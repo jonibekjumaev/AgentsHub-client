@@ -5,6 +5,11 @@ import { Pagination, Stack, Typography } from '@mui/material';
 import PropertyCard from '../property/PropertyCard';
 import { Property } from '../../types/property/property';
 import { T } from '../../types/common';
+import { useMutation, useQuery } from '@apollo/client';
+import { LIKE_TARGET_PROPERTY } from '../../../apollo/user/mutation';
+import { GET_FAVORITES } from '../../../apollo/user/query';
+import { Message } from '../../enums/common.enum';
+import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../sweetAlert';
 
 const MyFavorites: NextPage = () => {
 	const device = useDeviceDetect();
@@ -14,9 +19,44 @@ const MyFavorites: NextPage = () => {
 
 	/** APOLLO REQUESTS **/
 
+	const [likeTargetProperty] = useMutation(LIKE_TARGET_PROPERTY);
+
+	const {
+		loading: getFavoritiesLoading,
+		data: getFavoritiesData,
+		error: getFavoritiesError,
+		refetch: getFavoritiesRefetch,
+	} = useQuery(GET_FAVORITES, {
+		fetchPolicy: 'network-only',
+		variables: { input: searchFavorites },
+		notifyOnNetworkStatusChange: true,
+		onCompleted: (data: T) => {
+			setMyFavorites(data?.getFavorities?.list);
+			setTotal(data?.getFavorities?.metaCounter[0]?.total ?? 0);
+		},
+	});
+
 	/** HANDLERS **/
 	const paginationHandler = (e: T, value: number) => {
 		setSearchFavorites({ ...searchFavorites, page: value });
+	};
+
+	const likePropertyHandler = async (user: T, id: string) => {
+		try {
+			if (!id) return;
+			if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
+
+			await likeTargetProperty({
+				variables: { input: id },
+			});
+
+			await getFavoritiesRefetch({ input: searchFavorites });
+
+			await sweetTopSmallSuccessAlert('success', 800);
+		} catch (err: any) {
+			console.log('ERROR,  likePropertyHandler:', err.message);
+			sweetMixinErrorAlert(err.message).then();
+		}
 	};
 
 	if (device === 'mobile') {
