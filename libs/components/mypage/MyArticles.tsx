@@ -8,7 +8,7 @@ import { userVar } from '../../../apollo/store';
 import { T } from '../../types/common';
 import { BoardArticle } from '../../types/board-article/board-article';
 import { GET_BOARD_ARTICLES } from '../../../apollo/user/query';
-import { LIKE_TARGET_PROPERTY } from '../../../apollo/user/mutation';
+import { LIKE_TARGET_BOARD_ARTICLE, LIKE_TARGET_PROPERTY } from '../../../apollo/user/mutation';
 import { Message } from '../../enums/common.enum';
 import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../sweetAlert';
 
@@ -24,7 +24,7 @@ const MyArticles: NextPage = ({ initialInput, ...props }: T) => {
 
 	/** APOLLO REQUESTS **/
 
-	const [likeTargetBoardArticle] = useMutation(LIKE_TARGET_PROPERTY);
+	const [likeTargetBoardArticle] = useMutation(LIKE_TARGET_BOARD_ARTICLE);
 
 	const {
 		loading: getBoardArticlesLoading,
