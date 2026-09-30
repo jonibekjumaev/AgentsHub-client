@@ -23,7 +23,7 @@ import { BoardArticle } from '../../../types/board-article/board-article';
 import { REACT_APP_API_URL } from '../../../config';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Typography from '@mui/material/Typography';
-import { BoardArticleStatus } from '../../../enums/board-article.enum';
+import { BoardArticleCategory, BoardArticleStatus } from '../../../enums/board-article.enum';
 
 interface Data {
 	category: string;
@@ -154,16 +154,18 @@ const CommunityArticleList = (props: CommunityArticleListProps) => {
 									<TableCell align="left">
 										<Box component={'div'}>
 											{article.articleTitle}
-											<Link
-												href={`/community/detail?articleCategory=${article.articleCategory}&id=${article._id}`}
-												className={'img_box'}
-											>
-												<IconButton className="btn_window">
-													<Tooltip title={'Open window'}>
-														<OpenInBrowserRoundedIcon />
-													</Tooltip>
-												</IconButton>
-											</Link>
+											{article.articleStatus == BoardArticleStatus.ACTIVE && (
+												<Link
+													href={`/community/detail?articleCategory=${article.articleCategory}&id=${article._id}`}
+													className={'img_box'}
+												>
+													<IconButton className="btn_window">
+														<Tooltip title={'Open window'}>
+															<OpenInBrowserRoundedIcon />
+														</Tooltip>
+													</IconButton>
+												</Link>
+											)}
 										</Box>
 									</TableCell>
 									<TableCell align="left">{article.articleCategory}</TableCell>
@@ -187,7 +189,7 @@ const CommunityArticleList = (props: CommunityArticleListProps) => {
 										<Moment format={'DD.MM.YY HH:mm'}>{article?.createdAt}</Moment>
 									</TableCell>
 									<TableCell align="center">
-										{article.articleStatus === 'DELETE' ? (
+										{article.articleStatus === BoardArticleStatus.DELETE ? (
 											<Button
 												variant="outlined"
 												sx={{ p: '3px', border: 'none', ':hover': { border: '1px solid #000000' } }}
