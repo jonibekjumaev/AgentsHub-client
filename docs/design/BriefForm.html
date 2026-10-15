@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AgentsHub — Post a brief</title>
+
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F6F7F9}
+a{color:#4338CA}a:hover{color:#312E81}
+</style>
+</helmet>
+<div style="min-height: 1400px; background: #F6F7F9; color: #0F172A; font-family: 'Manrope', system-ui, sans-serif;">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #E3E7EE;">
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 24px; min-height: 64px; display: flex; align-items: center; gap: 32px; flex-wrap: wrap;">
+<a href="Home.html" style="font-size: 20px; font-weight: 800; letter-spacing: -0.02em; color: #0F172A; text-decoration: none;">Agents<span style="color: #4338CA;">Hub</span></a>
+<nav aria-label="Main" style="display: flex; gap: 24px; font-size: 14px; font-weight: 600; flex-wrap: wrap;">
+<a href="Agents.html" style="color: #334155; text-decoration: none;">Agents</a>
+<a href="Briefs.html" aria-current="page" style="color: #4338CA; text-decoration: none;">Briefs</a>
+<a href="Creators.html" style="color: #334155; text-decoration: none;">Creators</a>
+<a href="#" style="color: #334155; text-decoration: none;">Community</a>
+</nav>
+<div style="margin-left: auto; display: flex; align-items: center; gap: 12px;">
+<span style="width: 36px; height: 36px; border-radius: 999px; background: #E6F4F2; color: #0F766E; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800;" aria-label="Signed in as @dilnoza_bakes">DB</span>
+</div>
+</div>
+</header>
+
+<div style="max-width: 1100px; margin: 0 auto; padding: 32px 24px 64px; display: flex; flex-direction: column; gap: 24px;">
+<nav aria-label="Breadcrumb" style="font-size: 13px; color: #5B6475; display: flex; gap: 8px;">
+<a href="MyBriefs.html" style="color: #5B6475; text-decoration: none;">My briefs</a><span aria-hidden="true">/</span><span style="color: #0F172A; font-weight: 600;">New brief</span>
+</nav>
+<div>
+<h1 style="margin: 0; font-size: 30px; font-weight: 800; letter-spacing: -0.03em;">Post a brief</h1>
+<p style="margin: 6px 0 0; font-size: 15px; color: #5B6475;">Tell creators what you need. Good briefs get answers within a day.</p>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start;">
+
+<form style="flex: 999 1 520px; min-width: 0; margin: 0; display: flex; flex-direction: column; gap: 20px; padding: 28px; border: 1px solid #E3E7EE; border-radius: 16px; background: #FFFFFF;">
+
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 700;">Title
+<input type="text" value="AI agent to take WhatsApp orders for a bakery" style="height: 46px; padding: 0 14px; border: 1px solid #CBD2DC; border-radius: 10px; font: 500 15px 'Manrope', sans-serif; color: #0F172A;">
+<span style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 500; color: #5B6475;"><span>Say what the agent should do, in one line.</span><span>45 / 100</span></span>
+</label>
+
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 700;">Category
+<select style="height: 46px; padding: 0 12px; border: 1px solid #CBD2DC; border-radius: 10px; font: 500 15px 'Manrope', sans-serif; color: #0F172A; background: #FFFFFF;">
+<option selected>Sales</option><option>Support</option><option>Finance</option><option>Marketing</option><option>Productivity</option><option>Developer tools</option>
+</select>
+</label>
+
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 700;">What do you need?
+<textarea rows="9" style="padding: 12px 14px; border: 1px solid #CBD2DC; border-radius: 10px; font: 500 15px/1.6 'Manrope', sans-serif; color: #0F172A; resize: vertical;">We are a small bakery in Tashkent. About 60 customers a day order by WhatsApp, and we write every order down by hand.
+
+I need an agent that reads the message, asks for anything missing (pickup time, cake size), confirms the order with the customer and adds a row to our Google Sheet.</textarea>
+<span style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 500; color: #5B6475;"><span>20 to 3000 characters. Plain text.</span><span>312 / 3000</span></span>
+</label>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px;">
+<legend style="font-size: 14px; font-weight: 700; margin-bottom: 6px;">Budget <span style="font-weight: 500; color: #5B6475;">(optional)</span></legend>
+<span style="display: flex; align-items: center; height: 46px; border: 1px solid #CBD2DC; border-radius: 10px; padding: 0 14px; gap: 6px;">
+<span style="font-family: 'JetBrains Mono', monospace; color: #5B6475;">$</span>
+<input type="number" value="500" min="1" aria-label="Budget in USD" style="flex: 1; min-width: 0; border: 0; outline: none; font: 500 16px 'JetBrains Mono', monospace; color: #0F172A;">
+<span style="font-size: 13px; font-weight: 600; color: #5B6475;">USD</span>
+</span>
+<label style="display: flex; gap: 8px; align-items: center; font-size: 13px; font-weight: 600; color: #334155;"><input type="checkbox" style="width: 16px; height: 16px; accent-color: #4338CA;">Open to offers (no fixed budget)</label>
+</fieldset>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 700;">Deadline <span style="font-weight: 500; color: #5B6475; display: contents;"></span>
+<input type="date" value="2026-11-30" min="2026-10-11" style="height: 46px; padding: 0 12px; border: 1px solid #CBD2DC; border-radius: 10px; font: 500 15px 'Manrope', sans-serif; color: #0F172A;">
+<span style="font-size: 12px; font-weight: 500; color: #5B6475;">Optional. Must be a future date. The brief closes when it passes.</span>
+</label>
+</div>
+
+<div style="height: 1px; background: #EEF1F5;"></div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
+<span style="font-size: 12px; color: #5B6475; max-width: 360px; line-height: 1.5;">Your brief is public. Your contacts are shown only to signed-in members.</span>
+<div style="display: flex; gap: 12px;">
+<a href="MyBriefs.html" style="display: inline-flex; align-items: center; height: 46px; padding: 0 20px; border-radius: 10px; border: 1px solid #E3E7EE; color: #0F172A; font-size: 15px; font-weight: 700; text-decoration: none;">Cancel</a>
+<button type="submit" style="height: 46px; padding: 0 24px; border-radius: 10px; border: 0; background: #4338CA; color: #FFFFFF; font: 800 15px 'Manrope', sans-serif;">Publish brief</button>
+</div>
+</div>
+</form>
+
+<aside style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+<div style="display: flex; flex-direction: column; gap: 14px; padding: 24px; border: 1px solid #E3E7EE; border-radius: 12px; background: #FFFFFF;">
+<div style="font-weight: 800;">What makes a good brief</div>
+<div style="display: flex; gap: 10px; font-size: 14px; line-height: 1.5; color: #334155;"><span style="flex: none; width: 22px; height: 22px; border-radius: 999px; background: #EEF0FF; color: #4338CA; font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center;">1</span>Describe the task, not the technology. "Take orders from WhatsApp" beats "build a GPT bot".</div>
+<div style="display: flex; gap: 10px; font-size: 14px; line-height: 1.5; color: #334155;"><span style="flex: none; width: 22px; height: 22px; border-radius: 999px; background: #EEF0FF; color: #4338CA; font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center;">2</span>Name the tools you already use: Google Sheets, Telegram, 1C, Instagram.</div>
+<div style="display: flex; gap: 10px; font-size: 14px; line-height: 1.5; color: #334155;"><span style="flex: none; width: 22px; height: 22px; border-radius: 999px; background: #EEF0FF; color: #4338CA; font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center;">3</span>Give numbers: how many messages, orders or files per day.</div>
+</div>
+<div style="padding: 16px 18px; border-radius: 12px; background: #EEF0FF; font-size: 13px; line-height: 1.6; color: #312E81;">You can close the brief when you find a creator, and reopen it later if you need more offers.</div>
+</aside>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

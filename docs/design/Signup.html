@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AgentsHub — Sign up</title>
+
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F6F7F9}
+a{color:#4338CA}a:hover{color:#312E81}
+</style>
+</helmet>
+<div style="min-height: 1100px; background: #F6F7F9; color: #0F172A; font-family: 'Manrope', system-ui, sans-serif; display: flex; flex-direction: column;">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #E3E7EE;">
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 24px; min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px;">
+<a href="Home.html" style="font-size: 20px; font-weight: 800; letter-spacing: -0.02em; color: #0F172A; text-decoration: none;">Agents<span style="color: #4338CA;">Hub</span></a>
+<span style="font-size: 14px; color: #5B6475;">Already have an account? <a href="#" style="font-weight: 700;">Log in</a></span>
+</div>
+</header>
+
+<div style="flex: 1; max-width: 1100px; width: 100%; margin: 0 auto; padding: 48px 24px 64px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start;">
+
+<form style="flex: 999 1 460px; min-width: 0; margin: 0; display: flex; flex-direction: column; gap: 22px; padding: 36px; border: 1px solid #E3E7EE; border-radius: 16px; background: #FFFFFF;">
+<div>
+<h1 style="margin: 0; font-size: 30px; font-weight: 800; letter-spacing: -0.03em;">Create your account</h1>
+<p style="margin: 8px 0 0; font-size: 15px; color: #5B6475;">It takes less than a minute.</p>
+</div>
+
+<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px;">
+<legend style="font-size: 14px; font-weight: 700; margin-bottom: 10px;">I want to</legend>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+<label style="display: flex; gap: 12px; align-items: flex-start; padding: 16px; border: 2px solid #4338CA; border-radius: 12px; background: #EEF0FF;">
+<input type="radio" name="role" checked style="margin-top: 3px; width: 18px; height: 18px; accent-color: #4338CA;">
+<span><span style="display: block; font-weight: 800;">Find or order an agent</span><span style="display: block; font-size: 13px; line-height: 1.5; color: #475569; margin-top: 2px;">Browse agents and post briefs for custom work.</span></span>
+</label>
+<label style="display: flex; gap: 12px; align-items: flex-start; padding: 16px; border: 1px solid #E3E7EE; border-radius: 12px; background: #FFFFFF;">
+<input type="radio" name="role" style="margin-top: 3px; width: 18px; height: 18px; accent-color: #4338CA;">
+<span><span style="display: block; font-weight: 800;">Sell agents I build</span><span style="display: block; font-size: 13px; line-height: 1.5; color: #475569; margin-top: 2px;">List your agents and answer briefs.</span></span>
+</label>
+</div>
+<p style="margin: 0; font-size: 12px; color: #5B6475;">You can't switch account type later. To do both, use two accounts.</p>
+</fieldset>
+
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 700;">Nickname
+<input type="text" value="dilnoza_bakes" style="height: 46px; padding: 0 14px; border: 1px solid #CBD2DC; border-radius: 10px; font: 500 15px 'Manrope', sans-serif; color: #0F172A;">
+<span style="font-size: 12px; font-weight: 500; color: #5B6475;">Shown publicly next to your agents, briefs and comments.</span>
+</label>
+
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 700;">Phone number
+<input type="tel" value="+99890123" aria-invalid="true" aria-describedby="phone-error" style="height: 46px; padding: 0 14px; border: 1px solid #DC2626; border-radius: 10px; font: 500 15px 'Manrope', sans-serif; color: #0F172A;">
+<span id="phone-error" style="font-size: 12px; font-weight: 600; color: #B91C1C;">Use the international format with country code, e.g. +998901234567.</span>
+</label>
+
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 700;">Password
+<input type="password" value="bakery2026" style="height: 46px; padding: 0 14px; border: 1px solid #CBD2DC; border-radius: 10px; font: 500 15px 'Manrope', sans-serif; color: #0F172A;">
+<span style="display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: #0F766E;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg>At least 8 characters</span>
+</label>
+
+<button type="submit" style="height: 50px; border-radius: 10px; border: 0; background: #4338CA; color: #FFFFFF; font: 800 15px 'Manrope', sans-serif;">Create account</button>
+<p style="margin: 0; font-size: 12px; line-height: 1.6; color: #5B6475;">Your phone, email and WhatsApp are never shown to guests. Only signed-in members can see your contacts.</p>
+</form>
+
+<aside style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 20px; padding: 8px 4px;">
+<h2 style="margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -0.02em;">Why AgentsHub</h2>
+<div style="display: flex; gap: 14px;"><span style="flex: none; width: 40px; height: 40px; border-radius: 10px; background: #EEF0FF; display: flex; align-items: center; justify-content: center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4338CA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></span><div><div style="font-weight: 800;">Private contacts</div><div style="font-size: 14px; line-height: 1.5; color: #5B6475;">Guests can browse, but only members see how to reach you.</div></div></div>
+<div style="display: flex; gap: 14px;"><span style="flex: none; width: 40px; height: 40px; border-radius: 10px; background: #EEF0FF; display: flex; align-items: center; justify-content: center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4338CA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12l-8 8-9-9V3h8z"></path><circle cx="7.5" cy="7.5" r="1.5"></circle></svg></span><div><div style="font-weight: 800;">Honest prices</div><div style="font-size: 14px; line-height: 1.5; color: #5B6475;">Free, one-time, monthly or custom. No hidden fees on the platform.</div></div></div>
+<div style="display: flex; gap: 14px;"><span style="flex: none; width: 40px; height: 40px; border-radius: 10px; background: #EEF0FF; display: flex; align-items: center; justify-content: center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4338CA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"></path></svg></span><div><div style="font-weight: 800;">Talk before you commit</div><div style="font-size: 14px; line-height: 1.5; color: #5B6475;">Ask questions in public, then agree on details directly.</div></div></div>
+</aside>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
