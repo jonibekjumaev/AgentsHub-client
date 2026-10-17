@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AgentsHub — Briefs</title>
+
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F6F7F9}
+a{color:#4338CA}a:hover{color:#312E81}
+</style>
+</helmet>
+<div style="background: #F6F7F9; color: #0F172A; font-family: 'Manrope', system-ui, sans-serif;">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #E3E7EE;">
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 24px; min-height: 64px; display: flex; align-items: center; gap: 32px; flex-wrap: wrap;">
+<a href="Home.html" style="font-size: 20px; font-weight: 800; letter-spacing: -0.02em; color: #0F172A; text-decoration: none;">Agents<span style="color: #4338CA;">Hub</span></a>
+<nav aria-label="Main" style="display: flex; gap: 24px; font-size: 14px; font-weight: 600; flex-wrap: wrap;">
+<a href="Agents.html" style="color: #334155; text-decoration: none;">Agents</a>
+<a href="Briefs.html" aria-current="page" style="color: #4338CA; text-decoration: none;">Briefs</a>
+<a href="#" style="color: #334155; text-decoration: none;">Creators</a>
+<a href="#" style="color: #334155; text-decoration: none;">Community</a>
+</nav>
+<div style="margin-left: auto; display: flex; align-items: center; gap: 12px;">
+<a href="Dashboard.html" style="display: inline-flex; align-items: center; height: 38px; padding: 0 14px; border-radius: 8px; border: 1px solid #E3E7EE; color: #0F172A; font-size: 14px; font-weight: 600; text-decoration: none;">Dashboard</a>
+<span style="width: 36px; height: 36px; border-radius: 999px; background: #EEF0FF; color: #4338CA; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800;" aria-label="Signed in as @nova_labs">NL</span>
+</div>
+</div>
+</header>
+
+<div style="max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px; display: flex; flex-direction: column; gap: 24px;">
+
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px;">
+<div>
+<h1 style="margin: 0; font-size: 32px; font-weight: 800; letter-spacing: -0.03em;">Briefs</h1>
+<p style="margin: 6px 0 0; font-size: 15px; color: #5B6475;">Businesses describe the agent they need. Ask questions in the comments, then reach out.</p>
+</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; padding-bottom: 4px; border-bottom: 1px solid #E3E7EE;">
+<div role="tablist" aria-label="Brief status" style="display: flex; gap: 4px;">
+<button type="button" role="tab" aria-selected="true" style="height: 40px; padding: 0 16px; border: 0; border-bottom: 2px solid #4338CA; background: transparent; font: 800 14px 'Manrope', sans-serif; color: #4338CA;">Open</button>
+<button type="button" role="tab" aria-selected="false" style="height: 40px; padding: 0 16px; border: 0; border-bottom: 2px solid transparent; background: transparent; font: 600 14px 'Manrope', sans-serif; color: #5B6475;">Closed</button>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+<label style="display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 12px; border: 1px solid #CBD2DC; border-radius: 10px; background: #FFFFFF; width: 260px; max-width: 100%;">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5B6475" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+<input type="search" placeholder="Search brief titles" aria-label="Search briefs" style="flex: 1; min-width: 0; border: 0; outline: none; font: 500 14px 'Manrope', sans-serif; background: transparent;">
+</label>
+<select aria-label="Sort briefs" style="height: 40px; padding: 0 12px; border: 1px solid #CBD2DC; border-radius: 10px; background: #FFFFFF; font: 600 14px 'Manrope', sans-serif; color: #0F172A;">
+<option>Newest</option><option>Budget: high to low</option><option>Budget: low to high</option><option>Deadline: soonest</option><option>Most viewed</option>
+</select>
+</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+<button type="button" aria-pressed="true" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #0F172A; background: #0F172A; color: #FFFFFF; font: 700 13px 'Manrope', sans-serif;">All categories</button>
+<button type="button" aria-pressed="false" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #E3E7EE; background: #FFFFFF; color: #334155; font: 600 13px 'Manrope', sans-serif;">Customer support</button>
+<button type="button" aria-pressed="false" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #E3E7EE; background: #FFFFFF; color: #334155; font: 600 13px 'Manrope', sans-serif;">Sales</button>
+<button type="button" aria-pressed="false" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #E3E7EE; background: #FFFFFF; color: #334155; font: 600 13px 'Manrope', sans-serif;">Marketing</button>
+<button type="button" aria-pressed="false" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #E3E7EE; background: #FFFFFF; color: #334155; font: 600 13px 'Manrope', sans-serif;">Content</button>
+<button type="button" aria-pressed="false" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #E3E7EE; background: #FFFFFF; color: #334155; font: 600 13px 'Manrope', sans-serif;">Data analysis</button>
+<button type="button" aria-pressed="false" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #E3E7EE; background: #FFFFFF; color: #334155; font: 600 13px 'Manrope', sans-serif;">Automation</button>
+<button type="button" aria-pressed="false" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #E3E7EE; background: #FFFFFF; color: #334155; font: 600 13px 'Manrope', sans-serif;">Education</button>
+<button type="button" aria-pressed="false" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #E3E7EE; background: #FFFFFF; color: #334155; font: 600 13px 'Manrope', sans-serif;">Other</button>
+</div>
+
+<div style="display: flex; flex-direction: column; border: 1px solid #E3E7EE; border-radius: 12px; background: #FFFFFF; overflow: hidden;">
+
+<a href="BriefDetail.html" style="display: flex; flex-wrap: wrap; gap: 20px; padding: 22px 24px; border-bottom: 1px solid #EEF1F5; color: #0F172A; text-decoration: none;">
+<div style="flex: 999 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 6px;">
+<div style="display: flex; gap: 8px; align-items: center;"><span style="padding: 2px 8px; border-radius: 999px; background: #E6F4F2; color: #0F766E; font-size: 11px; font-weight: 800;">OPEN</span><span style="font-size: 12px; font-weight: 700; color: #4338CA;">Sales</span></div>
+<div style="font-size: 18px; font-weight: 800;">AI agent to take WhatsApp orders for a bakery</div>
+<div style="font-size: 14px; line-height: 1.5; color: #5B6475;">Customers order by WhatsApp. I need an agent that takes the order, confirms it and sends it to our sheet.</div>
+<div style="font-size: 13px; color: #5B6475;">@dilnoza_bakes · 2 hours ago · 3 comments · 41 views</div>
+</div>
+<div style="flex: 1 1 180px; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 4px;">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 500;">$500</div>
+<div style="font-size: 13px; color: #5B6475;">Deadline Nov 30</div>
+</div>
+</a>
+
+<a href="BriefDetail.html" style="display: flex; flex-wrap: wrap; gap: 20px; padding: 22px 24px; border-bottom: 1px solid #EEF1F5; color: #0F172A; text-decoration: none;">
+<div style="flex: 999 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 6px;">
+<div style="display: flex; gap: 8px; align-items: center;"><span style="padding: 2px 8px; border-radius: 999px; background: #E6F4F2; color: #0F766E; font-size: 11px; font-weight: 800;">OPEN</span><span style="font-size: 12px; font-weight: 700; color: #4338CA;">Data analysis</span></div>
+<div style="font-size: 18px; font-weight: 800;">Weekly sales report from our CRM</div>
+<div style="font-size: 14px; line-height: 1.5; color: #5B6475;">Every Monday, pull last week's deals from our CRM and send a short summary to the sales chat.</div>
+<div style="font-size: 13px; color: #5B6475;">@ben_trade · 3 days ago · 1 comment · 26 views</div>
+</div>
+<div style="flex: 1 1 180px; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 4px;">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 500;">$250.50</div>
+<div style="font-size: 13px; color: #5B6475;">Deadline Dec 15</div>
+</div>
+</a>
+
+<a href="BriefDetail.html" style="display: flex; flex-wrap: wrap; gap: 20px; padding: 22px 24px; border-bottom: 1px solid #EEF1F5; color: #0F172A; text-decoration: none;">
+<div style="flex: 999 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 6px;">
+<div style="display: flex; gap: 8px; align-items: center;"><span style="padding: 2px 8px; border-radius: 999px; background: #E6F4F2; color: #0F766E; font-size: 11px; font-weight: 800;">OPEN</span><span style="font-size: 12px; font-weight: 700; color: #4338CA;">Customer support</span></div>
+<div style="font-size: 18px; font-weight: 800;">Booking assistant for a dental clinic</div>
+<div style="font-size: 14px; line-height: 1.5; color: #5B6475;">Patients should book, move or cancel appointments on Telegram without calling us.</div>
+<div style="font-size: 13px; color: #5B6475;">@smile_clinic · yesterday · 0 comments · 18 views</div>
+</div>
+<div style="flex: 1 1 180px; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 4px;">
+<div style="font-size: 15px; font-weight: 700; color: #334155;">Open to offers</div>
+<div style="font-size: 13px; color: #5B6475;">No deadline</div>
+</div>
+</a>
+
+<a href="BriefDetail.html" style="display: flex; flex-wrap: wrap; gap: 20px; padding: 22px 24px; color: #0F172A; text-decoration: none;">
+<div style="flex: 999 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 6px;">
+<div style="display: flex; gap: 8px; align-items: center;"><span style="padding: 2px 8px; border-radius: 999px; background: #E6F4F2; color: #0F766E; font-size: 11px; font-weight: 800;">OPEN</span><span style="font-size: 12px; font-weight: 700; color: #4338CA;">Education</span></div>
+<div style="font-size: 18px; font-weight: 800;">Homework helper for an English course</div>
+<div style="font-size: 14px; line-height: 1.5; color: #5B6475;">Checks short essays from students and explains mistakes in simple words.</div>
+<div style="font-size: 13px; color: #5B6475;">@cara_teaches · 5 days ago · 2 comments · 57 views</div>
+</div>
+<div style="flex: 1 1 180px; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 4px;">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 500;">$300</div>
+<div style="font-size: 13px; color: #5B6475;">No deadline</div>
+</div>
+</a>
+</div>
+
+<p style="margin: 0; font-size: 13px; color: #5B6475;">When sorting by budget or deadline, briefs without one are listed last.</p>
+
+<nav aria-label="Pagination" style="display: flex; justify-content: center; gap: 6px;">
+<a href="#" aria-label="Previous page" style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid #E3E7EE; border-radius: 8px; background: #FFFFFF; color: #334155; text-decoration: none;">‹</a>
+<a href="#" aria-current="page" style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 8px; background: #4338CA; color: #FFFFFF; font-weight: 700; text-decoration: none;">1</a>
+<a href="#" style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid #E3E7EE; border-radius: 8px; background: #FFFFFF; color: #334155; font-weight: 700; text-decoration: none;">2</a>
+<a href="#" aria-label="Next page" style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid #E3E7EE; border-radius: 8px; background: #FFFFFF; color: #334155; text-decoration: none;">›</a>
+</nav>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1600}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
