@@ -52,6 +52,10 @@ Import alias: `@/` → `src/`.
 7. User content (descriptions, briefs, articles, comments) is plain text: render with `white-space: pre-line`. Never `dangerouslySetInnerHTML`.
 8. Accessibility: semantic elements, labels on every control, `aria-current` on active nav, `role="alert"` on errors.
 9. Show backend errors through the error mapping (`errors.json`), never raw backend messages.
+10. Apollo: read `data`/`error`/`loading` from useQuery; do not use the onCompleted/onError
+    callback options (deprecated in 3.14, removed in Apollo 4).
+11. SSR props contain public data only. Contacts and anything member-specific are fetched
+    client-side after auth.
 
 ## Security rules (strict)
 - Never read, print or edit `.env`, `.env.local`, `.env.development`. Use `.env.example` to see which keys exist.
