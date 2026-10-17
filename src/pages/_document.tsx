@@ -1,9 +1,15 @@
-import { Html, Head, Main, NextScript, DocumentProps } from 'next/document';
+import { Html, Head, Main, NextScript, DocumentContext, DocumentProps } from 'next/document';
+import { DocumentHeadTags, DocumentHeadTagsProps, documentGetInitialProps } from '@mui/material-nextjs/v14-pagesRouter';
 
-export default function Document({ locale }: DocumentProps) {
+type Props = DocumentProps & DocumentHeadTagsProps;
+
+export default function Document(props: Props) {
 	return (
-		<Html lang={locale ?? 'en'}>
-			<Head />
+		<Html lang={props.locale ?? 'en'}>
+			<Head>
+				<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+				<DocumentHeadTags {...props} />
+			</Head>
 			<body>
 				<Main />
 				<NextScript />
@@ -11,3 +17,5 @@ export default function Document({ locale }: DocumentProps) {
 		</Html>
 	);
 }
+
+Document.getInitialProps = async (ctx: DocumentContext) => documentGetInitialProps(ctx);

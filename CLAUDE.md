@@ -56,6 +56,11 @@ Import alias: `@/` → `src/`.
     callback options (deprecated in 3.14, removed in Apollo 4).
 11. SSR props contain public data only. Contacts and anything member-specific are fetched
     client-side after auth.
+12. Server-side Apollo: one client per request (`initializeApollo()` + `addApolloState`), no auth
+    header, public data only. Never keep a server client in module scope.
+13. GraphQL documents use `graphql()` from `@/gql`; run `yarn codegen` after changing a document.
+14. Never run `yarn build` while `yarn dev` is running — they share `.next/` and the dev server breaks.
+    Restart `yarn dev` after `yarn install` (changed `node_modules` break the running dev server).
 
 ## Security rules (strict)
 - Never read, print or edit `.env`, `.env.local`, `.env.development`. Use `.env.example` to see which keys exist.
