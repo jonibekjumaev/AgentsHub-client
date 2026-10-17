@@ -1,0 +1,66 @@
+{
+	"ui": {
+		"metaTitle": "UI check — AgentsHub",
+		"title": "UI style check",
+		"intro": "Development-only page. Every shared component is previewed here.",
+		"logoStart": "Agents",
+		"logoEnd": "Hub",
+		"sections": {
+			"logo": "Logo",
+			"typography": "Typography",
+			"buttons": "Buttons",
+			"inputs": "Inputs",
+			"chips": "Chips",
+			"price": "Price",
+			"card": "Card"
+		},
+		"sample": {
+			"h1": "Find an AI agent for your business",
+			"h2": "Popular agents",
+			"h3": "Pricing",
+			"body": "Body text is 15px / 500 with a relaxed line height. User content is plain text.\nLine breaks are kept with white-space: pre-line.",
+			"bodySmall": "Body small — 14px secondary text.",
+			"meta": "Meta — 13px, muted",
+			"caption": "Caption — 12px hint",
+			"overline": "Overline"
+		},
+		"buttons": {
+			"primary": "Primary",
+			"secondary": "Secondary",
+			"soft": "Follow",
+			"danger": "Delete",
+			"text": "Text link",
+			"disabled": "Disabled",
+			"small": "Small",
+			"medium": "Medium",
+			"large": "Large"
+		},
+		"inputs": {
+			"nameLabel": "Agent name",
+			"namePlaceholder": "e.g. Support Copilot",
+			"nameHint": "Shown on the agent card.",
+			"priceLabel": "Price",
+			"priceError": "Enter a price greater than 0."
+		},
+		"chips": {
+			"open": "Open",
+			"closed": "Closed",
+			"paused": "Paused",
+			"category": "Customer support"
+		},
+		"price": {
+			"free": "Free",
+			"perMonth": "/ mo",
+			"custom": "Custom"
+		},
+		"card": {
+			"title": "Support Copilot",
+			"author": "by @{{nick}}",
+			"description": "Answers customer tickets in your tone of voice.\nWorks with email and chat.",
+			"likes_one": "{{count}} like",
+			"likes_other": "{{count}} likes",
+			"views_one": "{{count}} view",
+			"views_other": "{{count}} views"
+		}
+	}
+}

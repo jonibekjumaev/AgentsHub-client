@@ -12,10 +12,13 @@
 	},
 	"dependencies": {
 		"@apollo/client": "^3.14.1",
+		"@emotion/cache": "^11.11.0",
 		"@emotion/react": "^11.8.1",
+		"@emotion/server": "^11.11.0",
 		"@emotion/styled": "^11.8.1",
 		"@mui/icons-material": "^5.18.0",
 		"@mui/material": "^5.18.0",
+		"@mui/material-nextjs": "^5.18.0",
 		"apollo-upload-client": "^17.0.0",
 		"graphql": "^16.14.2",
 		"i18next": "^23.16.8",
