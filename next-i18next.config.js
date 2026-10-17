@@ -4,5 +4,4 @@ module.exports = {
 		locales: ['en', 'kr', 'ru'],
 		localeDetection: false,
 	},
-	trailingSlash: true,
 };

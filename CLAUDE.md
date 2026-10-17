@@ -25,8 +25,10 @@ Apollo Client 3 · next-i18next (`en` default, `ko`, `uz`) · yarn.
 ```
 src/
   pages/        routing only — thin files: fetch params, pick layout, render a feature component
-  features/     auth, agents, briefs, creators, community, comments, follows, likes, dashboard, admin
+  features/     auth, agents, briefs, creators, members, community, comments, follows, likes, dashboard, admin
                 each: components/  graphql/  hooks/  index.ts (public exports)
+                members = public member profile (/members/[id]) shared by USER and CREATOR;
+                creators = creators list and creator cards only
   shared/       ui/ (StatusChip, PriceTag, EmptyState, ErrorState, Skeleton, Pagination, FormField)
                 layout/ (Header, Footer, PublicLayout, AuthLayout, DashboardLayout)
                 lib/ (format.ts, validation)

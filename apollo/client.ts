@@ -115,6 +115,8 @@ function createIsomorphicLink() {
 
 		return from([errorLink, tokenRefreshLink, splitLink]);
 	}
+	// Apollo 3.14 warns when `link` is missing; empty link = previous server-side default
+	return ApolloLink.empty();
 }
 
 function createApolloClient() {
