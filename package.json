@@ -4,11 +4,12 @@
 	"private": true,
 	"license": "UNLICENSED",
 	"scripts": {
-		"dev": "next dev",
+		"dev": "next dev -p 3000",
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"typecheck": "tsc --noEmit"
+		"typecheck": "tsc --noEmit",
+		"codegen": "graphql-codegen --config codegen.ts"
 	},
 	"dependencies": {
 		"@apollo/client": "^3.14.1",
@@ -29,6 +30,8 @@
 		"react-i18next": "^13.5.0"
 	},
 	"devDependencies": {
+		"@graphql-codegen/cli": "7.4.3",
+		"@graphql-codegen/client-preset": "6.2.0",
 		"@types/apollo-upload-client": "^17.0.0",
 		"@types/node": "20.10.0",
 		"@types/react": "18.2.0",
