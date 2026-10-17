@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { ApolloClient, ApolloLink, HttpLink, from, type NormalizedCacheObject } from '@apollo/client';
+import { ApolloClient, HttpLink, from, type NormalizedCacheObject } from '@apollo/client';
 import { createUploadLink } from 'apollo-upload-client';
 import { env } from '@/config/env';
 import { authLink } from './authLink';
@@ -28,7 +28,7 @@ const createBrowserClient = (): Client => {
 		uri: env.graphqlUrl,
 		// The API runs Apollo Server 4 with CSRF prevention on: multipart uploads are rejected without this header.
 		headers: { 'Apollo-Require-Preflight': 'true' },
-	}) as unknown as ApolloLink; // @types/apollo-upload-client bundles an older @apollo/client typing
+	});
 
 	return new ApolloClient({
 		link: from([errorLink, authLink, uploadLink]),

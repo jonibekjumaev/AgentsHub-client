@@ -59,6 +59,7 @@ Import alias: `@/` → `src/`.
 12. Server-side Apollo: one client per request (`initializeApollo()` + `addApolloState`), no auth
     header, public data only. Never keep a server client in module scope.
 13. GraphQL documents use `graphql()` from `@/gql`; run `yarn codegen` after changing a document.
+14. Never run `yarn build` while `yarn dev` is running — they share `.next/` and the dev server breaks.
 
 ## Security rules (strict)
 - Never read, print or edit `.env`, `.env.local`, `.env.development`. Use `.env.example` to see which keys exist.

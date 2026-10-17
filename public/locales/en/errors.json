@@ -1,4 +1,8 @@
 {
+	"login": {
+		"invalid": "Wrong member nick or password.",
+		"blocked": "Your account has been blocked."
+	},
 	"network": "Can't reach the server. Check your connection and try again.",
 	"unauthenticated": "Please log in to continue.",
 	"forbidden": "You don't have access to this action.",

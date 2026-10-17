@@ -1,4 +1,23 @@
 {
+	"auth": {
+		"metaTitle": "Auth check — AgentsHub",
+		"title": "Auth check",
+		"intro": "Development-only page. The real login page comes in slice S1.",
+		"session": "Session",
+		"status": "Status",
+		"nick": "Member nick",
+		"type": "Member type",
+		"memberStatus": "Member status",
+		"email": "Email",
+		"password": "Password",
+		"login": "Log in",
+		"submit": "Log in",
+		"logout": "Log out",
+		"creatorBlock": "CREATOR-only block",
+		"creatorHint": "Wrapped in RequireRole. Guest → /login, USER → 404, CREATOR → content.",
+		"openCreatorBlock": "Open block",
+		"creatorOnly": "You are a CREATOR — this block is visible."
+	},
 	"api": {
 		"metaTitle": "API check — AgentsHub",
 		"title": "API check",

@@ -40,5 +40,9 @@
 		"eslint-config-next": "14.2.35",
 		"prettier": "2.7.1",
 		"typescript": "~5.4.5"
+	},
+	"resolutions": {
+		"@types/apollo-upload-client/@apollo/client": "3.14.1",
+		"@types/apollo-upload-client/graphql": "16.14.2"
 	}
 }

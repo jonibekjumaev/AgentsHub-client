@@ -15,9 +15,9 @@ export const ErrorCode = {
 	InternalServerError: 'INTERNAL_SERVER_ERROR',
 } as const;
 
-export const BLOCKED_MESSAGE = 'You have been blocked!';
-
 export type ErrorKey =
+	| 'errors:login.invalid'
+	| 'errors:login.blocked'
 	| 'errors:network'
 	| 'errors:unauthenticated'
 	| 'errors:forbidden'
@@ -39,9 +39,6 @@ export const errorCodeOf = (error: Pick<GraphQLFormattedError, 'extensions'>): s
 	return typeof code === 'string' ? code : undefined;
 };
 
-export const isBlockedError = (error: GraphQLFormattedError): boolean =>
-	errorCodeOf(error) === ErrorCode.Forbidden && error.message === BLOCKED_MESSAGE;
-
 /** A 4xx/5xx response (e.g. GRAPHQL_VALIDATION_FAILED) arrives as a network error that still carries `result.errors`. */
 const errorsFromNetworkError = (networkError: unknown): readonly GraphQLFormattedError[] => {
 	if (typeof networkError !== 'object' || networkError === null || !('result' in networkError)) return [];
@@ -51,16 +48,22 @@ const errorsFromNetworkError = (networkError: unknown): readonly GraphQLFormatte
 	return Array.isArray(errors) ? (errors as GraphQLFormattedError[]) : [];
 };
 
-/** Maps any error to an i18n key in public/locales/{lng}/errors.json. Never returns backend text. */
-export const toErrorKey = (error: unknown): ErrorKey => {
-	if (!(error instanceof ApolloError)) return 'errors:unknown';
+/** The first backend error code, 'NETWORK' when the server could not be reached, else undefined. */
+export const getErrorCode = (error: unknown): string | undefined => {
+	if (!(error instanceof ApolloError)) return undefined;
 
 	const graphQLErrors = error.graphQLErrors.length
 		? error.graphQLErrors
 		: errorsFromNetworkError(error.networkError);
 	const code = graphQLErrors.map(errorCodeOf).find(Boolean);
 
-	if (code) return keyByCode[code] ?? 'errors:unknown';
-	if (error.networkError) return 'errors:network';
-	return 'errors:unknown';
+	if (code) return code;
+	return error.networkError ? 'NETWORK' : undefined;
+};
+
+/** Maps any error to an i18n key in public/locales/{lng}/errors.json. Never returns backend text. */
+export const toErrorKey = (error: unknown): ErrorKey => {
+	const code = getErrorCode(error);
+	if (code === 'NETWORK') return 'errors:network';
+	return (code && keyByCode[code]) || 'errors:unknown';
 };

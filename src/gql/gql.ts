@@ -14,9 +14,15 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
+    "\n\tquery Me($memberId: String!) {\n\t\tcheckAuth\n\t\tgetMember(memberId: $memberId) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\tmemberStatus\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberPhone\n\t\t\tmemberEmail\n\t\t\tmemberWhatsapp\n\t\t}\n\t}\n": typeof types.MeDocument,
+    "\n\tmutation Login($input: LoginInput!) {\n\t\tlogin(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n": typeof types.LoginDocument,
+    "\n\tmutation Signup($input: MemberInput!) {\n\t\tsignup(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n": typeof types.SignupDocument,
     "\n\tquery DevApiProducts($input: ProductsInquiry!) {\n\t\tgetProducts(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tproductTitle\n\t\t\t\tproductCategory\n\t\t\t\tproductPricing\n\t\t\t\tproductPrice\n\t\t\t\tproductLikes\n\t\t\t\tproductViews\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": typeof types.DevApiProductsDocument,
 };
 const documents: Documents = {
+    "\n\tquery Me($memberId: String!) {\n\t\tcheckAuth\n\t\tgetMember(memberId: $memberId) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\tmemberStatus\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberPhone\n\t\t\tmemberEmail\n\t\t\tmemberWhatsapp\n\t\t}\n\t}\n": types.MeDocument,
+    "\n\tmutation Login($input: LoginInput!) {\n\t\tlogin(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n": types.LoginDocument,
+    "\n\tmutation Signup($input: MemberInput!) {\n\t\tsignup(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n": types.SignupDocument,
     "\n\tquery DevApiProducts($input: ProductsInquiry!) {\n\t\tgetProducts(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tproductTitle\n\t\t\t\tproductCategory\n\t\t\t\tproductPricing\n\t\t\t\tproductPrice\n\t\t\t\tproductLikes\n\t\t\t\tproductViews\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": types.DevApiProductsDocument,
 };
 
@@ -34,6 +40,18 @@ const documents: Documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tquery Me($memberId: String!) {\n\t\tcheckAuth\n\t\tgetMember(memberId: $memberId) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\tmemberStatus\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberPhone\n\t\t\tmemberEmail\n\t\t\tmemberWhatsapp\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery Me($memberId: String!) {\n\t\tcheckAuth\n\t\tgetMember(memberId: $memberId) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\tmemberStatus\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberPhone\n\t\t\tmemberEmail\n\t\t\tmemberWhatsapp\n\t\t}\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tmutation Login($input: LoginInput!) {\n\t\tlogin(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation Login($input: LoginInput!) {\n\t\tlogin(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tmutation Signup($input: MemberInput!) {\n\t\tsignup(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation Signup($input: MemberInput!) {\n\t\tsignup(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
