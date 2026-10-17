@@ -1,10 +1,9 @@
 /**
- * Session storage: access token + the member `_id` returned by login/signup (server data, not decoded
- * from the token — CLAUDE.md security rules). SSR-safe: on the server there is no session.
+ * Access token storage — the only stored session value. Who the member is comes from `getMe`,
+ * never from decoding the token (CLAUDE.md security rules). SSR-safe: on the server there is no session.
  */
 
 export const TOKEN_KEY = 'agentshub.accessToken';
-const MEMBER_ID_KEY = 'agentshub.memberId';
 
 type Listener = () => void;
 const listeners = new Set<Listener>();
@@ -19,24 +18,18 @@ const storage = (): Storage | null => {
 	}
 };
 
-const read = (key: string): string | null => {
+const notify = () => listeners.forEach((listener) => listener());
+
+export const getToken = (): string | null => {
 	try {
-		return storage()?.getItem(key) ?? null;
+		return storage()?.getItem(TOKEN_KEY) ?? null;
 	} catch {
 		return null;
 	}
 };
 
-const notify = () => listeners.forEach((listener) => listener());
-
-export const getToken = (): string | null => read(TOKEN_KEY);
-
-export const getSessionMemberId = (): string | null => read(MEMBER_ID_KEY);
-
-/** The member id is written first, so other tabs reacting to the token key already see it. */
-export const setToken = (token: string, memberId: string): void => {
+export const setToken = (token: string): void => {
 	try {
-		storage()?.setItem(MEMBER_ID_KEY, memberId);
 		storage()?.setItem(TOKEN_KEY, token);
 	} catch {
 		// Quota or access errors: the session simply won't persist across reloads.
@@ -47,7 +40,6 @@ export const setToken = (token: string, memberId: string): void => {
 export const clearToken = (): void => {
 	try {
 		storage()?.removeItem(TOKEN_KEY);
-		storage()?.removeItem(MEMBER_ID_KEY);
 	} catch {
 		// Nothing to clear.
 	}

@@ -1,6 +1,6 @@
 import { graphql } from '@/gql';
 
-// login/signup responses have no contacts (no token yet) — AuthProvider loads the full member afterwards.
+// Only the token is kept; AuthProvider loads the member (with contacts) through getMe afterwards.
 export const LoginMutation = graphql(`
 	mutation Login($input: LoginInput!) {
 		login(input: $input) {

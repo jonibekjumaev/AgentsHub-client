@@ -15,6 +15,11 @@ export const ErrorCode = {
 	InternalServerError: 'INTERNAL_SERVER_ERROR',
 } as const;
 
+/** Machine-readable `extensions.reason` values (D-33). Unknown reasons are treated like none. */
+export const ErrorReason = {
+	MemberBlocked: 'MEMBER_BLOCKED',
+} as const;
+
 export type ErrorKey =
 	| 'errors:login.invalid'
 	| 'errors:login.blocked'
@@ -39,6 +44,11 @@ export const errorCodeOf = (error: Pick<GraphQLFormattedError, 'extensions'>): s
 	return typeof code === 'string' ? code : undefined;
 };
 
+export const errorReasonOf = (error: Pick<GraphQLFormattedError, 'extensions'>): string | undefined => {
+	const reason = error.extensions?.reason;
+	return typeof reason === 'string' ? reason : undefined;
+};
+
 /** A 4xx/5xx response (e.g. GRAPHQL_VALIDATION_FAILED) arrives as a network error that still carries `result.errors`. */
 const errorsFromNetworkError = (networkError: unknown): readonly GraphQLFormattedError[] => {
 	if (typeof networkError !== 'object' || networkError === null || !('result' in networkError)) return [];
@@ -48,14 +58,18 @@ const errorsFromNetworkError = (networkError: unknown): readonly GraphQLFormatte
 	return Array.isArray(errors) ? (errors as GraphQLFormattedError[]) : [];
 };
 
+const graphQLErrorsOf = (error: ApolloError): readonly GraphQLFormattedError[] =>
+	error.graphQLErrors.length ? error.graphQLErrors : errorsFromNetworkError(error.networkError);
+
+/** The first `extensions.reason` of an Apollo error, if any. */
+export const getErrorReason = (error: unknown): string | undefined =>
+	error instanceof ApolloError ? graphQLErrorsOf(error).map(errorReasonOf).find(Boolean) : undefined;
+
 /** The first backend error code, 'NETWORK' when the server could not be reached, else undefined. */
 export const getErrorCode = (error: unknown): string | undefined => {
 	if (!(error instanceof ApolloError)) return undefined;
 
-	const graphQLErrors = error.graphQLErrors.length
-		? error.graphQLErrors
-		: errorsFromNetworkError(error.networkError);
-	const code = graphQLErrors.map(errorCodeOf).find(Boolean);
+	const code = graphQLErrorsOf(error).map(errorCodeOf).find(Boolean);
 
 	if (code) return code;
 	return error.networkError ? 'NETWORK' : undefined;

@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useMutation } from '@apollo/client';
-import { setToken, useAuth } from '@/auth';
+import { useAuth } from '@/auth';
 import type { AuthErrorMode } from '@/apollo/errorLink';
 import type { MemberInput } from '@/gql/graphql';
 import { toErrorKey } from '@/shared/lib/errors';
@@ -11,7 +11,7 @@ const context: { authErrors: AuthErrorMode } = { authErrors: 'ignore' };
 
 export const useSignup = () => {
 	const router = useRouter();
-	const { refetchMe } = useAuth();
+	const { startSession } = useAuth();
 	const [mutate, { loading, error, reset }] = useMutation(SignupMutation, { context });
 
 	/** Resolves true after redirecting; false on error (read `errorKey`; field errors come in slice S1). */
@@ -21,8 +21,7 @@ export const useSignup = () => {
 			const member = data?.signup;
 			if (!member?.accessToken) return false;
 
-			setToken(member.accessToken, member._id);
-			await refetchMe();
+			await startSession(member.accessToken);
 			await router.push(safeNextPath(router.query.next));
 			return true;
 		} catch {

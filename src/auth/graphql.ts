@@ -1,13 +1,9 @@
 import { graphql } from '@/gql';
 
-/**
- * The API has no "me" query. `checkAuth` is guarded, so it validates the token (UNAUTHENTICATED /
- * blocked FORBIDDEN); `getMember` alone is public and would silently treat a bad token as a guest.
- */
+/** The member of the stored token, with their own contacts (D-33). Logged in only. */
 export const MeQuery = graphql(`
-	query Me($memberId: String!) {
-		checkAuth
-		getMember(memberId: $memberId) {
+	query Me {
+		getMe {
 			_id
 			memberType
 			memberStatus

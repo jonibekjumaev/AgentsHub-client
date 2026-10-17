@@ -2,7 +2,7 @@ import Router from 'next/router';
 import type { GraphQLFormattedError } from 'graphql';
 import { onError } from '@apollo/client/link/error';
 import { clearToken } from '@/auth/session';
-import { ErrorCode, errorCodeOf } from '@/shared/lib/errors';
+import { ErrorCode, ErrorReason, errorCodeOf, errorReasonOf } from '@/shared/lib/errors';
 
 /**
  * How errorLink treats session errors, set per operation with `context: { authErrors }`:
@@ -14,11 +14,10 @@ export type AuthErrorMode = 'redirect' | 'silent' | 'ignore';
 
 /** On these pages UNAUTHENTICATED means "wrong credentials", not "session expired" (FRONTEND_MIGRATION §1.2). */
 const AUTH_PAGES = ['/login', '/signup'];
-const BLOCKED_MESSAGE = 'You have been blocked!';
 
-/** TODO(backend Step 13): replace with extensions.reason === 'MEMBER_BLOCKED'. */
+/** D-33: branch on the machine-readable reason, never on the message text. */
 const isBlockedMemberError = (error: GraphQLFormattedError): boolean =>
-	errorCodeOf(error) === ErrorCode.Forbidden && error.message === BLOCKED_MESSAGE;
+	errorReasonOf(error) === ErrorReason.MemberBlocked;
 
 let redirecting = false;
 

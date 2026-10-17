@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { useMutation } from '@apollo/client';
-import { setToken, useAuth } from '@/auth';
+import { useAuth } from '@/auth';
 import type { AuthErrorMode } from '@/apollo/errorLink';
 import type { LoginInput } from '@/gql/graphql';
-import { ErrorCode, getErrorCode, type ErrorKey } from '@/shared/lib/errors';
+import { ErrorReason, getErrorCode, getErrorReason, type ErrorKey } from '@/shared/lib/errors';
 import { LoginMutation } from '../graphql/auth';
 import { safeNextPath } from './redirect';
 
@@ -11,15 +11,14 @@ const context: { authErrors: AuthErrorMode } = { authErrors: 'ignore' };
 
 /** D-27: one message for every failed login. Blocked (correct password only) and network get their own. */
 const toLoginErrorKey = (error: unknown): ErrorKey => {
-	const code = getErrorCode(error);
-	if (code === 'NETWORK') return 'errors:network';
-	if (code === ErrorCode.Forbidden) return 'errors:login.blocked';
+	if (getErrorCode(error) === 'NETWORK') return 'errors:network';
+	if (getErrorReason(error) === ErrorReason.MemberBlocked) return 'errors:login.blocked';
 	return 'errors:login.invalid';
 };
 
 export const useLogin = () => {
 	const router = useRouter();
-	const { refetchMe } = useAuth();
+	const { startSession } = useAuth();
 	const [mutate, { loading, error, reset }] = useMutation(LoginMutation, { context });
 
 	/** Resolves true after redirecting; false on error (read `errorKey`). */
@@ -29,8 +28,7 @@ export const useLogin = () => {
 			const member = data?.login;
 			if (!member?.accessToken) return false;
 
-			setToken(member.accessToken, member._id);
-			await refetchMe();
+			await startSession(member.accessToken);
 			await router.push(safeNextPath(router.query.next));
 			return true;
 		} catch {

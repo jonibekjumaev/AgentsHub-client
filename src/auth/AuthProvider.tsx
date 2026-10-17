@@ -5,14 +5,16 @@ import { useApolloClient, useQuery } from '@apollo/client';
 import type { MeQuery as MeQueryResult } from '@/gql/graphql';
 import type { AuthErrorMode } from '@/apollo/errorLink';
 import { MeQuery } from './graphql';
-import { clearToken, getSessionMemberId, getToken, subscribeToSession } from './session';
+import { clearToken, getToken, setToken, subscribeToSession } from './session';
 
-export type Me = MeQueryResult['getMember'];
+export type Me = MeQueryResult['getMe'];
 export type AuthStatus = 'loading' | 'guest' | 'member';
 
 type AuthContextValue = {
 	me: Me | null;
 	status: AuthStatus;
+	/** Stores the token from login/signup and reloads every active query as the new member. */
+	startSession: (token: string) => Promise<void>;
 	refetchMe: () => Promise<void>;
 	logout: () => Promise<void>;
 };
@@ -27,41 +29,49 @@ const getServerToken = () => null;
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
 	const client = useApolloClient();
 	const token = useSyncExternalStore(subscribeToSession, getToken, getServerToken);
-	const memberId = token ? getSessionMemberId() : null;
 
 	// 'loading' until mounted: the server and the first client render never show guest or member.
 	const [mounted, setMounted] = useState(false);
 	useEffect(() => setMounted(true), []);
 
-	const { data, loading } = useQuery(MeQuery, {
-		variables: { memberId: memberId ?? '' },
-		skip: !token || !memberId,
-		context: meContext,
-	});
+	const { data, loading } = useQuery(MeQuery, { skip: !token, context: meContext });
 
-	// A different session (logout, or another member logged in from another tab): drop member data.
+	// The token was removed or replaced (logout here or in another tab): drop the old member's data.
 	const previousToken = useRef(token);
 	useEffect(() => {
 		if (previousToken.current && previousToken.current !== token) void client.clearStore();
 		previousToken.current = token;
 	}, [client, token]);
 
-	const me = token && data?.getMember._id === memberId ? data.getMember : null;
+	const me = token ? data?.getMe ?? null : null;
 
 	let status: AuthStatus;
 	if (!mounted) status = 'loading';
-	else if (!token || !memberId) status = 'guest';
+	else if (!token) status = 'guest';
 	else if (me) status = 'member';
 	else status = loading ? 'loading' : 'guest';
 
-	/** Resolves once the current session's member is in the cache, which the hook above then reads. */
+	/** Resolves once the current member is in the cache, which the hook above then reads. */
 	const refetchMe = useCallback(async () => {
-		const sessionMemberId = getSessionMemberId();
-		if (!getToken() || !sessionMemberId) return;
+		if (!getToken()) return;
 		await client
-			.query({ query: MeQuery, variables: { memberId: sessionMemberId }, fetchPolicy: 'network-only', context: meContext })
+			.query({ query: MeQuery, fetchPolicy: 'network-only', context: meContext })
 			.catch(() => undefined); // errorLink already cleared a rejected session; status falls back to guest
 	}, [client]);
+
+	/**
+	 * Same effect as client.resetStore(), ordered so no query is in flight while the store is cleared:
+	 * clearing first (as a guest, getMe is still skipped) avoids the "Store reset while query was in
+	 * flight" error that would briefly turn the status into 'guest' and trip RequireRole.
+	 */
+	const startSession = useCallback(
+		async (nextToken: string) => {
+			await client.clearStore();
+			setToken(nextToken);
+			await Promise.all([client.reFetchObservableQueries(), refetchMe()]);
+		},
+		[client, refetchMe],
+	);
 
 	const logout = useCallback(async () => {
 		clearToken();
@@ -69,7 +79,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 		await Router.push('/');
 	}, [client]);
 
-	const value = useMemo(() => ({ me, status, refetchMe, logout }), [me, status, refetchMe, logout]);
+	const value = useMemo(
+		() => ({ me, status, startSession, refetchMe, logout }),
+		[me, status, startSession, refetchMe, logout],
+	);
 
 	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
