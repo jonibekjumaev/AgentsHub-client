@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
 import ErrorPage from 'next/error';
 import { useRouter } from 'next/router';
@@ -23,8 +23,13 @@ export const RequireRole = ({ roles, children }: RequireRoleProps) => {
 	const router = useRouter();
 	const { t } = useTranslation('common');
 
+	// Once only: replace() changes the route, which gives a new `router` and re-runs this effect —
+	// without the guard a still-mounted guard (e.g. in a layout) would redirect forever.
+	const redirected = useRef(false);
 	useEffect(() => {
-		if (status === 'guest') void router.replace({ pathname: '/login', query: { next: router.asPath } });
+		if (status !== 'guest' || redirected.current) return;
+		redirected.current = true;
+		void router.replace({ pathname: '/login', query: { next: router.asPath } });
 	}, [status, router]);
 
 	if (status === 'member' && me) {
