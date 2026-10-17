@@ -61,6 +61,9 @@ Import alias: `@/` → `src/`.
 13. GraphQL documents use `graphql()` from `@/gql`; run `yarn codegen` after changing a document.
 14. Never run `yarn build` while `yarn dev` is running — they share `.next/` and the dev server breaks.
     Restart `yarn dev` after `yarn install` (changed `node_modules` break the running dev server).
+15. New dependencies: pick versions released at least 14 days ago; exact-pin dev tooling (no `^`).
+16. Every slice ships with tests for its logic and its key component states (Vitest + Testing Library,
+    `src/test/renderWithProviders`). Tests sit next to the code as `*.test.ts(x)`, never in `src/pages/`.
 
 ## Security rules (strict)
 - Never read, print or edit `.env`, `.env.local`, `.env.development`. Use `.env.example` to see which keys exist.
@@ -72,13 +75,13 @@ Import alias: `@/` → `src/`.
 ## Workflow
 - Work only on the part the prompt asks for. If you find another problem, list it in the report — do not fix it silently.
 - Start with a short plan (files to create/change/delete). Then implement.
-- Before reporting, run: `yarn tsc --noEmit`, `yarn lint`, `yarn build`. All must pass.
+- Before reporting, run: `yarn tsc --noEmit`, `yarn lint`, `yarn test`, `yarn build` (dev server stopped). All must pass.
 - Do **not** run `git commit` or `git push` — the developer commits after review.
 - Reply to the developer in Uzbek; keep technical terms (component, hook, query, props…) in English.
 
 ## Report format
 1. What was done (1–3 lines)
 2. Files: created / changed / deleted
-3. Checks: tsc / lint / build results
+3. Checks: tsc / lint / test / build results
 4. How to test in the browser (steps)
 5. Open issues or questions (if any)

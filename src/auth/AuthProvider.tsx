@@ -10,7 +10,7 @@ import { clearToken, getToken, setToken, subscribeToSession } from './session';
 export type Me = MeQueryResult['getMe'];
 export type AuthStatus = 'loading' | 'guest' | 'member';
 
-type AuthContextValue = {
+export type AuthContextValue = {
 	me: Me | null;
 	status: AuthStatus;
 	/** Stores the token from login/signup and reloads every active query as the new member. */
@@ -19,7 +19,8 @@ type AuthContextValue = {
 	logout: () => Promise<void>;
 };
 
-const AuthContext = createContext<AuthContextValue | null>(null);
+/** Exported for tests only (src/test/renderWithProviders) — app code uses useAuth(). */
+export const AuthContext = createContext<AuthContextValue | null>(null);
 
 const meContext: { authErrors: AuthErrorMode } = { authErrors: 'silent' };
 
