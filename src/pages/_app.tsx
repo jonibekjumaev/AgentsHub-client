@@ -5,7 +5,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { AppCacheProvider } from '@mui/material-nextjs/v14-pagesRouter';
 import { appWithTranslation } from 'next-i18next';
 import { useApollo } from '@/apollo/client';
-import { AuthProvider } from '@/auth';
+import { AuthProvider } from '@/auth/AuthProvider'; // direct: the barrel would pull RequireRole + StatusPage into _app
 import type { GetLayout, NextPageWithLayout } from '@/shared/layout/types';
 import { ToastProvider } from '@/shared/ui/toast'; // direct: the barrel would pull the whole UI kit into _app
 import { theme } from '@/theme/theme';

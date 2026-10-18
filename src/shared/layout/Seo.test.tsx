@@ -59,6 +59,15 @@ describe('Seo', () => {
 		expect(document.querySelector('meta[name="robots"]')).toBeNull();
 	});
 
+	it('uses canonicalPath (with its query) for the canonical and alternate URLs', () => {
+		mockRouter.setCurrentUrl('/agents?category=sales&sort=rank&page=3');
+		mockRouter.locale = 'uz';
+		renderWithProviders(<Seo title="Sales AI agents" canonicalPath="/agents?category=sales" />, { auth: {} });
+
+		expect(attr('link[rel="canonical"]', 'href')).toBe(`${SITE}/uz/agents?category=sales`);
+		expect(alternates()).toMatchObject({ en: `${SITE}/agents?category=sales`, ko: `${SITE}/ko/agents?category=sales` });
+	});
+
 	it('links the home page without a trailing slash in other locales', () => {
 		mockRouter.setCurrentUrl('/');
 		renderWithProviders(<Seo />, { auth: {} });

@@ -1,3 +1,4 @@
+import type { Me } from '@/auth';
 import type { MemberType } from '@/gql/graphql';
 
 export type NavItem = {
@@ -63,6 +64,10 @@ export const dashboardHref = (memberType: MemberType): string =>
 	memberType === 'ADMIN' ? DASHBOARD_NAV.ADMIN.items[0].href : '/dashboard';
 
 export const SETTINGS_HREF = '/dashboard/settings';
+
+export const profileHref = (me: Pick<Me, '_id'>): string => `/members/${me._id}`;
+export const memberDisplayName = (me: Pick<Me, 'memberFullName' | 'memberNick'>): string =>
+	me.memberFullName || me.memberNick;
 
 /** `pathname` is the route pattern (router.pathname), e.g. /agents/[id] → Agents is active. */
 export const isActive = (pathname: string, item: NavItem): boolean =>

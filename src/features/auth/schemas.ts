@@ -1,4 +1,5 @@
-import { z } from 'zod';
+// zod/mini: the functional API tree-shakes (zod classic ships every method on every schema, ~23 kB gz).
+import * as z from 'zod/mini';
 import { MemberType } from '@/gql/enums';
 
 /**
@@ -20,29 +21,33 @@ export const normalizePhone = (value: string) => value.replace(/[\s\-().]/g, '')
 /** @Length(3, 12) counts UTF-16 units, the same as String.length. */
 const nick = z
 	.string()
-	.trim()
-	.min(1, 'auth:validation.nickRequired')
-	.min(NICK_MIN, 'auth:validation.nickLength')
-	.max(NICK_MAX, 'auth:validation.nickLength');
+	.check(
+		z.trim(),
+		z.minLength(1, 'auth:validation.nickRequired'),
+		z.minLength(NICK_MIN, 'auth:validation.nickLength'),
+		z.maxLength(NICK_MAX, 'auth:validation.nickLength'),
+	);
 
 /** LoginInput: nick 3–12, password only non-empty — old 5–7 character passwords still log in (D-26). */
 export const loginSchema = z.object({
 	memberNick: nick,
-	memberPassword: z.string().min(1, 'auth:validation.passwordRequired'),
+	memberPassword: z.string().check(z.minLength(1, 'auth:validation.passwordRequired')),
 });
 
 /** MemberInput: memberType USER or CREATOR only (D-14), E.164 phone (D-25), new-password rule (D-26). */
 export const signupSchema = z.object({
 	memberType: z.enum([MemberType.User, MemberType.Creator], { error: 'auth:validation.roleRequired' }),
 	memberNick: nick,
-	memberPhone: z
-		.string()
-		.transform(normalizePhone)
-		.pipe(z.string().min(1, 'auth:validation.phoneRequired').regex(E164_PHONE, 'auth:validation.phoneFormat')),
+	memberPhone: z.pipe(
+		z.pipe(z.string(), z.transform(normalizePhone)),
+		z.string().check(z.minLength(1, 'auth:validation.phoneRequired'), z.regex(E164_PHONE, 'auth:validation.phoneFormat')),
+	),
 	memberPassword: z
 		.string()
-		.min(PASSWORD_MIN, 'auth:validation.passwordMin')
-		.refine((value) => utf8Bytes(value) <= PASSWORD_MAX_BYTES, 'auth:validation.passwordMaxBytes'),
+		.check(
+			z.minLength(PASSWORD_MIN, 'auth:validation.passwordMin'),
+			z.refine((value) => utf8Bytes(value) <= PASSWORD_MAX_BYTES, 'auth:validation.passwordMaxBytes'),
+		),
 });
 
 /** The new-password rule alone, for the live hint under the field. */

@@ -13,21 +13,26 @@ type SeoProps = {
 	image?: string;
 	/** Error and private pages: robots noindex, and no canonical / hreflang links. */
 	noindex?: boolean;
+	/**
+	 * Locale-free path, optionally with the query that defines the page (e.g. "/agents?category=sales"),
+	 * for the canonical and hreflang URLs. Default: the current path without its query.
+	 */
+	canonicalPath?: string;
 };
 
 const absoluteUrl = (pathOrUrl: string) =>
 	/^https?:\/\//.test(pathOrUrl) ? pathOrUrl : `${env.siteUrl}${pathOrUrl.startsWith('/') ? '' : '/'}${pathOrUrl}`;
 
 /** Title, description, Open Graph, canonical URL and en/ko/uz hreflang alternates for the current page. */
-export const Seo = ({ title, description, image, noindex = false }: SeoProps) => {
+export const Seo = ({ title, description, image, noindex = false, canonicalPath }: SeoProps) => {
 	const { asPath, locale = DEFAULT_LOCALE } = useRouter();
 	const { t } = useTranslation('common');
 
 	const siteName = t('common:app.name');
 	const fullTitle = title ? `${title} · ${siteName}` : siteName;
 	const text = description ?? t('common:seo.description');
-	// The query and hash never belong in canonical or alternate URLs.
-	const path = asPath.split(/[?#]/)[0] || '/';
+	// The query and hash belong in canonical or alternate URLs only when the page says so.
+	const path = canonicalPath ?? (asPath.split(/[?#]/)[0] || '/');
 	const urlIn = (target: string) => `${env.siteUrl}${localePath(path, target)}`;
 	const canonical = urlIn(locale);
 
