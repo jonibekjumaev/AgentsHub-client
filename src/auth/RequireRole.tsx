@@ -1,10 +1,13 @@
 import { useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
-import ErrorPage from 'next/error';
 import { useRouter } from 'next/router';
 import { Box, Skeleton, Stack } from '@mui/material';
+import { SearchOff as SearchOffIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
 import type { MemberType } from '@/gql/graphql';
+// Exact files, not the barrels: shared/layout's Header imports @/auth.
+import { Seo } from '@/shared/layout/Seo';
+import { StatusPage } from '@/shared/ui/StatusPage';
 import { useAuth } from './AuthProvider';
 
 type RequireRoleProps = {
@@ -33,7 +36,20 @@ export const RequireRole = ({ roles, children }: RequireRoleProps) => {
 	}, [status, router]);
 
 	if (status === 'member' && me) {
-		return roles.includes(me.memberType) ? <>{children}</> : <ErrorPage statusCode={404} />;
+		if (roles.includes(me.memberType)) return <>{children}</>;
+		// Same page as /404: the route exists, but not for this role.
+		return (
+			<>
+				<Seo title={t('common:errorPages.notFound.title')} noindex />
+				<StatusPage
+					code="404"
+					icon={<SearchOffIcon />}
+					title={t('common:errorPages.notFound.title')}
+					text={t('common:errorPages.notFound.text')}
+					action={{ label: t('common:errorPages.home'), href: '/' }}
+				/>
+			</>
+		);
 	}
 
 	// Loading, or a guest on the way to /login.

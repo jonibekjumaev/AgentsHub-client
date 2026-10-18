@@ -23,6 +23,7 @@ export const ErrorReason = {
 export type ErrorKey =
 	| 'errors:login.invalid'
 	| 'errors:login.blocked'
+	| 'errors:signup.conflict'
 	| 'errors:network'
 	| 'errors:unauthenticated'
 	| 'errors:forbidden'

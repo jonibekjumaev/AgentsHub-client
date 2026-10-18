@@ -49,7 +49,9 @@ describe('RequireRole', () => {
 	it('shows 404 for a member with the wrong role', () => {
 		renderGuarded({ status: 'member', me: member('USER') });
 
-		expect(screen.getByRole('heading', { name: '404' })).toBeInTheDocument();
+		expect(screen.getByRole('heading', { level: 1, name: 'Page not found' })).toBeInTheDocument();
+		expect(screen.getByText('404')).toBeInTheDocument();
+		expect(screen.getByRole('link', { name: 'Back to home' })).toHaveAttribute('href', '/');
 		expect(screen.queryByText('Creator content')).not.toBeInTheDocument();
 	});
 

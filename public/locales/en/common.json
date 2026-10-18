@@ -105,7 +105,9 @@
 	"field": {
 		"counter": "{{count}} / {{max}}",
 		"counterSpoken": "{{count}} of {{max}} characters used",
-		"required": "required"
+		"required": "required",
+		"showPassword": "Show password",
+		"hidePassword": "Hide password"
 	},
 	"states": {
 		"errorTitle": "Something went wrong"

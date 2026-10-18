@@ -2,5 +2,147 @@
 	"app": {
 		"name": "AgentsHub",
 		"rebuilding": "AgentsHub를 새로 만들고 있습니다."
+	},
+	"brand": {
+		"start": "Agents",
+		"end": "Hub"
+	},
+	"seo": {
+		"description": "AgentsHub는 AI 에이전트 마켓플레이스입니다. 비즈니스에 맞는 에이전트를 찾거나, 브리프를 올리고 크리에이터의 제안을 받아 보세요."
+	},
+	"a11y": {
+		"skipToContent": "본문으로 건너뛰기"
+	},
+	"nav": {
+		"label": "주 메뉴",
+		"agents": "에이전트",
+		"briefs": "브리프",
+		"creators": "크리에이터",
+		"community": "커뮤니티",
+		"openMenu": "메뉴 열기",
+		"closeMenu": "메뉴 닫기",
+		"mobileMenu": "메뉴"
+	},
+	"header": {
+		"login": "로그인",
+		"signup": "회원가입",
+		"dashboard": "대시보드",
+		"accountMenu": "@{{nick}} 계정 메뉴",
+		"signedInAs": "@{{nick}} · {{role}}",
+		"myProfile": "내 프로필",
+		"settings": "설정",
+		"logout": "로그아웃"
+	},
+	"language": {
+		"label": "언어: {{language}}",
+		"names": {
+			"en": "English",
+			"ko": "한국어",
+			"uz": "Oʻzbekcha"
+		}
+	},
+	"footer": {
+		"label": "푸터",
+		"faq": "자주 묻는 질문",
+		"about": "소개",
+		"copyright": "© {{year}} AgentsHub",
+		"prices": "모든 가격은 USD 기준입니다."
+	},
+	"dashboardNav": {
+		"label": "대시보드",
+		"titles": {
+			"CREATOR": "크리에이터",
+			"USER": "내 계정",
+			"ADMIN": "관리자"
+		},
+		"overview": "개요",
+		"myAgents": "내 에이전트",
+		"myBriefs": "내 브리프",
+		"articles": "글",
+		"favorites": "즐겨찾기",
+		"visited": "최근 본 항목",
+		"followers": "팔로워",
+		"following": "팔로잉",
+		"settings": "프로필 설정",
+		"members": "회원",
+		"agents": "에이전트",
+		"briefs": "브리프"
+	},
+	"errorPages": {
+		"home": "홈으로 돌아가기",
+		"notFound": {
+			"title": "페이지를 찾을 수 없습니다",
+			"text": "찾으시는 페이지가 없거나 이동되었습니다."
+		},
+		"serverError": {
+			"title": "서버에 문제가 발생했습니다",
+			"text": "잠시 후 다시 시도해 주세요. 문제가 계속되면 조금 뒤에 다시 방문해 주세요."
+		}
+	},
+	"status": {
+		"loading": "불러오는 중…"
+	},
+	"actions": {
+		"tryAgain": "다시 시도",
+		"cancel": "취소",
+		"confirm": "확인",
+		"delete": "삭제",
+		"close": "닫기"
+	},
+	"price": {
+		"free": "무료",
+		"custom": "맞춤 가격",
+		"perMonth": "/ 월",
+		"perMonthSpoken": "월",
+		"none": "가격 없음"
+	},
+	"pagination": {
+		"label": "페이지 이동",
+		"previous": "이전 페이지",
+		"next": "다음 페이지",
+		"page": "{{page}}페이지"
+	},
+	"field": {
+		"counter": "{{count}} / {{max}}",
+		"counterSpoken": "{{max}}자 중 {{count}}자 사용",
+		"required": "필수",
+		"showPassword": "비밀번호 표시",
+		"hidePassword": "비밀번호 숨기기"
+	},
+	"states": {
+		"errorTitle": "문제가 발생했습니다"
+	},
+	"enums": {
+		"AgentCategory": {
+			"AUTOMATION": "자동화",
+			"CONTENT": "콘텐츠",
+			"CUSTOMER_SUPPORT": "고객 지원",
+			"DATA_ANALYSIS": "데이터 분석",
+			"EDUCATION": "교육",
+			"MARKETING": "마케팅",
+			"OTHER": "기타",
+			"SALES": "영업"
+		},
+		"ProductPricing": {
+			"FREE": "무료",
+			"ONE_TIME": "일회성",
+			"SUBSCRIPTION": "구독",
+			"CUSTOM": "맞춤 가격"
+		},
+		"ProductStatus": {
+			"ACTIVE": "활성",
+			"PAUSED": "일시 중지",
+			"DELETE": "삭제됨"
+		},
+		"BriefStatus": {
+			"OPEN": "모집 중",
+			"CLOSED": "마감",
+			"DELETE": "삭제됨"
+		},
+		"MemberType": {
+			"USER": "사용자",
+			"CREATOR": "크리에이터",
+			"ADMIN": "관리자"
+		}
 	}
 }
