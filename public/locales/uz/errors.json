@@ -1,0 +1,16 @@
+{
+	"login": {
+		"invalid": "Nik yoki parol notoʻgʻri.",
+		"blocked": "Hisobingiz bloklangan."
+	},
+	"signup": {
+		"conflict": "Bu nik yoki telefon raqam allaqachon band. Boshqasini kiriting yoki tizimga kiring."
+	},
+	"network": "Serverga ulanib boʻlmadi. Internet aloqasini tekshirib, qayta urinib koʻring.",
+	"unauthenticated": "Davom etish uchun tizimga kiring.",
+	"forbidden": "Bu amalni bajarishga ruxsatingiz yoʻq.",
+	"notFound": "Siz qidirgan narsa topilmadi.",
+	"conflict": "Bu qiymat allaqachon band.",
+	"validation": "Baʼzi maydonlar notoʻgʻri toʻldirilgan. Tekshirib, qayta urinib koʻring.",
+	"unknown": "Nimadir notoʻgʻri ketdi. Qayta urinib koʻring."
+}

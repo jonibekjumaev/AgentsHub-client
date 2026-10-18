@@ -179,6 +179,8 @@ Uploaded image replaces initials.
 
 Dashboard sidebar items — CREATOR: Overview, My agents, Articles, Favorites, Followers, Profile settings.
 USER: My briefs, Favorites, Recently visited, Articles, Following, Profile settings.
+ADMIN: Members (`/admin/members`), Agents (`/admin/agents`), Briefs (`/admin/briefs`), Articles (`/admin/articles`);
+the header "Dashboard" button leads ADMIN to `/admin/members`.
 
 ---
 

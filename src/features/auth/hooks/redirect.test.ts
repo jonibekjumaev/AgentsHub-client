@@ -14,6 +14,8 @@ describe('safeNextPath', () => {
 		['empty string', ''],
 		['undefined', undefined],
 		['array query param', ['/a', '/b']],
+		['the login page', '/login?next=/agents'],
+		['the signup page', '/signup'],
 	])('falls back to "/" for %s', (_label, value) => {
 		expect(safeNextPath(value)).toBe('/');
 	});

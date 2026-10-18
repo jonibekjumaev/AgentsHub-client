@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { Box } from '@mui/material';
+import { LanguageSwitcher } from './LanguageSwitcher';
 import { Logo } from './Logo';
 import { MAIN_CONTENT_ID, SkipLink } from './SkipLink';
 
@@ -9,7 +10,7 @@ type AuthLayoutProps = {
 	headerAction?: ReactNode;
 };
 
-/** Login.html: a slim header (logo + one action) and the form centered below. */
+/** Login.html: a slim header (logo, one action, compact language switcher) and the form centered below. */
 export const AuthLayout = ({ children, headerAction }: AuthLayoutProps) => (
 	<Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
 		<Box component="header" sx={{ bgcolor: 'surface', borderBottom: 1, borderColor: 'border' }}>
@@ -28,7 +29,10 @@ export const AuthLayout = ({ children, headerAction }: AuthLayoutProps) => (
 				}}
 			>
 				<Logo />
-				{headerAction && <Box sx={{ fontSize: 14, color: 'muted' }}>{headerAction}</Box>}
+				<Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'flex-end', gap: 3 }}>
+					{headerAction && <Box sx={{ fontSize: 14, color: 'muted' }}>{headerAction}</Box>}
+					<LanguageSwitcher />
+				</Box>
 			</Box>
 		</Box>
 		<Box

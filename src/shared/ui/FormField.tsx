@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { Box, FormHelperText, FormLabel, OutlinedInput, type OutlinedInputProps } from '@mui/material';
+import { Check as CheckIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
 import { visuallyHidden } from './visuallyHidden';
 
@@ -14,7 +15,9 @@ export type FieldControlProps = {
 type FormFieldProps = {
 	id: string;
 	label: string;
-	hint?: string;
+	hint?: ReactNode;
+	/** "valid": the hint is a met rule (e.g. password length) — success color with a check icon. */
+	hintState?: 'valid';
 	/** Already translated error text; shown instead of the hint. */
 	error?: string;
 	required?: boolean;
@@ -27,7 +30,7 @@ type FormFieldProps = {
  * DESIGN §3 Form controls: label above (14/700), hint 12/500 muted, counter right-aligned in the
  * same row, error 12/600 danger. The error is linked through aria-describedby and announced (role="alert").
  */
-export const FormField = ({ id, label, hint, error, required, counter, children }: FormFieldProps) => {
+export const FormField = ({ id, label, hint, hintState, error, required, counter, children }: FormFieldProps) => {
 	const { t } = useTranslation('common');
 	const hintId = `${id}-hint`;
 	const errorId = `${id}-error`;
@@ -54,7 +57,20 @@ export const FormField = ({ id, label, hint, error, required, counter, children 
 							{error}
 						</FormHelperText>
 					) : hint ? (
-						<FormHelperText id={hintId} sx={{ mt: 0 }}>
+						<FormHelperText
+							id={hintId}
+							sx={{
+								mt: 0,
+								...(hintState === 'valid' && {
+									display: 'flex',
+									alignItems: 'center',
+									gap: 1.5,
+									color: 'success.main',
+									fontWeight: 600,
+								}),
+							}}
+						>
+							{hintState === 'valid' && <CheckIcon aria-hidden="true" sx={{ fontSize: 14 }} />}
 							{hint}
 						</FormHelperText>
 					) : (
@@ -86,11 +102,23 @@ type FormTextFieldProps = Omit<FormFieldProps, 'children' | 'counter'> &
 	};
 
 /** FormField + OutlinedInput, with the counter derived from `value` and `maxLength`. */
-export const FormTextField = ({ id, label, hint, error, required, maxLength, value, inputProps, ...input }: FormTextFieldProps) => (
+export const FormTextField = ({
+	id,
+	label,
+	hint,
+	hintState,
+	error,
+	required,
+	maxLength,
+	value,
+	inputProps,
+	...input
+}: FormTextFieldProps) => (
 	<FormField
 		id={id}
 		label={label}
 		hint={hint}
+		hintState={hintState}
 		error={error}
 		required={required}
 		counter={maxLength ? { count: value.length, max: maxLength } : undefined}

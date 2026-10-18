@@ -2,5 +2,147 @@
 	"app": {
 		"name": "AgentsHub",
 		"rebuilding": "AgentsHub qayta qurilmoqda."
+	},
+	"brand": {
+		"start": "Agents",
+		"end": "Hub"
+	},
+	"seo": {
+		"description": "AgentsHub — AI agentlar marketpleysi. Biznesingiz uchun agent toping yoki brief joylang va kreatorlarning takliflarini oling."
+	},
+	"a11y": {
+		"skipToContent": "Asosiy qismga oʻtish"
+	},
+	"nav": {
+		"label": "Asosiy menyu",
+		"agents": "Agentlar",
+		"briefs": "Brieflar",
+		"creators": "Kreatorlar",
+		"community": "Hamjamiyat",
+		"openMenu": "Menyuni ochish",
+		"closeMenu": "Menyuni yopish",
+		"mobileMenu": "Menyu"
+	},
+	"header": {
+		"login": "Kirish",
+		"signup": "Roʻyxatdan oʻtish",
+		"dashboard": "Boshqaruv paneli",
+		"accountMenu": "@{{nick}} hisob menyusi",
+		"signedInAs": "@{{nick}} · {{role}}",
+		"myProfile": "Mening profilim",
+		"settings": "Sozlamalar",
+		"logout": "Chiqish"
+	},
+	"language": {
+		"label": "Til: {{language}}",
+		"names": {
+			"en": "English",
+			"ko": "한국어",
+			"uz": "Oʻzbekcha"
+		}
+	},
+	"footer": {
+		"label": "Pastki qism",
+		"faq": "Koʻp soʻraladigan savollar",
+		"about": "Biz haqimizda",
+		"copyright": "© {{year}} AgentsHub",
+		"prices": "Barcha narxlar AQSh dollarida."
+	},
+	"dashboardNav": {
+		"label": "Boshqaruv paneli",
+		"titles": {
+			"CREATOR": "Kreator",
+			"USER": "Mening hisobim",
+			"ADMIN": "Admin"
+		},
+		"overview": "Umumiy koʻrinish",
+		"myAgents": "Mening agentlarim",
+		"myBriefs": "Mening brieflarim",
+		"articles": "Maqolalar",
+		"favorites": "Sevimlilar",
+		"visited": "Yaqinda koʻrilganlar",
+		"followers": "Obunachilar",
+		"following": "Obunalar",
+		"settings": "Profil sozlamalari",
+		"members": "Aʼzolar",
+		"agents": "Agentlar",
+		"briefs": "Brieflar"
+	},
+	"errorPages": {
+		"home": "Bosh sahifaga qaytish",
+		"notFound": {
+			"title": "Sahifa topilmadi",
+			"text": "Siz qidirayotgan sahifa mavjud emas yoki boshqa joyga koʻchirilgan."
+		},
+		"serverError": {
+			"title": "Bizning tomonda nimadir notoʻgʻri ketdi",
+			"text": "Birozdan keyin qayta urinib koʻring. Muammo takrorlansa, keyinroq qaytib keling."
+		}
+	},
+	"status": {
+		"loading": "Yuklanmoqda…"
+	},
+	"actions": {
+		"tryAgain": "Qayta urinish",
+		"cancel": "Bekor qilish",
+		"confirm": "Tasdiqlash",
+		"delete": "Oʻchirish",
+		"close": "Yopish"
+	},
+	"price": {
+		"free": "Bepul",
+		"custom": "Kelishilgan",
+		"perMonth": "/ oy",
+		"perMonthSpoken": "oyiga",
+		"none": "Narx yoʻq"
+	},
+	"pagination": {
+		"label": "Sahifalar",
+		"previous": "Oldingi sahifa",
+		"next": "Keyingi sahifa",
+		"page": "{{page}}-sahifa"
+	},
+	"field": {
+		"counter": "{{count}} / {{max}}",
+		"counterSpoken": "{{max}} ta belgidan {{count}} tasi ishlatildi",
+		"required": "majburiy",
+		"showPassword": "Parolni koʻrsatish",
+		"hidePassword": "Parolni yashirish"
+	},
+	"states": {
+		"errorTitle": "Nimadir notoʻgʻri ketdi"
+	},
+	"enums": {
+		"AgentCategory": {
+			"AUTOMATION": "Avtomatlashtirish",
+			"CONTENT": "Kontent",
+			"CUSTOMER_SUPPORT": "Mijozlarni qoʻllab-quvvatlash",
+			"DATA_ANALYSIS": "Maʼlumotlar tahlili",
+			"EDUCATION": "Taʼlim",
+			"MARKETING": "Marketing",
+			"OTHER": "Boshqa",
+			"SALES": "Savdo"
+		},
+		"ProductPricing": {
+			"FREE": "Bepul",
+			"ONE_TIME": "Bir martalik",
+			"SUBSCRIPTION": "Obuna",
+			"CUSTOM": "Kelishilgan"
+		},
+		"ProductStatus": {
+			"ACTIVE": "Faol",
+			"PAUSED": "Toʻxtatilgan",
+			"DELETE": "Oʻchirilgan"
+		},
+		"BriefStatus": {
+			"OPEN": "Ochiq",
+			"CLOSED": "Yopilgan",
+			"DELETE": "Oʻchirilgan"
+		},
+		"MemberType": {
+			"USER": "Foydalanuvchi",
+			"CREATOR": "Kreator",
+			"ADMIN": "Admin"
+		}
 	}
 }
