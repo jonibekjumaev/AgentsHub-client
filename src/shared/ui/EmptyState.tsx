@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import NextLink from 'next/link';
 import { Box, Button, Typography } from '@mui/material';
 import { InboxOutlined as InboxOutlinedIcon } from '@mui/icons-material';
+import { radiusPx } from '@/theme/tokens';
 
 type EmptyAction = { label: string } & ({ onClick: () => void; href?: never } | { href: string; onClick?: never });
 
@@ -28,7 +29,7 @@ export const EmptyState = ({ title, text, icon, action, headingLevel = 'h2' }: E
 			bgcolor: 'surface',
 			border: 1,
 			borderColor: 'border',
-			borderRadius: 3,
+			borderRadius: radiusPx.lg,
 		}}
 	>
 		<Box
@@ -38,7 +39,7 @@ export const EmptyState = ({ title, text, icon, action, headingLevel = 'h2' }: E
 				placeItems: 'center',
 				width: 56,
 				height: 56,
-				borderRadius: 3,
+				borderRadius: radiusPx.lg,
 				bgcolor: 'accentSoft',
 				color: 'primary.main',
 				mb: 4,

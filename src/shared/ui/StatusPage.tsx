@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import NextLink from 'next/link';
 import { Box, Button, Typography } from '@mui/material';
+import { radiusPx } from '@/theme/tokens';
 
 type StatusPageProps = {
 	/** "404", "500" — shown in mono above the title. */
@@ -25,7 +26,7 @@ export const StatusPage = ({ code, title, text, icon, action }: StatusPageProps)
 				bgcolor: 'surface',
 				border: 1,
 				borderColor: 'border',
-				borderRadius: 3,
+				borderRadius: radiusPx.lg,
 			}}
 		>
 			<Box
@@ -35,7 +36,7 @@ export const StatusPage = ({ code, title, text, icon, action }: StatusPageProps)
 					placeItems: 'center',
 					width: 56,
 					height: 56,
-					borderRadius: 3,
+					borderRadius: radiusPx.lg,
 					bgcolor: 'accentSoft',
 					color: 'primary.main',
 					mb: 4,

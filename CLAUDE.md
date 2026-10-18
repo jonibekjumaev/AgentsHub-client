@@ -45,6 +45,8 @@ Import alias: `@/` → `src/`.
 1. A feature never imports another feature's internals — only `shared/*` or another feature's `index.ts`.
 2. Types come from codegen (`src/gql`). Do not hand-write GraphQL types or enums that the schema provides.
 3. Styling: MUI theme + `sx`/`styled` only, values from `theme/tokens.ts`. No new SCSS, no hex colors in components.
+   Never a numeric `borderRadius` in `sx` (MUI multiplies it by `shape.borderRadius` = 10px): use `radiusPx.*`.
+   ESLint enforces this outside `src/theme/`.
 4. No hard-coded UI text. Use `t('namespace:key')`; add the key to `public/locales/en/*.json`.
    Do not invent `ko`/`uz` translations — leave them for review (fallback is `en`).
 5. Every data page handles loading (skeleton), empty, error and success.

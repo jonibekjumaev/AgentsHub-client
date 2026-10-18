@@ -21,7 +21,10 @@ describe('AgentCard', () => {
 		expect(screen.getByText('128 likes')).toBeInTheDocument();
 		expect(screen.getByText('2.3K views')).toBeInTheDocument();
 		// The cover is decorative: the title names the agent.
-		expect(container.querySelector('img')).toHaveAttribute('src', 'http://localhost:3005/uploads/product/cover.png');
+		// next/image: resized through /_next/image from the API upload.
+		expect(container.querySelector('img')?.getAttribute('src')).toContain(
+			encodeURIComponent('http://localhost:3005/uploads/product/cover.png'),
+		);
 		expect(container.querySelector('img')).toHaveAttribute('alt', '');
 	});
 

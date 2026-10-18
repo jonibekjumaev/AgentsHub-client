@@ -99,6 +99,14 @@ export const hasActiveFilters = (filters: AgentFilters): boolean =>
 	filters.maxPrice !== null ||
 	filters.tags.length > 0;
 
+/** How many removable filter values are set (one per ActiveFilters chip). */
+export const activeFilterCount = (filters: AgentFilters): number =>
+	(filters.text ? 1 : 0) +
+	filters.categories.length +
+	filters.pricing.length +
+	(filters.minPrice !== null || filters.maxPrice !== null ? 1 : 0) +
+	filters.tags.length;
+
 // ---------- parsing ----------
 
 const textSchema = z.catch(z.string().check(z.trim(), z.maxLength(SEARCH_TEXT_MAX)), '');

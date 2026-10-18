@@ -1,3 +1,26 @@
 {
-	"extends": "next/core-web-vitals"
+	"extends": "next/core-web-vitals",
+	"overrides": [
+		{
+			"files": ["src/**/*.ts", "src/**/*.tsx"],
+			"excludedFiles": ["src/theme/**"],
+			"rules": {
+				"no-restricted-syntax": [
+					"error",
+					{
+						"selector": "Property[key.name='borderRadius'][value.type='Literal'][value.raw=/^(?!0$)[0-9.]/]",
+						"message": "sx multiplies a numeric borderRadius by shape.borderRadius (10px). Use radiusPx.* from @/theme/tokens."
+					},
+					{
+						"selector": "Property[key.name='borderRadius'] > MemberExpression[object.name='radius']",
+						"message": "radius.* is a number, which sx multiplies by 10px. Use radiusPx.* from @/theme/tokens."
+					},
+					{
+						"selector": "JSXAttribute[name.name='borderRadius'] > JSXExpressionContainer > Literal[raw=/^(?!0$)[0-9.]/]",
+						"message": "A numeric borderRadius prop is multiplied by shape.borderRadius (10px). Use radiusPx.* from @/theme/tokens."
+					}
+				]
+			}
+		}
+	]
 }

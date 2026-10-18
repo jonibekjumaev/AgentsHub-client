@@ -2,6 +2,7 @@ import { Box, FormHelperText, Radio, Typography } from '@mui/material';
 import { useController, type Control } from 'react-hook-form';
 import { useTranslation } from 'next-i18next';
 import { MemberType } from '@/gql/enums';
+import { radiusPx } from '@/theme/tokens';
 import type { SignupValues } from '../schemas';
 
 const ROLES = [MemberType.User, MemberType.Creator] as const;
@@ -37,7 +38,7 @@ export const RoleCards = ({ control }: { control: Control<SignupValues> }) => {
 								p: selected ? 4 : '17px',
 								border: selected ? 2 : 1,
 								borderColor: selected ? 'primary.main' : error ? 'dangerBorder' : 'border',
-								borderRadius: 3,
+								borderRadius: radiusPx.lg,
 								bgcolor: selected ? 'accentSoft' : 'surface',
 								cursor: 'pointer',
 								'&:focus-within': { outline: 2, outlineColor: 'primary.main', outlineOffset: 2 },

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import NextLink from 'next/link';
 import { Box, Card, CardContent, Divider, Link, Stack, Typography } from '@mui/material';
 import { FavoriteBorder as FavoriteBorderIcon, SmartToyOutlined as SmartToyOutlinedIcon } from '@mui/icons-material';
@@ -23,6 +24,7 @@ const Cover = ({ image }: { image: string | undefined }) => {
 	return (
 		<Box
 			sx={{
+				position: 'relative',
 				aspectRatio: '16 / 10',
 				bgcolor: 'accentSoft',
 				color: 'primary.main',
@@ -32,15 +34,8 @@ const Cover = ({ image }: { image: string | undefined }) => {
 			}}
 		>
 			{src ? (
-				// Decorative: the title right below names the agent. Plain <img>: uploads come from the API origin.
-				<Box
-					component="img"
-					src={src}
-					alt=""
-					loading="lazy"
-					decoding="async"
-					sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-				/>
+				// Decorative: the title right below names the agent. Lazy by default; resized by next/image.
+				<Image src={src} alt="" fill sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 300px" style={{ objectFit: 'cover' }} />
 			) : (
 				<SmartToyOutlinedIcon aria-hidden="true" sx={{ fontSize: 40 }} />
 			)}

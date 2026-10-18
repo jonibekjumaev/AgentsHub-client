@@ -2,7 +2,7 @@ import { Box, ButtonBase, Link, Typography } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
 import { useFormat } from '@/shared/lib/format';
-import { radius } from '@/theme/tokens';
+import { radiusPx } from '@/theme/tokens';
 import type { FilterPatch } from '../hooks/useAgentFilters';
 import { hasActiveFilters, type AgentFilters } from '../lib/listQuery';
 
@@ -71,7 +71,7 @@ export const ActiveFilters = ({ filters, onChange, onClear }: ActiveFiltersProps
 								gap: 1.5,
 								height: 30,
 								px: 2.5,
-								borderRadius: `${radius.pill}px`,
+								borderRadius: radiusPx.pill,
 								border: 1,
 								borderColor: 'accentBorder',
 								bgcolor: 'accentSoft',

@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { Box } from '@mui/material';
 import { ErrorOutline as ErrorOutlineIcon, InfoOutlined as InfoOutlinedIcon } from '@mui/icons-material';
+import { radiusPx } from '@/theme/tokens';
 
 type FormAlertProps = {
 	/** error: DESIGN §3 error alert (role="alert"). info: accent notice (role="status"). */
@@ -22,7 +23,7 @@ export const FormAlert = ({ severity, children }: FormAlertProps) => {
 				alignItems: 'flex-start',
 				px: 3.5,
 				py: 3,
-				borderRadius: 2.5,
+				borderRadius: radiusPx.md,
 				border: 1,
 				borderColor: isError ? 'dangerSoftBorder' : 'accentBorder',
 				bgcolor: isError ? 'dangerSoft' : 'accentSoft',

@@ -15,6 +15,8 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  */
 type Documents = {
     "\n\tquery Me {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\tmemberStatus\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberPhone\n\t\t\tmemberEmail\n\t\t\tmemberWhatsapp\n\t\t}\n\t}\n": typeof types.MeDocument,
+    "\n\tquery AgentDetail($productId: String!) {\n\t\tgetProduct(productId: $productId) {\n\t\t\t_id\n\t\t\tproductTitle\n\t\t\tproductDesc\n\t\t\tproductStatus\n\t\t\tproductCategory\n\t\t\tproductPricing\n\t\t\tproductPrice\n\t\t\tproductDemoUrl\n\t\t\tproductTags\n\t\t\tproductImages\n\t\t\tproductLikes\n\t\t\tproductViews\n\t\t\tproductComments\n\t\t\tupdatedAt\n\t\t\tmemberData {\n\t\t\t\t_id\n\t\t\t\tmemberNick\n\t\t\t\tmemberFullName\n\t\t\t\tmemberImage\n\t\t\t\tmemberProducts\n\t\t\t\tmemberFollowers\n\t\t\t}\n\t\t}\n\t}\n": typeof types.AgentDetailDocument,
+    "\n\tquery AgentViewer($productId: String!) {\n\t\tgetProduct(productId: $productId) {\n\t\t\t_id\n\t\t\tproductViews\n\t\t\tmemberData {\n\t\t\t\t_id\n\t\t\t\tmemberEmail\n\t\t\t\tmemberWhatsapp\n\t\t\t}\n\t\t}\n\t}\n": typeof types.AgentViewerDocument,
     "\n\tfragment AgentCard on Product {\n\t\t_id\n\t\tproductTitle\n\t\tproductCategory\n\t\tproductPricing\n\t\tproductPrice\n\t\tproductImages\n\t\tproductLikes\n\t\tproductViews\n\t\tmemberData {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t}\n\t}\n": typeof types.AgentCardFragmentDoc,
     "\n\tquery AgentsList($input: ProductsInquiry!) {\n\t\tgetProducts(input: $input) {\n\t\t\tlist {\n\t\t\t\t...AgentCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": typeof types.AgentsListDocument,
     "\n\tmutation Login($input: LoginInput!) {\n\t\tlogin(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n": typeof types.LoginDocument,
@@ -23,6 +25,8 @@ type Documents = {
 };
 const documents: Documents = {
     "\n\tquery Me {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\tmemberStatus\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberPhone\n\t\t\tmemberEmail\n\t\t\tmemberWhatsapp\n\t\t}\n\t}\n": types.MeDocument,
+    "\n\tquery AgentDetail($productId: String!) {\n\t\tgetProduct(productId: $productId) {\n\t\t\t_id\n\t\t\tproductTitle\n\t\t\tproductDesc\n\t\t\tproductStatus\n\t\t\tproductCategory\n\t\t\tproductPricing\n\t\t\tproductPrice\n\t\t\tproductDemoUrl\n\t\t\tproductTags\n\t\t\tproductImages\n\t\t\tproductLikes\n\t\t\tproductViews\n\t\t\tproductComments\n\t\t\tupdatedAt\n\t\t\tmemberData {\n\t\t\t\t_id\n\t\t\t\tmemberNick\n\t\t\t\tmemberFullName\n\t\t\t\tmemberImage\n\t\t\t\tmemberProducts\n\t\t\t\tmemberFollowers\n\t\t\t}\n\t\t}\n\t}\n": types.AgentDetailDocument,
+    "\n\tquery AgentViewer($productId: String!) {\n\t\tgetProduct(productId: $productId) {\n\t\t\t_id\n\t\t\tproductViews\n\t\t\tmemberData {\n\t\t\t\t_id\n\t\t\t\tmemberEmail\n\t\t\t\tmemberWhatsapp\n\t\t\t}\n\t\t}\n\t}\n": types.AgentViewerDocument,
     "\n\tfragment AgentCard on Product {\n\t\t_id\n\t\tproductTitle\n\t\tproductCategory\n\t\tproductPricing\n\t\tproductPrice\n\t\tproductImages\n\t\tproductLikes\n\t\tproductViews\n\t\tmemberData {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t}\n\t}\n": types.AgentCardFragmentDoc,
     "\n\tquery AgentsList($input: ProductsInquiry!) {\n\t\tgetProducts(input: $input) {\n\t\t\tlist {\n\t\t\t\t...AgentCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": types.AgentsListDocument,
     "\n\tmutation Login($input: LoginInput!) {\n\t\tlogin(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n": types.LoginDocument,
@@ -48,6 +52,14 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n\tquery Me {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\tmemberStatus\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberPhone\n\t\t\tmemberEmail\n\t\t\tmemberWhatsapp\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery Me {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\tmemberStatus\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberPhone\n\t\t\tmemberEmail\n\t\t\tmemberWhatsapp\n\t\t}\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tquery AgentDetail($productId: String!) {\n\t\tgetProduct(productId: $productId) {\n\t\t\t_id\n\t\t\tproductTitle\n\t\t\tproductDesc\n\t\t\tproductStatus\n\t\t\tproductCategory\n\t\t\tproductPricing\n\t\t\tproductPrice\n\t\t\tproductDemoUrl\n\t\t\tproductTags\n\t\t\tproductImages\n\t\t\tproductLikes\n\t\t\tproductViews\n\t\t\tproductComments\n\t\t\tupdatedAt\n\t\t\tmemberData {\n\t\t\t\t_id\n\t\t\t\tmemberNick\n\t\t\t\tmemberFullName\n\t\t\t\tmemberImage\n\t\t\t\tmemberProducts\n\t\t\t\tmemberFollowers\n\t\t\t}\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery AgentDetail($productId: String!) {\n\t\tgetProduct(productId: $productId) {\n\t\t\t_id\n\t\t\tproductTitle\n\t\t\tproductDesc\n\t\t\tproductStatus\n\t\t\tproductCategory\n\t\t\tproductPricing\n\t\t\tproductPrice\n\t\t\tproductDemoUrl\n\t\t\tproductTags\n\t\t\tproductImages\n\t\t\tproductLikes\n\t\t\tproductViews\n\t\t\tproductComments\n\t\t\tupdatedAt\n\t\t\tmemberData {\n\t\t\t\t_id\n\t\t\t\tmemberNick\n\t\t\t\tmemberFullName\n\t\t\t\tmemberImage\n\t\t\t\tmemberProducts\n\t\t\t\tmemberFollowers\n\t\t\t}\n\t\t}\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tquery AgentViewer($productId: String!) {\n\t\tgetProduct(productId: $productId) {\n\t\t\t_id\n\t\t\tproductViews\n\t\t\tmemberData {\n\t\t\t\t_id\n\t\t\t\tmemberEmail\n\t\t\t\tmemberWhatsapp\n\t\t\t}\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery AgentViewer($productId: String!) {\n\t\tgetProduct(productId: $productId) {\n\t\t\t_id\n\t\t\tproductViews\n\t\t\tmemberData {\n\t\t\t\t_id\n\t\t\t\tmemberEmail\n\t\t\t\tmemberWhatsapp\n\t\t\t}\n\t\t}\n\t}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

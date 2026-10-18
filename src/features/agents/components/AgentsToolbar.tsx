@@ -3,7 +3,7 @@ import type { FormEvent } from 'react';
 import { Box, InputAdornment, NativeSelect, OutlinedInput, Typography } from '@mui/material';
 import { Search as SearchIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
-import { radius } from '@/theme/tokens';
+import { radiusPx } from '@/theme/tokens';
 import type { FilterPatch } from '../hooks/useAgentFilters';
 import { AGENT_SORTS, SEARCH_TEXT_MAX, type AgentFilters, type AgentSort } from '../lib/listQuery';
 
@@ -15,8 +15,7 @@ type AgentsToolbarProps = {
 	onChange: (patch: FilterPatch) => void;
 };
 
-// sx turns a bare number into a multiple of shape.borderRadius (10px): radii are px strings from tokens.
-const controlSx = { height: 42, borderRadius: `${radius.md}px`, bgcolor: 'surface', fontSize: 14 } as const;
+const controlSx = { height: 42, borderRadius: radiusPx.md, bgcolor: 'surface', fontSize: 14 } as const;
 
 /** Agents.html header row: title + subtitle, then title search and sort. */
 export const AgentsToolbar = ({ filters, onChange }: AgentsToolbarProps) => {

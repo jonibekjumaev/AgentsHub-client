@@ -121,6 +121,23 @@ describe('AgentsCatalog', () => {
 		expect(await screen.findByRole('button', { name: 'Remove filter: Sales' })).toBeInTheDocument();
 	});
 
+	it('opens the filters in a drawer below md (results stay first) and applies changes at once', async () => {
+		const user = userEvent.setup();
+		const filters = at('/agents?tag=crm');
+		renderCatalog([listMock(filters, twoAgents), listMock({ ...filters, categories: ['SALES'] }, twoAgents)]);
+		await screen.findByRole('list', { name: 'Agents' });
+
+		// CSS shows this button below md only; jsdom's 1024px window is md, so query hidden elements too.
+		await user.click(screen.getByRole('button', { name: 'Filters (1)', hidden: true }));
+		const drawer = await screen.findByRole('dialog', { name: 'Filters' });
+
+		await user.click(within(drawer).getByRole('checkbox', { name: 'Sales' }));
+		expect(mockRouter.asPath).toBe('/agents?category=sales&tag=crm');
+
+		await user.click(within(drawer).getByRole('button', { name: 'Show results' }));
+		await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+	});
+
 	it('removes one filter from its chip', async () => {
 		const user = userEvent.setup();
 		const filters = at('/agents?category=sales&tag=crm');

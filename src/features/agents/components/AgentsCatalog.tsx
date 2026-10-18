@@ -1,8 +1,9 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import dynamic from 'next/dynamic';
 import NextLink from 'next/link';
 import { useQuery } from '@apollo/client';
 import { Box, Button, Typography } from '@mui/material';
-import { SearchOff as SearchOffIcon } from '@mui/icons-material';
+import { SearchOff as SearchOffIcon, Tune as TuneIcon } from '@mui/icons-material';
 import { Trans, useTranslation } from 'next-i18next';
 import { useAuth } from '@/auth';
 import { useFormat } from '@/shared/lib/format';
@@ -11,14 +12,17 @@ import { EmptyState } from '@/shared/ui/EmptyState';
 import { ErrorState } from '@/shared/ui/ErrorState';
 import { Pagination } from '@/shared/ui/Pagination';
 import { CardSkeleton } from '@/shared/ui/Skeletons';
-import { radius } from '@/theme/tokens';
+import { radiusPx } from '@/theme/tokens';
 import { AgentsListQuery } from '../graphql/agents';
 import { useAgentFilters } from '../hooks/useAgentFilters';
-import { AGENTS_PAGE_SIZE, agentsListVariables, hasActiveFilters } from '../lib/listQuery';
+import { AGENTS_PAGE_SIZE, activeFilterCount, agentsListVariables, hasActiveFilters } from '../lib/listQuery';
 import { ActiveFilters } from './ActiveFilters';
 import { AgentCard } from './AgentCard';
 import { AgentFiltersPanel } from './AgentFiltersPanel';
 import { AgentsToolbar } from './AgentsToolbar';
+
+// Below md only, after a click: Drawer + Modal stay out of the page chunk.
+const FiltersDrawer = dynamic(() => import('./FiltersDrawer').then((mod) => mod.FiltersDrawer), { ssr: false });
 
 const POST_BRIEF_HREF = '/dashboard/briefs/new';
 
@@ -55,7 +59,7 @@ const BriefCta = () => {
 				bgcolor: 'surface',
 				border: '1px dashed',
 				borderColor: 'inputBorder',
-				borderRadius: `${radius.lg}px`,
+				borderRadius: radiusPx.lg,
 			}}
 		>
 			<Typography component="h2" sx={{ fontWeight: 800 }}>
@@ -79,6 +83,9 @@ export const AgentsCatalog = () => {
 	const routeLoading = useRouteLoading();
 	const variables = useMemo(() => agentsListVariables(filters), [filters]);
 	const { data, loading, error, refetch } = useQuery(AgentsListQuery, { variables });
+	const [drawerOpen, setDrawerOpen] = useState(false);
+	const [drawerLoaded, setDrawerLoaded] = useState(false);
+	const filterCount = activeFilterCount(filters);
 
 	const filtered = hasActiveFilters(filters);
 	const agents = data?.getProducts.list ?? [];
@@ -137,21 +144,46 @@ export const AgentsCatalog = () => {
 			<Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', gap: 6 }}>
 				<AgentFiltersPanel filters={filters} onChange={update} />
 				<Box sx={{ flex: '999 1 560px', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 5 }}>
-					{/* Announced politely after every filter change; empty while loading. */}
-					<Typography role="status" variant="body2" sx={{ color: 'muted', minHeight: '1.55em', '& strong': { color: 'ink' } }}>
-						{showCount && (
-							<Trans
-								t={t}
-								i18nKey={filtered ? 'agents:list.countFiltered' : 'agents:list.count'}
-								count={total}
-								values={{ formatted: format.number(total) }}
-								components={{ strong: <strong /> }}
-							/>
-						)}
-					</Typography>
+					<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 3 }}>
+						{/* Announced politely after every filter change; empty while loading. */}
+						<Typography role="status" variant="body2" sx={{ color: 'muted', minHeight: '1.55em', '& strong': { color: 'ink' } }}>
+							{showCount && (
+								<Trans
+									t={t}
+									i18nKey={filtered ? 'agents:list.countFiltered' : 'agents:list.count'}
+									count={total}
+									values={{ formatted: format.number(total) }}
+									components={{ strong: <strong /> }}
+								/>
+							)}
+						</Typography>
+						<Button
+							variant="outlined"
+							size="small"
+							startIcon={<TuneIcon />}
+							aria-haspopup="dialog"
+							aria-expanded={drawerOpen}
+							onClick={() => {
+								setDrawerOpen(true);
+								setDrawerLoaded(true);
+							}}
+							sx={{ display: { xs: 'inline-flex', md: 'none' } }}
+						>
+							{filterCount ? t('agents:filters.openWithCount', { count: filterCount }) : t('agents:filters.open')}
+						</Button>
+					</Box>
 					{renderResults()}
 				</Box>
 			</Box>
+			{drawerLoaded && (
+				<FiltersDrawer
+					open={drawerOpen}
+					onClose={() => setDrawerOpen(false)}
+					filters={filters}
+					onChange={update}
+					onClear={() => void clear()}
+				/>
+			)}
 		</Box>
 	);
 };

@@ -4,6 +4,7 @@ import { Box, ButtonBase } from '@mui/material';
 import type { SxProps, Theme } from '@mui/material/styles';
 import { useTranslation } from 'next-i18next';
 import { useFormat } from '@/shared/lib/format';
+import { radiusPx } from '@/theme/tokens';
 
 type PaginationProps = {
 	/** 1-based current page. */
@@ -39,7 +40,7 @@ const squareSx: SxProps<Theme> = {
 	justifyContent: 'center',
 	width: 40,
 	height: 40,
-	borderRadius: 2,
+	borderRadius: radiusPx.sm,
 	border: 1,
 	borderColor: 'border',
 	bgcolor: 'surface',

@@ -23,6 +23,10 @@
 	},
 	"filters": {
 		"label": "Filters",
+		"open": "Filters",
+		"openWithCount": "Filters ({{count}})",
+		"close": "Close filters",
+		"showResults": "Show results",
 		"category": "Category",
 		"pricing": "Pricing",
 		"price": "Price, USD",
@@ -71,5 +75,56 @@
 		"categoryTitle": "{{category}} AI agents",
 		"categoryDescription": "Ready-made AI agents in the {{category}} category from independent creators. Compare prices, likes and views.",
 		"paged": "{{title}} — page {{page}}"
+	},
+	"detail": {
+		"breadcrumb": "Breadcrumb",
+		"updated": "Updated {{date}}",
+		"about": "About this agent",
+		"tagsLabel": "Tags",
+		"tagLink": "Show agents tagged {{tag}}",
+		"gallery": {
+			"label": "Screenshots",
+			"show": "Show screenshot {{index}} of {{count}}",
+			"alt": "{{title}} — screenshot {{index}} of {{count}}",
+			"noImage": "No screenshots yet"
+		},
+		"price": {
+			"FREE": "Free to use",
+			"ONE_TIME": "One-time payment · USD",
+			"SUBSCRIPTION": "Subscription · billed monthly · USD",
+			"CUSTOM": "Price on request — contact the creator"
+		},
+		"demo": "Open live demo",
+		"newTab": "(opens in a new tab)",
+		"likes_one": "{{formatted}} like",
+		"likes_other": "{{formatted}} likes",
+		"views_one": "{{formatted}} view",
+		"views_other": "{{formatted}} views",
+		"creator": {
+			"title": "Creator",
+			"agents_one": "{{count}} agent",
+			"agents_other": "{{count}} agents",
+			"followers_one": "{{count}} follower",
+			"followers_other": "{{count}} followers",
+			"profile": "View profile of @{{nick}}"
+		},
+		"contacts": {
+			"title": "Contacts",
+			"guestTitle": "Contacts are for members",
+			"guestText": "Log in to see this creator’s email and WhatsApp. It keeps creators safe from spam.",
+			"login": "Log in to contact",
+			"loading": "Loading contacts…",
+			"email": "Email",
+			"whatsapp": "WhatsApp",
+			"visible": "Visible because you are signed in.",
+			"none": "This creator hasn’t added contact details yet.",
+			"error": "We couldn’t load the contacts"
+		},
+		"questions": {
+			"title": "Questions",
+			"soon": "Questions and answers for this agent are coming soon."
+		},
+		"moreFrom": "More from @{{nick}}",
+		"errorTitle": "We couldn’t load this agent"
 	}
 }

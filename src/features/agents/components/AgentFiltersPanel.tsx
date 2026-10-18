@@ -3,7 +3,7 @@ import type { KeyboardEvent, ReactNode } from 'react';
 import { Box, Checkbox, Divider, FormControlLabel, FormHelperText, OutlinedInput, Typography } from '@mui/material';
 import type { SxProps, Theme } from '@mui/material/styles';
 import { useTranslation } from 'next-i18next';
-import { radius } from '@/theme/tokens';
+import { radiusPx } from '@/theme/tokens';
 import type { FilterPatch } from '../hooks/useAgentFilters';
 import {
 	AGENT_CATEGORIES,
@@ -21,6 +21,11 @@ type AgentFiltersPanelProps = {
 	onChange: (patch: FilterPatch) => void;
 };
 
+type PanelVariant = {
+	/** "aside": the md+ sidebar (hidden below md). "drawer": bare content for FiltersDrawer. */
+	variant?: 'aside' | 'drawer';
+};
+
 const legendSx: SxProps<Theme> = {
 	p: 0,
 	mb: 2.5,
@@ -31,8 +36,7 @@ const legendSx: SxProps<Theme> = {
 	color: 'body',
 };
 
-// sx turns a bare number into a multiple of shape.borderRadius (10px): radii are px strings from tokens.
-const smallInputSx: SxProps<Theme> = { height: 38, borderRadius: `${radius.sm}px`, fontSize: 14 };
+const smallInputSx: SxProps<Theme> = { height: 38, borderRadius: radiusPx.sm, fontSize: 14 };
 
 const Group = ({ legend, children }: { legend: string; children: ReactNode }) => (
 	<Box component="fieldset" sx={{ border: 0, m: 0, p: 0, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 1 }}>
@@ -172,7 +176,7 @@ const TagInput = ({ filters, onChange }: AgentFiltersPanelProps) => {
 };
 
 /** Agents.html filter panel: category, pricing, price range, tags. */
-export const AgentFiltersPanel = ({ filters, onChange }: AgentFiltersPanelProps) => {
+export const AgentFiltersPanel = ({ filters, onChange, variant = 'aside' }: AgentFiltersPanelProps & PanelVariant) => {
 	const { t } = useTranslation(['agents', 'common']);
 
 	const checkbox = (key: string, label: string, checked: boolean, onToggle: () => void) => (
@@ -184,24 +188,30 @@ export const AgentFiltersPanel = ({ filters, onChange }: AgentFiltersPanelProps)
 		/>
 	);
 
+	const frame =
+		variant === 'aside'
+			? ({
+					component: 'aside',
+					'aria-label': t('agents:filters.label'),
+					sx: {
+						flex: '1 1 240px',
+						maxWidth: 280,
+						minWidth: 0,
+						// Below md the same panel opens in FiltersDrawer, so results come first.
+						display: { xs: 'none', md: 'flex' },
+						flexDirection: 'column',
+						gap: 5,
+						p: 5,
+						bgcolor: 'surface',
+						border: 1,
+						borderColor: 'border',
+						borderRadius: radiusPx.lg,
+					},
+				} as const)
+			: ({ component: 'div', sx: { display: 'flex', flexDirection: 'column', gap: 5 } } as const);
+
 	return (
-		<Box
-			component="aside"
-			aria-label={t('agents:filters.label')}
-			sx={{
-				flex: '1 1 240px',
-				maxWidth: { md: 280 },
-				minWidth: 0,
-				display: 'flex',
-				flexDirection: 'column',
-				gap: 5,
-				p: 5,
-				bgcolor: 'surface',
-				border: 1,
-				borderColor: 'border',
-				borderRadius: `${radius.lg}px`,
-			}}
-		>
+		<Box {...frame}>
 			<Group legend={t('agents:filters.category')}>
 				{AGENT_CATEGORIES.map((category) =>
 					checkbox(category, t(`common:enums.AgentCategory.${category}`), filters.categories.includes(category), () =>
