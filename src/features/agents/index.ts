@@ -7,3 +7,7 @@ export { AgentsListQuery } from './graphql/agents';
 export { useAgentFilters } from './hooks/useAgentFilters';
 export { agentsHref, agentsListVariables, parseAgentFilters, type AgentFilters } from './lib/listQuery';
 export { prefetchAgentDetail, type AgentDetailPrefetch } from './lib/prefetchAgentDetail';
+export { MyAgents } from './components/manage/MyAgents';
+export { RecentAgents } from './components/manage/RecentAgents';
+export { CreatorAgentsQuery } from './graphql/creatorAgents';
+export { MY_AGENTS_PATH, NEW_AGENT_PATH, myAgentsVariables } from './lib/myAgents';

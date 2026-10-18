@@ -20,8 +20,12 @@ type Documents = {
     "\n\tmutation LikeAgent($productId: String!) {\n\t\tlikeTargetProduct(productId: $productId) {\n\t\t\t_id\n\t\t\tproductLikes\n\t\t}\n\t}\n": typeof types.LikeAgentDocument,
     "\n\tfragment AgentCard on Product {\n\t\t_id\n\t\tproductTitle\n\t\tproductCategory\n\t\tproductPricing\n\t\tproductPrice\n\t\tproductImages\n\t\tproductLikes\n\t\tproductViews\n\t\tmemberData {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t}\n\t}\n": typeof types.AgentCardFragmentDoc,
     "\n\tquery AgentsList($input: ProductsInquiry!) {\n\t\tgetProducts(input: $input) {\n\t\t\tlist {\n\t\t\t\t...AgentCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": typeof types.AgentsListDocument,
+    "\n\tfragment CreatorAgentRow on Product {\n\t\t_id\n\t\tproductTitle\n\t\tproductCategory\n\t\tproductStatus\n\t\tproductPricing\n\t\tproductPrice\n\t\tproductImages\n\t\tproductViews\n\t\tproductLikes\n\t\tproductComments\n\t\tupdatedAt\n\t}\n": typeof types.CreatorAgentRowFragmentDoc,
+    "\n\tquery CreatorAgents($input: CreatorProductsInquiry!) {\n\t\tlist: getCreatorProducts(input: $input) {\n\t\t\tlist {\n\t\t\t\t...CreatorAgentRow\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t\tactive: getCreatorProducts(input: { page: 1, limit: 1, search: { productStatus: ACTIVE } }) {\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t\tpaused: getCreatorProducts(input: { page: 1, limit: 1, search: { productStatus: PAUSED } }) {\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": typeof types.CreatorAgentsDocument,
+    "\n\tmutation UpdateAgentStatus($input: ProductUpdate!) {\n\t\tupdateProduct(input: $input) {\n\t\t\t_id\n\t\t\tproductStatus\n\t\t\tupdatedAt\n\t\t}\n\t}\n": typeof types.UpdateAgentStatusDocument,
     "\n\tmutation Login($input: LoginInput!) {\n\t\tlogin(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n": typeof types.LoginDocument,
     "\n\tmutation Signup($input: MemberInput!) {\n\t\tsignup(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n": typeof types.SignupDocument,
+    "\n\tquery CreatorStats {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberProducts\n\t\t\tmemberViews\n\t\t\tmemberLikes\n\t\t\tmemberFollowers\n\t\t}\n\t}\n": typeof types.CreatorStatsDocument,
     "\n\tquery DevApiProducts($input: ProductsInquiry!) {\n\t\tgetProducts(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tproductTitle\n\t\t\t\tproductCategory\n\t\t\t\tproductPricing\n\t\t\t\tproductPrice\n\t\t\t\tproductLikes\n\t\t\t\tproductViews\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": typeof types.DevApiProductsDocument,
 };
 const documents: Documents = {
@@ -31,8 +35,12 @@ const documents: Documents = {
     "\n\tmutation LikeAgent($productId: String!) {\n\t\tlikeTargetProduct(productId: $productId) {\n\t\t\t_id\n\t\t\tproductLikes\n\t\t}\n\t}\n": types.LikeAgentDocument,
     "\n\tfragment AgentCard on Product {\n\t\t_id\n\t\tproductTitle\n\t\tproductCategory\n\t\tproductPricing\n\t\tproductPrice\n\t\tproductImages\n\t\tproductLikes\n\t\tproductViews\n\t\tmemberData {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t}\n\t}\n": types.AgentCardFragmentDoc,
     "\n\tquery AgentsList($input: ProductsInquiry!) {\n\t\tgetProducts(input: $input) {\n\t\t\tlist {\n\t\t\t\t...AgentCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": types.AgentsListDocument,
+    "\n\tfragment CreatorAgentRow on Product {\n\t\t_id\n\t\tproductTitle\n\t\tproductCategory\n\t\tproductStatus\n\t\tproductPricing\n\t\tproductPrice\n\t\tproductImages\n\t\tproductViews\n\t\tproductLikes\n\t\tproductComments\n\t\tupdatedAt\n\t}\n": types.CreatorAgentRowFragmentDoc,
+    "\n\tquery CreatorAgents($input: CreatorProductsInquiry!) {\n\t\tlist: getCreatorProducts(input: $input) {\n\t\t\tlist {\n\t\t\t\t...CreatorAgentRow\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t\tactive: getCreatorProducts(input: { page: 1, limit: 1, search: { productStatus: ACTIVE } }) {\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t\tpaused: getCreatorProducts(input: { page: 1, limit: 1, search: { productStatus: PAUSED } }) {\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": types.CreatorAgentsDocument,
+    "\n\tmutation UpdateAgentStatus($input: ProductUpdate!) {\n\t\tupdateProduct(input: $input) {\n\t\t\t_id\n\t\t\tproductStatus\n\t\t\tupdatedAt\n\t\t}\n\t}\n": types.UpdateAgentStatusDocument,
     "\n\tmutation Login($input: LoginInput!) {\n\t\tlogin(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n": types.LoginDocument,
     "\n\tmutation Signup($input: MemberInput!) {\n\t\tsignup(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n": types.SignupDocument,
+    "\n\tquery CreatorStats {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberProducts\n\t\t\tmemberViews\n\t\t\tmemberLikes\n\t\t\tmemberFollowers\n\t\t}\n\t}\n": types.CreatorStatsDocument,
     "\n\tquery DevApiProducts($input: ProductsInquiry!) {\n\t\tgetProducts(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tproductTitle\n\t\t\t\tproductCategory\n\t\t\t\tproductPricing\n\t\t\t\tproductPrice\n\t\t\t\tproductLikes\n\t\t\t\tproductViews\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": types.DevApiProductsDocument,
 };
 
@@ -77,11 +85,27 @@ export function graphql(source: "\n\tquery AgentsList($input: ProductsInquiry!) 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n\tfragment CreatorAgentRow on Product {\n\t\t_id\n\t\tproductTitle\n\t\tproductCategory\n\t\tproductStatus\n\t\tproductPricing\n\t\tproductPrice\n\t\tproductImages\n\t\tproductViews\n\t\tproductLikes\n\t\tproductComments\n\t\tupdatedAt\n\t}\n"): (typeof documents)["\n\tfragment CreatorAgentRow on Product {\n\t\t_id\n\t\tproductTitle\n\t\tproductCategory\n\t\tproductStatus\n\t\tproductPricing\n\t\tproductPrice\n\t\tproductImages\n\t\tproductViews\n\t\tproductLikes\n\t\tproductComments\n\t\tupdatedAt\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tquery CreatorAgents($input: CreatorProductsInquiry!) {\n\t\tlist: getCreatorProducts(input: $input) {\n\t\t\tlist {\n\t\t\t\t...CreatorAgentRow\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t\tactive: getCreatorProducts(input: { page: 1, limit: 1, search: { productStatus: ACTIVE } }) {\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t\tpaused: getCreatorProducts(input: { page: 1, limit: 1, search: { productStatus: PAUSED } }) {\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery CreatorAgents($input: CreatorProductsInquiry!) {\n\t\tlist: getCreatorProducts(input: $input) {\n\t\t\tlist {\n\t\t\t\t...CreatorAgentRow\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t\tactive: getCreatorProducts(input: { page: 1, limit: 1, search: { productStatus: ACTIVE } }) {\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t\tpaused: getCreatorProducts(input: { page: 1, limit: 1, search: { productStatus: PAUSED } }) {\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tmutation UpdateAgentStatus($input: ProductUpdate!) {\n\t\tupdateProduct(input: $input) {\n\t\t\t_id\n\t\t\tproductStatus\n\t\t\tupdatedAt\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation UpdateAgentStatus($input: ProductUpdate!) {\n\t\tupdateProduct(input: $input) {\n\t\t\t_id\n\t\t\tproductStatus\n\t\t\tupdatedAt\n\t\t}\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n\tmutation Login($input: LoginInput!) {\n\t\tlogin(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation Login($input: LoginInput!) {\n\t\tlogin(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n\tmutation Signup($input: MemberInput!) {\n\t\tsignup(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation Signup($input: MemberInput!) {\n\t\tsignup(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tquery CreatorStats {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberProducts\n\t\t\tmemberViews\n\t\t\tmemberLikes\n\t\t\tmemberFollowers\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery CreatorStats {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberProducts\n\t\t\tmemberViews\n\t\t\tmemberLikes\n\t\t\tmemberFollowers\n\t\t}\n\t}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

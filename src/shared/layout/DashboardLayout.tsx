@@ -5,7 +5,9 @@ import { Box, Link, Typography } from '@mui/material';
 import { useTranslation } from 'next-i18next';
 import { RequireRole, useAuth } from '@/auth';
 import type { MemberType } from '@/gql/graphql';
+import { radiusPx } from '@/theme/tokens';
 import { Header } from './Header';
+import { Seo } from './Seo';
 import { MAIN_CONTENT_ID } from './SkipLink';
 import { DASHBOARD_NAV, isActive } from './navigation';
 
@@ -61,7 +63,7 @@ export const DashboardNav = () => {
 							px: { xs: 0.5, md: 3 },
 							borderBottom: { xs: 2, md: 0 },
 							borderColor: active ? 'primary.main' : 'transparent',
-							borderRadius: { md: 2 },
+							borderRadius: { md: radiusPx.sm },
 							bgcolor: { md: active ? 'accentSoft' : 'transparent' },
 						}}
 					>
@@ -81,6 +83,8 @@ type DashboardLayoutProps = {
 
 export const DashboardLayout = ({ roles, children }: DashboardLayoutProps) => (
 	<Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+		{/* Private pages: noindex is in the static HTML too, before RequireRole lets the page (and its own Seo) render. */}
+		<Seo noindex />
 		<Header />
 		<Box sx={{ flex: 1, width: '100%', maxWidth: 1200, mx: 'auto', px: { xs: 4, sm: 6 }, pt: 8, pb: 16 }}>
 			<RequireRole roles={roles}>
