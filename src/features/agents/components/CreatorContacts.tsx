@@ -1,13 +1,11 @@
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import { useQuery } from '@apollo/client';
 import { Box, Button, Link, Skeleton, Stack, Typography } from '@mui/material';
 import { LockOutlined as LockOutlinedIcon, MailOutline as MailOutlineIcon, WhatsApp as WhatsAppIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
-import { useAuth } from '@/auth';
 import { ErrorState } from '@/shared/ui/ErrorState';
 import { radiusPx } from '@/theme/tokens';
-import { AgentViewerQuery } from '../graphql/agentDetail';
+import { useAgentViewer } from '../hooks/useAgentViewer';
 import { whatsappHref } from '../lib/detail';
 
 const boxSx = {
@@ -53,11 +51,11 @@ const GuestPrompt = () => {
 };
 
 /** Members: the creator's email / WhatsApp, fetched in the browser with the token (CLAUDE.md rule 11). */
-const MemberContacts = ({ agentId }: { agentId: string }) => {
+const MemberContacts = ({ viewer }: { viewer: ReturnType<typeof useAgentViewer> }) => {
 	const { t } = useTranslation('agents');
-	const { data, loading, error, refetch } = useQuery(AgentViewerQuery, { variables: { productId: agentId } });
+	const { data, error, refetch } = viewer;
 
-	if (loading && !data) return <LoadingContacts />;
+	if (!data && !error) return <LoadingContacts />;
 	if (error && !data) {
 		return <ErrorState error={error} title={t('agents:detail.contacts.error')} onRetry={() => void refetch()} />;
 	}
@@ -115,12 +113,12 @@ const MemberContacts = ({ agentId }: { agentId: string }) => {
 
 /**
  * DESIGN §4: contacts render only for signed-in ACTIVE members. The member query also records the
- * member's view of this agent (see AgentViewerQuery); guests, SSR and bots never count as a view.
+ * member's view of this agent (see AgentViewerQuery, shared with LikeButton through useAgentViewer); guests, SSR and bots never count as a view.
  */
 export const CreatorContacts = ({ agentId }: { agentId: string }) => {
-	const { status, me } = useAuth();
+	const viewer = useAgentViewer(agentId);
 
-	if (status === 'loading') return <LoadingContacts />;
-	if (status === 'member' && me?.memberStatus === 'ACTIVE') return <MemberContacts agentId={agentId} />;
-	return <GuestPrompt />;
+	if (viewer.viewer === 'guest') return <GuestPrompt />;
+	if (!viewer.me) return <LoadingContacts />;
+	return <MemberContacts viewer={viewer} />;
 };

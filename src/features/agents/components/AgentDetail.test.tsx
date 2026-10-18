@@ -52,9 +52,21 @@ describe('AgentDetail', () => {
 
 		expect(screen.getByText('$49')).toBeInTheDocument();
 		expect(screen.getByText('Subscription · billed monthly · USD')).toBeInTheDocument();
-		expect(screen.getByText('128 likes')).toBeInTheDocument();
+		expect(screen.getByRole('button', { name: 'Like, 128 likes' })).toHaveAttribute('aria-pressed', 'false');
 		expect(screen.getByText('2.3K views')).toBeInTheDocument();
 		expect(screen.getByRole('heading', { name: 'Questions' })).toBeInTheDocument();
+	});
+
+	it('puts price + creator right after the gallery and before About (the mobile order; md moves it right)', async () => {
+		renderDetail([detailMock(), moreMock([])]);
+
+		const gallery = (await screen.findByRole('group', { name: 'Screenshots' })) as Node;
+		const price = screen.getByText('Subscription · billed monthly · USD');
+		const about = screen.getByRole('heading', { name: 'About this agent' });
+		const follows = (a: Node, b: Node) => Boolean(a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING);
+
+		expect(follows(gallery, price)).toBe(true);
+		expect(follows(price, about)).toBe(true);
 	});
 
 	it('keeps the description plain text with its line breaks (white-space: pre-line)', async () => {

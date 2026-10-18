@@ -29,6 +29,7 @@ const viewerMock = (memberEmail: string | null, memberWhatsapp: string | null): 
 				__typename: 'Product',
 				_id: AGENT_ID,
 				productViews: 2301,
+				meLiked: [],
 				memberData: { __typename: 'Member', _id: CREATOR_ID, memberEmail, memberWhatsapp },
 			},
 		},

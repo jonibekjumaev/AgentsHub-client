@@ -20,6 +20,7 @@ import { DEFAULT_FILTERS, agentsHref } from '../lib/listQuery';
 import { agentHref } from './AgentCard';
 import { AgentGallery } from './AgentGallery';
 import { CreatorContacts } from './CreatorContacts';
+import { LikeButton } from './LikeButton';
 
 type Agent = AgentDetailData['getProduct'];
 type Creator = NonNullable<Agent['memberData']>;
@@ -67,7 +68,7 @@ const Breadcrumbs = ({ agent }: { agent: Agent }) => {
 	);
 };
 
-/** Price, demo link and counters (AgentDetail.html right column, first card). Like comes in S2c. */
+/** Price, demo link, like and views (AgentDetail.html right column, first card). */
 const PriceBox = ({ agent }: { agent: Agent }) => {
 	const { t } = useTranslation('agents');
 	const format = useFormat();
@@ -99,27 +100,22 @@ const PriceBox = ({ agent }: { agent: Agent }) => {
 				</Button>
 			)}
 			<Stack direction="row" spacing={2}>
-				{[
-					t('agents:detail.likes', { count: agent.productLikes, formatted: format.compact(agent.productLikes) }),
-					t('agents:detail.views', { count: agent.productViews, formatted: format.compact(agent.productViews) }),
-				].map((text) => (
-					<Box
-						key={text}
-						sx={{
-							flex: 1,
-							display: 'grid',
-							placeItems: 'center',
-							height: 42,
-							borderRadius: radiusPx.md,
-							bgcolor: 'ground',
-							fontSize: 14,
-							fontWeight: 600,
-							color: 'bodySoft',
-						}}
-					>
-						{text}
-					</Box>
-				))}
+				<LikeButton agentId={agent._id} creatorId={agent.memberData?._id} likes={agent.productLikes} />
+				<Box
+					sx={{
+						flex: 1,
+						display: 'grid',
+						placeItems: 'center',
+						height: 42,
+						borderRadius: radiusPx.md,
+						bgcolor: 'ground',
+						fontSize: 14,
+						fontWeight: 600,
+						color: 'bodySoft',
+					}}
+				>
+					{t('agents:detail.views', { count: agent.productViews, formatted: format.compact(agent.productViews) })}
+				</Box>
 			</Stack>
 		</Box>
 	);
@@ -271,58 +267,73 @@ export const AgentDetail = ({ agentId }: { agentId: string }) => {
 		return (
 			<>
 				<Breadcrumbs agent={agent} />
-				<Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', gap: 8 }}>
-					<Box sx={{ flex: '999 1 560px', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 7 }}>
-						<Box component="header" sx={{ display: 'flex', flexDirection: 'column', gap: 2.5 }}>
-							<Stack direction="row" spacing={2} alignItems="center" useFlexGap flexWrap="wrap">
-								<CategoryChip category={agent.productCategory} size="medium" />
-								<Typography variant="meta" component="span">
-									{/* Server and browser may sit in different time zones: the browser's date wins. */}
-									<time dateTime={agent.updatedAt} suppressHydrationWarning>
-										{t('agents:detail.updated', { date: format.date(agent.updatedAt) })}
-									</time>
-								</Typography>
-							</Stack>
-							<Typography variant="h1" sx={{ fontSize: { xs: 32, md: 40 }, overflowWrap: 'anywhere' }}>
-								{agent.productTitle}
+				{/*
+				  DOM order = the mobile order: header, gallery, price + creator, about, questions.
+				  From md the price + creator column moves to the right and spans every row (AgentDetail.html).
+				*/}
+				<Box
+					sx={{
+						display: 'grid',
+						gridTemplateColumns: { xs: 'minmax(0, 1fr)', md: 'minmax(0, 1fr) 340px' },
+						// The last row takes the spare height, so a tall right column never spreads the left one.
+						gridTemplateRows: { md: 'auto auto auto 1fr' },
+						columnGap: 8,
+						rowGap: 7,
+						alignItems: 'start',
+					}}
+				>
+					<Box component="header" sx={{ display: 'flex', flexDirection: 'column', gap: 2.5 }}>
+						<Stack direction="row" spacing={2} alignItems="center" useFlexGap flexWrap="wrap">
+							<CategoryChip category={agent.productCategory} size="medium" />
+							<Typography variant="meta" component="span">
+								{/* Server and browser may sit in different time zones: the browser's date wins. */}
+								<time dateTime={agent.updatedAt} suppressHydrationWarning>
+									{t('agents:detail.updated', { date: format.date(agent.updatedAt) })}
+								</time>
 							</Typography>
-						</Box>
-						<AgentGallery title={agent.productTitle} images={agent.productImages} />
-						<Box component="section" aria-labelledby="agent-about" sx={cardSx}>
-							<Typography id="agent-about" variant="h2" sx={{ fontSize: 20 }}>
-								{t('agents:detail.about')}
-							</Typography>
-							{/* Plain text from the creator (CLAUDE.md rule 7). */}
-							<Typography sx={{ whiteSpace: 'pre-line', overflowWrap: 'anywhere', color: 'body', lineHeight: 1.7 }}>
-								{agent.productDesc}
-							</Typography>
-							{tags.length > 0 && (
-								<Box
-									component="ul"
-									aria-label={t('agents:detail.tagsLabel')}
-									sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5, m: 0, p: 0, listStyle: 'none' }}
-								>
-									{tags.map((tag) => (
-										<li key={tag}>
-											<Chip
-												component={NextLink}
-												href={agentsHref({ ...DEFAULT_FILTERS, tags: [tag] })}
-												clickable
-												label={tag}
-												aria-label={t('agents:detail.tagLink', { tag })}
-												sx={{ borderRadius: radiusPx.sm, bgcolor: 'neutralSoft', color: 'body', fontWeight: 600, height: 26 }}
-											/>
-										</li>
-									))}
-								</Box>
-							)}
-						</Box>
-						<QuestionsPlaceholder />
+						</Stack>
+						<Typography variant="h1" sx={{ fontSize: { xs: 32, md: 40 }, overflowWrap: 'anywhere' }}>
+							{agent.productTitle}
+						</Typography>
 					</Box>
-					<Box component="aside" sx={{ flex: '1 1 340px', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 4 }}>
+					<AgentGallery title={agent.productTitle} images={agent.productImages} />
+					<Box
+						component="aside"
+						sx={{ gridColumn: { md: 2 }, gridRow: { md: '1 / -1' }, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 4 }}
+					>
 						<PriceBox agent={agent} />
 						{creator && <CreatorBox agentId={agent._id} creator={creator} />}
 					</Box>
+					<Box component="section" aria-labelledby="agent-about" sx={cardSx}>
+						<Typography id="agent-about" variant="h2" sx={{ fontSize: 20 }}>
+							{t('agents:detail.about')}
+						</Typography>
+						{/* Plain text from the creator (CLAUDE.md rule 7). */}
+						<Typography sx={{ whiteSpace: 'pre-line', overflowWrap: 'anywhere', color: 'body', lineHeight: 1.7 }}>
+							{agent.productDesc}
+						</Typography>
+						{tags.length > 0 && (
+							<Box
+								component="ul"
+								aria-label={t('agents:detail.tagsLabel')}
+								sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5, m: 0, p: 0, listStyle: 'none' }}
+							>
+								{tags.map((tag) => (
+									<li key={tag}>
+										<Chip
+											component={NextLink}
+											href={agentsHref({ ...DEFAULT_FILTERS, tags: [tag] })}
+											clickable
+											label={tag}
+											aria-label={t('agents:detail.tagLink', { tag })}
+											sx={{ borderRadius: radiusPx.sm, bgcolor: 'neutralSoft', color: 'body', fontWeight: 600, height: 26 }}
+										/>
+									</li>
+								))}
+							</Box>
+						)}
+					</Box>
+					<QuestionsPlaceholder />
 				</Box>
 				{creator && <MoreFromCreator agentId={agent._id} creator={creator} />}
 			</>

@@ -6,6 +6,7 @@ import { I18nextProvider } from 'react-i18next';
 import { vi } from 'vitest';
 import { AuthProvider } from '@/auth';
 import { AuthContext, type AuthContextValue } from '@/auth/AuthProvider';
+import { ToastProvider } from '@/shared/ui/toast';
 import { theme } from '@/theme/theme';
 import { createTestI18n } from './i18n';
 
@@ -36,11 +37,13 @@ export const renderWithProviders = (ui: ReactElement, { mocks = [], auth, ...opt
 		<MockedProvider mocks={mocks}>
 			<I18nextProvider i18n={i18n}>
 				<ThemeProvider theme={theme}>
-					{auth ? (
-						<AuthContext.Provider value={mockAuth(auth)}>{children}</AuthContext.Provider>
-					) : (
-						<AuthProvider>{children}</AuthProvider>
-					)}
+					<ToastProvider>
+						{auth ? (
+							<AuthContext.Provider value={mockAuth(auth)}>{children}</AuthContext.Provider>
+						) : (
+							<AuthProvider>{children}</AuthProvider>
+						)}
+					</ToastProvider>
 				</ThemeProvider>
 			</I18nextProvider>
 		</MockedProvider>

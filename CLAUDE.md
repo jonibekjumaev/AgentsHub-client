@@ -69,6 +69,9 @@ Import alias: `@/` → `src/`.
 17. Icons: always named imports from `@mui/icons-material` (`import { Close as CloseIcon } from '@mui/icons-material'`).
 18. `_app.tsx` must not import the `@/shared/ui` (or `@/shared/layout`) barrel — import the exact file.
 19. Line endings are LF (`.gitattributes`); keep new files LF.
+20. `package.json` `sideEffects` lets webpack drop unused barrel exports. A module with a side effect on
+    import (a bare `import '…'`, global CSS, polyfill, setup or validation code) must be listed there,
+    or webpack may drop it. `src/test/sideEffects.test.ts` checks the bare imports.
 
 ## Security rules (strict)
 - Never read, print or edit `.env`, `.env.local`, `.env.development`. Use `.env.example` to see which keys exist.

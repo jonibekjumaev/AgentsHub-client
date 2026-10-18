@@ -125,6 +125,10 @@
 			"soon": "Questions and answers for this agent are coming soon."
 		},
 		"moreFrom": "More from @{{nick}}",
-		"errorTitle": "We couldn’t load this agent"
+		"errorTitle": "We couldn’t load this agent",
+		"like": {
+			"label": "Like",
+			"own": "You can’t like your own agent."
+		}
 	}
 }

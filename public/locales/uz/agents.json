@@ -1,0 +1,134 @@
+{
+	"list": {
+		"title": "AI agentlar",
+		"subtitle": "Mustaqil kreatorlarning tayyor agentlari.",
+		"searchLabel": "Agentlarni nomi boʻyicha qidirish",
+		"searchPlaceholder": "Agentlarni qidirish",
+		"sortLabel": "Saralash",
+		"sort": {
+			"newest": "Eng yangilari",
+			"rank": "Reyting boʻyicha",
+			"likes": "Eng koʻp yoqtirilgan",
+			"views": "Eng koʻp koʻrilgan",
+			"price-asc": "Narx: arzondan qimmatga",
+			"price-desc": "Narx: qimmatdan arzonga"
+		},
+		"resultsLabel": "Agentlar",
+		"count_one": "<strong>{{formatted}} ta agent</strong>",
+		"count_other": "<strong>{{formatted}} ta agent</strong>",
+		"countFiltered_one": "Filtrlarga mos <strong>{{formatted}} ta agent</strong>",
+		"countFiltered_other": "Filtrlarga mos <strong>{{formatted}} ta agent</strong>",
+		"loading": "Agentlar yuklanmoqda…",
+		"errorTitle": "Agentlarni yuklab boʻlmadi"
+	},
+	"filters": {
+		"label": "Filtrlar",
+		"open": "Filtrlar",
+		"openWithCount": "Filtrlar ({{count}})",
+		"close": "Filtrlarni yopish",
+		"showResults": "Natijalarni koʻrsatish",
+		"category": "Kategoriya",
+		"pricing": "Narx turi",
+		"price": "Narx, USD",
+		"priceMin": "Min",
+		"priceMax": "Maks",
+		"priceHint": "Bir martalik va oylik narxlarga qoʻllanadi. Bepul va kelishilgan narxli agentlar kirmaydi.",
+		"priceDisabledHint": "Bepul va kelishilgan narxli agentlarda narx yoʻq. Narx boʻyicha filtrlash uchun bir martalik yoki obunani tanlang.",
+		"priceRangeError": "Minimal narx maksimaldan katta boʻlmasligi kerak.",
+		"tags": "Teglar",
+		"tagPlaceholder": "Teg yozing va Enter bosing",
+		"tagHint": "Faqat siz qoʻshgan barcha teglarga ega agentlar koʻrsatiladi.",
+		"tagLimit": "Koʻpi bilan {{max}} ta teg qoʻshish mumkin.",
+		"active": "Faol filtrlar:",
+		"remove": "Filtrni olib tashlash: {{label}}",
+		"clearAll": "Hammasini tozalash",
+		"tagChip": "#{{tag}}",
+		"priceFrom": "{{min}} dan",
+		"priceUpTo": "{{max}} gacha",
+		"priceBetween": "{{min}} – {{max}}"
+	},
+	"card": {
+		"by": "@{{nick}}",
+		"likes_one": "{{count}} ta like",
+		"likes_other": "{{count}} ta like",
+		"views_one": "{{formatted}} marta koʻrilgan",
+		"views_other": "{{formatted}} marta koʻrilgan"
+	},
+	"empty": {
+		"noResultsTitle": "Filtrlarga mos agent topilmadi",
+		"noResultsText": "Filtrlarni kamaytiring yoki boshqa soʻz bilan qidiring.",
+		"clearFilters": "Filtrlarni tozalash",
+		"noAgentsTitle": "Hozircha agentlar yoʻq",
+		"noAgentsText": "Kreatorlar hali agent joylamagan. Tez orada qaytib keling.",
+		"pageTitle": "Bu sahifa boʻsh",
+		"pageText": "Natijalar soni bu sahifa raqamidan kam.",
+		"firstPage": "Birinchi sahifaga oʻtish"
+	},
+	"briefCta": {
+		"title": "Kerakli agentni topmadingizmi?",
+		"text": "Nima kerakligini yozib brief joylang. Maxsus agent yaratadigan kreatorlar uni koʻradi.",
+		"action": "Brief joylash"
+	},
+	"seo": {
+		"title": "AI agentlar",
+		"description": "Mustaqil kreatorlarning tayyor AI agentlarini koʻring: mijozlarni qoʻllab-quvvatlash, savdo, marketing, kontent va boshqalar. Narxlar AQSh dollarida.",
+		"categoryTitle": "{{category}} boʻyicha AI agentlar",
+		"categoryDescription": "{{category}} kategoriyasidagi tayyor AI agentlar. Narx, like va koʻrishlar sonini solishtiring.",
+		"paged": "{{title}} — {{page}}-sahifa"
+	},
+	"detail": {
+		"breadcrumb": "Navigatsiya",
+		"updated": "{{date}} da yangilangan",
+		"about": "Agent haqida",
+		"tagsLabel": "Teglar",
+		"tagLink": "{{tag}} tegli agentlarni koʻrsatish",
+		"gallery": {
+			"label": "Skrinshotlar",
+			"show": "{{count}} ta skrinshotdan {{index}}-sini koʻrsatish",
+			"alt": "{{title}} — {{count}} ta skrinshotdan {{index}}-si",
+			"noImage": "Hozircha skrinshotlar yoʻq"
+		},
+		"price": {
+			"FREE": "Bepul foydalanish",
+			"ONE_TIME": "Bir martalik toʻlov · USD",
+			"SUBSCRIPTION": "Obuna · har oy toʻlanadi · USD",
+			"CUSTOM": "Narx kelishiladi — kreator bilan bogʻlaning"
+		},
+		"demo": "Jonli demoni ochish",
+		"newTab": "(yangi oynada ochiladi)",
+		"likes_one": "{{formatted}} ta like",
+		"likes_other": "{{formatted}} ta like",
+		"views_one": "{{formatted}} marta koʻrilgan",
+		"views_other": "{{formatted}} marta koʻrilgan",
+		"creator": {
+			"title": "Kreator",
+			"agents_one": "{{count}} ta agent",
+			"agents_other": "{{count}} ta agent",
+			"followers_one": "{{count}} ta obunachi",
+			"followers_other": "{{count}} ta obunachi",
+			"profile": "@{{nick}} profilini koʻrish"
+		},
+		"contacts": {
+			"title": "Kontaktlar",
+			"guestTitle": "Kontaktlar faqat aʼzolar uchun",
+			"guestText": "Bu kreatorning email va WhatsApp raqamini koʻrish uchun tizimga kiring. Bu kreatorlarni spamdan himoya qiladi.",
+			"login": "Bogʻlanish uchun kirish",
+			"loading": "Kontaktlar yuklanmoqda…",
+			"email": "Email",
+			"whatsapp": "WhatsApp",
+			"visible": "Tizimga kirganingiz uchun koʻrinmoqda.",
+			"none": "Bu kreator hali kontakt maʼlumotlarini qoʻshmagan.",
+			"error": "Kontaktlarni yuklab boʻlmadi"
+		},
+		"questions": {
+			"title": "Savollar",
+			"soon": "Bu agent boʻyicha savol-javob boʻlimi tez orada qoʻshiladi."
+		},
+		"moreFrom": "@{{nick}} ning boshqa agentlari",
+		"errorTitle": "Bu agentni yuklab boʻlmadi",
+		"like": {
+			"label": "Like",
+			"own": "Oʻz agentingizga like bosib boʻlmaydi."
+		}
+	}
+}
