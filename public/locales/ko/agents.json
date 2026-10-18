@@ -1,0 +1,134 @@
+{
+	"list": {
+		"title": "AI 에이전트",
+		"subtitle": "독립 크리에이터가 만든 바로 쓸 수 있는 에이전트.",
+		"searchLabel": "제목으로 에이전트 검색",
+		"searchPlaceholder": "에이전트 검색",
+		"sortLabel": "정렬",
+		"sort": {
+			"newest": "최신순",
+			"rank": "랭킹순",
+			"likes": "좋아요순",
+			"views": "조회순",
+			"price-asc": "가격 낮은순",
+			"price-desc": "가격 높은순"
+		},
+		"resultsLabel": "에이전트",
+		"count_one": "에이전트 <strong>{{formatted}}개</strong>",
+		"count_other": "에이전트 <strong>{{formatted}}개</strong>",
+		"countFiltered_one": "필터와 일치하는 에이전트 <strong>{{formatted}}개</strong>",
+		"countFiltered_other": "필터와 일치하는 에이전트 <strong>{{formatted}}개</strong>",
+		"loading": "에이전트를 불러오는 중…",
+		"errorTitle": "에이전트를 불러오지 못했습니다"
+	},
+	"filters": {
+		"label": "필터",
+		"open": "필터",
+		"openWithCount": "필터 ({{count}})",
+		"close": "필터 닫기",
+		"showResults": "결과 보기",
+		"category": "카테고리",
+		"pricing": "가격 유형",
+		"price": "가격 (USD)",
+		"priceMin": "최소",
+		"priceMax": "최대",
+		"priceHint": "일회성 및 월간 가격에 적용됩니다. 무료 및 맞춤 가격 에이전트는 제외됩니다.",
+		"priceDisabledHint": "무료 및 맞춤 가격 에이전트에는 가격이 없습니다. 가격으로 필터링하려면 일회성 또는 구독을 선택하세요.",
+		"priceRangeError": "최소 가격은 최대 가격보다 클 수 없습니다.",
+		"tags": "태그",
+		"tagPlaceholder": "태그를 입력하고 Enter를 누르세요",
+		"tagHint": "추가한 모든 태그가 있는 에이전트만 표시됩니다.",
+		"tagLimit": "태그는 최대 {{max}}개까지 추가할 수 있습니다.",
+		"active": "적용된 필터:",
+		"remove": "필터 제거: {{label}}",
+		"clearAll": "모두 지우기",
+		"tagChip": "#{{tag}}",
+		"priceFrom": "{{min}} 이상",
+		"priceUpTo": "{{max}} 이하",
+		"priceBetween": "{{min}} – {{max}}"
+	},
+	"card": {
+		"by": "@{{nick}}",
+		"likes_one": "좋아요 {{count}}",
+		"likes_other": "좋아요 {{count}}",
+		"views_one": "조회 {{formatted}}",
+		"views_other": "조회 {{formatted}}"
+	},
+	"empty": {
+		"noResultsTitle": "필터와 일치하는 에이전트가 없습니다",
+		"noResultsText": "필터를 줄이거나 다른 검색어를 입력해 보세요.",
+		"clearFilters": "필터 지우기",
+		"noAgentsTitle": "아직 에이전트가 없습니다",
+		"noAgentsText": "아직 등록된 에이전트가 없습니다. 곧 다시 확인해 주세요.",
+		"pageTitle": "이 페이지는 비어 있습니다",
+		"pageText": "결과 수가 이 페이지 번호보다 적습니다.",
+		"firstPage": "첫 페이지로 이동"
+	},
+	"briefCta": {
+		"title": "원하는 에이전트를 찾지 못하셨나요?",
+		"text": "필요한 내용을 브리프로 올려 보세요. 맞춤 에이전트를 만드는 크리에이터가 확인합니다.",
+		"action": "브리프 올리기"
+	},
+	"seo": {
+		"title": "AI 에이전트",
+		"description": "독립 크리에이터가 만든 AI 에이전트를 둘러보세요: 고객 지원, 영업, 마케팅, 콘텐츠 등. 가격은 USD 기준입니다.",
+		"categoryTitle": "{{category}} AI 에이전트",
+		"categoryDescription": "{{category}} 카테고리의 AI 에이전트. 가격, 좋아요, 조회수를 비교해 보세요.",
+		"paged": "{{title}} — {{page}}페이지"
+	},
+	"detail": {
+		"breadcrumb": "경로",
+		"updated": "{{date}} 업데이트",
+		"about": "에이전트 소개",
+		"tagsLabel": "태그",
+		"tagLink": "{{tag}} 태그가 있는 에이전트 보기",
+		"gallery": {
+			"label": "스크린샷",
+			"show": "스크린샷 {{count}}개 중 {{index}}번째 보기",
+			"alt": "{{title}} — 스크린샷 {{count}}개 중 {{index}}번째",
+			"noImage": "아직 스크린샷이 없습니다"
+		},
+		"price": {
+			"FREE": "무료로 사용",
+			"ONE_TIME": "일회성 결제 · USD",
+			"SUBSCRIPTION": "구독 · 매월 결제 · USD",
+			"CUSTOM": "가격 문의 — 크리에이터에게 연락하세요"
+		},
+		"demo": "라이브 데모 열기",
+		"newTab": "(새 탭에서 열림)",
+		"likes_one": "좋아요 {{formatted}}",
+		"likes_other": "좋아요 {{formatted}}",
+		"views_one": "조회 {{formatted}}",
+		"views_other": "조회 {{formatted}}",
+		"creator": {
+			"title": "크리에이터",
+			"agents_one": "에이전트 {{count}}개",
+			"agents_other": "에이전트 {{count}}개",
+			"followers_one": "팔로워 {{count}}명",
+			"followers_other": "팔로워 {{count}}명",
+			"profile": "@{{nick}} 프로필 보기"
+		},
+		"contacts": {
+			"title": "연락처",
+			"guestTitle": "연락처는 회원 전용입니다",
+			"guestText": "로그인하면 이 크리에이터의 이메일과 WhatsApp을 볼 수 있습니다. 크리에이터를 스팸으로부터 보호하기 위함입니다.",
+			"login": "로그인하고 연락하기",
+			"loading": "연락처를 불러오는 중…",
+			"email": "이메일",
+			"whatsapp": "WhatsApp",
+			"visible": "로그인했기 때문에 표시됩니다.",
+			"none": "이 크리에이터는 아직 연락처를 등록하지 않았습니다.",
+			"error": "연락처를 불러오지 못했습니다"
+		},
+		"questions": {
+			"title": "질문",
+			"soon": "이 에이전트에 대한 질문과 답변 기능이 곧 추가됩니다."
+		},
+		"moreFrom": "@{{nick}}의 다른 에이전트",
+		"errorTitle": "이 에이전트를 불러오지 못했습니다",
+		"like": {
+			"label": "좋아요",
+			"own": "내 에이전트에는 좋아요를 누를 수 없습니다."
+		}
+	}
+}

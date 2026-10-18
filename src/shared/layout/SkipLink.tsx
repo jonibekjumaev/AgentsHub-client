@@ -1,5 +1,6 @@
 import { Link } from '@mui/material';
 import { useTranslation } from 'next-i18next';
+import { radiusPx } from '@/theme/tokens';
 
 export const MAIN_CONTENT_ID = 'main-content';
 
@@ -17,7 +18,7 @@ export const SkipLink = () => {
 				zIndex: (theme) => theme.zIndex.tooltip,
 				px: 4,
 				py: 2,
-				borderRadius: 2,
+				borderRadius: radiusPx.sm,
 				bgcolor: 'surface',
 				border: 1,
 				borderColor: 'border',

@@ -1,6 +1,7 @@
 import { useId } from 'react';
 import { Box, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Typography } from '@mui/material';
 import { useTranslation } from 'next-i18next';
+import { radiusPx } from '@/theme/tokens';
 
 type ConfirmDialogProps = {
 	open: boolean;
@@ -42,7 +43,7 @@ export const ConfirmDialog = ({
 			aria-describedby={text ? textId : undefined}
 			maxWidth="xs"
 			fullWidth
-			PaperProps={{ sx: { borderRadius: 4 } }}
+			PaperProps={{ sx: { borderRadius: radiusPx.xl } }}
 		>
 			<DialogTitle id={titleId} variant="h3" component="h2" sx={{ pt: 6, px: 6 }}>
 				{title}

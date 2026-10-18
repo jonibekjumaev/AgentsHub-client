@@ -1,6 +1,7 @@
 import type { FormEventHandler, ReactNode } from 'react';
 import { Box, Skeleton, Typography } from '@mui/material';
 import { useTranslation } from 'next-i18next';
+import { radiusPx } from '@/theme/tokens';
 
 type AuthCardProps = {
 	title: string;
@@ -18,7 +19,7 @@ const cardSx = {
 	bgcolor: 'surface',
 	border: 1,
 	borderColor: 'border',
-	borderRadius: 4,
+	borderRadius: radiusPx.xl,
 } as const;
 
 /** The form shell of Login.html / Signup.html: h1 + subtitle, then the fields. */

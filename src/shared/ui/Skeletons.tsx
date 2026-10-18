@@ -1,12 +1,13 @@
 import { Box, Card, CardContent, Divider, Skeleton, Stack } from '@mui/material';
 import { useTranslation } from 'next-i18next';
+import { radiusPx } from '@/theme/tokens';
 
 /** Mirrors AgentCard: 16:10 image, category chip, title, "by @nick", divider, price + meta. */
 export const CardSkeleton = () => (
 	<Card aria-hidden="true">
 		<Skeleton variant="rectangular" sx={{ aspectRatio: '16 / 10', height: 'auto' }} />
 		<CardContent sx={{ p: 4 }}>
-			<Skeleton variant="rounded" width={96} height={22} sx={{ borderRadius: 999 }} />
+			<Skeleton variant="rounded" width={96} height={22} sx={{ borderRadius: radiusPx.pill }} />
 			<Skeleton variant="text" width="80%" sx={{ mt: 2, fontSize: 17 }} />
 			<Skeleton variant="text" width="40%" sx={{ fontSize: 13 }} />
 			<Divider sx={{ my: 3 }} />
@@ -24,8 +25,8 @@ export const RowSkeleton = () => (
 		<CardContent sx={{ p: 4, display: 'flex', flexWrap: 'wrap', gap: 4, alignItems: 'center' }}>
 			<Box sx={{ flex: '1 1 320px', minWidth: 0 }}>
 				<Stack direction="row" spacing={2}>
-					<Skeleton variant="rounded" width={56} height={20} sx={{ borderRadius: 999 }} />
-					<Skeleton variant="rounded" width={96} height={20} sx={{ borderRadius: 999 }} />
+					<Skeleton variant="rounded" width={56} height={20} sx={{ borderRadius: radiusPx.pill }} />
+					<Skeleton variant="rounded" width={96} height={20} sx={{ borderRadius: radiusPx.pill }} />
 				</Stack>
 				<Skeleton variant="text" width="70%" sx={{ mt: 2, fontSize: 17 }} />
 				<Skeleton variant="text" width="45%" sx={{ fontSize: 13 }} />

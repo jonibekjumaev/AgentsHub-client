@@ -9,6 +9,7 @@ import { RequireRole, useAuth } from '@/auth';
 import { env } from '@/config/env';
 import { useLogin } from '@/features/auth';
 import { PublicLayout, type NextPageWithLayout } from '@/shared/layout';
+import { radiusPx } from '@/theme/tokens';
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
 	if (env.isProduction) return { notFound: true };
@@ -113,7 +114,7 @@ const DevAuthPage: NextPageWithLayout = () => {
 												role="alert"
 												sx={{
 													p: 3,
-													borderRadius: 2.5,
+													borderRadius: radiusPx.md,
 													border: 1,
 													borderColor: 'dangerSoftBorder',
 													bgcolor: 'dangerSoft',

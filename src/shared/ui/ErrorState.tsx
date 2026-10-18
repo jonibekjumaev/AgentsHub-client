@@ -2,6 +2,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { ErrorOutline as ErrorOutlineIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
 import { toErrorKey } from '@/shared/lib/errors';
+import { radiusPx } from '@/theme/tokens';
 
 type ErrorStateProps = {
 	/** Any error; shown through the error mapping, never as backend text (CLAUDE.md rule 9). */
@@ -26,7 +27,7 @@ export const ErrorState = ({ error, onRetry, title }: ErrorStateProps) => {
 				bgcolor: 'dangerSoft',
 				border: 1,
 				borderColor: 'dangerSoftBorder',
-				borderRadius: 3,
+				borderRadius: radiusPx.lg,
 				color: 'dangerInk',
 			}}
 		>

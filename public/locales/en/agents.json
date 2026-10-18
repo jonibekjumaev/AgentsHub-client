@@ -1,0 +1,134 @@
+{
+	"list": {
+		"title": "AI agents",
+		"subtitle": "Ready-made agents from independent creators.",
+		"searchLabel": "Search agents by title",
+		"searchPlaceholder": "Search agents",
+		"sortLabel": "Sort",
+		"sort": {
+			"newest": "Newest",
+			"rank": "Top ranked",
+			"likes": "Most liked",
+			"views": "Most viewed",
+			"price-asc": "Price: low to high",
+			"price-desc": "Price: high to low"
+		},
+		"resultsLabel": "Agents",
+		"count_one": "<strong>{{formatted}} agent</strong>",
+		"count_other": "<strong>{{formatted}} agents</strong>",
+		"countFiltered_one": "<strong>{{formatted}} agent</strong> matches your filters",
+		"countFiltered_other": "<strong>{{formatted}} agents</strong> match your filters",
+		"loading": "Loading agents…",
+		"errorTitle": "We couldn't load the agents"
+	},
+	"filters": {
+		"label": "Filters",
+		"open": "Filters",
+		"openWithCount": "Filters ({{count}})",
+		"close": "Close filters",
+		"showResults": "Show results",
+		"category": "Category",
+		"pricing": "Pricing",
+		"price": "Price, USD",
+		"priceMin": "Min",
+		"priceMax": "Max",
+		"priceHint": "Applies to one-time and monthly prices. Free and custom agents are left out.",
+		"priceDisabledHint": "Free and custom agents have no price. Pick one-time or subscription to filter by price.",
+		"priceRangeError": "Min must not be greater than max.",
+		"tags": "Tags",
+		"tagPlaceholder": "Add a tag and press Enter",
+		"tagHint": "Agents must have every tag you add.",
+		"tagLimit": "You can add up to {{max}} tags.",
+		"active": "Active filters:",
+		"remove": "Remove filter: {{label}}",
+		"clearAll": "Clear all",
+		"tagChip": "#{{tag}}",
+		"priceFrom": "From {{min}}",
+		"priceUpTo": "Up to {{max}}",
+		"priceBetween": "{{min}} – {{max}}"
+	},
+	"card": {
+		"by": "by @{{nick}}",
+		"likes_one": "{{count}} like",
+		"likes_other": "{{count}} likes",
+		"views_one": "{{formatted}} view",
+		"views_other": "{{formatted}} views"
+	},
+	"empty": {
+		"noResultsTitle": "No agents match your filters",
+		"noResultsText": "Try fewer filters or a different search.",
+		"clearFilters": "Clear filters",
+		"noAgentsTitle": "No agents yet",
+		"noAgentsText": "Creators haven't listed any agents. Check back soon.",
+		"pageTitle": "This page is empty",
+		"pageText": "There are fewer results than this page number.",
+		"firstPage": "Go to the first page"
+	},
+	"briefCta": {
+		"title": "Didn't find the right agent?",
+		"text": "Post a brief with what you need. Creators who build custom agents will see it.",
+		"action": "Post a brief"
+	},
+	"seo": {
+		"title": "AI agents",
+		"description": "Browse ready-made AI agents from independent creators: customer support, sales, marketing, content and more. Prices in USD.",
+		"categoryTitle": "{{category}} AI agents",
+		"categoryDescription": "Ready-made AI agents in the {{category}} category from independent creators. Compare prices, likes and views.",
+		"paged": "{{title}} — page {{page}}"
+	},
+	"detail": {
+		"breadcrumb": "Breadcrumb",
+		"updated": "Updated {{date}}",
+		"about": "About this agent",
+		"tagsLabel": "Tags",
+		"tagLink": "Show agents tagged {{tag}}",
+		"gallery": {
+			"label": "Screenshots",
+			"show": "Show screenshot {{index}} of {{count}}",
+			"alt": "{{title}} — screenshot {{index}} of {{count}}",
+			"noImage": "No screenshots yet"
+		},
+		"price": {
+			"FREE": "Free to use",
+			"ONE_TIME": "One-time payment · USD",
+			"SUBSCRIPTION": "Subscription · billed monthly · USD",
+			"CUSTOM": "Price on request — contact the creator"
+		},
+		"demo": "Open live demo",
+		"newTab": "(opens in a new tab)",
+		"likes_one": "{{formatted}} like",
+		"likes_other": "{{formatted}} likes",
+		"views_one": "{{formatted}} view",
+		"views_other": "{{formatted}} views",
+		"creator": {
+			"title": "Creator",
+			"agents_one": "{{count}} agent",
+			"agents_other": "{{count}} agents",
+			"followers_one": "{{count}} follower",
+			"followers_other": "{{count}} followers",
+			"profile": "View profile of @{{nick}}"
+		},
+		"contacts": {
+			"title": "Contacts",
+			"guestTitle": "Contacts are for members",
+			"guestText": "Log in to see this creator’s email and WhatsApp. It keeps creators safe from spam.",
+			"login": "Log in to contact",
+			"loading": "Loading contacts…",
+			"email": "Email",
+			"whatsapp": "WhatsApp",
+			"visible": "Visible because you are signed in.",
+			"none": "This creator hasn’t added contact details yet.",
+			"error": "We couldn’t load the contacts"
+		},
+		"questions": {
+			"title": "Questions",
+			"soon": "Questions and answers for this agent are coming soon."
+		},
+		"moreFrom": "More from @{{nick}}",
+		"errorTitle": "We couldn’t load this agent",
+		"like": {
+			"label": "Like",
+			"own": "You can’t like your own agent."
+		}
+	}
+}

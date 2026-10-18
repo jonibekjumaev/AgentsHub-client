@@ -1,10 +1,14 @@
 import { useId, useState } from 'react';
 import type { MouseEvent } from 'react';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { Button, Menu, MenuItem } from '@mui/material';
-import { Check as CheckIcon, Language as LanguageIcon } from '@mui/icons-material';
+import { Button } from '@mui/material';
+import { Language as LanguageIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
-import { DEFAULT_LOCALE, LOCALES, localePath } from '@/shared/lib/locale';
+import { DEFAULT_LOCALE } from '@/shared/lib/locale';
+
+// Menu + Popover + Modal are only needed after a click: loaded then, and kept mounted afterwards.
+const LanguageMenu = dynamic(() => import('./LanguageMenu').then((mod) => mod.LanguageMenu), { ssr: false });
 
 type LanguageSwitcherProps = {
 	/** Called after a language is picked (the mobile drawer closes itself). */
@@ -16,6 +20,7 @@ export const LanguageSwitcher = ({ onSwitch }: LanguageSwitcherProps) => {
 	const router = useRouter();
 	const { t } = useTranslation('common');
 	const [anchor, setAnchor] = useState<HTMLElement | null>(null);
+	const [loaded, setLoaded] = useState(false);
 	const menuId = useId();
 	const open = Boolean(anchor);
 	const current = router.locale ?? DEFAULT_LOCALE;
@@ -40,39 +45,17 @@ export const LanguageSwitcher = ({ onSwitch }: LanguageSwitcherProps) => {
 				aria-haspopup="menu"
 				aria-expanded={open}
 				aria-controls={open ? menuId : undefined}
-				onClick={(event) => setAnchor(event.currentTarget)}
+				onClick={(event) => {
+					setAnchor(event.currentTarget);
+					setLoaded(true);
+				}}
 				sx={{ color: 'body', flexShrink: 0 }}
 			>
 				{current.toUpperCase()}
 			</Button>
-			<Menu
-				id={menuId}
-				anchorEl={anchor}
-				open={open}
-				onClose={() => setAnchor(null)}
-				anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-				transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-			>
-				{LOCALES.map((locale) => {
-					const selected = locale === current;
-					return (
-						<MenuItem
-							key={locale}
-							component="a"
-							href={localePath(router.asPath, locale)}
-							hrefLang={locale}
-							lang={locale}
-							selected={selected}
-							aria-current={selected ? 'true' : undefined}
-							onClick={(event: MouseEvent<HTMLElement>) => switchTo(event, locale)}
-							sx={{ gap: 3, minWidth: 160, fontSize: 14, fontWeight: selected ? 700 : 600 }}
-						>
-							{t(`common:language.names.${locale}`)}
-							{selected && <CheckIcon fontSize="small" aria-hidden="true" sx={{ ml: 'auto', color: 'primary.main' }} />}
-						</MenuItem>
-					);
-				})}
-			</Menu>
+			{loaded && (
+				<LanguageMenu id={menuId} anchorEl={anchor} current={current} onClose={() => setAnchor(null)} onPick={switchTo} />
+			)}
 		</>
 	);
 };

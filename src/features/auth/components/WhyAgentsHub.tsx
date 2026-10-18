@@ -5,6 +5,7 @@ import {
 	LockOutlined as LockOutlinedIcon,
 } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
+import { radiusPx } from '@/theme/tokens';
 
 const POINTS = [
 	{ key: 'contacts', Icon: LockOutlinedIcon },
@@ -35,7 +36,7 @@ export const WhyAgentsHub = () => {
 							placeItems: 'center',
 							width: 40,
 							height: 40,
-							borderRadius: 2.5,
+							borderRadius: radiusPx.md,
 							bgcolor: 'accentSoft',
 							color: 'primary.main',
 						}}

@@ -10,6 +10,7 @@ import { env } from '@/config/env';
 import { graphql } from '@/gql';
 import { PublicLayout, type NextPageWithLayout } from '@/shared/layout';
 import { toErrorKey } from '@/shared/lib/errors';
+import { radiusPx } from '@/theme/tokens';
 
 // Dev-only check of SSR + hydration; real product queries will live in features/agents/graphql.
 const DevApiProductsQuery = graphql(`
@@ -84,7 +85,7 @@ const DevApiPage: NextPageWithLayout = () => {
 						role="alert"
 						sx={{
 							p: 4,
-							borderRadius: 3,
+							borderRadius: radiusPx.lg,
 							border: 1,
 							borderColor: 'dangerSoftBorder',
 							bgcolor: 'dangerSoft',

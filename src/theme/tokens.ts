@@ -80,6 +80,18 @@ export const radius = {
 	pill: 999,
 } as const;
 
+/**
+ * Radii for `sx` / `styled`. A bare number in sx `borderRadius` is multiplied by shape.borderRadius
+ * (10px), so components always use these strings (an ESLint rule rejects numbers there).
+ */
+export const radiusPx = {
+	sm: `${radius.sm}px`,
+	md: `${radius.md}px`,
+	lg: `${radius.lg}px`,
+	xl: `${radius.xl}px`,
+	pill: `${radius.pill}px`,
+} as const;
+
 export const layout = {
 	containerMaxWidth: 1200,
 	formMaxWidth: 1100,

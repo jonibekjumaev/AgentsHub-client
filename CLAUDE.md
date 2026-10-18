@@ -45,6 +45,8 @@ Import alias: `@/` → `src/`.
 1. A feature never imports another feature's internals — only `shared/*` or another feature's `index.ts`.
 2. Types come from codegen (`src/gql`). Do not hand-write GraphQL types or enums that the schema provides.
 3. Styling: MUI theme + `sx`/`styled` only, values from `theme/tokens.ts`. No new SCSS, no hex colors in components.
+   Never a numeric `borderRadius` in `sx` (MUI multiplies it by `shape.borderRadius` = 10px): use `radiusPx.*`.
+   ESLint enforces this outside `src/theme/`.
 4. No hard-coded UI text. Use `t('namespace:key')`; add the key to `public/locales/en/*.json`.
    Do not invent `ko`/`uz` translations — leave them for review (fallback is `en`).
 5. Every data page handles loading (skeleton), empty, error and success.
@@ -67,6 +69,9 @@ Import alias: `@/` → `src/`.
 17. Icons: always named imports from `@mui/icons-material` (`import { Close as CloseIcon } from '@mui/icons-material'`).
 18. `_app.tsx` must not import the `@/shared/ui` (or `@/shared/layout`) barrel — import the exact file.
 19. Line endings are LF (`.gitattributes`); keep new files LF.
+20. `package.json` `sideEffects` lets webpack drop unused barrel exports. A module with a side effect on
+    import (a bare `import '…'`, global CSS, polyfill, setup or validation code) must be listed there,
+    or webpack may drop it. `src/test/sideEffects.test.ts` checks the bare imports.
 
 ## Security rules (strict)
 - Never read, print or edit `.env`, `.env.local`, `.env.development`. Use `.env.example` to see which keys exist.
