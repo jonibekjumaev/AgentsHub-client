@@ -5,6 +5,7 @@ import { env } from '@/config/env';
 import { authLink } from './authLink';
 import { createCache } from './cache';
 import { errorLink } from './errorLink';
+import { uploadFetch } from './uploadFetch';
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 
@@ -28,6 +29,8 @@ const createBrowserClient = (): Client => {
 		uri: env.graphqlUrl,
 		// The API runs Apollo Server 4 with CSRF prevention on: multipart uploads are rejected without this header.
 		headers: { 'Apollo-Require-Preflight': 'true' },
+		// Upload progress for operations that ask for it (context.fetchOptions.onUploadProgress).
+		fetch: uploadFetch,
 	});
 
 	return new ApolloClient({
