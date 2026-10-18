@@ -667,7 +667,7 @@
     auto-bind "^5.0.0"
     tslib "^2.8.0"
 
-"@graphql-codegen/plugin-helpers@^7.3.0", "@graphql-codegen/plugin-helpers@^7.4.0", "@graphql-codegen/plugin-helpers@^7.4.1", "@graphql-codegen/plugin-helpers@^7.4.2":
+"@graphql-codegen/plugin-helpers@^7.1.0", "@graphql-codegen/plugin-helpers@^7.3.0", "@graphql-codegen/plugin-helpers@^7.4.0", "@graphql-codegen/plugin-helpers@^7.4.1", "@graphql-codegen/plugin-helpers@^7.4.2":
   version "7.4.2"
   resolved "https://registry.npmjs.org/@graphql-codegen/plugin-helpers/-/plugin-helpers-7.4.2.tgz#2f38032e608c8414f510fa03b16dd5b4c283b34b"
   integrity sha512-5SmkQvoNg3orbCNWBIv6lD1Zk1/mJbgdqv5oUy2Pw8Q70sO1Y3CGOkdwnPUp5l/pm0GKApQUyqPJkqFaJKewpQ==
@@ -709,6 +709,17 @@
     auto-bind "^5.0.0"
     tslib "^2.8.0"
 
+"@graphql-codegen/typescript@6.1.0":
+  version "6.1.0"
+  resolved "https://registry.npmjs.org/@graphql-codegen/typescript/-/typescript-6.1.0.tgz#3d3ec5f141830522e16060e6e8933f0672ae4311"
+  integrity sha512-2Hu3111O/AwV28Ap7tNsixlmXSAJuQbQArQklx+IC/tNswpckZnCfmlcBtTJrGU1+mJXEneJXGfb2XWvKjbhlQ==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "^7.1.0"
+    "@graphql-codegen/schema-ast" "^6.1.0"
+    "@graphql-codegen/visitor-plugin-common" "^7.2.0"
+    auto-bind "^5.0.0"
+    tslib "~2.8.0"
+
 "@graphql-codegen/typescript@^6.1.0", "@graphql-codegen/typescript@^6.1.2":
   version "6.1.2"
   resolved "https://registry.npmjs.org/@graphql-codegen/typescript/-/typescript-6.1.2.tgz#9e0ad25bc74f4f1c189f00bfe30632de650de971"
@@ -720,7 +731,7 @@
     auto-bind "^5.0.0"
     tslib "~2.8.0"
 
-"@graphql-codegen/visitor-plugin-common@^7.2.10", "@graphql-codegen/visitor-plugin-common@^7.2.5", "@graphql-codegen/visitor-plugin-common@^7.2.8", "@graphql-codegen/visitor-plugin-common@^7.2.9", "@graphql-codegen/visitor-plugin-common@^7.3.0":
+"@graphql-codegen/visitor-plugin-common@^7.2.0", "@graphql-codegen/visitor-plugin-common@^7.2.10", "@graphql-codegen/visitor-plugin-common@^7.2.5", "@graphql-codegen/visitor-plugin-common@^7.2.8", "@graphql-codegen/visitor-plugin-common@^7.2.9", "@graphql-codegen/visitor-plugin-common@^7.3.0":
   version "7.3.0"
   resolved "https://registry.npmjs.org/@graphql-codegen/visitor-plugin-common/-/visitor-plugin-common-7.3.0.tgz#bc7bd692a7f0c1d228ac541fac16d697cc070890"
   integrity sha512-XS+VizbHubOXwk6TKK24FLiaicm5p210vufhhpQK78+0ETLhOiMGPBnkz6ieT3OOPJkakKXQoit948ekxE4ohg==
@@ -2484,6 +2495,11 @@ cliui@^9.0.1:
     strip-ansi "^7.1.0"
     wrap-ansi "^9.0.0"
 
+clsx@^1.1.0:
+  version "1.2.1"
+  resolved "https://registry.npmjs.org/clsx/-/clsx-1.2.1.tgz#0ddc4a20a549b59c93a4116bb26f5294ca17dc12"
+  integrity sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==
+
 clsx@^2.1.0, clsx@^2.1.1:
   version "2.1.1"
   resolved "https://registry.npmjs.org/clsx/-/clsx-2.1.1.tgz#eed397c9fd8bd882bfb18deab7102049a2f32999"
@@ -3651,6 +3667,11 @@ globby@^11.0.3:
     merge2 "^1.4.1"
     slash "^3.0.0"
 
+goober@^2.0.33:
+  version "2.1.19"
+  resolved "https://registry.npmjs.org/goober/-/goober-2.1.19.tgz#a4b4dcdbba9325b8c4d7380099f9f281f27c6a6f"
+  integrity sha512-U7veizMqxyKlM58+Z5j2ngJBH/r9siDmxpvNxSw0PylF6WQvrASJEZrxh1hidRBJc2jqoBVSyOban5u8m+6Rxg==
+
 gopd@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/gopd/-/gopd-1.0.1.tgz#29ff76de69dac7489b7c0918a5788e56477c332c"
@@ -4800,6 +4821,14 @@ normalize-path@^2.1.1:
   integrity sha512-3pKJwH184Xo/lnH6oyP1q2pMd7HcypqqmRs91/6/i2CGtWwIKGCkOOMTm/zXbgTEWHw1uNpNi/igc3ePOYHb6w==
   dependencies:
     remove-trailing-separator "^1.0.1"
+
+notistack@3.0.2:
+  version "3.0.2"
+  resolved "https://registry.npmjs.org/notistack/-/notistack-3.0.2.tgz#009799c3fccddeffac58565ba1657d27616dfabd"
+  integrity sha512-0R+/arLYbK5Hh7mEfR2adt0tyXJcCC9KkA2hc56FeWik2QN6Bm/S4uW+BjzDARsJth5u06nTjelSw/VSnB1YEA==
+  dependencies:
+    clsx "^1.1.0"
+    goober "^2.0.33"
 
 object-assign@^4.1.0, object-assign@^4.1.1:
   version "4.1.1"

@@ -64,6 +64,9 @@ Import alias: `@/` → `src/`.
 15. New dependencies: pick versions released at least 14 days ago; exact-pin dev tooling (no `^`).
 16. Every slice ships with tests for its logic and its key component states (Vitest + Testing Library,
     `src/test/renderWithProviders`). Tests sit next to the code as `*.test.ts(x)`, never in `src/pages/`.
+17. Icons: always named imports from `@mui/icons-material` (`import { Close as CloseIcon } from '@mui/icons-material'`).
+18. `_app.tsx` must not import the `@/shared/ui` (or `@/shared/layout`) barrel — import the exact file.
+19. Line endings are LF (`.gitattributes`); keep new files LF.
 
 ## Security rules (strict)
 - Never read, print or edit `.env`, `.env.local`, `.env.development`. Use `.env.example` to see which keys exist.

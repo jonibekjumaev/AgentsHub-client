@@ -8,6 +8,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { addApolloState, initializeApollo } from '@/apollo/client';
 import { env } from '@/config/env';
 import { graphql } from '@/gql';
+import { PublicLayout, type NextPageWithLayout } from '@/shared/layout';
 import { toErrorKey } from '@/shared/lib/errors';
 
 // Dev-only check of SSR + hydration; real product queries will live in features/agents/graphql.
@@ -50,7 +51,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
 	});
 };
 
-const DevApiPage = () => {
+const DevApiPage: NextPageWithLayout = () => {
 	const { t } = useTranslation(['dev', 'errors']);
 	const { locale } = useRouter();
 	const { data, loading, error } = useQuery(DevApiProductsQuery, { variables });
@@ -66,7 +67,7 @@ const DevApiPage = () => {
 				<title>{t('dev:api.metaTitle')}</title>
 				<meta name="robots" content="noindex" />
 			</Head>
-			<Box component="main" sx={{ maxWidth: 1200, mx: 'auto', px: { xs: 4, sm: 6 }, pt: 10, pb: 16 }}>
+			<Box sx={{ maxWidth: 1200, mx: 'auto', px: { xs: 4, sm: 6 }, pt: 10, pb: 16 }}>
 				<Typography variant="h1">{t('dev:api.title')}</Typography>
 				<Typography variant="meta" sx={{ mt: 2, mb: 8 }}>
 					{t('dev:api.intro')}
@@ -124,5 +125,7 @@ const DevApiPage = () => {
 		</>
 	);
 };
+
+DevApiPage.getLayout = (page) => <PublicLayout>{page}</PublicLayout>;
 
 export default DevApiPage;

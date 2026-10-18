@@ -22,6 +22,14 @@ const config: CodegenConfig = {
 				},
 			},
 		},
+		// Every schema enum with runtime values (the client preset only emits enums used by documents).
+		'src/gql/enums.ts': {
+			plugins: ['typescript'],
+			config: {
+				onlyEnums: true,
+				enumsAsConst: true,
+			},
+		},
 	},
 };
 

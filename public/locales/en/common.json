@@ -3,7 +3,144 @@
 		"name": "AgentsHub",
 		"rebuilding": "AgentsHub is being rebuilt."
 	},
+	"brand": {
+		"start": "Agents",
+		"end": "Hub"
+	},
+	"seo": {
+		"description": "AgentsHub is a marketplace for AI agents. Find an agent for your business, or post a brief and let creators come to you."
+	},
+	"a11y": {
+		"skipToContent": "Skip to content"
+	},
+	"nav": {
+		"label": "Main",
+		"agents": "Agents",
+		"briefs": "Briefs",
+		"creators": "Creators",
+		"community": "Community",
+		"openMenu": "Open menu",
+		"closeMenu": "Close menu",
+		"mobileMenu": "Menu"
+	},
+	"header": {
+		"login": "Log in",
+		"signup": "Sign up",
+		"dashboard": "Dashboard",
+		"accountMenu": "Account menu for @{{nick}}",
+		"signedInAs": "@{{nick}} · {{role}}",
+		"myProfile": "My profile",
+		"settings": "Settings",
+		"logout": "Log out"
+	},
+	"language": {
+		"label": "Language: {{language}}",
+		"names": {
+			"en": "English",
+			"ko": "한국어",
+			"uz": "Oʻzbekcha"
+		}
+	},
+	"footer": {
+		"label": "Footer",
+		"faq": "FAQ",
+		"about": "About",
+		"copyright": "© {{year}} AgentsHub",
+		"prices": "All prices in USD."
+	},
+	"dashboardNav": {
+		"label": "Dashboard",
+		"titles": {
+			"CREATOR": "Creator",
+			"USER": "My account",
+			"ADMIN": "Admin"
+		},
+		"overview": "Overview",
+		"myAgents": "My agents",
+		"myBriefs": "My briefs",
+		"articles": "Articles",
+		"favorites": "Favorites",
+		"visited": "Recently visited",
+		"followers": "Followers",
+		"following": "Following",
+		"settings": "Profile settings",
+		"members": "Members",
+		"agents": "Agents",
+		"briefs": "Briefs"
+	},
+	"errorPages": {
+		"home": "Back to home",
+		"notFound": {
+			"title": "Page not found",
+			"text": "The page you are looking for doesn't exist or has moved."
+		},
+		"serverError": {
+			"title": "Something went wrong on our side",
+			"text": "Please try again in a moment. If it keeps happening, come back a little later."
+		}
+	},
 	"status": {
 		"loading": "Loading…"
+	},
+	"actions": {
+		"tryAgain": "Try again",
+		"cancel": "Cancel",
+		"confirm": "Confirm",
+		"delete": "Delete",
+		"close": "Close"
+	},
+	"price": {
+		"free": "Free",
+		"custom": "Custom",
+		"perMonth": "/ mo",
+		"perMonthSpoken": "per month",
+		"none": "No price"
+	},
+	"pagination": {
+		"label": "Pagination",
+		"previous": "Previous page",
+		"next": "Next page",
+		"page": "Page {{page}}"
+	},
+	"field": {
+		"counter": "{{count}} / {{max}}",
+		"counterSpoken": "{{count}} of {{max}} characters used",
+		"required": "required"
+	},
+	"states": {
+		"errorTitle": "Something went wrong"
+	},
+	"enums": {
+		"AgentCategory": {
+			"AUTOMATION": "Automation",
+			"CONTENT": "Content",
+			"CUSTOMER_SUPPORT": "Customer support",
+			"DATA_ANALYSIS": "Data analysis",
+			"EDUCATION": "Education",
+			"MARKETING": "Marketing",
+			"OTHER": "Other",
+			"SALES": "Sales"
+		},
+		"ProductPricing": {
+			"FREE": "Free",
+			"ONE_TIME": "One-time",
+			"SUBSCRIPTION": "Subscription",
+			"CUSTOM": "Custom"
+		},
+		"ProductStatus": {
+			"ACTIVE": "Active",
+			"PAUSED": "Paused",
+			"DELETE": "Deleted"
+		},
+		"BriefStatus": {
+			"OPEN": "Open",
+			"CLOSED": "Closed",
+			"DELETE": "Deleted"
+		},
+		"MemberType": {
+			"USER": "User",
+			"CREATOR": "Creator",
+			"ADMIN": "Admin"
+		}
 	}
 }
