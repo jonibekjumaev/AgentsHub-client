@@ -30,17 +30,36 @@
 	"ui": {
 		"metaTitle": "UI check — AgentsHub",
 		"title": "UI style check",
-		"intro": "Development-only page. Every shared component is previewed here.",
+		"intro": "Development-only page. Every shared component is previewed here in all variants and states.",
 		"logoStart": "Agents",
 		"logoEnd": "Hub",
 		"sections": {
 			"logo": "Logo",
 			"typography": "Typography",
 			"buttons": "Buttons",
-			"inputs": "Inputs",
+			"inputs": "Form fields",
 			"chips": "Chips",
-			"price": "Price",
+			"price": "PriceTag",
+			"format": "Formatting",
+			"avatars": "Avatars",
+			"states": "Empty and error states",
+			"skeletons": "Skeletons",
+			"pagination": "Pagination",
+			"dialogs": "Confirm dialog and toasts",
 			"card": "Card"
+		},
+		"sub": {
+			"productStatus": "Product status",
+			"briefStatus": "Brief status",
+			"categories": "Categories (labels)",
+			"categoryFilter": "Categories (clickable filter)",
+			"palettes": "Palettes by member id",
+			"sizes": "36 · 52 (radius 14) · 96 (radius 24)",
+			"card": "CardSkeleton",
+			"row": "RowSkeleton",
+			"page": "PageSkeleton",
+			"paginationButtons": "Button mode (12 pages)",
+			"paginationLinks": "Link mode (3 pages)"
 		},
 		"sample": {
 			"h1": "Find an AI agent for your business",
@@ -68,18 +87,33 @@
 			"namePlaceholder": "e.g. Support Copilot",
 			"nameHint": "Shown on the agent card.",
 			"priceLabel": "Price",
-			"priceError": "Enter a price greater than 0."
+			"priceError": "Enter a price greater than 0.",
+			"disabledLabel": "Disabled field"
 		},
-		"chips": {
-			"open": "Open",
-			"closed": "Closed",
-			"paused": "Paused",
-			"category": "Customer support"
+		"format": {
+			"price": "Price",
+			"number": "Number",
+			"compact": "Compact",
+			"date": "Date",
+			"relative": "Relative"
 		},
-		"price": {
-			"free": "Free",
-			"perMonth": "/ mo",
-			"custom": "Custom"
+		"states": {
+			"emptyTitle": "No agents match your filters",
+			"emptyText": "Try removing a filter or searching for something else.",
+			"emptyAction": "Clear filters"
+		},
+		"dialog": {
+			"trigger": "Delete agent…",
+			"title": "Delete this agent?",
+			"text": "It disappears from the marketplace. This cannot be undone."
+		},
+		"toasts": {
+			"success": "Show success toast",
+			"error": "Show error toast",
+			"saved": "Changes saved.",
+			"deleted": "Agent deleted.",
+			"info": "Filters cleared.",
+			"retry": "Retrying…"
 		},
 		"card": {
 			"title": "Support Copilot",

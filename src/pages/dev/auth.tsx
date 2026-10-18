@@ -8,6 +8,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { RequireRole, useAuth } from '@/auth';
 import { env } from '@/config/env';
 import { useLogin } from '@/features/auth';
+import { PublicLayout, type NextPageWithLayout } from '@/shared/layout';
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
 	if (env.isProduction) return { notFound: true };
@@ -30,7 +31,7 @@ const Row = ({ label, value }: { label: string; value: string }) => (
 	</Stack>
 );
 
-const DevAuthPage = () => {
+const DevAuthPage: NextPageWithLayout = () => {
 	const { t } = useTranslation(['dev', 'errors']);
 	const { me, status, logout } = useAuth();
 	const { login, loading, errorKey } = useLogin();
@@ -49,7 +50,7 @@ const DevAuthPage = () => {
 				<title>{t('dev:auth.metaTitle')}</title>
 				<meta name="robots" content="noindex" />
 			</Head>
-			<Box component="main" sx={{ maxWidth: 720, mx: 'auto', px: { xs: 4, sm: 6 }, pt: 10, pb: 16 }}>
+			<Box sx={{ maxWidth: 720, mx: 'auto', px: { xs: 4, sm: 6 }, pt: 10, pb: 16 }}>
 				<Typography variant="h1">{t('dev:auth.title')}</Typography>
 				<Typography variant="meta" sx={{ mt: 2, mb: 8 }}>
 					{t('dev:auth.intro')}
@@ -156,5 +157,7 @@ const DevAuthPage = () => {
 		</>
 	);
 };
+
+DevAuthPage.getLayout = (page) => <PublicLayout>{page}</PublicLayout>;
 
 export default DevAuthPage;

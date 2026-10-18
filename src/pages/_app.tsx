@@ -6,6 +6,8 @@ import { AppCacheProvider } from '@mui/material-nextjs/v14-pagesRouter';
 import { appWithTranslation } from 'next-i18next';
 import { useApollo } from '@/apollo/client';
 import { AuthProvider } from '@/auth';
+import type { GetLayout, NextPageWithLayout } from '@/shared/layout/types';
+import { ToastProvider } from '@/shared/ui/toast'; // direct: the barrel would pull the whole UI kit into _app
 import { theme } from '@/theme/theme';
 import { fontVars } from '@/theme/tokens';
 import { jetbrainsMono, manrope, notoSansKr } from '@/theme/fonts';
@@ -23,9 +25,14 @@ const fontVariables = (
 	/>
 );
 
-const App = (props: AppProps) => {
+type AppPropsWithLayout = AppProps & { Component: NextPageWithLayout };
+
+const withoutLayout: GetLayout = (page) => page;
+
+const App = (props: AppPropsWithLayout) => {
 	const { Component, pageProps } = props;
 	const apolloClient = useApollo(pageProps);
+	const getLayout = Component.getLayout ?? withoutLayout;
 
 	return (
 		<AppCacheProvider {...props}>
@@ -34,7 +41,9 @@ const App = (props: AppProps) => {
 					<ThemeProvider theme={theme}>
 						<CssBaseline />
 						{fontVariables}
-						<Component {...pageProps} />
+						<ToastProvider>
+							{getLayout(<Component {...pageProps} />)}
+						</ToastProvider>
 					</ThemeProvider>
 				</AuthProvider>
 			</ApolloProvider>
