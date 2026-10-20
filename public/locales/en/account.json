@@ -1,0 +1,49 @@
+{
+	"title": "Profile settings",
+	"subtitle": "How other members see you, and your password.",
+	"loading": "Loading your profile…",
+	"errorTitle": "We couldn't load your profile",
+	"leave": "You have unsaved changes. Leave this page?",
+	"avatar": {
+		"add": "Upload a picture",
+		"change": "Change picture",
+		"remove": "Remove",
+		"hint": "PNG or JPEG, up to 15 MB.",
+		"type": "Use a PNG or JPEG image.",
+		"size": "The picture is larger than 15 MB."
+	},
+	"profile": {
+		"title": "Profile",
+		"nickHint": "Shown publicly next to your agents, briefs and comments.",
+		"fullName": "Full name",
+		"email": "Email",
+		"whatsapp": "WhatsApp",
+		"desc": "About you",
+		"descHint": "A few lines for your public profile. Plain text.",
+		"submit": "Save profile",
+		"saved": "Your profile is saved.",
+		"saveFailed": "Your profile wasn't saved"
+	},
+	"password": {
+		"title": "Password",
+		"text": "Changing it doesn't sign you out on other devices.",
+		"current": "Current password",
+		"new": "New password",
+		"confirm": "Repeat the new password",
+		"submit": "Change password",
+		"changed": "Your password is changed.",
+		"failed": "The password wasn't changed"
+	},
+	"errors": {
+		"phoneRequired": "Enter your phone number.",
+		"fullNameLength": "The name must be 3 to 100 characters.",
+		"email": "Enter a valid email of at most 254 characters.",
+		"whatsappFormat": "Use the international format with country code, e.g. +998901234567.",
+		"descLength": "Keep it under 500 characters.",
+		"taken": "This nickname or phone number is already used.",
+		"currentRequired": "Enter your current password.",
+		"wrongPassword": "The current password is wrong.",
+		"samePassword": "The new password must be different from the current one.",
+		"confirmMismatch": "The passwords don't match."
+	}
+}

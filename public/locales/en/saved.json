@@ -1,0 +1,17 @@
+{
+	"loading": "Loading agents…",
+	"errorTitle": "We couldn't load this list",
+	"browse": "Browse agents",
+	"favorites": {
+		"title": "Favorites",
+		"subtitle": "Agents you liked. Paused or removed agents drop off this list.",
+		"emptyTitle": "No favorites yet",
+		"emptyText": "Like an agent to keep it here."
+	},
+	"visited": {
+		"title": "Recently visited",
+		"subtitle": "Agents you opened lately.",
+		"emptyTitle": "Nothing here yet",
+		"emptyText": "Agents you open show up here."
+	}
+}

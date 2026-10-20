@@ -1,0 +1,17 @@
+{
+	"loading": "Agentlar yuklanmoqda…",
+	"errorTitle": "Roʻyxatni yuklab boʻlmadi",
+	"browse": "Agentlarni koʻrish",
+	"favorites": {
+		"title": "Saralanganlar",
+		"subtitle": "Siz layk bosgan agentlar. Toʻxtatilgan yoki oʻchirilganlari roʻyxatdan tushib qoladi.",
+		"emptyTitle": "Hali saralanganlar yoʻq",
+		"emptyText": "Agentga layk bosing, u shu yerda saqlanadi."
+	},
+	"visited": {
+		"title": "Yaqinda koʻrilganlar",
+		"subtitle": "Yaqinda ochgan agentlaringiz.",
+		"emptyTitle": "Hali hech narsa yoʻq",
+		"emptyText": "Ochgan agentlaringiz shu yerda chiqadi."
+	}
+}
