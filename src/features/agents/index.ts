@@ -12,3 +12,6 @@ export { RecentAgents } from './components/manage/RecentAgents';
 export { CreatorAgentsQuery } from './graphql/creatorAgents';
 export { MY_AGENTS_PATH, NEW_AGENT_PATH, myAgentsVariables } from './lib/myAgents';
 export { EditAgent, NewAgent } from './components/form/AgentFormPages';
+export { AgentPreview } from './components/manage/AgentPreview';
+export { agentPreviewHref } from './lib/myAgents';
+export { SavedAgents } from './components/saved/SavedAgents';

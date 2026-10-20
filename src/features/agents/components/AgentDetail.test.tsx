@@ -54,7 +54,7 @@ describe('AgentDetail', () => {
 		expect(screen.getByText('Subscription · billed monthly · USD')).toBeInTheDocument();
 		expect(screen.getByRole('button', { name: 'Like, 128 likes' })).toHaveAttribute('aria-pressed', 'false');
 		expect(screen.getByText('2.3K views')).toBeInTheDocument();
-		expect(screen.getByRole('heading', { name: 'Questions' })).toBeInTheDocument();
+		expect(screen.getByRole('heading', { name: /^Questions and answers/ })).toBeInTheDocument();
 	});
 
 	it('puts price + creator right after the gallery and before About (the mobile order; md moves it right)', async () => {
