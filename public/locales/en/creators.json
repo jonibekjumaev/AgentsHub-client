@@ -1,0 +1,83 @@
+{
+	"rank": "#{{rank}}",
+	"stats": {
+		"agents_one": "agent",
+		"agents_other": "agents",
+		"followers_one": "follower",
+		"followers_other": "followers",
+		"likes_one": "like",
+		"likes_other": "likes"
+	},
+	"list": {
+		"title": "Creators",
+		"subtitle": "People and teams who build the agents. Ranked nightly by likes and views.",
+		"count_one": "<strong>{{formatted}}</strong> creator",
+		"count_other": "<strong>{{formatted}}</strong> creators",
+		"searchLabel": "Search creators",
+		"searchPlaceholder": "Search by nickname",
+		"sortLabel": "Sort by",
+		"sort": {
+			"rank": "Top ranked",
+			"products": "Most agents",
+			"likes": "Most liked",
+			"views": "Most viewed",
+			"newest": "Newest"
+		},
+		"loading": "Loading creators…",
+		"errorTitle": "We couldn't load the creators",
+		"resultsLabel": "Creators"
+	},
+	"empty": {
+		"noneTitle": "No creators yet",
+		"noneText": "Creators show up here once they join.",
+		"noResultsTitle": "No creators match",
+		"noResultsText": "Try a shorter search or another spelling.",
+		"clear": "Clear search",
+		"pageTitle": "This page is empty",
+		"firstPage": "Go to page 1"
+	},
+	"seo": {
+		"title": "AI agent creators",
+		"description": "Meet the people and teams who build AI agents on AgentsHub, ranked by likes and views.",
+		"paged": "{{title}} — page {{page}}",
+		"profileTitle": "{{name}} (@{{nick}})",
+		"profileDescription": "@{{nick}} on AgentsHub."
+	},
+	"profile": {
+		"breadcrumb": "Breadcrumb",
+		"errorTitle": "We couldn't load this profile",
+		"loading": "Loading…",
+		"since": "member since {{date}}",
+		"blocked": "This account is blocked.",
+		"contacts": {
+			"guest": "Log in to see contact details.",
+			"login": "Log in",
+			"error": "Couldn't load the contacts",
+			"none": "No contacts added yet.",
+			"visible": "Visible because you are signed in."
+		},
+		"stats": {
+			"agents": "Agents",
+			"briefs": "Briefs",
+			"followers": "Followers",
+			"following": "Following",
+			"likes": "Likes",
+			"views": "Views",
+			"articles": "Articles"
+		},
+		"tabs": {
+			"label": "Profile sections",
+			"agents": "Agents",
+			"briefs": "Open briefs",
+			"followers": "Followers",
+			"following": "Following"
+		},
+		"workError": "We couldn't load this list",
+		"noAgents": "No public agents yet",
+		"noBriefs": "No open briefs",
+		"showMoreAgents_one": "Show {{count}} more agent",
+		"showMoreAgents_other": "Show {{count}} more agents",
+		"showMoreBriefs_one": "Show {{count}} more brief",
+		"showMoreBriefs_other": "Show {{count}} more briefs"
+	}
+}

@@ -1,0 +1,28 @@
+{
+	"follow": "Follow",
+	"following": "Following",
+	"followLabel": "Follow @{{nick}}",
+	"followingLabel": "Following @{{nick}}, click to unfollow",
+	"followed": "You follow @{{nick}} now.",
+	"unfollowed": "You unfollowed @{{nick}}.",
+	"loading": "Loading members…",
+	"errorTitle": "We couldn't load this list",
+	"followers_one": "{{formatted}} follower",
+	"followers_other": "{{formatted}} followers",
+	"listLabel": {
+		"followers": "Followers",
+		"following": "Following"
+	},
+	"empty": {
+		"followers": "No followers yet",
+		"following": "Not following anyone yet"
+	},
+	"errors": {
+		"changed": "This changed in the meantime. The list has been reloaded."
+	},
+	"mine": {
+		"title": "Follows",
+		"subtitle": "Members who follow you, and members you follow.",
+		"tabsLabel": "Follow lists"
+	}
+}
