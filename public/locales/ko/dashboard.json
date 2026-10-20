@@ -2,5 +2,105 @@
 	"placeholder": {
 		"title": "대시보드",
 		"text": "대시보드를 준비하고 있습니다. 메뉴에서 내 역할에 맞는 섹션을 확인하세요."
+	},
+	"overview": {
+		"title": "개요",
+		"subtitle": "내 프로필과 에이전트 현황입니다.",
+		"loading": "통계를 불러오는 중…",
+		"errorTitle": "통계를 불러오지 못했습니다",
+		"recent": "최근 업데이트한 에이전트",
+		"manage": "모든 에이전트 관리",
+		"stats": {
+			"label": "내 통계",
+			"agents": "에이전트",
+			"agentsHint": "활성 및 일시 중지",
+			"profileViews": "프로필 조회수",
+			"profileLikes": "프로필 좋아요",
+			"followers": "팔로워"
+		}
+	},
+	"myAgents": {
+		"title": "내 에이전트",
+		"subtitle": "에이전트를 일시 중지하면 삭제하지 않고 마켓플레이스에서 숨길 수 있습니다.",
+		"new": "새 에이전트",
+		"loading": "에이전트를 불러오는 중…",
+		"errorTitle": "에이전트를 불러오지 못했습니다",
+		"tabs": {
+			"label": "에이전트 상태",
+			"all": "전체",
+			"active": "활성",
+			"paused": "일시 중지"
+		},
+		"table": {
+			"caption": "내 에이전트",
+			"agent": "에이전트",
+			"status": "상태",
+			"price": "가격",
+			"views": "조회수",
+			"likes": "좋아요",
+			"questions": "질문",
+			"updated": "업데이트",
+			"actions": "작업",
+			"hidden": "마켓플레이스에서 숨김"
+		},
+		"actions": {
+			"edit": "수정",
+			"editLabel": "{{title}} 수정",
+			"preview": "미리보기",
+			"previewLabel": "{{title}} 미리보기",
+			"pause": "일시 중지",
+			"pauseLabel": "{{title}} 일시 중지",
+			"resume": "활성화",
+			"resumeLabel": "{{title}} 활성화",
+			"delete": "삭제",
+			"deleteLabel": "{{title}} 삭제"
+		},
+		"confirm": {
+			"pause": {
+				"title": "“{{title}}”을(를) 일시 중지할까요?",
+				"text": "마켓플레이스, 내 프로필, 랭킹, 다른 회원의 즐겨찾기에서 사라집니다. 다시 활성화할 때까지 좋아요, 조회, 댓글이 멈춥니다.",
+				"confirm": "에이전트 일시 중지"
+			},
+			"delete": {
+				"title": "“{{title}}”을(를) 삭제할까요?",
+				"text": "되돌릴 수 없습니다. 에이전트가 목록에서 영구히 사라집니다. 잠시 숨기려면 일시 중지하세요.",
+				"confirm": "에이전트 삭제"
+			}
+		},
+		"done": {
+			"pause": "“{{title}}”이(가) 일시 중지되었습니다.",
+			"resume": "“{{title}}”이(가) 다시 활성화되었습니다.",
+			"delete": "“{{title}}”이(가) 삭제되었습니다."
+		},
+		"errors": {
+			"changed": "그 사이 이 에이전트가 변경되었거나 삭제되었습니다. 목록을 새로고침했습니다."
+		},
+		"empty": {
+			"title": "첫 에이전트를 등록하세요",
+			"text": "명확한 제목, 정직한 가격, 스크린샷 몇 장과 함께 에이전트를 추가하세요. 언제든 수정할 수 있습니다.",
+			"action": "첫 에이전트 등록하기"
+		},
+		"emptyTab": {
+			"active": "활성 에이전트가 없습니다",
+			"paused": "일시 중지된 에이전트가 없습니다",
+			"all": "에이전트가 없습니다",
+			"action": "모든 에이전트 보기"
+		},
+		"emptyPage": {
+			"title": "이 페이지는 비어 있습니다",
+			"action": "첫 페이지로 이동"
+		},
+		"deleteNote": {
+			"strong": "삭제는 영구적입니다.",
+			"text": "삭제된 에이전트는 목록에서 사라지며 복구할 수 없습니다. 잠시 숨기려면 일시 중지하세요."
+		}
+	},
+	"preview": {
+		"metaTitle": "미리보기: {{title}}",
+		"crumb": "미리보기",
+		"paused": "이 에이전트는 일시 중지되어 나만 볼 수 있습니다. 다시 마켓플레이스에 등록하려면 활성화하세요.",
+		"live": "이 에이전트는 마켓플레이스에 게시되어 있습니다.",
+		"publicLink": "공개 페이지 열기",
+		"actionsLabel": "에이전트 작업"
 	}
 }

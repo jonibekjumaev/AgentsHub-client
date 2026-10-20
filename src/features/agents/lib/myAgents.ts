@@ -7,6 +7,9 @@ import type { CreatorProductsInquiry } from '@/gql/graphql';
 
 export const MY_AGENTS_PATH = '/dashboard/agents';
 export const NEW_AGENT_PATH = '/dashboard/agents/new';
+/** The owner's preview of one agent (S3c). Also where AgentForm lands after saving. */
+export const agentPreviewHref = (agentId: string) => `${MY_AGENTS_PATH}/${agentId}`;
+export const agentEditHref = (agentId: string) => `${MY_AGENTS_PATH}/${agentId}/edit`;
 export const MY_AGENTS_PAGE_SIZE = 10;
 
 export const STATUS_TABS = ['all', 'active', 'paused'] as const;

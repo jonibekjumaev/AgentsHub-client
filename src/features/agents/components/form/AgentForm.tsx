@@ -29,7 +29,7 @@ import {
 	type ValidAgentForm,
 } from '../../lib/agentForm';
 import { AGENT_CATEGORIES, AGENT_PRICINGS } from '../../lib/listQuery';
-import { MY_AGENTS_PATH } from '../../lib/myAgents';
+import { MY_AGENTS_PATH, agentPreviewHref } from '../../lib/myAgents';
 import { AgentCard } from '../AgentCard';
 import { ImageManager } from './ImageManager';
 import { TagsField } from './TagsField';
@@ -184,8 +184,10 @@ export const AgentForm = ({ mode, agentId, initialValues, creator }: AgentFormPr
 		}
 		setImagesError(null);
 		try {
+			let savedId = agentId ?? '';
 			if (mode === 'create') {
-				await createAgent({ variables: { input: toProductInput(form) } });
+				const result = await createAgent({ variables: { input: toProductInput(form) } });
+				savedId = result.data?.createProduct._id ?? '';
 				toast.success(t('agents:form.created', { title: form.productTitle }));
 			} else {
 				const input = toProductUpdate(agentId as string, initialValues, form);
@@ -193,7 +195,8 @@ export const AgentForm = ({ mode, agentId, initialValues, creator }: AgentFormPr
 				toast.success(t('agents:form.saved', { title: form.productTitle }));
 			}
 			allowNavigation();
-			await router.push(MY_AGENTS_PATH);
+			// The owner's preview of what was just saved (S3c); My agents if the id is somehow missing.
+			await router.push(savedId ? agentPreviewHref(savedId) : MY_AGENTS_PATH);
 		} catch (error) {
 			showServerError(error);
 		}

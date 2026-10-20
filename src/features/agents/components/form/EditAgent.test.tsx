@@ -107,7 +107,7 @@ describe('EditAgent', () => {
 		await user.clear(screen.getByRole('textbox', { name: /^Demo URL/ }));
 		await user.click(screen.getByRole('button', { name: 'Save changes' }));
 
-		await waitFor(() => expect(mockRouter.asPath).toBe('/dashboard/agents'));
+		await waitFor(() => expect(mockRouter.asPath).toBe(`/dashboard/agents/${AGENT_ID}`));
 		expect(screen.getByText('Changes to “SupportPilot” are saved.')).toBeInTheDocument();
 	});
 

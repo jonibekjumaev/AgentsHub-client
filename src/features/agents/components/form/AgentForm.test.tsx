@@ -76,7 +76,7 @@ describe('AgentForm (create)', () => {
 		await waitFor(() => expect(screen.queryByRole('progressbar')).not.toBeInTheDocument());
 		await user.click(screen.getByRole('button', { name: 'Publish agent' }));
 
-		await waitFor(() => expect(mockRouter.asPath).toBe('/dashboard/agents'));
+		await waitFor(() => expect(mockRouter.asPath).toBe('/dashboard/agents/6ac7992dd87bde19b9216d01'));
 		expect(screen.getByText('“SupportPilot” is published.')).toBeInTheDocument();
 	});
 

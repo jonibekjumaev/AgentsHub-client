@@ -94,5 +94,13 @@
 			"strong": "Deleting is permanent.",
 			"text": "A deleted agent disappears from your list and can't be restored. To hide it for a while, pause it instead."
 		}
+	},
+	"preview": {
+		"metaTitle": "Preview: {{title}}",
+		"crumb": "Preview",
+		"paused": "This agent is paused. Only you can see it. Activate it to list it in the marketplace again.",
+		"live": "This agent is live in the marketplace.",
+		"publicLink": "Open the public page",
+		"actionsLabel": "Agent actions"
 	}
 }

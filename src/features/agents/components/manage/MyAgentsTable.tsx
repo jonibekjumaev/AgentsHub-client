@@ -11,10 +11,10 @@ import { PriceTag } from '@/shared/ui/PriceTag';
 import { StatusChip } from '@/shared/ui/StatusChip';
 import { visuallyHidden } from '@/shared/ui/visuallyHidden';
 import { radiusPx } from '@/theme/tokens';
-import { statusActions, type StatusAction } from '../../lib/myAgents';
+import { agentEditHref, agentPreviewHref, statusActions, type StatusAction } from '../../lib/myAgents';
 
-export const editAgentHref = (agentId: string) => `/dashboard/agents/${agentId}/edit`;
-export const previewAgentHref = (agentId: string) => `/dashboard/agents/${agentId}`;
+export const editAgentHref = agentEditHref;
+export const previewAgentHref = agentPreviewHref;
 
 type MyAgentsTableProps = {
 	agents: CreatorAgentRowFragment[];

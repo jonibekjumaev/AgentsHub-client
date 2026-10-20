@@ -40,7 +40,7 @@ const PageHeader = ({ current, title, subtitle }: { current: string; title: stri
 };
 
 /** The same 404 page as a wrong role gets (RequireRole): missing, deleted, malformed id or not yours. */
-const AgentNotFound = () => {
+export const AgentNotFound = () => {
 	const { t } = useTranslation('common');
 	return (
 		<>
