@@ -1,0 +1,88 @@
+{
+	"seo": {
+		"title": "AgentsHub — biznesingiz uchun AI agentlar",
+		"description": "Mustaqil kreatorlarning tayyor AI agentlarini koʻring yoki brief joylang va kreatorlar oʻzlari murojaat qilsin. Narxlar USD da."
+	},
+	"hero": {
+		"eyebrow": "AI agentlar bozori",
+		"title": "Biznesingiz uchun AI agent toping yoki yaratib berishsin.",
+		"text": "Mustaqil kreatorlarning tayyor agentlarini koʻring. Mosi topilmadimi? Brief joylang, kreatorlar oʻzlari murojaat qiladi.",
+		"searchLabel": "Agentlarni qidirish",
+		"searchPlaceholder": "Agentingiz nima qilishi kerak?",
+		"search": "Agentlarni qidirish",
+		"postBrief": "Brief joylash →",
+		"sell": "Agentingizni soting →"
+	},
+	"values": {
+		"label": "Nega AgentsHub",
+		"contacts": {
+			"title": "Kontaktlar maxfiy",
+			"text": "Email va WhatsApp faqat tizimga kirgan aʼzolarga koʻrinadi."
+		},
+		"pricing": {
+			"title": "Aniq narxlar",
+			"text": "Har bir agent bepul, bir martalik, oylik yoki kelishilgan narxda — USD da."
+		},
+		"ranking": {
+			"title": "Adolatli reyting",
+			"text": "Kreatorlar hajm boʻyicha emas, boshqalarning haqiqiy layk va koʻrishlari boʻyicha saralanadi."
+		}
+	},
+	"categories": {
+		"title": "Kategoriyalar boʻyicha",
+		"text": "Agentlar va brieflar uchun bir xil kategoriyalar.",
+		"all": "Barcha agentlar"
+	},
+	"agents": {
+		"title": "Eng yaxshi agentlar",
+		"text": "Har kecha boshqa aʼzolarning layk va koʻrishlari boʻyicha saralanadi.",
+		"all": "Hammasi"
+	},
+	"activity": "Soʻnggi faollik",
+	"briefs": {
+		"title": "Soʻnggi brieflar",
+		"all": "Barcha brieflar"
+	},
+	"creators": {
+		"title": "Eng yaxshi kreatorlar",
+		"all": "Barcha kreatorlar"
+	},
+	"how": {
+		"title": "AgentsHub qanday ishlaydi",
+		"business": {
+			"title": "Bizneslar uchun",
+			"step1": {
+				"title": "Agentlarni qidiring",
+				"text": "Kategoriya, narx turi va teglar boʻyicha saralang."
+			},
+			"step2": {
+				"title": "Mosi yoʻqmi? Brief joylang",
+				"text": "Ehtiyojni yozing. Byudjet va muddat ixtiyoriy."
+			},
+			"step3": {
+				"title": "Kreator bilan bogʻlaning",
+				"text": "Tafsilotlarni email yoki WhatsApp orqali kelishing."
+			}
+		},
+		"creator": {
+			"title": "Kreatorlar uchun",
+			"step1": {
+				"title": "Agentingizni joylang",
+				"text": "Skrinshotlar, demo havola va aniq narx qoʻshing."
+			},
+			"step2": {
+				"title": "Ochiq brieflarga javob bering",
+				"text": "Izohlarda savol bering, keyin bogʻlaning."
+			},
+			"step3": {
+				"title": "Reytingingizni oshiring",
+				"text": "Boshqalarning layk va koʻrishlari sizni har kecha yuqoriga olib chiqadi."
+			}
+		}
+	},
+	"cta": {
+		"title": "Hali hech bir agent qilmaydigan ish kerakmi?",
+		"text": "Ikki daqiqada brief joylang. Kreatorlar uni bugun koʻradi.",
+		"action": "Brief joylash"
+	}
+}

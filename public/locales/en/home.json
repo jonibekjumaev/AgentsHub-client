@@ -1,0 +1,88 @@
+{
+	"seo": {
+		"title": "AgentsHub — AI agents for your business",
+		"description": "Browse ready-made AI agents from independent creators, or post a brief and let creators come to you. Prices in USD."
+	},
+	"hero": {
+		"eyebrow": "Marketplace for AI agents",
+		"title": "Find an AI agent for your business — or get one built.",
+		"text": "Browse ready-made agents from independent creators. Can't find the right one? Post a brief and let creators come to you.",
+		"searchLabel": "Search agents",
+		"searchPlaceholder": "What should your agent do?",
+		"search": "Search agents",
+		"postBrief": "Post a brief →",
+		"sell": "Sell your agent →"
+	},
+	"values": {
+		"label": "Why AgentsHub",
+		"contacts": {
+			"title": "Contacts stay private",
+			"text": "Email and WhatsApp are shown only to signed-in members."
+		},
+		"pricing": {
+			"title": "Clear pricing",
+			"text": "Every agent is free, one-time, monthly or custom — in USD."
+		},
+		"ranking": {
+			"title": "Fair ranking",
+			"text": "Creators rank by real likes and views from others, not by volume."
+		}
+	},
+	"categories": {
+		"title": "Browse by category",
+		"text": "The same categories work for agents and for briefs.",
+		"all": "All agents"
+	},
+	"agents": {
+		"title": "Top-ranked agents",
+		"text": "Ranked every night by likes and views from other members.",
+		"all": "See all"
+	},
+	"activity": "Latest activity",
+	"briefs": {
+		"title": "Latest briefs",
+		"all": "All briefs"
+	},
+	"creators": {
+		"title": "Top creators",
+		"all": "All creators"
+	},
+	"how": {
+		"title": "How AgentsHub works",
+		"business": {
+			"title": "For businesses",
+			"step1": {
+				"title": "Search or browse agents",
+				"text": "Filter by category, price type and tags."
+			},
+			"step2": {
+				"title": "No match? Post a brief",
+				"text": "Describe the need. Budget and deadline are optional."
+			},
+			"step3": {
+				"title": "Contact the creator directly",
+				"text": "Agree on details by email or WhatsApp."
+			}
+		},
+		"creator": {
+			"title": "For creators",
+			"step1": {
+				"title": "List your agent",
+				"text": "Add screenshots, a demo link and a clear price."
+			},
+			"step2": {
+				"title": "Answer open briefs",
+				"text": "Ask questions in the comments, then reach out."
+			},
+			"step3": {
+				"title": "Grow your rank",
+				"text": "Likes and views from others move you up each night."
+			}
+		}
+	},
+	"cta": {
+		"title": "Need something no agent does yet?",
+		"text": "Post a brief in two minutes. Creators will see it today.",
+		"action": "Post a brief"
+	}
+}

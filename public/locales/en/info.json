@@ -1,0 +1,68 @@
+{
+	"faq": {
+		"title": "FAQ",
+		"description": "Answers about buying and selling AI agents on AgentsHub.",
+		"subtitle": "Short answers to the questions people ask most.",
+		"more": "Still have a question? Ask in the",
+		"community": "community",
+		"items": {
+			"what": {
+				"q": "What is AgentsHub?",
+				"a": "A marketplace where independent creators list AI agents, and businesses post briefs for the agents they need."
+			},
+			"contact": {
+				"q": "How do I buy an agent?",
+				"a": "Open the agent, check its price and demo, then contact the creator by email or WhatsApp. Payment and setup are agreed directly with them."
+			},
+			"contacts": {
+				"q": "Who can see my email and WhatsApp?",
+				"a": "Only signed-in members. Guests never see contact details."
+			},
+			"pricing": {
+				"q": "What do the price types mean?",
+				"a": "Free, one-time, monthly subscription, or custom quote. All prices are in USD."
+			},
+			"brief": {
+				"q": "What is a brief?",
+				"a": "A short description of an agent you need. Creators ask questions in the comments and contact you directly. Budget and deadline are optional."
+			},
+			"deadline": {
+				"q": "What happens when my brief's deadline passes?",
+				"a": "Nothing automatic: the brief stays open until you close it. To reopen a closed brief whose deadline has passed, set a new date or remove it."
+			},
+			"rank": {
+				"q": "How are creators and agents ranked?",
+				"a": "Every night, from likes and views by other members. Your own likes and views don't count."
+			},
+			"pause": {
+				"q": "Can I hide an agent for a while?",
+				"a": "Yes. Pause it in My agents: it disappears from the marketplace until you activate it again."
+			},
+			"password": {
+				"q": "I forgot my password.",
+				"a": "Password recovery isn't available yet. Contact support from the email linked to your account."
+			},
+			"blocked": {
+				"q": "Why was I signed out with a \"blocked\" message?",
+				"a": "An admin blocked the account. Contact support if you think it's a mistake."
+			}
+		}
+	},
+	"about": {
+		"title": "About AgentsHub",
+		"description": "Why AgentsHub exists and how it works.",
+		"lead": "AgentsHub connects businesses with independent creators of AI agents — in the open, with clear prices and private contacts.",
+		"why": {
+			"title": "Why we built it",
+			"text": "Small businesses want automation but don't know where to start. Creators build great agents but struggle to be found. AgentsHub puts both in one place."
+		},
+		"how": {
+			"title": "How it works",
+			"text": "Creators list agents with a price and screenshots. Businesses browse, or post a brief when nothing fits. Questions happen in public comments; deals happen directly."
+		},
+		"principles": {
+			"title": "What we care about",
+			"text": "Private contacts, honest prices in USD, and a ranking based on what other members like — not on how much you post."
+		}
+	}
+}
