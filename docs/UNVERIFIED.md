@@ -4,6 +4,16 @@ Slices S4 and later were written straight into the repo while the developer was 
 `yarn codegen`, `tsc`, `lint`, `test` or `build`. Only a syntax check (esbuild) was run.
 Work through this list once, top to bottom, then delete the file.
 
+## Status (2026-10-20)
+
+- [x] `yarn codegen` — pass (fixed: `MemberUpdate` has no `_id`, `BoardArticleUpdate` has no `articleCategory`)
+- [x] `yarn typecheck` — pass
+- [x] `yarn lint` — pass, 0 warnings
+- [x] `yarn test` — 67 files / 479 tests pass (after the DashboardHome redirect-loop fix and the `briefForm.test` helper fix)
+- [x] `yarn build` — pass (57 s, 72 pages); `/` is ISR (300 s)
+- [ ] Browser walk-through — section 4
+- [ ] Decided limit changes — section 6
+
 ## 0. Order of checks
 
 1. Backend running on 3005 → `yarn codegen`. Codegen fails on the first field or type the schema does not
@@ -64,7 +74,7 @@ Names taken from Nestar + FRONTEND_MIGRATION.md, not from the live schema.
 
 ### Home, sitemap (S10)
 - [ ] The API accepts `limit: 100` on the public lists used by `/sitemap.xml` (if it caps lower, lower `LIMIT`)
-- [ ] `getStaticProps` + `revalidate: 300` on `/` works with the per-request Apollo client (ISR, no token)
+- [x] `getStaticProps` + `revalidate: 300` on `/` works with the per-request Apollo client (ISR, no token) — confirmed: `yarn build` passes, prerender-manifest has `initialRevalidateSeconds: 300` for `/en`, `/ko`, `/uz`.
 
 ## 2. Behaviour decisions to confirm
 
@@ -75,7 +85,7 @@ Names taken from Nestar + FRONTEND_MIGRATION.md, not from the live schema.
 - [ ] Admin reopen of a brief whose deadline passed sends `briefDeadline: null` (no dialog for admins)
 - [ ] Admin "delete" on a member sets `memberStatus: DELETE`; admins themselves get no actions
 - [ ] `/admin` redirects to `/admin/members`
-- [ ] `/dashboard` sends a USER to `/dashboard/briefs` (replace).
+- [x] `/dashboard` sends a USER to `/dashboard/briefs` (replace). — covered by CreatorOverview.test (redirect once, no loop).
 - [ ] Follow buttons on lists use one "who I follow" query (first 100). More than 100 follows → some cards
       show "Follow" until the profile is opened (profile uses `meFollowed`).
 - [ ] Brief and comment business messages are matched in the feature (`BriefErrorMessage`,
@@ -139,9 +149,23 @@ Names taken from Nestar + FRONTEND_MIGRATION.md, not from the live schema.
 
 ## 5. Phase 6 (written, not run)
 
-- [ ] `docs/ci.yml` → move it to `.github/workflows/ci.yml` (the remote tools can't write into .github): install → typecheck → lint → test → build, 20 min timeout. Push a branch to see it run.
-- [ ] `README.md` rewritten (setup, env table, scripts, structure, deploy).
+- [x] `docs/ci.yml` → move it to `.github/workflows/ci.yml` (the remote tools can't write into .github): install → typecheck → lint → test → build, 20 min timeout. Push a branch to see it run. — moved; still to see it run on GitHub.
+- [x] `README.md` rewritten (setup, env table, scripts, structure, deploy).
 - [ ] Still open, need a terminal: Playwright e2e (new dependency — decide first), lazy notistack, Noto Sans KR
       weight (measure `.next` CSS first), `@types/node` bump, product comments on paused agents (owner view hides the box).
-- [ ] AgentDetail now shows real comments (S4 component, PRODUCT group) and a Follow button in the creator box;
+- [x] AgentDetail now shows real comments (S4 component, PRODUCT group) and a Follow button in the creator box;
       `AgentDetail.test.tsx` expects the "Questions and answers" heading.
+
+## 6. Decided limit changes (backend first, then client)
+
+Decided 2026-10-20 during the browser walk-through: the Nestar-era limits are too short for AgentsHub.
+
+| Field | Now | New | Backend (Step 13a) | Client after the backend change |
+|---|---|---|---|---|
+| `commentContent` | 1–100 | 1–1000 | comment DTO `@Length`, model `maxlength`, tests, FRONTEND_MIGRATION §3.8 | `COMMENT_MAX` in `features/comments/lib/comments.ts` |
+| Chat message | 1–500 | 1–3000 | socket gateway check + its error message, §3.11 | `CHAT_MESSAGE_MAX` in `features/community/lib/chat.ts`; `community:chat.errors.length` text (en/ko/uz) |
+| `articleContent` | 3–250 | 3–3000 | board article DTO/model, tests, §3.10 | `ARTICLE_CONTENT_MAX` in `features/community/lib/articles.ts`; `community:form.contentHint` and `community:form.errors.contentLength` texts (en/ko/uz) |
+
+- [ ] Backend changed and deployed locally
+- [ ] Client constants + locale texts updated (texts with fixed numbers → use `{{max}}` so this never needs a text change again)
+- [ ] `articleTitle` stays 3–50 (not changed)
