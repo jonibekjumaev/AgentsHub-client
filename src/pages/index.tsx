@@ -20,7 +20,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 		client.query({ query: CreatorsListQuery, variables: topCreatorsVariables() }).catch(() => undefined),
 	]);
 	return addApolloState(client, {
-		props: { ...(await serverSideTranslations(locale ?? 'en', ['common', 'home', 'agents', 'briefs', 'creators', 'follows'])) },
+		props: { ...(await serverSideTranslations(locale ?? 'en', ['common', 'home', 'agents', 'briefs', 'creators', 'follows', 'errors'])) },
 		revalidate: REVALIDATE_SECONDS,
 	});
 };

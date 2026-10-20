@@ -6,7 +6,11 @@ export const ADMIN_PAGE_SIZE = 20;
 export type AdminListState = { status: string; text: string; page: number };
 export const DEFAULT_ADMIN_LIST: AdminListState = { status: 'all', text: '', page: 1 };
 
-export const adminVariables = (state: AdminListState, statusField: string, withText = true) => ({
+/**
+ * `Search` is the table's search input type. The status comes from the table's own status list (one of the
+ * field's enum values), and `withText` is false for inputs without `text` (ABAISearch).
+ */
+export const adminVariables = <Search extends object>(state: AdminListState, statusField: keyof Search & string, withText = true) => ({
 	input: {
 		page: state.page,
 		limit: ADMIN_PAGE_SIZE,
@@ -15,7 +19,7 @@ export const adminVariables = (state: AdminListState, statusField: string, withT
 		search: {
 			...(state.status !== 'all' && { [statusField]: state.status }),
 			...(withText && state.text && { text: state.text }),
-		},
+		} as Search,
 	},
 });
 

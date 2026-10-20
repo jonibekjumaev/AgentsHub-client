@@ -22,7 +22,13 @@ const valid: BriefFormValues = {
 
 const errorsOf = (values: BriefFormValues) => {
 	const result = briefFormSchema.safeParse(values);
-	return result.success ? {} : Object.fromEntries(result.error.issues.map((issue) => [issue.path[0], issue.message]));
+	if (result.success) return {};
+	const errors: Record<string, string> = {};
+	for (const issue of result.error.issues) {
+		const field = String(issue.path[0]);
+		errors[field] ??= issue.message;
+	}
+	return errors;
 };
 
 describe('briefFormSchema', () => {
@@ -50,7 +56,9 @@ describe('briefFormSchema', () => {
 	});
 
 	it('refuses a past deadline (D-05), but not the stored one left unchanged (D-31)', () => {
-		expect(errorsOf({ ...valid, briefDeadline: '2020-01-01' })).toEqual({ briefDeadline: 'briefs:form.errors.deadlineFuture' });
+		expect(errorsOf({ ...valid, briefDeadline: '2020-01-01' })).toEqual({
+			briefDeadline: 'briefs:form.errors.deadlineFuture',
+		});
 		expect(makeBriefFormSchema('2020-01-01').safeParse({ ...valid, briefDeadline: '2020-01-01' }).success).toBe(true);
 		expect(makeBriefFormSchema('2020-01-01').safeParse({ ...valid, briefDeadline: '2020-01-02' }).success).toBe(false);
 	});
@@ -83,12 +91,18 @@ describe('toBriefInput / toBriefUpdate', () => {
 
 	it('sends only changes on update, null to clear, and nothing when unchanged', () => {
 		const initial: BriefFormValues = { ...valid, briefTitle: 'WhatsApp orders', briefDeadline: '2099-11-30' };
-		expect(toBriefUpdate('id', initial, briefFormSchema.parse({ ...initial, briefDeadline: '2099-01-01' }))).toBeTruthy();
-		expect(toBriefUpdate('id', initial, briefFormSchema.parse({ ...initial, openToOffers: true, briefDeadline: '' }))).toEqual({
+		expect(
+			toBriefUpdate('id', initial, briefFormSchema.parse({ ...initial, briefDeadline: '2099-01-01' })),
+		).toBeTruthy();
+		expect(
+			toBriefUpdate('id', initial, briefFormSchema.parse({ ...initial, openToOffers: true, briefDeadline: '' })),
+		).toEqual({
 			_id: 'id',
 			briefBudget: null,
 			briefDeadline: null,
 		});
-		expect(toBriefUpdate('id', { ...initial, briefDeadline: '' }, briefFormSchema.parse({ ...initial, briefDeadline: '' }))).toBeNull();
+		expect(
+			toBriefUpdate('id', { ...initial, briefDeadline: '' }, briefFormSchema.parse({ ...initial, briefDeadline: '' })),
+		).toBeNull();
 	});
 });

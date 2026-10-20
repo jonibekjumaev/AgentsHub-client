@@ -1,7 +1,7 @@
 import type { MockedResponse } from '@apollo/client/testing';
-import { screen, within } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import mockRouter from 'next-router-mock';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { Me } from '@/auth';
 import { CreatorAgentsQuery, myAgentsVariables } from '@/features/agents';
 import { renderWithProviders } from '@/test/renderWithProviders';
@@ -61,6 +61,10 @@ describe('Creator overview (/dashboard)', () => {
 		mockRouter.setCurrentUrl('/dashboard');
 	});
 
+	afterEach(() => {
+		vi.restoreAllMocks();
+	});
+
 	it('shows only counters the API keeps, with honest labels, and no rank tile', async () => {
 		renderWithProviders(<DashboardHome />, { auth: { status: 'member', me: creator }, mocks: [statsMock(4), recentMock] });
 
@@ -82,9 +86,23 @@ describe('Creator overview (/dashboard)', () => {
 		expect(await screen.findByRole('link', { name: 'List your first agent' })).toHaveAttribute('href', '/dashboard/agents/new');
 	});
 
-	it('keeps the placeholder for other roles', () => {
+	it('sends a USER to My briefs once, with replace', async () => {
+		const replace = vi.spyOn(mockRouter, 'replace');
+		const push = vi.spyOn(mockRouter, 'push');
 		renderWithProviders(<DashboardHome />, { auth: { status: 'member', me: { ...creator, memberType: 'USER' } } });
+
+		await waitFor(() => expect(mockRouter.asPath).toBe('/dashboard/briefs'));
+		// The route change gives a new router object; that must not trigger a second redirect.
+		await new Promise((resolve) => setTimeout(resolve, 50));
+		expect(replace).toHaveBeenCalledTimes(1);
+		expect(push).not.toHaveBeenCalled();
+		expect(screen.queryByRole('heading', { name: 'Dashboard' })).not.toBeInTheDocument();
+	});
+
+	it('keeps the placeholder for an ADMIN', () => {
+		renderWithProviders(<DashboardHome />, { auth: { status: 'member', me: { ...creator, memberType: 'ADMIN' } } });
 		expect(screen.getByRole('heading', { name: 'Dashboard' })).toBeInTheDocument();
 		expect(screen.queryByRole('list', { name: 'Your numbers' })).not.toBeInTheDocument();
+		expect(mockRouter.asPath).toBe('/dashboard');
 	});
 });

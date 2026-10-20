@@ -81,7 +81,7 @@ export const ProfileForm = ({ memberId, initialValues }: ProfileFormProps) => {
 
 	const onSubmit = handleSubmit(async (form) => {
 		setFormError(null);
-		const input = toMemberUpdate(memberId, saved, form);
+		const input = toMemberUpdate(saved, form);
 		if (!input) return;
 		try {
 			await update({ variables: { input } });

@@ -40,8 +40,8 @@ describe('accountFormSchema', () => {
 describe('toMemberUpdate', () => {
 	it('sends only changes, null to clear optional text and "" to remove the picture', () => {
 		const form = accountFormSchema.parse({ ...initial, memberEmail: '', memberImage: '' });
-		expect(toMemberUpdate('id', initial, form)).toEqual({ _id: 'id', memberEmail: null, memberImage: '' });
-		expect(toMemberUpdate('id', initial, accountFormSchema.parse(initial))).toBeNull();
+		expect(toMemberUpdate(initial, form)).toEqual({ memberEmail: null, memberImage: '' });
+		expect(toMemberUpdate(initial, accountFormSchema.parse(initial))).toBeNull();
 	});
 });
 

@@ -359,10 +359,12 @@ export const CommentsSection = ({ target, authorId, canPost, lockedNote, placeho
 			<Typography id={headingId} variant="h2" sx={{ fontSize: 20 }}>
 				{labels?.title ?? t('comments:title')}
 				{shown && (
-					<Box component="span" sx={{ color: 'muted', fontWeight: 600 }}>
+					<>
 						{' '}
-						· {total}
-					</Box>
+						<Box component="span" sx={{ color: 'muted', fontWeight: 600 }}>
+							· {total}
+						</Box>
+					</>
 				)}
 			</Typography>
 			{body()}

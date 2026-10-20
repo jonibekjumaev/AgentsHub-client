@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'next-i18next';
@@ -15,11 +15,14 @@ export const DashboardHome = () => {
 	const { t } = useTranslation('dashboard');
 	const { me } = useAuth();
 	const router = useRouter();
+	// The router object changes after every navigation; a ref keeps the redirect to once per member.
+	const routerRef = useRef(router);
+	routerRef.current = router;
 	const isUser = me?.memberType === 'USER';
 
 	useEffect(() => {
-		if (isUser) void router.replace(MY_BRIEFS_PATH);
-	}, [isUser, router]);
+		if (isUser) void routerRef.current.replace(MY_BRIEFS_PATH);
+	}, [isUser]);
 
 	if (me?.memberType === 'CREATOR') return <CreatorOverview />;
 	if (isUser) return <PageSkeleton variant="rows" count={3} />;

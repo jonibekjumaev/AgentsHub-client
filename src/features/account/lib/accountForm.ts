@@ -81,8 +81,9 @@ export const fromAccount = (member: AccountQuery['getMe']): AccountFormValues =>
  * Only what changed (§1.4). Optional text cleared → null; the picture removed → '' (D-15, null is
  * rejected for memberImage). Returns null when nothing changed.
  */
-export const toMemberUpdate = (memberId: string, initial: AccountFormValues, form: ValidAccountForm): MemberUpdate | null => {
-	const update: MemberUpdate = { _id: memberId };
+export const toMemberUpdate = (initial: AccountFormValues, form: ValidAccountForm): MemberUpdate | null => {
+	// No _id: updateMember changes the signed-in member.
+	const update: MemberUpdate = {};
 	const optional = (value: string) => (value === '' ? null : value);
 	if (form.memberNick !== initial.memberNick) update.memberNick = form.memberNick;
 	if (form.memberFullName !== initial.memberFullName) update.memberFullName = optional(form.memberFullName);
@@ -91,7 +92,7 @@ export const toMemberUpdate = (memberId: string, initial: AccountFormValues, for
 	if (form.memberWhatsapp !== initial.memberWhatsapp) update.memberWhatsapp = optional(form.memberWhatsapp);
 	if (form.memberDesc !== initial.memberDesc) update.memberDesc = optional(form.memberDesc);
 	if (form.memberImage !== initial.memberImage) update.memberImage = form.memberImage;
-	return Object.keys(update).length > 1 ? update : null;
+	return Object.keys(update).length > 0 ? update : null;
 };
 
 const utf8Bytes = (value: string) => new TextEncoder().encode(value).length;

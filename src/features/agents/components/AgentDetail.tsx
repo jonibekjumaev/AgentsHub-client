@@ -1,7 +1,7 @@
 import NextLink from 'next/link';
 import Image from 'next/image';
 import { useQuery } from '@apollo/client';
-import { Box, Button, Chip, Link, Skeleton, Stack, Typography } from '@mui/material';
+import { Box, Button, Chip, Link, Skeleton, Stack, Typography, type SxProps, type Theme } from '@mui/material';
 import { OpenInNew as OpenInNewIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
 import { CommentsSection, productCommentTarget } from '@/features/comments';
@@ -345,7 +345,7 @@ export const AgentDetail = ({ agentId, variant = 'public' }: { agentId: string; 
 	};
 
 	// Inside the dashboard the layout already sets the width and padding.
-	const frameSx = owner
+	const frameSx: SxProps<Theme> = owner
 		? { display: 'flex', flexDirection: 'column', gap: 6 }
 		: { maxWidth: 1200, mx: 'auto', px: { xs: 4, sm: 6 }, pt: 6, pb: 16, display: 'flex', flexDirection: 'column', gap: 6 };
 

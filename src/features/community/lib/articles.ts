@@ -122,10 +122,9 @@ export const toArticleInput = (form: ValidArticleForm): BoardArticleInput => ({
 	...(form.articleImage !== '' && { articleImage: form.articleImage }),
 });
 
-/** Only changes; a removed image is null (B11). Null when nothing changed. */
+/** Only changes; a removed image is null (B11). Null when nothing changed. The category is fixed once posted (not in BoardArticleUpdate). */
 export const toArticleUpdate = (articleId: string, initial: ArticleFormValues, form: ValidArticleForm): BoardArticleUpdate | null => {
 	const update: BoardArticleUpdate = { _id: articleId };
-	if (form.articleCategory !== initial.articleCategory) update.articleCategory = form.articleCategory;
 	if (form.articleTitle !== initial.articleTitle) update.articleTitle = form.articleTitle;
 	if (form.articleContent !== initial.articleContent) update.articleContent = form.articleContent;
 	if (form.articleImage !== initial.articleImage) update.articleImage = form.articleImage === '' ? null : form.articleImage;

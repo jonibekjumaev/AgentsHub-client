@@ -114,8 +114,9 @@ export const ArticleForm = ({ mode, articleId, initialValues }: ArticleFormProps
 							inputRef={field.ref}
 							id="articleCategory"
 							fullWidth
+							disabled={mode === 'edit'}
 							input={<OutlinedInput error={Boolean(fieldState.error)} />}
-							inputProps={{ 'aria-invalid': fieldState.error ? true : undefined, 'aria-describedby': fieldState.error ? 'articleCategory-error' : undefined }}
+							inputProps={{ 'aria-invalid': fieldState.error ? true : undefined, 'aria-describedby': fieldState.error ? 'articleCategory-error' : mode === 'edit' ? 'articleCategory-hint' : undefined }}
 						>
 							<option value="" disabled>
 								{t('community:form.categoryPlaceholder')}
@@ -126,6 +127,7 @@ export const ArticleForm = ({ mode, articleId, initialValues }: ArticleFormProps
 								</option>
 							))}
 						</NativeSelect>
+						{mode === 'edit' && <FormHelperText id="articleCategory-hint">{t('community:form.categoryLocked')}</FormHelperText>}
 						{fieldState.error?.message && (
 							<FormHelperText id="articleCategory-error" error role="alert">
 								{t(fieldState.error.message)}

@@ -92,6 +92,7 @@
 		"leave": "You have unsaved changes. Leave this page?",
 		"category": "Category",
 		"categoryPlaceholder": "Choose a category",
+		"categoryLocked": "The category can't be changed after posting.",
 		"title": "Title",
 		"content": "Text",
 		"contentHint": "3 to 250 characters. Plain text.",

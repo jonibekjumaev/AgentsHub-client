@@ -3,6 +3,7 @@ import NextLink from 'next/link';
 import { useMutation, useQuery } from '@apollo/client';
 import { Link } from '@mui/material';
 import { useTranslation } from 'next-i18next';
+import type { AbaiSearch, AlbiSearch, AlpiSearch, MiSearch } from '@/gql/graphql';
 import { useFormat } from '@/shared/lib/format';
 import { StatusChip } from '@/shared/ui/StatusChip';
 import {
@@ -41,7 +42,7 @@ export const AdminMembers = () => {
 	const { t } = useTranslation(['admin', 'common']);
 	const format = useFormat();
 	const [state, setState] = useState<AdminListState>(DEFAULT_ADMIN_LIST);
-	const { data, loading, error, refetch } = useQuery(AdminMembersQuery, { variables: adminVariables(state, 'memberStatus'), fetchPolicy: 'cache-and-network' });
+	const { data, loading, error, refetch } = useQuery(AdminMembersQuery, { variables: adminVariables<MiSearch>(state, 'memberStatus'), fetchPolicy: 'cache-and-network' });
 	const [update] = useMutation(AdminUpdateMemberMutation);
 	const run = useAdminRun(refetch);
 	const list = data?.getAllMembersByAdmin.list ?? [];
@@ -85,7 +86,7 @@ export const AdminAgents = () => {
 	const format = useFormat();
 	const [state, setState] = useState<AdminListState>(DEFAULT_ADMIN_LIST);
 	// ALPISearch has the marketplace filters; `text` is one of them (§3.3).
-	const { data, loading, error, refetch } = useQuery(AdminProductsQuery, { variables: adminVariables(state, 'productStatus'), fetchPolicy: 'cache-and-network' });
+	const { data, loading, error, refetch } = useQuery(AdminProductsQuery, { variables: adminVariables<AlpiSearch>(state, 'productStatus'), fetchPolicy: 'cache-and-network' });
 	const [update] = useMutation(AdminUpdateProductMutation);
 	const [remove] = useMutation(AdminRemoveProductMutation);
 	const run = useAdminRun(refetch);
@@ -137,7 +138,7 @@ export const AdminBriefs = () => {
 	const { t } = useTranslation(['admin', 'common']);
 	const format = useFormat();
 	const [state, setState] = useState<AdminListState>(DEFAULT_ADMIN_LIST);
-	const { data, loading, error, refetch } = useQuery(AdminBriefsQuery, { variables: adminVariables(state, 'briefStatus'), fetchPolicy: 'cache-and-network' });
+	const { data, loading, error, refetch } = useQuery(AdminBriefsQuery, { variables: adminVariables<AlbiSearch>(state, 'briefStatus'), fetchPolicy: 'cache-and-network' });
 	const [update] = useMutation(AdminUpdateBriefMutation);
 	const [remove] = useMutation(AdminRemoveBriefMutation);
 	const run = useAdminRun(refetch);
@@ -194,7 +195,7 @@ export const AdminArticles = () => {
 	const format = useFormat();
 	const [state, setState] = useState<AdminListState>(DEFAULT_ADMIN_LIST);
 	const { data, loading, error, refetch } = useQuery(AdminArticlesQuery, {
-		variables: adminVariables(state, 'articleStatus', false),
+		variables: adminVariables<AbaiSearch>(state, 'articleStatus', false),
 		fetchPolicy: 'cache-and-network',
 	});
 	const [update] = useMutation(AdminUpdateArticleMutation);
