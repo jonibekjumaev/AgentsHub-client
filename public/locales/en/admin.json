@@ -1,0 +1,89 @@
+{
+	"search": "Search",
+	"status": "Status",
+	"allStatuses": "All statuses",
+	"loading": "Loading…",
+	"errorTitle": "We couldn't load this list",
+	"empty": "Nothing here",
+	"total_one": "{{count}} item",
+	"total_other": "{{count}} items",
+	"changed": "This item was changed or removed in the meantime. The list has been reloaded.",
+	"memberStatus": {
+		"ACTIVE": "Active",
+		"BLOCK": "Blocked",
+		"DELETE": "Deleted"
+	},
+	"articleStatus": {
+		"ACTIVE": "Active",
+		"DELETE": "Deleted"
+	},
+	"columns": {
+		"member": "Member",
+		"type": "Type",
+		"status": "Status",
+		"contacts": "Contacts",
+		"joined": "Joined",
+		"agent": "Agent",
+		"creator": "Creator",
+		"category": "Category",
+		"stats": "Likes · views",
+		"updated": "Updated",
+		"brief": "Brief",
+		"author": "Author",
+		"deadline": "Deadline",
+		"created": "Created",
+		"article": "Article"
+	},
+	"actions": {
+		"label": "Actions",
+		"aria": "{{action}}: {{title}}",
+		"pause": "Pause",
+		"resume": "Activate",
+		"close": "Close",
+		"reopen": "Reopen",
+		"delete": "Delete",
+		"remove": "Remove permanently",
+		"block": "Block",
+		"unblock": "Unblock"
+	},
+	"done": {
+		"pause": "“{{title}}” is paused.",
+		"resume": "“{{title}}” is active again.",
+		"close": "“{{title}}” is closed.",
+		"reopen": "“{{title}}” is open again.",
+		"delete": "“{{title}}” is deleted.",
+		"remove": "“{{title}}” is removed for good.",
+		"block": "{{title}} is blocked.",
+		"unblock": "{{title}} is unblocked."
+	},
+	"confirm": {
+		"delete": {
+			"title": "Delete “{{title}}”?",
+			"text": "It disappears from the site. You can still remove it permanently afterwards."
+		},
+		"remove": {
+			"title": "Remove “{{title}}” permanently?",
+			"text": "This can't be undone: the record is erased from the database."
+		},
+		"block": {
+			"title": "Block {{title}}?",
+			"text": "They are signed out on their next request and can't sign in until unblocked."
+		}
+	},
+	"members": {
+		"title": "Members",
+		"subtitle": "Block, unblock or delete members. Types and passwords can't be changed here."
+	},
+	"agents": {
+		"title": "Agents",
+		"subtitle": "Every agent, including paused and deleted ones."
+	},
+	"briefs": {
+		"title": "Briefs",
+		"subtitle": "Every brief. Reopening a brief whose deadline passed removes the deadline."
+	},
+	"articles": {
+		"title": "Articles",
+		"subtitle": "Community articles. Delete first, then remove permanently."
+	}
+}
