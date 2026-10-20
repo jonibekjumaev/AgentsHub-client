@@ -1,0 +1,216 @@
+{
+	"list": {
+		"title": "Briefs",
+		"subtitle": "Businesses describe the agent they need. Ask questions in the comments, then reach out.",
+		"post": "Post a brief",
+		"tabsLabel": "Brief status",
+		"tabs": {
+			"open": "Open",
+			"closed": "Closed"
+		},
+		"searchLabel": "Search briefs",
+		"searchPlaceholder": "Search brief titles",
+		"sortLabel": "Sort",
+		"sort": {
+			"newest": "Newest",
+			"budget-desc": "Budget: high to low",
+			"budget-asc": "Budget: low to high",
+			"deadline": "Deadline: soonest",
+			"views": "Most viewed"
+		},
+		"categoriesLabel": "Categories",
+		"allCategories": "All categories",
+		"loading": "Loading briefs…",
+		"errorTitle": "Couldn't load the briefs",
+		"resultsLabel": "Briefs",
+		"countOpen_one": "<strong>{{formatted}} open brief</strong>",
+		"countOpen_other": "<strong>{{formatted}} open briefs</strong>",
+		"countClosed_one": "<strong>{{formatted}} closed brief</strong>",
+		"countClosed_other": "<strong>{{formatted}} closed briefs</strong>",
+		"optionalLast": "When sorting by budget or deadline, briefs without one are listed last."
+	},
+	"empty": {
+		"noOpenTitle": "No open briefs yet",
+		"noOpenText": "When a business posts what it needs, it shows up here.",
+		"noClosedTitle": "No closed briefs",
+		"noClosedText": "Briefs their authors have closed show up here.",
+		"noResultsTitle": "No briefs match",
+		"noResultsText": "Try another category or a shorter search.",
+		"clearFilters": "Clear filters",
+		"pageTitle": "This page is empty",
+		"pageText": "There are fewer briefs now than when this link was made.",
+		"firstPage": "Go to page 1"
+	},
+	"card": {
+		"comments_one": "{{formatted}} comment",
+		"comments_other": "{{formatted}} comments",
+		"views_one": "{{formatted}} view",
+		"views_other": "{{formatted}} views"
+	},
+	"budget": {
+		"label": "Budget",
+		"open": "Open to offers"
+	},
+	"deadline": {
+		"on": "Deadline {{date}}",
+		"none": "No deadline",
+		"passed": "Deadline passed ({{date}})"
+	},
+	"closedOn": "Closed on {{date}}",
+	"seo": {
+		"title": "Briefs: businesses looking for AI agents",
+		"description": "Businesses describe the AI agent they need, with budget and deadline. Ask questions and contact them directly.",
+		"categoryTitle": "{{category}} briefs",
+		"categoryDescription": "Businesses looking for {{category}} AI agents. Budgets in USD, questions in the open.",
+		"closed": "Closed: {{title}}",
+		"paged": "{{title}} — page {{page}}"
+	},
+	"detail": {
+		"breadcrumb": "Breadcrumb",
+		"errorTitle": "Couldn't load this brief",
+		"posted": "Posted {{date}}",
+		"budget": "Budget",
+		"deadline": "Deadline",
+		"currency": "Currency",
+		"deadlinePassed": "The deadline has passed.",
+		"postedBy": "Posted by",
+		"profile": "Profile of @{{nick}}",
+		"authorBriefs_one": "{{count}} brief",
+		"authorBriefs_other": "{{count}} briefs",
+		"closedComments": "This brief is closed. You can read the questions, but not add new ones.",
+		"commentPlaceholder": "Ask about scope, tools or timing. Keep pricing talks for direct contact.",
+		"contacts": {
+			"title": "Contact directly",
+			"loading": "Loading contacts…",
+			"guestTitle": "Contacts are for members",
+			"guestText": "Log in to see the author's email and WhatsApp.",
+			"login": "Log in to see contacts",
+			"error": "Couldn't load the contacts",
+			"none": "The author hasn't added any contacts yet. Ask in the comments.",
+			"email": "Email",
+			"whatsapp": "WhatsApp",
+			"visible": "Visible because you are signed in."
+		},
+		"creatorHint": {
+			"title": "Have an agent that fits?",
+			"text": "Share a link to your listing in the comments, then contact the author.",
+			"action": "Go to my agents"
+		}
+	},
+	"mine": {
+		"title": "My briefs",
+		"subtitle": "Describe what you need and let creators come to you.",
+		"loading": "Loading your briefs…",
+		"errorTitle": "We couldn't load your briefs",
+		"tabsLabel": "Brief status",
+		"tabs": {
+			"all": "All",
+			"open": "Open",
+			"closed": "Closed"
+		},
+		"listLabel": "Your briefs",
+		"deadlineWas": "Deadline was {{date}}",
+		"reopenHint": "The deadline has passed. Set a new date to reopen.",
+		"actions": {
+			"edit": "Edit",
+			"editLabel": "Edit {{title}}",
+			"close": "Close",
+			"closeLabel": "Close {{title}}",
+			"reopen": "Reopen",
+			"reopenLabel": "Reopen {{title}}",
+			"delete": "Delete",
+			"deleteLabel": "Delete {{title}}"
+		},
+		"done": {
+			"close": "“{{title}}” is closed.",
+			"reopen": "“{{title}}” is open again.",
+			"delete": "“{{title}}” was deleted."
+		},
+		"errors": {
+			"changed": "This brief was changed or removed in the meantime. The list has been reloaded."
+		},
+		"confirmDelete": {
+			"title": "Delete “{{title}}”?",
+			"text": "This can't be undone: the brief and its page disappear for everyone. To stop getting offers, close it instead.",
+			"confirm": "Delete brief"
+		},
+		"reopen": {
+			"title": "Reopen “{{title}}”",
+			"text": "The deadline has passed. Choose a new deadline or remove it.",
+			"dateLabel": "New deadline",
+			"confirm": "Reopen with this date",
+			"withoutDeadline": "Reopen without a deadline"
+		},
+		"empty": {
+			"title": "Post your first brief",
+			"text": "Describe the task, your tools and your numbers. Creators answer in the comments and contact you directly.",
+			"action": "Post a brief"
+		},
+		"emptyTab": {
+			"all": "No briefs",
+			"open": "No open briefs",
+			"closed": "No closed briefs",
+			"action": "Show all briefs"
+		},
+		"note": "Closed briefs stay public, with their comments, but take no new questions. Deleting a brief removes it for good."
+	},
+	"form": {
+		"newTitle": "Post a brief",
+		"newCrumb": "New brief",
+		"newSubtitle": "Tell creators what you need. Good briefs get answers within a day.",
+		"editTitle": "Edit “{{title}}”",
+		"editSubtitle": "Changes show on the public page right away.",
+		"loading": "Loading the brief…",
+		"backToList": "Back to my briefs",
+		"closedNote": "This brief is closed. You can still edit it; reopen it from My briefs to take new questions.",
+		"optional": "(optional)",
+		"title": {
+			"label": "Title",
+			"hint": "Say what the agent should do, in one line."
+		},
+		"category": {
+			"label": "Category",
+			"placeholder": "Choose a category"
+		},
+		"content": {
+			"label": "What do you need?",
+			"hint": "20 to 3000 characters. Plain text."
+		},
+		"budget": {
+			"label": "Budget",
+			"inputLabel": "Budget in USD",
+			"openToOffers": "Open to offers (no fixed budget)"
+		},
+		"deadline": {
+			"label": "Deadline (optional)",
+			"hint": "Today or later. The brief stays open after it passes until you close it."
+		},
+		"publicNote": "Your brief is public. Your contacts are shown only to signed-in members.",
+		"submitCreate": "Publish brief",
+		"submitEdit": "Save changes",
+		"created": "“{{title}}” is published.",
+		"saved": "“{{title}}” is saved.",
+		"leave": "You have unsaved changes. Leave this page?",
+		"tips": {
+			"title": "What makes a good brief",
+			"task": "Describe the task, not the technology. “Take orders from WhatsApp” beats “build a GPT bot”.",
+			"tools": "Name the tools you already use: Google Sheets, Telegram, 1C, Instagram.",
+			"numbers": "Give numbers: how many messages, orders or files per day.",
+			"lifecycle": "You can close the brief when you find a creator, and reopen it later if you need more offers."
+		},
+		"errors": {
+			"titleRequired": "Enter a title.",
+			"titleLength": "The title must be 3 to 100 characters.",
+			"categoryRequired": "Choose a category.",
+			"contentRequired": "Describe what you need.",
+			"contentLength": "The description must be 20 to 3000 characters.",
+			"budgetRequired": "Enter a budget, or tick “Open to offers”.",
+			"budgetPositive": "The budget must be greater than 0.",
+			"deadlineFuture": "Pick today or a later date.",
+			"server": "Check this field.",
+			"gone": "This brief was deleted or is no longer yours.",
+			"saveFailed": "The brief wasn't saved",
+			"loadFailed": "We couldn't load this brief"
+		}
+	}
+}

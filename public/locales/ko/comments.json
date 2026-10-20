@@ -1,0 +1,35 @@
+{
+	"title": "질문과 답변",
+	"loading": "댓글을 불러오는 중…",
+	"errorTitle": "댓글을 불러오지 못했습니다",
+	"unavailable": "이 페이지에서는 댓글을 볼 수 없습니다.",
+	"empty": "아직 질문이 없습니다. 첫 질문을 남겨 보세요.",
+	"unknownMember": "회원",
+	"author": "작성자",
+	"delete": "삭제",
+	"deleteLabel": "내 댓글 삭제",
+	"deleted": "댓글이 삭제되었습니다.",
+	"showMore_one": "{{count}}개 더 보기",
+	"showMore_other": "{{count}}개 더 보기",
+	"guest": {
+		"text": "질문하거나 답하려면 로그인하세요.",
+		"login": "로그인하고 댓글 달기"
+	},
+	"form": {
+		"label": "질문하기",
+		"placeholder": "질문을 입력하세요.",
+		"public": "댓글은 모두에게 공개됩니다.",
+		"submit": "질문 등록",
+		"posted": "질문이 등록되었습니다.",
+		"invalid": "1~{{max}}자로 입력하세요."
+	},
+	"confirm": {
+		"title": "이 댓글을 삭제할까요?",
+		"text": "모든 사람에게서 사라지며 되돌릴 수 없습니다.",
+		"confirm": "댓글 삭제"
+	},
+	"errors": {
+		"closed": "지금은 댓글을 달 수 없습니다. 페이지를 새로고침하세요.",
+		"changed": "이미 삭제된 댓글입니다. 목록을 다시 불러옵니다."
+	}
+}
