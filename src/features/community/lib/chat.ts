@@ -2,7 +2,8 @@
  * Community chat protocol (FRONTEND_MIGRATION §3.11, D-19): a raw WebSocket, JSON frames with `event`.
  * Parsing is defensive: an unknown or malformed frame is ignored, never shown.
  */
-export const CHAT_MESSAGE_MAX = 500;
+/** 1–3000 characters after trimming (D-35) */
+export const CHAT_MESSAGE_MAX = 3000;
 export const CHAT_COOLDOWN_MS = 1000;
 /** Messages kept on screen; older ones scroll away. */
 export const CHAT_HISTORY_MAX = 100;

@@ -27,10 +27,11 @@ describe('community URL filters', () => {
 describe('article form (§3.10)', () => {
 	const valid: ArticleFormValues = { articleCategory: 'FREE', articleTitle: 'Hello', articleContent: 'First post', articleImage: '' };
 
-	it('checks the 3–50 / 3–250 limits', () => {
+	it('checks the 3–50 / 3–3000 limits (D-35)', () => {
 		expect(articleFormSchema.safeParse(valid).success).toBe(true);
 		expect(articleFormSchema.safeParse({ ...valid, articleTitle: 'x'.repeat(51) }).success).toBe(false);
-		expect(articleFormSchema.safeParse({ ...valid, articleContent: 'x'.repeat(251) }).success).toBe(false);
+		expect(articleFormSchema.safeParse({ ...valid, articleContent: 'x'.repeat(3000) }).success).toBe(true);
+		expect(articleFormSchema.safeParse({ ...valid, articleContent: 'x'.repeat(3001) }).success).toBe(false);
 	});
 
 	it('clears a removed image with null (B11)', () => {

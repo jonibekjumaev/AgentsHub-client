@@ -5,7 +5,7 @@ import mockRouter from 'next-router-mock';
 import { beforeEach, describe, expect, it } from 'vitest';
 import type { Me } from '@/auth';
 import { renderWithProviders } from '@/test/renderWithProviders';
-import { CommentsQuery, CreateCommentMutation, DeleteCommentMutation } from '../graphql/comments';
+import { CommentsQuery, CreateCommentMutation, DeleteCommentMutation, RemoveCommentByAdminMutation } from '../graphql/comments';
 import { briefCommentTarget, commentsVariables } from '../lib/comments';
 import { CommentsSection } from './CommentsSection';
 
@@ -104,7 +104,7 @@ describe('CommentsSection (§3.8)', () => {
 		renderWithProviders(<CommentsSection target={target} canPost />, { mocks: [listMock([])], auth: { status: 'member', me } });
 
 		await user.click(await screen.findByRole('button', { name: 'Post question' }));
-		expect(await screen.findByText('Write 1 to 100 characters.')).toBeInTheDocument();
+		expect(await screen.findByText('Write 1 to 1000 characters.')).toBeInTheDocument();
 	});
 
 	it('deletes an own comment after confirming', async () => {
@@ -126,6 +126,29 @@ describe('CommentsSection (§3.8)', () => {
 		await user.click(within(dialog).getByRole('button', { name: 'Delete comment' }));
 
 		expect(await screen.findByText('Your comment was deleted.')).toBeInTheDocument();
+		expect(await screen.findByText('No questions yet. Be the first to ask.')).toBeInTheDocument();
+	});
+
+	it('lets an admin remove any member\'s comment with removeCommentByAdmin (§3.12)', async () => {
+		const user = userEvent.setup();
+		const admin = { ...me, memberType: 'ADMIN' } as Me;
+		renderWithProviders(<CommentsSection target={target} canPost />, {
+			mocks: [
+				listMock([answer]),
+				{
+					request: { query: RemoveCommentByAdminMutation, variables: { commentId: answer._id } },
+					result: { data: { removeCommentByAdmin: { __typename: 'Comment', _id: answer._id } } },
+				},
+				listMock([]),
+			],
+			auth: { status: 'member', me: admin },
+		});
+
+		await user.click(await screen.findByRole('button', { name: 'Remove the comment by @dilnoza_bakes' }));
+		const dialog = await screen.findByRole('dialog');
+		await user.click(within(dialog).getByRole('button', { name: 'Delete comment' }));
+
+		expect(await screen.findByText('The comment was removed.')).toBeInTheDocument();
 		expect(await screen.findByText('No questions yet. Be the first to ask.')).toBeInTheDocument();
 	});
 
