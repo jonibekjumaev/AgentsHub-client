@@ -9,6 +9,8 @@
 	"delete": "Oʻchirish",
 	"deleteLabel": "Izohingizni oʻchirish",
 	"deleted": "Izohingiz oʻchirildi.",
+	"removeLabel": "@{{nick}} izohini oʻchirish",
+	"removed": "Izoh oʻchirildi.",
 	"showMore_one": "Yana {{count}} tasini koʻrsatish",
 	"showMore_other": "Yana {{count}} tasini koʻrsatish",
 	"guest": {

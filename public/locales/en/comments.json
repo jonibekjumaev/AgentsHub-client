@@ -9,6 +9,8 @@
 	"delete": "Delete",
 	"deleteLabel": "Delete your comment",
 	"deleted": "Your comment was deleted.",
+	"removeLabel": "Remove the comment by @{{nick}}",
+	"removed": "The comment was removed.",
 	"showMore_one": "Show {{count}} more",
 	"showMore_other": "Show {{count}} more",
 	"guest": {

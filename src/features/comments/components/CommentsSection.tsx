@@ -18,7 +18,7 @@ import { FormField } from '@/shared/ui/FormField';
 import { SubmitButton } from '@/shared/ui/SubmitButton';
 import { useToast } from '@/shared/ui/toast';
 import { radiusPx } from '@/theme/tokens';
-import { CommentsQuery, CreateCommentMutation, DeleteCommentMutation } from '../graphql/comments';
+import { CommentsQuery, CreateCommentMutation, DeleteCommentMutation, RemoveCommentByAdminMutation } from '../graphql/comments';
 import {
 	COMMENTS_PAGE_SIZE,
 	COMMENT_MAX,
@@ -88,10 +88,12 @@ type CommentRowProps = {
 	comment: CommentItemFragment;
 	isAuthor: boolean;
 	isMine: boolean;
+	/** An admin may remove anyone's comment (removeCommentByAdmin); their own goes the normal way. */
+	isModerator: boolean;
 	onDelete: () => void;
 };
 
-const CommentRow = ({ comment, isAuthor, isMine, onDelete }: CommentRowProps) => {
+const CommentRow = ({ comment, isAuthor, isMine, isModerator, onDelete }: CommentRowProps) => {
 	const { t } = useTranslation('comments');
 	const format = useFormat();
 	const member = comment.memberData;
@@ -125,14 +127,14 @@ const CommentRow = ({ comment, isAuthor, isMine, onDelete }: CommentRowProps) =>
 							{format.relative(comment.createdAt)}
 						</time>
 					</Typography>
-					{isMine && (
+					{(isMine || isModerator) && (
 						<Button
 							size="small"
 							color="error"
 							variant="text"
 							startIcon={<DeleteOutlineIcon />}
 							onClick={onDelete}
-							aria-label={t('comments:deleteLabel')}
+							aria-label={t(isMine ? 'comments:deleteLabel' : 'comments:removeLabel', { nick })}
 							sx={{ ml: 'auto', height: 28, minWidth: 0 }}
 						>
 							{t('comments:delete')}
@@ -250,7 +252,9 @@ export const CommentsSection = ({ target, authorId, canPost, lockedNote, placeho
 		variables: commentsVariables(target, limit),
 	});
 	const [remove, { loading: removing }] = useMutation(DeleteCommentMutation);
-	const [pendingDelete, setPendingDelete] = useState<string | null>(null);
+	const [removeByAdmin, { loading: removingByAdmin }] = useMutation(RemoveCommentByAdminMutation);
+	const [pendingDelete, setPendingDelete] = useState<{ id: string; mine: boolean } | null>(null);
+	const isAdmin = me?.memberType === 'ADMIN';
 	const [dialogOpen, setDialogOpen] = useState(false);
 
 	// While "Show more" loads, keep the comments already on screen.
@@ -268,11 +272,20 @@ export const CommentsSection = ({ target, authorId, canPost, lockedNote, placeho
 	const confirmDelete = async () => {
 		if (!pendingDelete) return;
 		try {
-			await remove({
-				variables: { input: { _id: pendingDelete, commentStatus: CommentStatus.Delete } },
-				update: (cache) => shiftCounter(cache, target, -1),
-			});
-			toast.success(t('comments:deleted'));
+			if (pendingDelete.mine) {
+				await remove({
+					variables: { input: { _id: pendingDelete.id, commentStatus: CommentStatus.Delete } },
+					update: (cache) => shiftCounter(cache, target, -1),
+				});
+				toast.success(t('comments:deleted'));
+			} else {
+				// the list only shows ACTIVE comments, so the server lowers the counter too (B19)
+				await removeByAdmin({
+					variables: { commentId: pendingDelete.id },
+					update: (cache) => shiftCounter(cache, target, -1),
+				});
+				toast.success(t('comments:removed'));
+			}
 		} catch (caught) {
 			toast.error(t(getErrorCode(caught) === ErrorCode.NotFound ? 'comments:errors.changed' : toErrorKey(caught)));
 		}
@@ -316,8 +329,9 @@ export const CommentsSection = ({ target, authorId, canPost, lockedNote, placeho
 							comment={comment}
 							isAuthor={Boolean(authorId) && comment.memberId === authorId}
 							isMine={Boolean(me) && comment.memberId === me?._id}
+							isModerator={isAdmin}
 							onDelete={() => {
-								setPendingDelete(comment._id);
+								setPendingDelete({ id: comment._id, mine: comment.memberId === me?._id });
 								setDialogOpen(true);
 							}}
 						/>
@@ -375,7 +389,7 @@ export const CommentsSection = ({ target, authorId, canPost, lockedNote, placeho
 				text={t('comments:confirm.text')}
 				confirmLabel={t('comments:confirm.confirm')}
 				destructive
-				loading={removing}
+				loading={removing || removingByAdmin}
 				onConfirm={() => void confirmDelete()}
 				onCancel={() => setDialogOpen(false)}
 			/>

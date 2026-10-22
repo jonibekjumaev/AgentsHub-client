@@ -59,6 +59,7 @@ type Documents = {
     "\n\tfragment CommentItem on Comment {\n\t\t_id\n\t\tcommentContent\n\t\tcommentGroup\n\t\tcommentRefId\n\t\tmemberId\n\t\tcreatedAt\n\t\tmemberData {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t}\n\t}\n": typeof types.CommentItemFragmentDoc,
     "\n\tquery Comments($input: CommentsInquiry!) {\n\t\tgetComments(input: $input) {\n\t\t\tlist {\n\t\t\t\t...CommentItem\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": typeof types.CommentsDocument,
     "\n\tmutation CreateComment($input: CommentInput!) {\n\t\tcreateComment(input: $input) {\n\t\t\t...CommentItem\n\t\t}\n\t}\n": typeof types.CreateCommentDocument,
+    "\n\tmutation RemoveCommentByAdmin($commentId: String!) {\n\t\tremoveCommentByAdmin(commentId: $commentId) {\n\t\t\t_id\n\t\t}\n\t}\n": typeof types.RemoveCommentByAdminDocument,
     "\n\tmutation DeleteComment($input: CommentUpdate!) {\n\t\tupdateComment(input: $input) {\n\t\t\t_id\n\t\t\tcommentStatus\n\t\t}\n\t}\n": typeof types.DeleteCommentDocument,
     "\n\tfragment ArticleCard on BoardArticle {\n\t\t_id\n\t\tarticleCategory\n\t\tarticleStatus\n\t\tarticleTitle\n\t\tarticleContent\n\t\tarticleImage\n\t\tarticleLikes\n\t\tarticleViews\n\t\tarticleComments\n\t\tcreatedAt\n\t\tmemberData {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t}\n\t}\n": typeof types.ArticleCardFragmentDoc,
     "\n\tquery ArticlesList($input: BoardArticlesInquiry!) {\n\t\tgetBoardArticles(input: $input) {\n\t\t\tlist {\n\t\t\t\t...ArticleCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": typeof types.ArticlesListDocument,
@@ -128,6 +129,7 @@ const documents: Documents = {
     "\n\tfragment CommentItem on Comment {\n\t\t_id\n\t\tcommentContent\n\t\tcommentGroup\n\t\tcommentRefId\n\t\tmemberId\n\t\tcreatedAt\n\t\tmemberData {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t}\n\t}\n": types.CommentItemFragmentDoc,
     "\n\tquery Comments($input: CommentsInquiry!) {\n\t\tgetComments(input: $input) {\n\t\t\tlist {\n\t\t\t\t...CommentItem\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": types.CommentsDocument,
     "\n\tmutation CreateComment($input: CommentInput!) {\n\t\tcreateComment(input: $input) {\n\t\t\t...CommentItem\n\t\t}\n\t}\n": types.CreateCommentDocument,
+    "\n\tmutation RemoveCommentByAdmin($commentId: String!) {\n\t\tremoveCommentByAdmin(commentId: $commentId) {\n\t\t\t_id\n\t\t}\n\t}\n": types.RemoveCommentByAdminDocument,
     "\n\tmutation DeleteComment($input: CommentUpdate!) {\n\t\tupdateComment(input: $input) {\n\t\t\t_id\n\t\t\tcommentStatus\n\t\t}\n\t}\n": types.DeleteCommentDocument,
     "\n\tfragment ArticleCard on BoardArticle {\n\t\t_id\n\t\tarticleCategory\n\t\tarticleStatus\n\t\tarticleTitle\n\t\tarticleContent\n\t\tarticleImage\n\t\tarticleLikes\n\t\tarticleViews\n\t\tarticleComments\n\t\tcreatedAt\n\t\tmemberData {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t}\n\t}\n": types.ArticleCardFragmentDoc,
     "\n\tquery ArticlesList($input: BoardArticlesInquiry!) {\n\t\tgetBoardArticles(input: $input) {\n\t\t\tlist {\n\t\t\t\t...ArticleCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": types.ArticlesListDocument,
@@ -346,6 +348,10 @@ export function graphql(source: "\n\tquery Comments($input: CommentsInquiry!) {\
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n\tmutation CreateComment($input: CommentInput!) {\n\t\tcreateComment(input: $input) {\n\t\t\t...CommentItem\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation CreateComment($input: CommentInput!) {\n\t\tcreateComment(input: $input) {\n\t\t\t...CommentItem\n\t\t}\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tmutation RemoveCommentByAdmin($commentId: String!) {\n\t\tremoveCommentByAdmin(commentId: $commentId) {\n\t\t\t_id\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation RemoveCommentByAdmin($commentId: String!) {\n\t\tremoveCommentByAdmin(commentId: $commentId) {\n\t\t\t_id\n\t\t}\n\t}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -9,6 +9,8 @@
 	"delete": "삭제",
 	"deleteLabel": "내 댓글 삭제",
 	"deleted": "댓글이 삭제되었습니다.",
+	"removeLabel": "@{{nick}}님의 댓글 삭제",
+	"removed": "댓글이 삭제되었습니다.",
 	"showMore_one": "{{count}}개 더 보기",
 	"showMore_other": "{{count}}개 더 보기",
 	"guest": {
