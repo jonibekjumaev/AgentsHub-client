@@ -6,6 +6,7 @@ import { useTranslation } from 'next-i18next';
 import type { AgentCardFragment } from '@/gql/graphql';
 import { useFormat } from '@/shared/lib/format';
 import { mediaUrl } from '@/shared/lib/media';
+import { cardHoverSx } from '@/shared/ui/cardHover';
 import { CategoryChip } from '@/shared/ui/CategoryChip';
 import { PriceTag } from '@/shared/ui/PriceTag';
 import { visuallyHidden } from '@/shared/ui/visuallyHidden';
@@ -48,7 +49,7 @@ const Cover = ({ image }: { image: string | undefined }) => {
  * The title link is stretched over the whole card, so the card is one tab stop and one click target.
  */
 export const AgentCard = ({ agent, headingLevel = 'h2' }: AgentCardProps) => {
-	const { t } = useTranslation('agents');
+	const { t } = useTranslation(['agents', 'common']);
 	const format = useFormat();
 	const nick = agent.memberData?.memberNick;
 
@@ -60,8 +61,7 @@ export const AgentCard = ({ agent, headingLevel = 'h2' }: AgentCardProps) => {
 				display: 'flex',
 				flexDirection: 'column',
 				height: '100%',
-				transition: 'border-color 120ms',
-				'&:hover': { borderColor: 'inputBorder' },
+				...cardHoverSx,
 				'&:focus-within': { outline: 2, outlineColor: 'primary.main', outlineStyle: 'solid', outlineOffset: 2 },
 			}}
 		>
@@ -87,7 +87,7 @@ export const AgentCard = ({ agent, headingLevel = 'h2' }: AgentCardProps) => {
 						{agent.productTitle}
 					</Link>
 				</Typography>
-				{nick && <Typography variant="meta">{t('agents:card.by', { nick })}</Typography>}
+				<Typography variant="meta">{nick ? t('agents:card.by', { nick }) : t('common:deletedMember')}</Typography>
 				<Divider sx={{ mt: 'auto' }} />
 				<Stack direction="row" alignItems="center" justifyContent="space-between" flexWrap="wrap" gap={2}>
 					<PriceTag pricing={agent.productPricing} price={agent.productPrice} />

@@ -8,9 +8,9 @@
 		"add": "Upload a picture",
 		"change": "Change picture",
 		"remove": "Remove",
-		"hint": "PNG or JPEG, up to 15 MB.",
+		"hint": "PNG or JPEG, up to 10 MB.",
 		"type": "Use a PNG or JPEG image.",
-		"size": "The picture is larger than 15 MB."
+		"size": "The picture is larger than 10 MB."
 	},
 	"profile": {
 		"title": "Profile",

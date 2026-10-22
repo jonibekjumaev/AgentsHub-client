@@ -111,7 +111,7 @@ export const CommunityChat = () => {
 					</Stack>
 					{errorKey && (
 						<FormHelperText id={`${inputId}-error`} error role="alert" sx={{ m: 0 }}>
-							{t(errorKey)}
+							{t(errorKey, { max: CHAT_MESSAGE_MAX })}
 						</FormHelperText>
 					)}
 				</Box>

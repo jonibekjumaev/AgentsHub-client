@@ -166,6 +166,7 @@ Decided 2026-10-20 during the browser walk-through: the Nestar-era limits are to
 | Chat message | 1–500 | 1–3000 | socket gateway check + its error message, §3.11 | `CHAT_MESSAGE_MAX` in `features/community/lib/chat.ts`; `community:chat.errors.length` text (en/ko/uz) |
 | `articleContent` | 3–250 | 3–3000 | board article DTO/model, tests, §3.10 | `ARTICLE_CONTENT_MAX` in `features/community/lib/articles.ts`; `community:form.contentHint` and `community:form.errors.contentLength` texts (en/ko/uz) |
 
-- [ ] Backend changed and deployed locally
-- [ ] Client constants + locale texts updated (texts with fixed numbers → use `{{max}}` so this never needs a text change again)
-- [ ] `articleTitle` stays 3–50 (not changed)
+- [x] Backend changed (Step 13a, D-35; branch `feat/step-13a`) — run it locally to check
+- [x] Client constants + locale texts updated: `COMMENT_MAX` 1000, `CHAT_MESSAGE_MAX` 3000, `ARTICLE_CONTENT_MAX` 3000. The chat error and the article content hint now use `{{max}}` / `{{min}}`; `community:form.errors.contentLength` keeps its number (zod messages are keys without values)
+- [x] `articleTitle` stays 3–50 (not changed)
+- [ ] After `yarn codegen` against the new API: show `productRankPosition` / `memberRankPosition` ("#n") instead of the list position (D-37); `meLiked` now comes back from the like mutations, so the LikeButton cache write can go

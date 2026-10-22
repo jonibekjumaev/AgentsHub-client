@@ -165,6 +165,22 @@ const CreatorBox = ({ agentId, creator }: { agentId: string; creator: Creator })
 	);
 };
 
+/** The author was deleted (D-38): the API sends memberData null. No profile link, follow or contacts. */
+const DeletedAuthorBox = () => {
+	const { t } = useTranslation(['agents', 'common']);
+	return (
+		<Box sx={cardSx}>
+			<Typography variant="overline" component="h2">
+				{t('agents:detail.creator.title')}
+			</Typography>
+			<Stack direction="row" spacing={3} alignItems="center">
+				<Avatar memberId="deleted" name={t('common:deletedMember')} size={48} />
+				<Typography sx={{ color: 'muted', fontWeight: 800 }}>{t('common:deletedMember')}</Typography>
+			</Stack>
+		</Box>
+	);
+};
+
 /** Other ACTIVE agents of the same creator; prefetched by SSR, hidden when there are none. */
 const MoreFromCreator = ({ agentId, creator }: { agentId: string; creator: Creator }) => {
 	const { t } = useTranslation(['agents', 'common']);
@@ -301,7 +317,7 @@ export const AgentDetail = ({ agentId, variant = 'public' }: { agentId: string; 
 						sx={{ gridColumn: { md: 2 }, gridRow: { md: '1 / -1' }, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 4 }}
 					>
 						<PriceBox agent={agent} owner={owner} />
-						{creator && !owner && <CreatorBox agentId={agent._id} creator={creator} />}
+						{!owner && (creator ? <CreatorBox agentId={agent._id} creator={creator} /> : <DeletedAuthorBox />)}
 					</Box>
 					<Box component="section" aria-labelledby="agent-about" sx={cardSx}>
 						<Typography id="agent-about" variant="h2" sx={{ fontSize: 20 }}>

@@ -23,7 +23,7 @@ describe('checkImageFiles', () => {
 		expect(checkImageFiles([file(name, type)], 10).rejected).toEqual([{ name, reason: 'type' }]);
 	});
 
-	it('takes exactly 15 000 000 bytes, the API limit, and refuses one byte more', () => {
+	it('takes exactly 10 000 000 bytes, the API limit (D-41), and refuses one byte more', () => {
 		expect(checkImageFiles([file('ok.png', 'image/png', IMAGE_MAX_BYTES)], 10).accepted).toHaveLength(1);
 		expect(checkImageFiles([file('big.png', 'image/png', IMAGE_MAX_BYTES + 1)], 10).rejected).toEqual([{ name: 'big.png', reason: 'size' }]);
 	});

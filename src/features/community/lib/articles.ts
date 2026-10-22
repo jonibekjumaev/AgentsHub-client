@@ -11,11 +11,11 @@ export const articleEditHref = (articleId: string) => `${MY_ARTICLES_PATH}/${art
 
 export const ARTICLES_PAGE_SIZE = 10;
 export const ARTICLE_SEARCH_MAX = 100;
-/** §3.10 */
+/** §3.10; content 3–3000 since D-35 */
 export const ARTICLE_TITLE_MIN = 3;
 export const ARTICLE_TITLE_MAX = 50;
 export const ARTICLE_CONTENT_MIN = 3;
-export const ARTICLE_CONTENT_MAX = 250;
+export const ARTICLE_CONTENT_MAX = 3000;
 
 export const ARTICLE_CATEGORIES: readonly BoardArticleCategory[] = [
 	BoardArticleCategory.Free,

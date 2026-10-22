@@ -1,7 +1,7 @@
 import { CommentGroup, Direction } from '@/gql/enums';
 
-/** commentContent is 1–100 characters (§3.8). */
-export const COMMENT_MAX = 100;
+/** commentContent is 1–1000 characters (§3.8, D-35). */
+export const COMMENT_MAX = 1000;
 /** Comments shown at first, and added by every "Show more". */
 export const COMMENTS_PAGE_SIZE = 20;
 

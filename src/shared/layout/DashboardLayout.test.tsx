@@ -33,7 +33,7 @@ describe('DashboardLayout', () => {
 	it.each([
 		['CREATOR', ['Overview', 'My agents', 'Articles', 'Favorites', 'Followers', 'Profile settings']],
 		['USER', ['My briefs', 'Favorites', 'Recently visited', 'Articles', 'Following', 'Profile settings']],
-		['ADMIN', ['Members', 'Agents', 'Briefs', 'Articles']],
+		['ADMIN', ['Members', 'Agents', 'Briefs', 'Articles', 'Profile settings']],
 	] as const)('shows the %s sidebar items', (memberType, labels) => {
 		const { links } = renderAt('/dashboard', memberType);
 		expect(links.map((link) => link.textContent)).toEqual(labels);

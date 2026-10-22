@@ -19,6 +19,7 @@ import { CreateArticleMutation, UpdateArticleMutation, UploadArticleImageMutatio
 import {
 	ARTICLE_CATEGORIES,
 	ARTICLE_CONTENT_MAX,
+	ARTICLE_CONTENT_MIN,
 	ARTICLE_TITLE_MAX,
 	MY_ARTICLES_PATH,
 	articleFormSchema,
@@ -137,7 +138,7 @@ export const ArticleForm = ({ mode, articleId, initialValues }: ArticleFormProps
 				)}
 			/>
 			<RHFTextField control={control} name="articleTitle" label={t('community:form.title')} maxLength={ARTICLE_TITLE_MAX} required />
-			<RHFTextField control={control} name="articleContent" label={t('community:form.content')} hint={t('community:form.contentHint')} maxLength={ARTICLE_CONTENT_MAX} multiline minRows={6} required />
+			<RHFTextField control={control} name="articleContent" label={t('community:form.content')} hint={t('community:form.contentHint', { min: ARTICLE_CONTENT_MIN, max: ARTICLE_CONTENT_MAX })} maxLength={ARTICLE_CONTENT_MAX} multiline minRows={6} required />
 
 			<Stack spacing={2}>
 				<Typography sx={{ fontSize: 14, fontWeight: 700 }}>

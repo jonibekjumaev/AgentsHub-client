@@ -25,7 +25,7 @@ describe('commentsVariables', () => {
 });
 
 describe('isValidComment', () => {
-	it('accepts 1–100 characters after trimming', () => {
+	it('accepts 1–1000 characters after trimming (D-35)', () => {
 		expect(isValidComment('  ok ')).toBe(true);
 		expect(isValidComment('a'.repeat(COMMENT_MAX))).toBe(true);
 	});

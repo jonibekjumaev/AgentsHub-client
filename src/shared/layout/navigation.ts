@@ -55,6 +55,7 @@ export const DASHBOARD_NAV: Record<MemberType, DashboardSection> = {
 			{ href: '/admin/agents', labelKey: 'common:dashboardNav.agents' },
 			{ href: '/admin/briefs', labelKey: 'common:dashboardNav.briefs' },
 			{ href: '/admin/articles', labelKey: 'common:dashboardNav.articles' },
+			{ href: '/dashboard/settings', labelKey: 'common:dashboardNav.settings' },
 		],
 	},
 };
@@ -66,6 +67,8 @@ export const dashboardHref = (memberType: MemberType): string =>
 export const SETTINGS_HREF = '/dashboard/settings';
 
 export const profileHref = (me: Pick<Me, '_id'>): string => `/members/${me._id}`;
+/** Admins have no public profile: /members/[id] answers 404 for them (prefetchMemberProfile), so no "My profile" link. */
+export const hasPublicProfile = (memberType: MemberType): boolean => memberType !== 'ADMIN';
 export const memberDisplayName = (me: Pick<Me, 'memberFullName' | 'memberNick'>): string =>
 	me.memberFullName || me.memberNick;
 

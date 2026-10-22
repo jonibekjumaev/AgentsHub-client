@@ -63,7 +63,7 @@
 		"loginText": "keyin chatda yozasiz.",
 		"errors": {
 			"guest": "Xabar yuborish uchun tizimga kiring.",
-			"length": "1 dan 500 gacha belgi yozing.",
+			"length": "1 dan {{max}} gacha belgi yozing.",
 			"rate": "Sekinroq: soniyasiga bitta xabar.",
 			"unknown": "Xabar yuborilmadi."
 		}
@@ -92,9 +92,10 @@
 		"leave": "Saqlanmagan oʻzgarishlar bor. Sahifadan chiqasizmi?",
 		"category": "Kategoriya",
 		"categoryPlaceholder": "Kategoriyani tanlang",
+		"categoryLocked": "Joylangandan keyin kategoriyani oʻzgartirib boʻlmaydi.",
 		"title": "Sarlavha",
 		"content": "Matn",
-		"contentHint": "3 dan 250 gacha belgi. Oddiy matn.",
+		"contentHint": "{{min}} dan {{max}} gacha belgi. Oddiy matn.",
 		"optional": "(ixtiyoriy)",
 		"submitCreate": "Joylash",
 		"submitEdit": "Oʻzgarishlarni saqlash",
@@ -106,14 +107,14 @@
 			"change": "Rasmni almashtirish",
 			"remove": "Oʻchirish",
 			"type": "PNG yoki JPEG rasm tanlang.",
-			"size": "Rasm 15 MB dan katta."
+			"size": "Rasm 10 MB dan katta."
 		},
 		"errors": {
 			"categoryRequired": "Kategoriyani tanlang.",
 			"titleRequired": "Sarlavha kiriting.",
 			"titleLength": "Sarlavha 3 dan 50 gacha belgi boʻlishi kerak.",
 			"contentRequired": "Biror narsa yozing.",
-			"contentLength": "Matn 3 dan 250 gacha belgi boʻlishi kerak.",
+			"contentLength": "Matn 3 dan 3000 gacha belgi boʻlishi kerak.",
 			"gone": "Bu maqola oʻchirilgan yoki endi sizniki emas.",
 			"saveFailed": "Maqola saqlanmadi",
 			"loadFailed": "Maqolani yuklab boʻlmadi"

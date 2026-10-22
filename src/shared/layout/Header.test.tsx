@@ -77,6 +77,16 @@ describe('Header', () => {
 		renderWithProviders(<Header />, { auth: { status: 'member', me: { ...creator, memberType: 'ADMIN' } } });
 		expect(getDesktop('link', 'Dashboard')).toHaveAttribute('href', '/admin/members');
 	});
+
+	it('shows no "My profile" to an admin: admins have no public profile (404)', async () => {
+		const user = userEvent.setup();
+		renderWithProviders(<Header />, { auth: { status: 'member', me: { ...creator, memberType: 'ADMIN' } } });
+
+		await user.click(getDesktop('button', 'Account menu for @nova_labs'));
+		const menu = await screen.findByRole('menu');
+		expect(within(menu).queryByRole('menuitem', { name: 'My profile' })).not.toBeInTheDocument();
+		expect(within(menu).getByRole('menuitem', { name: 'Log out' })).toBeInTheDocument();
+	});
 });
 
 describe('Header mobile drawer', () => {

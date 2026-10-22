@@ -45,6 +45,18 @@ export const CreateCommentMutation = graphql(`
 	}
 `);
 
+/**
+ * ADMIN only: hard-deletes any member's comment (§3.12). An ACTIVE comment's target counter drops by 1 (B19).
+ * A missing comment → NOT_FOUND REMOVE_FAILED.
+ */
+export const RemoveCommentByAdminMutation = graphql(`
+	mutation RemoveCommentByAdmin($commentId: String!) {
+		removeCommentByAdmin(commentId: $commentId) {
+			_id
+		}
+	}
+`);
+
 /** Deleting is an update to DELETE, own comments only; the target's counter drops by 1 (B19). */
 export const DeleteCommentMutation = graphql(`
 	mutation DeleteComment($input: CommentUpdate!) {

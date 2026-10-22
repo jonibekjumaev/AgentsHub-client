@@ -63,7 +63,7 @@
 		"loginText": "to chat.",
 		"errors": {
 			"guest": "Log in to send messages.",
-			"length": "Write 1 to 500 characters.",
+			"length": "Write 1 to {{max}} characters.",
 			"rate": "Slow down: one message per second.",
 			"unknown": "The message wasn't sent."
 		}
@@ -95,7 +95,7 @@
 		"categoryLocked": "The category can't be changed after posting.",
 		"title": "Title",
 		"content": "Text",
-		"contentHint": "3 to 250 characters. Plain text.",
+		"contentHint": "{{min}} to {{max}} characters. Plain text.",
 		"optional": "(optional)",
 		"submitCreate": "Publish",
 		"submitEdit": "Save changes",
@@ -107,14 +107,14 @@
 			"change": "Change image",
 			"remove": "Remove",
 			"type": "Use a PNG or JPEG image.",
-			"size": "The image is larger than 15 MB."
+			"size": "The image is larger than 10 MB."
 		},
 		"errors": {
 			"categoryRequired": "Choose a category.",
 			"titleRequired": "Enter a title.",
 			"titleLength": "The title must be 3 to 50 characters.",
 			"contentRequired": "Write something.",
-			"contentLength": "The text must be 3 to 250 characters.",
+			"contentLength": "The text must be 3 to 3000 characters.",
 			"gone": "This article was deleted or is no longer yours.",
 			"saveFailed": "The article wasn't saved",
 			"loadFailed": "We couldn't load this article"

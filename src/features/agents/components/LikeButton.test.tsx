@@ -88,7 +88,8 @@ describe('LikeButton', () => {
 	});
 
 	it('stays neutral and inactive until meLiked is known, then shows it (no flash)', async () => {
-		renderAs({ auth: { status: 'member', me: member } }, [viewerMock(true, 50)]);
+		// 300 ms, not 50: under a loaded full run, 50 ms raced findByRole and the "pending" state was already over.
+		renderAs({ auth: { status: 'member', me: member } }, [viewerMock(true, 300)]);
 
 		const button = await screen.findByRole('button', { name: /^Like/ });
 		expect(button).toHaveAttribute('aria-pressed', 'false');

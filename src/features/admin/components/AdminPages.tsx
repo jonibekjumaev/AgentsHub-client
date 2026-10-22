@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import NextLink from 'next/link';
 import { useMutation, useQuery } from '@apollo/client';
-import { Link } from '@mui/material';
+import { Link, Typography } from '@mui/material';
 import { useTranslation } from 'next-i18next';
 import type { AbaiSearch, AlbiSearch, AlpiSearch, MiSearch } from '@/gql/graphql';
 import { useFormat } from '@/shared/lib/format';
@@ -37,6 +37,13 @@ const member = (id: string, nick: string) => (
 	</Link>
 );
 
+/** A deleted member has no profile (getMember → 404, D-38): plain text, never a link. */
+const deletedMember = (label: string, nick?: string) => (
+	<Typography component="span" sx={{ color: 'muted', fontWeight: 600 }}>
+		{nick ? `@${nick} · ${label}` : label}
+	</Typography>
+);
+
 /** /admin/members: status filter (ACTIVE / BLOCK / DELETE), search, block / unblock / delete. */
 export const AdminMembers = () => {
 	const { t } = useTranslation(['admin', 'common']);
@@ -61,7 +68,7 @@ export const AdminMembers = () => {
 				title: `@${item.memberNick}`,
 				actions: memberAdminActions(item.memberStatus, item.memberType),
 				cells: [
-					member(item._id, item.memberNick),
+					item.memberStatus === 'DELETE' ? deletedMember(t('common:deletedMember'), item.memberNick) : member(item._id, item.memberNick),
 					t(`common:enums.MemberType.${item.memberType}`),
 					t(`admin:memberStatus.${item.memberStatus}`),
 					[item.memberPhone, item.memberEmail].filter(Boolean).join(' · '),
@@ -113,7 +120,7 @@ export const AdminAgents = () => {
 					) : (
 						item.productTitle
 					),
-					item.memberData ? member(item.memberData._id, item.memberData.memberNick) : '—',
+					item.memberData ? member(item.memberData._id, item.memberData.memberNick) : deletedMember(t('common:deletedMember')),
 					<StatusChip key="status" kind="product" status={item.productStatus} />,
 					t(`common:enums.AgentCategory.${item.productCategory}`),
 					`${format.compact(item.productLikes)} · ${format.compact(item.productViews)}`,
@@ -165,7 +172,7 @@ export const AdminBriefs = () => {
 							{item.briefTitle}
 						</Link>
 					),
-					item.memberData ? member(item.memberData._id, item.memberData.memberNick) : '—',
+					item.memberData ? member(item.memberData._id, item.memberData.memberNick) : deletedMember(t('common:deletedMember')),
 					<StatusChip key="status" kind="brief" status={item.briefStatus} />,
 					t(`common:enums.AgentCategory.${item.briefCategory}`),
 					item.briefDeadline ? format.date(item.briefDeadline) : '—',
@@ -225,7 +232,7 @@ export const AdminArticles = () => {
 					) : (
 						item.articleTitle
 					),
-					item.memberData ? member(item.memberData._id, item.memberData.memberNick) : '—',
+					item.memberData ? member(item.memberData._id, item.memberData.memberNick) : deletedMember(t('common:deletedMember')),
 					t(`admin:articleStatus.${item.articleStatus}`),
 					t(`community:categories.${item.articleCategory}`),
 					format.date(item.createdAt),

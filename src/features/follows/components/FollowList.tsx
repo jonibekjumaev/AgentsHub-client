@@ -64,6 +64,7 @@ export const FollowList = ({ memberId, kind }: { memberId: string; kind: 'follow
 	const followings = useQuery(FollowingsQuery, { variables: followingsVariables(memberId, page), skip: kind !== 'following' });
 	const query = kind === 'followers' ? followers : followings;
 
+	// A deleted member's follows are removed by the API (D-39); a null one that slips through is skipped (D-38).
 	const members: FollowMemberFragment[] =
 		kind === 'followers'
 			? (followers.data?.getMemberFollowers.list ?? []).flatMap((item) => (item.followerData ? [item.followerData] : []))

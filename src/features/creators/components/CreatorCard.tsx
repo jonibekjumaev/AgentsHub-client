@@ -5,6 +5,7 @@ import { FollowButton } from '@/features/follows';
 import type { CreatorCardFragment } from '@/gql/graphql';
 import { useFormat } from '@/shared/lib/format';
 import { Avatar } from '@/shared/ui/Avatar';
+import { cardHoverSx } from '@/shared/ui/cardHover';
 import { radiusPx } from '@/theme/tokens';
 import { memberHref } from '../lib/creatorsQuery';
 
@@ -35,7 +36,10 @@ export const RankBadge = ({ rank }: { rank: number | null | undefined }) => {
 	);
 };
 
-/** Creators.html card: avatar, name + position (top-ranked sort only), @nick, 2-line description, stats, Follow. */
+/**
+ * Creators.html card: avatar, name + position (top-ranked sort only), @nick, 2-line description, stats, Follow.
+ * The name link is stretched over the whole card (one click target, like AgentCard); Follow sits above it.
+ */
 export const CreatorCard = ({ creator, position }: { creator: CreatorCardFragment; position?: number }) => {
 	const { t } = useTranslation('creators');
 	const format = useFormat();
@@ -45,6 +49,7 @@ export const CreatorCard = ({ creator, position }: { creator: CreatorCardFragmen
 		<Box
 			component="article"
 			sx={{
+				position: 'relative',
 				height: '100%',
 				display: 'flex',
 				flexDirection: 'column',
@@ -54,6 +59,8 @@ export const CreatorCard = ({ creator, position }: { creator: CreatorCardFragmen
 				border: 1,
 				borderColor: 'border',
 				borderRadius: radiusPx.lg,
+				...cardHoverSx,
+				'&:focus-within': { outline: 2, outlineColor: 'primary.main', outlineStyle: 'solid', outlineOffset: 2 },
 			}}
 		>
 			<Stack direction="row" spacing={3} alignItems="center" sx={{ minWidth: 0 }}>
@@ -61,7 +68,16 @@ export const CreatorCard = ({ creator, position }: { creator: CreatorCardFragmen
 				<Box sx={{ minWidth: 0 }}>
 					<Stack direction="row" spacing={1.5} alignItems="center" useFlexGap flexWrap="wrap">
 						<Typography component="h2" sx={{ fontSize: 16, fontWeight: 800, overflowWrap: 'anywhere' }}>
-							<Link component={NextLink} href={memberHref(creator._id)} sx={{ color: 'ink' }}>
+							<Link
+								component={NextLink}
+								href={memberHref(creator._id)}
+								underline="none"
+								sx={{
+									color: 'ink',
+									'&::after': { content: '""', position: 'absolute', inset: 0, borderRadius: radiusPx.lg },
+									'&:focus-visible': { outline: 0 },
+								}}
+							>
 								{name}
 							</Link>
 						</Typography>
@@ -97,7 +113,10 @@ export const CreatorCard = ({ creator, position }: { creator: CreatorCardFragmen
 						<strong>{format.number(creator.memberLikes)}</strong> {t('creators:stats.likes', { count: creator.memberLikes })}
 					</span>
 				</Stack>
-				<FollowButton memberId={creator._id} nick={creator.memberNick} size="small" />
+				{/* above the stretched link, so Follow is its own click target */}
+				<Box sx={{ position: 'relative', zIndex: 1 }}>
+					<FollowButton memberId={creator._id} nick={creator.memberNick} size="small" />
+				</Box>
 			</Stack>
 		</Box>
 	);
