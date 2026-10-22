@@ -16,7 +16,7 @@ export const getServerSideProps: GetServerSideProps<AgentPageProps> = async ({ p
 	return addApolloState(client, {
 		props: {
 			agentId: result.agentId,
-			...(await serverSideTranslations(locale ?? 'en', ['common', 'agents', 'errors'])),
+			...(await serverSideTranslations(locale ?? 'en', ['common', 'agents', 'comments', 'follows', 'errors'])),
 		},
 	});
 };

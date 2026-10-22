@@ -15,6 +15,11 @@ type ConfirmDialogProps = {
 	loading?: boolean;
 	/** Danger styling for destructive actions (default). */
 	destructive?: boolean;
+	/**
+	 * After the close transition. Use it to move focus when the trigger no longer exists (e.g. the deleted row):
+	 * MUI returns focus to the trigger as the dialog starts closing, so focusing earlier would be undone.
+	 */
+	onExited?: () => void;
 };
 
 /**
@@ -30,6 +35,7 @@ export const ConfirmDialog = ({
 	onCancel,
 	loading = false,
 	destructive = true,
+	onExited,
 }: ConfirmDialogProps) => {
 	const { t } = useTranslation('common');
 	const titleId = useId();
@@ -44,6 +50,7 @@ export const ConfirmDialog = ({
 			maxWidth="xs"
 			fullWidth
 			PaperProps={{ sx: { borderRadius: radiusPx.xl } }}
+			TransitionProps={{ onExited }}
 		>
 			<DialogTitle id={titleId} variant="h3" component="h2" sx={{ pt: 6, px: 6 }}>
 				{title}

@@ -1,0 +1,123 @@
+{
+	"categories": {
+		"FREE": "Free talk",
+		"RECOMMEND": "Recommendations",
+		"NEWS": "News",
+		"HUMOR": "Humor"
+	},
+	"likes_one": "{{formatted}} like",
+	"likes_other": "{{formatted}} likes",
+	"comments_one": "{{formatted}} comment",
+	"comments_other": "{{formatted}} comments",
+	"views_one": "{{formatted}} view",
+	"views_other": "{{formatted}} views",
+	"list": {
+		"title": "Community",
+		"subtitle": "Tips, news and questions from builders and buyers of AI agents.",
+		"write": "Write an article",
+		"searchLabel": "Search articles",
+		"searchPlaceholder": "Search titles",
+		"categoriesLabel": "Categories",
+		"all": "All",
+		"loading": "Loading articles…",
+		"errorTitle": "We couldn't load the articles",
+		"resultsLabel": "Articles"
+	},
+	"empty": {
+		"noneTitle": "No articles yet",
+		"noneText": "Start the conversation with the first post.",
+		"noResultsTitle": "No articles match",
+		"clear": "Clear filters",
+		"pageTitle": "This page is empty",
+		"firstPage": "Go to page 1"
+	},
+	"seo": {
+		"title": "Community",
+		"description": "Articles and a live chat for people who build and buy AI agents.",
+		"categoryTitle": "{{category}} — Community",
+		"paged": "{{title}} — page {{page}}"
+	},
+	"detail": {
+		"breadcrumb": "Breadcrumb",
+		"errorTitle": "We couldn't load this article",
+		"like": "Like",
+		"edit": "Edit",
+		"commentsTitle": "Comments",
+		"commentLabel": "Add a comment",
+		"commentSubmit": "Post comment",
+		"commentPlaceholder": "Share your thoughts. Comments are public."
+	},
+	"chat": {
+		"title": "Live chat",
+		"online_one": "{{count}} online",
+		"online_other": "{{count}} online",
+		"connecting": "Connecting…",
+		"offline": "Offline",
+		"logLabel": "Chat messages",
+		"empty": "No messages yet. Say hello.",
+		"guest": "guest",
+		"placeholder": "Write a message",
+		"inputLabel": "Message",
+		"send": "Send message",
+		"login": "Log in",
+		"loginText": "to chat.",
+		"errors": {
+			"guest": "Log in to send messages.",
+			"length": "Write 1 to 500 characters.",
+			"rate": "Slow down: one message per second.",
+			"unknown": "The message wasn't sent."
+		}
+	},
+	"mine": {
+		"title": "My articles",
+		"subtitle": "Your posts in the community.",
+		"emptyTitle": "No articles yet",
+		"emptyText": "Share a tip, a question or a story with the community.",
+		"edit": "Edit",
+		"editLabel": "Edit {{title}}",
+		"delete": "Delete",
+		"deleteLabel": "Delete {{title}}",
+		"deleted": "“{{title}}” was deleted.",
+		"changed": "This article was changed or removed in the meantime.",
+		"confirm": {
+			"title": "Delete “{{title}}”?",
+			"text": "It disappears from the community with its comments. This can't be undone.",
+			"confirm": "Delete article"
+		}
+	},
+	"form": {
+		"newTitle": "Write an article",
+		"editTitle": "Edit article",
+		"loading": "Loading the article…",
+		"leave": "You have unsaved changes. Leave this page?",
+		"category": "Category",
+		"categoryPlaceholder": "Choose a category",
+		"categoryLocked": "The category can't be changed after posting.",
+		"title": "Title",
+		"content": "Text",
+		"contentHint": "3 to 250 characters. Plain text.",
+		"optional": "(optional)",
+		"submitCreate": "Publish",
+		"submitEdit": "Save changes",
+		"created": "Your article is published.",
+		"saved": "Your article is saved.",
+		"image": {
+			"label": "Image",
+			"add": "Add an image",
+			"change": "Change image",
+			"remove": "Remove",
+			"type": "Use a PNG or JPEG image.",
+			"size": "The image is larger than 15 MB."
+		},
+		"errors": {
+			"categoryRequired": "Choose a category.",
+			"titleRequired": "Enter a title.",
+			"titleLength": "The title must be 3 to 50 characters.",
+			"contentRequired": "Write something.",
+			"contentLength": "The text must be 3 to 250 characters.",
+			"gone": "This article was deleted or is no longer yours.",
+			"saveFailed": "The article wasn't saved",
+			"loadFailed": "We couldn't load this article"
+		}
+	}
+}

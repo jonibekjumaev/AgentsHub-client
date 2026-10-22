@@ -2,5 +2,105 @@
 	"placeholder": {
 		"title": "Boshqaruv paneli",
 		"text": "Boshqaruv paneli tayyorlanmoqda. Rolingizga mos boʻlimlarni menyudan koʻring."
+	},
+	"overview": {
+		"title": "Umumiy koʻrinish",
+		"subtitle": "Profilingiz va agentlaringiz holati.",
+		"loading": "Raqamlar yuklanmoqda…",
+		"errorTitle": "Raqamlarni yuklab boʻlmadi",
+		"recent": "Yaqinda yangilangan agentlar",
+		"manage": "Barcha agentlarni boshqarish",
+		"stats": {
+			"label": "Sizning raqamlaringiz",
+			"agents": "Agentlar",
+			"agentsHint": "Faol va toʻxtatilgan",
+			"profileViews": "Profil koʻrishlari",
+			"profileLikes": "Profil likelari",
+			"followers": "Obunachilar"
+		}
+	},
+	"myAgents": {
+		"title": "Mening agentlarim",
+		"subtitle": "Agentni oʻchirmasdan marketpleysdan yashirish uchun uni toʻxtatib qoʻying.",
+		"new": "Yangi agent",
+		"loading": "Agentlaringiz yuklanmoqda…",
+		"errorTitle": "Agentlaringizni yuklab boʻlmadi",
+		"tabs": {
+			"label": "Agent holati",
+			"all": "Hammasi",
+			"active": "Faol",
+			"paused": "Toʻxtatilgan"
+		},
+		"table": {
+			"caption": "Sizning agentlaringiz",
+			"agent": "Agent",
+			"status": "Holat",
+			"price": "Narx",
+			"views": "Koʻrishlar",
+			"likes": "Likelar",
+			"questions": "Savollar",
+			"updated": "Yangilangan",
+			"actions": "Amallar",
+			"hidden": "marketpleysdan yashirilgan"
+		},
+		"actions": {
+			"edit": "Tahrirlash",
+			"editLabel": "{{title}} ni tahrirlash",
+			"preview": "Koʻrish",
+			"previewLabel": "{{title}} ni koʻrish",
+			"pause": "Toʻxtatish",
+			"pauseLabel": "{{title}} ni toʻxtatish",
+			"resume": "Faollashtirish",
+			"resumeLabel": "{{title}} ni faollashtirish",
+			"delete": "Oʻchirish",
+			"deleteLabel": "{{title}} ni oʻchirish"
+		},
+		"confirm": {
+			"pause": {
+				"title": "“{{title}}” toʻxtatilsinmi?",
+				"text": "U marketpleys, profilingiz, reytinglar va boshqa aʼzolarning sevimlilari roʻyxatidan yoʻqoladi. Qayta faollashtirmaguningizcha like, koʻrish va izohlar toʻxtaydi.",
+				"confirm": "Agentni toʻxtatish"
+			},
+			"delete": {
+				"title": "“{{title}}” oʻchirilsinmi?",
+				"text": "Buni qaytarib boʻlmaydi: agent roʻyxatingizdan butunlay oʻchadi. Vaqtincha yashirish uchun uni toʻxtatib qoʻying.",
+				"confirm": "Agentni oʻchirish"
+			}
+		},
+		"done": {
+			"pause": "“{{title}}” toʻxtatildi.",
+			"resume": "“{{title}}” yana faol.",
+			"delete": "“{{title}}” oʻchirildi."
+		},
+		"errors": {
+			"changed": "Bu agent shu orada oʻzgartirilgan yoki oʻchirilgan. Roʻyxat yangilandi."
+		},
+		"empty": {
+			"title": "Birinchi agentingizni joylang",
+			"text": "Aniq nom, halol narx va bir nechta skrinshot bilan agent qoʻshing. Uni istalgan vaqt tahrirlash mumkin.",
+			"action": "Birinchi agentni joylash"
+		},
+		"emptyTab": {
+			"active": "Faol agentlar yoʻq",
+			"paused": "Toʻxtatilgan agentlar yoʻq",
+			"all": "Agentlar yoʻq",
+			"action": "Barcha agentlarni koʻrsatish"
+		},
+		"emptyPage": {
+			"title": "Bu sahifa boʻsh",
+			"action": "Birinchi sahifaga oʻtish"
+		},
+		"deleteNote": {
+			"strong": "Oʻchirish qaytarib boʻlmaydi.",
+			"text": "Oʻchirilgan agent roʻyxatingizdan yoʻqoladi va uni tiklab boʻlmaydi. Vaqtincha yashirish uchun uni toʻxtatib qoʻying."
+		}
+	},
+	"preview": {
+		"metaTitle": "Koʻrinishi: {{title}}",
+		"crumb": "Koʻrinishi",
+		"paused": "Bu agent toʻxtatilgan, uni faqat siz koʻrasiz. Marketpleysga qaytarish uchun uni faollashtiring.",
+		"live": "Bu agent marketpleysda faol.",
+		"publicLink": "Ochiq sahifani ochish",
+		"actionsLabel": "Agent amallari"
 	}
 }

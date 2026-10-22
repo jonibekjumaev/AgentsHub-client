@@ -1,0 +1,89 @@
+{
+	"search": "Qidirish",
+	"status": "Holat",
+	"allStatuses": "Barcha holatlar",
+	"loading": "Yuklanmoqda…",
+	"errorTitle": "Roʻyxatni yuklab boʻlmadi",
+	"empty": "Hech narsa yoʻq",
+	"total_one": "{{count}} ta",
+	"total_other": "{{count}} ta",
+	"changed": "Bu yozuv shu orada oʻzgartirilgan yoki oʻchirilgan. Roʻyxat qayta yuklandi.",
+	"memberStatus": {
+		"ACTIVE": "Faol",
+		"BLOCK": "Bloklangan",
+		"DELETE": "Oʻchirilgan"
+	},
+	"articleStatus": {
+		"ACTIVE": "Faol",
+		"DELETE": "Oʻchirilgan"
+	},
+	"columns": {
+		"member": "Aʼzo",
+		"type": "Turi",
+		"status": "Holat",
+		"contacts": "Kontaktlar",
+		"joined": "Qoʻshilgan",
+		"agent": "Agent",
+		"creator": "Kreator",
+		"category": "Kategoriya",
+		"stats": "Layk · koʻrish",
+		"updated": "Yangilangan",
+		"brief": "Brief",
+		"author": "Muallif",
+		"deadline": "Muddat",
+		"created": "Yaratilgan",
+		"article": "Maqola"
+	},
+	"actions": {
+		"label": "Amallar",
+		"aria": "{{action}}: {{title}}",
+		"pause": "Toʻxtatish",
+		"resume": "Faollashtirish",
+		"close": "Yopish",
+		"reopen": "Qayta ochish",
+		"delete": "Oʻchirish",
+		"remove": "Butunlay oʻchirish",
+		"block": "Bloklash",
+		"unblock": "Blokdan chiqarish"
+	},
+	"done": {
+		"pause": "“{{title}}” toʻxtatildi.",
+		"resume": "“{{title}}” yana faol.",
+		"close": "“{{title}}” yopildi.",
+		"reopen": "“{{title}}” qayta ochildi.",
+		"delete": "“{{title}}” oʻchirildi.",
+		"remove": "“{{title}}” butunlay oʻchirildi.",
+		"block": "{{title}} bloklandi.",
+		"unblock": "{{title}} blokdan chiqarildi."
+	},
+	"confirm": {
+		"delete": {
+			"title": "“{{title}}” oʻchirilsinmi?",
+			"text": "U saytdan yoʻqoladi. Keyin uni butunlay oʻchirish mumkin."
+		},
+		"remove": {
+			"title": "“{{title}}” butunlay oʻchirilsinmi?",
+			"text": "Buni qaytarib boʻlmaydi: yozuv bazadan oʻchadi."
+		},
+		"block": {
+			"title": "{{title}} bloklansinmi?",
+			"text": "Keyingi soʻrovida tizimdan chiqariladi va blokdan chiqarilmaguncha kira olmaydi."
+		}
+	},
+	"members": {
+		"title": "Aʼzolar",
+		"subtitle": "Aʼzolarni bloklash, blokdan chiqarish yoki oʻchirish. Tur va parolni bu yerda oʻzgartirib boʻlmaydi."
+	},
+	"agents": {
+		"title": "Agentlar",
+		"subtitle": "Barcha agentlar, toʻxtatilgan va oʻchirilganlari bilan."
+	},
+	"briefs": {
+		"title": "Brieflar",
+		"subtitle": "Barcha brieflar. Muddati oʻtgan brief qayta ochilsa, muddati olib tashlanadi."
+	},
+	"articles": {
+		"title": "Maqolalar",
+		"subtitle": "Hamjamiyat maqolalari. Avval oʻchiring, keyin butunlay oʻchiring."
+	}
+}

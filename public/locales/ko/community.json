@@ -1,0 +1,122 @@
+{
+	"categories": {
+		"FREE": "자유",
+		"RECOMMEND": "추천",
+		"NEWS": "뉴스",
+		"HUMOR": "유머"
+	},
+	"likes_one": "좋아요 {{formatted}}",
+	"likes_other": "좋아요 {{formatted}}",
+	"comments_one": "댓글 {{formatted}}",
+	"comments_other": "댓글 {{formatted}}",
+	"views_one": "조회 {{formatted}}",
+	"views_other": "조회 {{formatted}}",
+	"list": {
+		"title": "커뮤니티",
+		"subtitle": "AI 에이전트를 만들고 사는 사람들의 팁, 소식, 질문.",
+		"write": "글쓰기",
+		"searchLabel": "글 검색",
+		"searchPlaceholder": "제목 검색",
+		"categoriesLabel": "카테고리",
+		"all": "전체",
+		"loading": "글을 불러오는 중…",
+		"errorTitle": "글을 불러오지 못했습니다",
+		"resultsLabel": "글"
+	},
+	"empty": {
+		"noneTitle": "아직 글이 없습니다",
+		"noneText": "첫 글로 대화를 시작해 보세요.",
+		"noResultsTitle": "일치하는 글이 없습니다",
+		"clear": "필터 지우기",
+		"pageTitle": "이 페이지는 비어 있습니다",
+		"firstPage": "1페이지로 이동"
+	},
+	"seo": {
+		"title": "커뮤니티",
+		"description": "AI 에이전트를 만들고 사는 사람들을 위한 글과 실시간 채팅.",
+		"categoryTitle": "{{category}} — 커뮤니티",
+		"paged": "{{title}} — {{page}}페이지"
+	},
+	"detail": {
+		"breadcrumb": "현재 위치",
+		"errorTitle": "글을 불러오지 못했습니다",
+		"like": "좋아요",
+		"edit": "수정",
+		"commentsTitle": "댓글",
+		"commentLabel": "댓글 쓰기",
+		"commentSubmit": "댓글 등록",
+		"commentPlaceholder": "생각을 나눠 주세요. 댓글은 공개됩니다."
+	},
+	"chat": {
+		"title": "실시간 채팅",
+		"online_one": "{{count}}명 접속 중",
+		"online_other": "{{count}}명 접속 중",
+		"connecting": "연결 중…",
+		"offline": "연결 끊김",
+		"logLabel": "채팅 메시지",
+		"empty": "아직 메시지가 없습니다. 인사해 보세요.",
+		"guest": "손님",
+		"placeholder": "메시지 입력",
+		"inputLabel": "메시지",
+		"send": "메시지 보내기",
+		"login": "로그인",
+		"loginText": "하면 채팅할 수 있습니다.",
+		"errors": {
+			"guest": "메시지를 보내려면 로그인하세요.",
+			"length": "1~500자로 입력하세요.",
+			"rate": "천천히: 1초에 한 번만 보낼 수 있습니다.",
+			"unknown": "메시지를 보내지 못했습니다."
+		}
+	},
+	"mine": {
+		"title": "내 글",
+		"subtitle": "커뮤니티에 올린 내 글입니다.",
+		"emptyTitle": "아직 글이 없습니다",
+		"emptyText": "팁, 질문, 이야기를 커뮤니티와 나눠 보세요.",
+		"edit": "수정",
+		"editLabel": "{{title}} 수정",
+		"delete": "삭제",
+		"deleteLabel": "{{title}} 삭제",
+		"deleted": "“{{title}}” 글을 삭제했습니다.",
+		"changed": "그 사이에 글이 변경되었거나 삭제되었습니다.",
+		"confirm": {
+			"title": "“{{title}}” 글을 삭제할까요?",
+			"text": "댓글과 함께 커뮤니티에서 사라지며 되돌릴 수 없습니다.",
+			"confirm": "글 삭제"
+		}
+	},
+	"form": {
+		"newTitle": "글쓰기",
+		"editTitle": "글 수정",
+		"loading": "글을 불러오는 중…",
+		"leave": "저장하지 않은 변경 사항이 있습니다. 이 페이지를 떠날까요?",
+		"category": "카테고리",
+		"categoryPlaceholder": "카테고리 선택",
+		"title": "제목",
+		"content": "내용",
+		"contentHint": "3~250자, 일반 텍스트.",
+		"optional": "(선택)",
+		"submitCreate": "게시",
+		"submitEdit": "변경 사항 저장",
+		"created": "글을 게시했습니다.",
+		"saved": "글을 저장했습니다.",
+		"image": {
+			"label": "이미지",
+			"add": "이미지 추가",
+			"change": "이미지 변경",
+			"remove": "삭제",
+			"type": "PNG 또는 JPEG 이미지를 사용하세요.",
+			"size": "이미지가 15MB보다 큽니다."
+		},
+		"errors": {
+			"categoryRequired": "카테고리를 선택하세요.",
+			"titleRequired": "제목을 입력하세요.",
+			"titleLength": "제목은 3~50자여야 합니다.",
+			"contentRequired": "내용을 입력하세요.",
+			"contentLength": "내용은 3~250자여야 합니다.",
+			"gone": "이 글은 삭제되었거나 더 이상 내 글이 아닙니다.",
+			"saveFailed": "글을 저장하지 못했습니다",
+			"loadFailed": "글을 불러오지 못했습니다"
+		}
+	}
+}

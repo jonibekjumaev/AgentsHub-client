@@ -1,0 +1,35 @@
+{
+	"title": "Questions and answers",
+	"loading": "Loading comments…",
+	"errorTitle": "Couldn't load the comments",
+	"unavailable": "Comments aren't available for this page.",
+	"empty": "No questions yet. Be the first to ask.",
+	"unknownMember": "member",
+	"author": "Author",
+	"delete": "Delete",
+	"deleteLabel": "Delete your comment",
+	"deleted": "Your comment was deleted.",
+	"showMore_one": "Show {{count}} more",
+	"showMore_other": "Show {{count}} more",
+	"guest": {
+		"text": "Log in to ask a question or answer one.",
+		"login": "Log in to comment"
+	},
+	"form": {
+		"label": "Ask a question",
+		"placeholder": "Write your question.",
+		"public": "Comments are public.",
+		"submit": "Post question",
+		"posted": "Your question is posted.",
+		"invalid": "Write 1 to {{max}} characters."
+	},
+	"confirm": {
+		"title": "Delete this comment?",
+		"text": "It will be removed for everyone. This can't be undone.",
+		"confirm": "Delete comment"
+	},
+	"errors": {
+		"closed": "Comments are closed here now. Reload the page.",
+		"changed": "This comment was already deleted. The list is reloaded."
+	}
+}

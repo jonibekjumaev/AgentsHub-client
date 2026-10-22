@@ -1,9 +1,11 @@
 import NextLink from 'next/link';
 import Image from 'next/image';
 import { useQuery } from '@apollo/client';
-import { Box, Button, Chip, Link, Skeleton, Stack, Typography } from '@mui/material';
-import { ForumOutlined as ForumOutlinedIcon, OpenInNew as OpenInNewIcon } from '@mui/icons-material';
+import { Box, Button, Chip, Link, Skeleton, Stack, Typography, type SxProps, type Theme } from '@mui/material';
+import { OpenInNew as OpenInNewIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
+import { CommentsSection, productCommentTarget } from '@/features/comments';
+import { FollowButton } from '@/features/follows';
 import type { AgentDetailQuery as AgentDetailData } from '@/gql/graphql';
 import { useFormat } from '@/shared/lib/format';
 import { mediaUrl } from '@/shared/lib/media';
@@ -36,7 +38,22 @@ const cardSx = {
 	borderRadius: radiusPx.lg,
 } as const;
 
+const statBoxSx = {
+	flex: 1,
+	display: 'grid',
+	placeItems: 'center',
+	height: 42,
+	borderRadius: radiusPx.md,
+	bgcolor: 'ground',
+	fontSize: 14,
+	fontWeight: 600,
+	color: 'bodySoft',
+} as const;
+
 const memberHref = (memberId: string) => `/members/${memberId}`;
+
+/** 'public': /agents/[id]. 'owner': the creator's preview (S3c) — no breadcrumbs, like button, contacts or "More from". */
+export type AgentDetailVariant = 'public' | 'owner';
 
 const Breadcrumbs = ({ agent }: { agent: Agent }) => {
 	const { t } = useTranslation(['agents', 'common']);
@@ -69,7 +86,7 @@ const Breadcrumbs = ({ agent }: { agent: Agent }) => {
 };
 
 /** Price, demo link, like and views (AgentDetail.html right column, first card). */
-const PriceBox = ({ agent }: { agent: Agent }) => {
+const PriceBox = ({ agent, owner }: { agent: Agent; owner: boolean }) => {
 	const { t } = useTranslation('agents');
 	const format = useFormat();
 	const demoUrl = isExternalHttpUrl(agent.productDemoUrl) ? agent.productDemoUrl : null;
@@ -100,20 +117,15 @@ const PriceBox = ({ agent }: { agent: Agent }) => {
 				</Button>
 			)}
 			<Stack direction="row" spacing={2}>
-				<LikeButton agentId={agent._id} creatorId={agent.memberData?._id} likes={agent.productLikes} />
-				<Box
-					sx={{
-						flex: 1,
-						display: 'grid',
-						placeItems: 'center',
-						height: 42,
-						borderRadius: radiusPx.md,
-						bgcolor: 'ground',
-						fontSize: 14,
-						fontWeight: 600,
-						color: 'bodySoft',
-					}}
-				>
+				{owner ? (
+					// The owner can't like their own agent (D-22): the count only.
+					<Box sx={statBoxSx}>
+						{t('agents:detail.likes', { count: agent.productLikes, formatted: format.compact(agent.productLikes) })}
+					</Box>
+				) : (
+					<LikeButton agentId={agent._id} creatorId={agent.memberData?._id} likes={agent.productLikes} />
+				)}
+				<Box sx={statBoxSx}>
 					{t('agents:detail.views', { count: agent.productViews, formatted: format.compact(agent.productViews) })}
 				</Box>
 			</Stack>
@@ -147,25 +159,8 @@ const CreatorBox = ({ agentId, creator }: { agentId: string; creator: Creator })
 					</Typography>
 				</Box>
 			</Stack>
+			<FollowButton memberId={creator._id} nick={creator.memberNick} fullWidth />
 			<CreatorContacts agentId={agentId} />
-		</Box>
-	);
-};
-
-/** Comments come in a later slice (FRONTEND_MIGRATION §3.8); the section keeps its place in the layout. */
-const QuestionsPlaceholder = () => {
-	const { t } = useTranslation('agents');
-	return (
-		<Box component="section" aria-labelledby="agent-questions" sx={cardSx}>
-			<Typography id="agent-questions" variant="h2" sx={{ fontSize: 20 }}>
-				{t('agents:detail.questions.title')}
-			</Typography>
-			<Stack direction="row" spacing={3} alignItems="center" sx={{ p: 4, borderRadius: radiusPx.md, bgcolor: 'ground' }}>
-				<ForumOutlinedIcon aria-hidden="true" sx={{ color: 'muted' }} />
-				<Typography variant="body2" sx={{ color: 'bodySoft' }}>
-					{t('agents:detail.questions.soon')}
-				</Typography>
-			</Stack>
 		</Box>
 	);
 };
@@ -251,12 +246,16 @@ const DetailSkeleton = () => {
 	);
 };
 
-/** /agents/[id] (AgentDetail.html). Public data comes from the SSR cache; contacts load after auth. */
-export const AgentDetail = ({ agentId }: { agentId: string }) => {
+/**
+ * /agents/[id] (AgentDetail.html). Public data comes from the SSR cache; contacts load after auth.
+ * variant 'owner' renders the same view inside the dashboard preview; that page loads the data itself.
+ */
+export const AgentDetail = ({ agentId, variant = 'public' }: { agentId: string; variant?: AgentDetailVariant }) => {
 	const { t } = useTranslation(['agents', 'common']);
 	const format = useFormat();
 	const { data, loading, error, refetch } = useQuery(AgentDetailQuery, { variables: { productId: agentId } });
 	const agent = data?.getProduct;
+	const owner = variant === 'owner';
 
 	const body = () => {
 		if (loading && !agent) return <DetailSkeleton />;
@@ -266,7 +265,7 @@ export const AgentDetail = ({ agentId }: { agentId: string }) => {
 
 		return (
 			<>
-				<Breadcrumbs agent={agent} />
+				{!owner && <Breadcrumbs agent={agent} />}
 				{/*
 				  DOM order = the mobile order: header, gallery, price + creator, about, questions.
 				  From md the price + creator column moves to the right and spans every row (AgentDetail.html).
@@ -301,8 +300,8 @@ export const AgentDetail = ({ agentId }: { agentId: string }) => {
 						component="aside"
 						sx={{ gridColumn: { md: 2 }, gridRow: { md: '1 / -1' }, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 4 }}
 					>
-						<PriceBox agent={agent} />
-						{creator && <CreatorBox agentId={agent._id} creator={creator} />}
+						<PriceBox agent={agent} owner={owner} />
+						{creator && !owner && <CreatorBox agentId={agent._id} creator={creator} />}
 					</Box>
 					<Box component="section" aria-labelledby="agent-about" sx={cardSx}>
 						<Typography id="agent-about" variant="h2" sx={{ fontSize: 20 }}>
@@ -333,16 +332,22 @@ export const AgentDetail = ({ agentId }: { agentId: string }) => {
 							</Box>
 						)}
 					</Box>
-					<QuestionsPlaceholder />
+					{/* §3.8: everyone reads; members ask on ACTIVE agents; a PAUSED agent (owner preview) takes no new comments. */}
+					<CommentsSection
+						target={productCommentTarget(agent._id)}
+						authorId={creator?._id}
+						canPost={agent.productStatus === 'ACTIVE'}
+					/>
 				</Box>
-				{creator && <MoreFromCreator agentId={agent._id} creator={creator} />}
+				{creator && !owner && <MoreFromCreator agentId={agent._id} creator={creator} />}
 			</>
 		);
 	};
 
-	return (
-		<Box sx={{ maxWidth: 1200, mx: 'auto', px: { xs: 4, sm: 6 }, pt: 6, pb: 16, display: 'flex', flexDirection: 'column', gap: 6 }}>
-			{body()}
-		</Box>
-	);
+	// Inside the dashboard the layout already sets the width and padding.
+	const frameSx: SxProps<Theme> = owner
+		? { display: 'flex', flexDirection: 'column', gap: 6 }
+		: { maxWidth: 1200, mx: 'auto', px: { xs: 4, sm: 6 }, pt: 6, pb: 16, display: 'flex', flexDirection: 'column', gap: 6 };
+
+	return <Box sx={frameSx}>{body()}</Box>;
 };

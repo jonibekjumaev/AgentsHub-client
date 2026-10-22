@@ -1,24 +1,24 @@
 import type { GetStaticProps } from 'next';
-import { Typography } from '@mui/material';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { DashboardHome } from '@/features/dashboard';
 import { DashboardLayout, Seo, type NextPageWithLayout } from '@/shared/layout';
 
+// Translations only: the dashboard is member data, fetched in the browser after auth (CLAUDE.md rule 11).
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
 	props: {
-		...(await serverSideTranslations(locale ?? 'en', ['common', 'dashboard'])),
+		...(await serverSideTranslations(locale ?? 'en', ['common', 'dashboard', 'errors'])),
 	},
 });
 
-/** Placeholder until the dashboard slice; ADMIN is allowed for now so every sidebar can be checked. */
+/** ADMIN is still allowed so every sidebar can be checked; its header button leads to /admin. */
 const DashboardPage: NextPageWithLayout = () => {
 	const { t } = useTranslation('dashboard');
 
 	return (
 		<>
-			<Seo title={t('dashboard:placeholder.title')} noindex />
-			<Typography variant="h1">{t('dashboard:placeholder.title')}</Typography>
-			<Typography sx={{ mt: 2, color: 'muted' }}>{t('dashboard:placeholder.text')}</Typography>
+			<Seo title={t('dashboard:overview.title')} noindex />
+			<DashboardHome />
 		</>
 	);
 };

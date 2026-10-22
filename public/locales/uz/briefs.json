@@ -1,0 +1,216 @@
+{
+	"list": {
+		"title": "Brieflar",
+		"subtitle": "Bizneslar oʻzlariga kerakli agentni tasvirlaydi. Izohlarda savol bering, keyin bogʻlaning.",
+		"post": "Brief joylash",
+		"tabsLabel": "Brief holati",
+		"tabs": {
+			"open": "Ochiq",
+			"closed": "Yopilgan"
+		},
+		"searchLabel": "Brieflarni qidirish",
+		"searchPlaceholder": "Brief sarlavhalarini qidirish",
+		"sortLabel": "Saralash",
+		"sort": {
+			"newest": "Eng yangi",
+			"budget-desc": "Byudjet: yuqoridan pastga",
+			"budget-asc": "Byudjet: pastdan yuqoriga",
+			"deadline": "Muddat: eng yaqini",
+			"views": "Eng koʻp koʻrilgan"
+		},
+		"categoriesLabel": "Kategoriyalar",
+		"allCategories": "Barcha kategoriyalar",
+		"loading": "Brieflar yuklanmoqda…",
+		"errorTitle": "Brieflarni yuklab boʻlmadi",
+		"resultsLabel": "Brieflar",
+		"countOpen_one": "<strong>{{formatted}} ta ochiq brief</strong>",
+		"countOpen_other": "<strong>{{formatted}} ta ochiq brief</strong>",
+		"countClosed_one": "<strong>{{formatted}} ta yopilgan brief</strong>",
+		"countClosed_other": "<strong>{{formatted}} ta yopilgan brief</strong>",
+		"optionalLast": "Byudjet yoki muddat boʻyicha saralaganda, ular koʻrsatilmagan brieflar oxirida chiqadi."
+	},
+	"empty": {
+		"noOpenTitle": "Hali ochiq brieflar yoʻq",
+		"noOpenText": "Biznes oʻziga keragini joylaganda, u shu yerda chiqadi.",
+		"noClosedTitle": "Yopilgan brieflar yoʻq",
+		"noClosedText": "Mualliflari yopgan brieflar shu yerda chiqadi.",
+		"noResultsTitle": "Mos brief topilmadi",
+		"noResultsText": "Boshqa kategoriyani tanlang yoki qisqaroq qidiring.",
+		"clearFilters": "Filtrlarni tozalash",
+		"pageTitle": "Bu sahifa boʻsh",
+		"pageText": "Bu havola yaratilganidan beri brieflar soni kamaygan.",
+		"firstPage": "1-sahifaga oʻtish"
+	},
+	"card": {
+		"comments_one": "{{formatted}} ta izoh",
+		"comments_other": "{{formatted}} ta izoh",
+		"views_one": "{{formatted}} marta koʻrilgan",
+		"views_other": "{{formatted}} marta koʻrilgan"
+	},
+	"budget": {
+		"label": "Byudjet",
+		"open": "Takliflar kutilmoqda"
+	},
+	"deadline": {
+		"on": "Muddat: {{date}}",
+		"none": "Muddatsiz",
+		"passed": "Muddat oʻtgan ({{date}})"
+	},
+	"closedOn": "{{date}} da yopilgan",
+	"seo": {
+		"title": "Brieflar: AI agent qidirayotgan bizneslar",
+		"description": "Bizneslar oʻzlariga kerakli AI agentni byudjet va muddati bilan tasvirlaydi. Savol bering va toʻgʻridan-toʻgʻri bogʻlaning.",
+		"categoryTitle": "{{category}} brieflari",
+		"categoryDescription": "{{category}} AI agentlarini qidirayotgan bizneslar. Byudjetlar USD da, savollar ochiq.",
+		"closed": "Yopilgan: {{title}}",
+		"paged": "{{title}} — {{page}}-sahifa"
+	},
+	"detail": {
+		"breadcrumb": "Joylashuv",
+		"errorTitle": "Bu briefni yuklab boʻlmadi",
+		"posted": "{{date}} da joylangan",
+		"budget": "Byudjet",
+		"deadline": "Muddat",
+		"currency": "Valyuta",
+		"deadlinePassed": "Muddat oʻtib ketgan.",
+		"postedBy": "Muallif",
+		"profile": "@{{nick}} profili",
+		"authorBriefs_one": "{{count}} ta brief",
+		"authorBriefs_other": "{{count}} ta brief",
+		"closedComments": "Bu brief yopilgan. Savollarni oʻqish mumkin, lekin yangisini qoʻshib boʻlmaydi.",
+		"commentPlaceholder": "Koʻlam, vositalar yoki muddat haqida soʻrang. Narx haqidagi gaplarni toʻgʻridan-toʻgʻri aloqaga qoldiring.",
+		"contacts": {
+			"title": "Toʻgʻridan-toʻgʻri bogʻlanish",
+			"loading": "Kontaktlar yuklanmoqda…",
+			"guestTitle": "Kontaktlar faqat aʼzolar uchun",
+			"guestText": "Muallifning email va WhatsApp raqamini koʻrish uchun tizimga kiring.",
+			"login": "Kontaktlarni koʻrish uchun kiring",
+			"error": "Kontaktlarni yuklab boʻlmadi",
+			"none": "Muallif hali kontakt qoʻshmagan. Izohlarda soʻrang.",
+			"email": "Email",
+			"whatsapp": "WhatsApp",
+			"visible": "Tizimga kirganingiz uchun koʻrinadi."
+		},
+		"creatorHint": {
+			"title": "Mos agentingiz bormi?",
+			"text": "Izohlarda eʼloningiz havolasini qoldiring, keyin muallif bilan bogʻlaning.",
+			"action": "Mening agentlarimga oʻtish"
+		}
+	},
+	"mine": {
+		"title": "Mening brieflarim",
+		"subtitle": "Nima kerakligini yozing, kreatorlar oʻzlari sizga murojaat qiladi.",
+		"loading": "Brieflaringiz yuklanmoqda…",
+		"errorTitle": "Brieflaringizni yuklab boʻlmadi",
+		"tabsLabel": "Brief holati",
+		"tabs": {
+			"all": "Hammasi",
+			"open": "Ochiq",
+			"closed": "Yopilgan"
+		},
+		"listLabel": "Brieflaringiz",
+		"deadlineWas": "Muddat {{date}} edi",
+		"reopenHint": "Muddat oʻtib ketgan. Qayta ochish uchun yangi sana belgilang.",
+		"actions": {
+			"edit": "Tahrirlash",
+			"editLabel": "{{title}} ni tahrirlash",
+			"close": "Yopish",
+			"closeLabel": "{{title}} ni yopish",
+			"reopen": "Qayta ochish",
+			"reopenLabel": "{{title}} ni qayta ochish",
+			"delete": "Oʻchirish",
+			"deleteLabel": "{{title}} ni oʻchirish"
+		},
+		"done": {
+			"close": "“{{title}}” yopildi.",
+			"reopen": "“{{title}}” qayta ochildi.",
+			"delete": "“{{title}}” oʻchirildi."
+		},
+		"errors": {
+			"changed": "Bu brief shu orada oʻzgartirilgan yoki oʻchirilgan. Roʻyxat qayta yuklandi."
+		},
+		"confirmDelete": {
+			"title": "“{{title}}” oʻchirilsinmi?",
+			"text": "Buni qaytarib boʻlmaydi: brief va uning sahifasi hamma uchun yoʻqoladi. Takliflarni toʻxtatish uchun uni yoping.",
+			"confirm": "Briefni oʻchirish"
+		},
+		"reopen": {
+			"title": "“{{title}}” ni qayta ochish",
+			"text": "Muddat oʻtib ketgan. Yangi muddat tanlang yoki uni olib tashlang.",
+			"dateLabel": "Yangi muddat",
+			"confirm": "Shu sana bilan qayta ochish",
+			"withoutDeadline": "Muddatsiz qayta ochish"
+		},
+		"empty": {
+			"title": "Birinchi briefingizni joylang",
+			"text": "Vazifa, ishlatadigan vositalaringiz va hajmni yozing. Kreatorlar izohlarda javob beradi va sizga bogʻlanadi.",
+			"action": "Brief joylash"
+		},
+		"emptyTab": {
+			"all": "Brieflar yoʻq",
+			"open": "Ochiq brieflar yoʻq",
+			"closed": "Yopilgan brieflar yoʻq",
+			"action": "Barcha brieflarni koʻrsatish"
+		},
+		"note": "Yopilgan brieflar izohlari bilan ochiq koʻrinib turadi, lekin yangi savol qabul qilmaydi. Oʻchirilgan brief butunlay yoʻqoladi."
+	},
+	"form": {
+		"newTitle": "Brief joylash",
+		"newCrumb": "Yangi brief",
+		"newSubtitle": "Kreatorlarga nima kerakligini ayting. Yaxshi brieflar bir kun ichida javob oladi.",
+		"editTitle": "“{{title}}” ni tahrirlash",
+		"editSubtitle": "Oʻzgarishlar ochiq sahifada darhol koʻrinadi.",
+		"loading": "Brief yuklanmoqda…",
+		"backToList": "Mening brieflarimga qaytish",
+		"closedNote": "Bu brief yopilgan. Uni tahrirlash mumkin; yangi savollar uchun Mening brieflarim sahifasida qayta oching.",
+		"optional": "(ixtiyoriy)",
+		"title": {
+			"label": "Sarlavha",
+			"hint": "Agent nima qilishi kerakligini bir qatorda yozing."
+		},
+		"category": {
+			"label": "Kategoriya",
+			"placeholder": "Kategoriyani tanlang"
+		},
+		"content": {
+			"label": "Sizga nima kerak?",
+			"hint": "20 dan 3000 gacha belgi. Oddiy matn."
+		},
+		"budget": {
+			"label": "Byudjet",
+			"inputLabel": "Byudjet (USD)",
+			"openToOffers": "Takliflar kutilmoqda (aniq byudjet yoʻq)"
+		},
+		"deadline": {
+			"label": "Muddat (ixtiyoriy)",
+			"hint": "Bugun yoki keyingi sana. Muddat oʻtsa ham, siz yopmaguningizcha brief ochiq qoladi."
+		},
+		"publicNote": "Briefingiz hammaga koʻrinadi. Kontaktlaringiz faqat tizimga kirgan aʼzolarga koʻrsatiladi.",
+		"submitCreate": "Briefni joylash",
+		"submitEdit": "Oʻzgarishlarni saqlash",
+		"created": "“{{title}}” joylandi.",
+		"saved": "“{{title}}” saqlandi.",
+		"leave": "Saqlanmagan oʻzgarishlar bor. Sahifadan chiqasizmi?",
+		"tips": {
+			"title": "Yaxshi brief qanday boʻladi",
+			"task": "Texnologiyani emas, vazifani yozing. “WhatsAppʼdan buyurtma qabul qilish” “GPT bot yasash”dan yaxshiroq.",
+			"tools": "Ishlatayotgan vositalaringizni ayting: Google Sheets, Telegram, 1C, Instagram.",
+			"numbers": "Raqamlar bering: kuniga nechta xabar, buyurtma yoki fayl.",
+			"lifecycle": "Kreator topgach briefni yopishingiz, koʻproq taklif kerak boʻlsa keyin qayta ochishingiz mumkin."
+		},
+		"errors": {
+			"titleRequired": "Sarlavha kiriting.",
+			"titleLength": "Sarlavha 3 dan 100 gacha belgi boʻlishi kerak.",
+			"categoryRequired": "Kategoriyani tanlang.",
+			"contentRequired": "Nima kerakligini yozing.",
+			"contentLength": "Tavsif 20 dan 3000 gacha belgi boʻlishi kerak.",
+			"budgetRequired": "Byudjet kiriting yoki “Takliflar kutilmoqda”ni belgilang.",
+			"budgetPositive": "Byudjet 0 dan katta boʻlishi kerak.",
+			"deadlineFuture": "Bugungi yoki keyingi sanani tanlang.",
+			"server": "Bu maydonni tekshiring.",
+			"gone": "Bu brief oʻchirilgan yoki endi sizniki emas.",
+			"saveFailed": "Brief saqlanmadi",
+			"loadFailed": "Briefni yuklab boʻlmadi"
+		}
+	}
+}

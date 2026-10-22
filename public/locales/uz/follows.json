@@ -1,0 +1,28 @@
+{
+	"follow": "Kuzatish",
+	"following": "Kuzatilmoqda",
+	"followLabel": "@{{nick}} ni kuzatish",
+	"followingLabel": "@{{nick}} kuzatilmoqda, bekor qilish uchun bosing",
+	"followed": "Endi @{{nick}} ni kuzatyapsiz.",
+	"unfollowed": "@{{nick}} ni kuzatish bekor qilindi.",
+	"loading": "Aʼzolar yuklanmoqda…",
+	"errorTitle": "Roʻyxatni yuklab boʻlmadi",
+	"followers_one": "{{formatted}} ta kuzatuvchi",
+	"followers_other": "{{formatted}} ta kuzatuvchi",
+	"listLabel": {
+		"followers": "Kuzatuvchilar",
+		"following": "Kuzatayotganlari"
+	},
+	"empty": {
+		"followers": "Hali kuzatuvchilar yoʻq",
+		"following": "Hali hech kimni kuzatmaydi"
+	},
+	"errors": {
+		"changed": "Shu orada oʻzgardi. Roʻyxat qayta yuklandi."
+	},
+	"mine": {
+		"title": "Kuzatishlar",
+		"subtitle": "Sizni kuzatayotgan va siz kuzatayotgan aʼzolar.",
+		"tabsLabel": "Kuzatish roʻyxatlari"
+	}
+}

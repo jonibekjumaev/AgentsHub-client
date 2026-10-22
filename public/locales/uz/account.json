@@ -1,0 +1,49 @@
+{
+	"title": "Profil sozlamalari",
+	"subtitle": "Boshqa aʼzolar sizni qanday koʻrishi va parolingiz.",
+	"loading": "Profilingiz yuklanmoqda…",
+	"errorTitle": "Profilingizni yuklab boʻlmadi",
+	"leave": "Saqlanmagan oʻzgarishlar bor. Sahifadan chiqasizmi?",
+	"avatar": {
+		"add": "Rasm yuklash",
+		"change": "Rasmni almashtirish",
+		"remove": "Oʻchirish",
+		"hint": "PNG yoki JPEG, 15 MB gacha.",
+		"type": "PNG yoki JPEG rasm tanlang.",
+		"size": "Rasm 15 MB dan katta."
+	},
+	"profile": {
+		"title": "Profil",
+		"nickHint": "Agentlaringiz, brieflaringiz va izohlaringiz yonida hammaga koʻrinadi.",
+		"fullName": "Toʻliq ism",
+		"email": "Email",
+		"whatsapp": "WhatsApp",
+		"desc": "Oʻzingiz haqingizda",
+		"descHint": "Ochiq profilingiz uchun bir necha qator. Oddiy matn.",
+		"submit": "Profilni saqlash",
+		"saved": "Profilingiz saqlandi.",
+		"saveFailed": "Profil saqlanmadi"
+	},
+	"password": {
+		"title": "Parol",
+		"text": "Parolni oʻzgartirsangiz, boshqa qurilmalardan chiqib ketmaysiz.",
+		"current": "Joriy parol",
+		"new": "Yangi parol",
+		"confirm": "Yangi parolni takrorlang",
+		"submit": "Parolni oʻzgartirish",
+		"changed": "Parolingiz oʻzgartirildi.",
+		"failed": "Parol oʻzgartirilmadi"
+	},
+	"errors": {
+		"phoneRequired": "Telefon raqamingizni kiriting.",
+		"fullNameLength": "Ism 3 dan 100 gacha belgi boʻlishi kerak.",
+		"email": "254 belgidan oshmaydigan toʻgʻri email kiriting.",
+		"whatsappFormat": "Davlat kodi bilan xalqaro formatda yozing, masalan +998901234567.",
+		"descLength": "500 belgidan oshirmang.",
+		"taken": "Bu nik yoki telefon raqami band.",
+		"currentRequired": "Joriy parolni kiriting.",
+		"wrongPassword": "Joriy parol notoʻgʻri.",
+		"samePassword": "Yangi parol joriy paroldan farq qilishi kerak.",
+		"confirmMismatch": "Parollar mos kelmadi."
+	}
+}

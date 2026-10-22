@@ -1,0 +1,83 @@
+{
+	"rank": "#{{rank}}",
+	"stats": {
+		"agents_one": "에이전트",
+		"agents_other": "에이전트",
+		"followers_one": "팔로워",
+		"followers_other": "팔로워",
+		"likes_one": "좋아요",
+		"likes_other": "좋아요"
+	},
+	"list": {
+		"title": "크리에이터",
+		"subtitle": "에이전트를 만드는 사람과 팀. 매일 밤 좋아요와 조회수로 순위가 정해집니다.",
+		"count_one": "크리에이터 <strong>{{formatted}}</strong>명",
+		"count_other": "크리에이터 <strong>{{formatted}}</strong>명",
+		"searchLabel": "크리에이터 검색",
+		"searchPlaceholder": "닉네임으로 검색",
+		"sortLabel": "정렬",
+		"sort": {
+			"rank": "순위순",
+			"products": "에이전트 많은순",
+			"likes": "좋아요순",
+			"views": "조회수순",
+			"newest": "최신순"
+		},
+		"loading": "크리에이터를 불러오는 중…",
+		"errorTitle": "크리에이터를 불러오지 못했습니다",
+		"resultsLabel": "크리에이터"
+	},
+	"empty": {
+		"noneTitle": "아직 크리에이터가 없습니다",
+		"noneText": "크리에이터가 가입하면 여기에 표시됩니다.",
+		"noResultsTitle": "일치하는 크리에이터가 없습니다",
+		"noResultsText": "검색어를 줄이거나 다른 철자로 시도해 보세요.",
+		"clear": "검색 지우기",
+		"pageTitle": "이 페이지는 비어 있습니다",
+		"firstPage": "1페이지로 이동"
+	},
+	"seo": {
+		"title": "AI 에이전트 크리에이터",
+		"description": "AgentsHub에서 AI 에이전트를 만드는 사람과 팀을 좋아요와 조회수 순위로 만나 보세요.",
+		"paged": "{{title}} — {{page}}페이지",
+		"profileTitle": "{{name}} (@{{nick}})",
+		"profileDescription": "AgentsHub의 @{{nick}}."
+	},
+	"profile": {
+		"breadcrumb": "현재 위치",
+		"errorTitle": "프로필을 불러오지 못했습니다",
+		"loading": "불러오는 중…",
+		"since": "{{date}} 가입",
+		"blocked": "차단된 계정입니다.",
+		"contacts": {
+			"guest": "연락처를 보려면 로그인하세요.",
+			"login": "로그인",
+			"error": "연락처를 불러오지 못했습니다",
+			"none": "아직 연락처가 없습니다.",
+			"visible": "로그인했기 때문에 보입니다."
+		},
+		"stats": {
+			"agents": "에이전트",
+			"briefs": "브리프",
+			"followers": "팔로워",
+			"following": "팔로잉",
+			"likes": "좋아요",
+			"views": "조회수",
+			"articles": "게시글"
+		},
+		"tabs": {
+			"label": "프로필 섹션",
+			"agents": "에이전트",
+			"briefs": "진행 중인 브리프",
+			"followers": "팔로워",
+			"following": "팔로잉"
+		},
+		"workError": "목록을 불러오지 못했습니다",
+		"noAgents": "아직 공개된 에이전트가 없습니다",
+		"noBriefs": "진행 중인 브리프가 없습니다",
+		"showMoreAgents_one": "에이전트 {{count}}개 더 보기",
+		"showMoreAgents_other": "에이전트 {{count}}개 더 보기",
+		"showMoreBriefs_one": "브리프 {{count}}개 더 보기",
+		"showMoreBriefs_other": "브리프 {{count}}개 더 보기"
+	}
+}

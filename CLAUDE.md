@@ -83,7 +83,9 @@ Import alias: `@/` → `src/`.
 ## Workflow
 - Work only on the part the prompt asks for. If you find another problem, list it in the report — do not fix it silently.
 - Start with a short plan (files to create/change/delete). Then implement.
-- Before reporting, run: `yarn tsc --noEmit`, `yarn lint`, `yarn test`, `yarn build` (dev server stopped). All must pass.
+- While iterating, run only the affected tests (`yarn vitest run <path>`) and `yarn tsc --noEmit`.
+- Before reporting, run once: `yarn tsc --noEmit`, `yarn lint`, `yarn test`, `yarn build` (dev server stopped). All must pass.
+- Skip headless-browser and bundle-analyzer checks unless the prompt asks for them; the developer verifies in the browser.
 - Do **not** run `git commit` or `git push` — the developer commits after review.
 - Reply to the developer in Uzbek; keep technical terms (component, hook, query, props…) in English.
 

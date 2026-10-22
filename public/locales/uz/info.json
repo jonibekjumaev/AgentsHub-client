@@ -1,0 +1,68 @@
+{
+	"faq": {
+		"title": "Koʻp soʻraladigan savollar",
+		"description": "AgentsHubʼda AI agent sotib olish va sotish haqida javoblar.",
+		"subtitle": "Eng koʻp beriladigan savollarga qisqa javoblar.",
+		"more": "Yana savolingiz bormi?",
+		"community": "Hamjamiyatda soʻrang",
+		"items": {
+			"what": {
+				"q": "AgentsHub nima?",
+				"a": "Mustaqil kreatorlar AI agentlarini joylaydigan, bizneslar esa kerakli agent uchun brief qoldiradigan bozor."
+			},
+			"contact": {
+				"q": "Agentni qanday sotib olaman?",
+				"a": "Agentni oching, narxi va demosini koʻring, soʻng kreator bilan email yoki WhatsApp orqali bogʻlaning. Toʻlov va sozlash ular bilan toʻgʻridan-toʻgʻri kelishiladi."
+			},
+			"contacts": {
+				"q": "Email va WhatsApp raqamimni kim koʻradi?",
+				"a": "Faqat tizimga kirgan aʼzolar. Mehmonlar kontaktlarni hech qachon koʻrmaydi."
+			},
+			"pricing": {
+				"q": "Narx turlari nimani anglatadi?",
+				"a": "Bepul, bir martalik, oylik obuna yoki kelishilgan narx. Barcha narxlar USD da."
+			},
+			"brief": {
+				"q": "Brief nima?",
+				"a": "Sizga kerakli agentning qisqa tavsifi. Kreatorlar izohlarda savol berib, sizga toʻgʻridan-toʻgʻri bogʻlanadi. Byudjet va muddat ixtiyoriy."
+			},
+			"deadline": {
+				"q": "Briefim muddati oʻtsa nima boʻladi?",
+				"a": "Avtomatik hech narsa boʻlmaydi: siz yopmaguningizcha brief ochiq turadi. Muddati oʻtgan yopilgan briefni qayta ochish uchun yangi sana qoʻying yoki muddatni olib tashlang."
+			},
+			"rank": {
+				"q": "Kreatorlar va agentlar reytingi qanday tuziladi?",
+				"a": "Har kecha boshqa aʼzolarning layk va koʻrishlaridan. Oʻzingizning layk va koʻrishlaringiz hisoblanmaydi."
+			},
+			"pause": {
+				"q": "Agentni vaqtincha yashirsam boʻladimi?",
+				"a": "Ha. Mening agentlarim boʻlimida toʻxtating: qayta faollashtirmaguningizcha u bozordan yoʻqoladi."
+			},
+			"password": {
+				"q": "Parolimni unutdim.",
+				"a": "Parolni tiklash hozircha yoʻq. Akkauntingizga bogʻlangan email orqali qoʻllab-quvvatlash xizmatiga yozing."
+			},
+			"blocked": {
+				"q": "Nega \"bloklangan\" xabari bilan tizimdan chiqarildim?",
+				"a": "Admin akkauntni bloklagan. Xato deb oʻylasangiz, qoʻllab-quvvatlash xizmatiga yozing."
+			}
+		}
+	},
+	"about": {
+		"title": "AgentsHub haqida",
+		"description": "AgentsHub nega bor va qanday ishlaydi.",
+		"lead": "AgentsHub bizneslarni AI agent yaratadigan mustaqil kreatorlar bilan ochiq, aniq narxlar va maxfiy kontaktlar orqali bogʻlaydi.",
+		"why": {
+			"title": "Nega yaratdik",
+			"text": "Kichik bizneslar avtomatlashtirishni xohlaydi, lekin qayerdan boshlashni bilmaydi. Kreatorlar zoʻr agentlar yasaydi, lekin ularni topish qiyin. AgentsHub ikkalasini bir joyga yigʻadi."
+		},
+		"how": {
+			"title": "Qanday ishlaydi",
+			"text": "Kreatorlar agentlarini narx va skrinshotlar bilan joylaydi. Bizneslar koʻrib chiqadi yoki mosi boʻlmasa brief qoldiradi. Savollar ochiq izohlarda, kelishuvlar toʻgʻridan-toʻgʻri."
+		},
+		"principles": {
+			"title": "Biz uchun muhim",
+			"text": "Maxfiy kontaktlar, USD dagi halol narxlar va qancha post qoʻyganingizga emas, boshqalarga yoqqaniga asoslangan reyting."
+		}
+	}
+}

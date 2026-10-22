@@ -1,0 +1,122 @@
+{
+	"categories": {
+		"FREE": "Erkin suhbat",
+		"RECOMMEND": "Tavsiyalar",
+		"NEWS": "Yangiliklar",
+		"HUMOR": "Hazil"
+	},
+	"likes_one": "{{formatted}} layk",
+	"likes_other": "{{formatted}} layk",
+	"comments_one": "{{formatted}} izoh",
+	"comments_other": "{{formatted}} izoh",
+	"views_one": "{{formatted}} koʻrish",
+	"views_other": "{{formatted}} koʻrish",
+	"list": {
+		"title": "Hamjamiyat",
+		"subtitle": "AI agent yaratuvchilar va xaridorlardan maslahatlar, yangiliklar va savollar.",
+		"write": "Maqola yozish",
+		"searchLabel": "Maqolalarni qidirish",
+		"searchPlaceholder": "Sarlavhalarni qidirish",
+		"categoriesLabel": "Kategoriyalar",
+		"all": "Hammasi",
+		"loading": "Maqolalar yuklanmoqda…",
+		"errorTitle": "Maqolalarni yuklab boʻlmadi",
+		"resultsLabel": "Maqolalar"
+	},
+	"empty": {
+		"noneTitle": "Hali maqolalar yoʻq",
+		"noneText": "Birinchi post bilan suhbatni boshlang.",
+		"noResultsTitle": "Mos maqola topilmadi",
+		"clear": "Filtrlarni tozalash",
+		"pageTitle": "Bu sahifa boʻsh",
+		"firstPage": "1-sahifaga oʻtish"
+	},
+	"seo": {
+		"title": "Hamjamiyat",
+		"description": "AI agent yaratuvchilar va xaridorlar uchun maqolalar va jonli chat.",
+		"categoryTitle": "{{category}} — Hamjamiyat",
+		"paged": "{{title}} — {{page}}-sahifa"
+	},
+	"detail": {
+		"breadcrumb": "Joylashuv",
+		"errorTitle": "Maqolani yuklab boʻlmadi",
+		"like": "Layk",
+		"edit": "Tahrirlash",
+		"commentsTitle": "Izohlar",
+		"commentLabel": "Izoh yozish",
+		"commentSubmit": "Izohni yuborish",
+		"commentPlaceholder": "Fikringizni yozing. Izohlar hammaga koʻrinadi."
+	},
+	"chat": {
+		"title": "Jonli chat",
+		"online_one": "{{count}} kishi onlayn",
+		"online_other": "{{count}} kishi onlayn",
+		"connecting": "Ulanmoqda…",
+		"offline": "Ulanish yoʻq",
+		"logLabel": "Chat xabarlari",
+		"empty": "Hali xabar yoʻq. Salom bering.",
+		"guest": "mehmon",
+		"placeholder": "Xabar yozing",
+		"inputLabel": "Xabar",
+		"send": "Xabarni yuborish",
+		"login": "Tizimga kiring,",
+		"loginText": "keyin chatda yozasiz.",
+		"errors": {
+			"guest": "Xabar yuborish uchun tizimga kiring.",
+			"length": "1 dan 500 gacha belgi yozing.",
+			"rate": "Sekinroq: soniyasiga bitta xabar.",
+			"unknown": "Xabar yuborilmadi."
+		}
+	},
+	"mine": {
+		"title": "Mening maqolalarim",
+		"subtitle": "Hamjamiyatdagi postlaringiz.",
+		"emptyTitle": "Hali maqolalar yoʻq",
+		"emptyText": "Hamjamiyat bilan maslahat, savol yoki voqea ulashing.",
+		"edit": "Tahrirlash",
+		"editLabel": "{{title}} ni tahrirlash",
+		"delete": "Oʻchirish",
+		"deleteLabel": "{{title}} ni oʻchirish",
+		"deleted": "“{{title}}” oʻchirildi.",
+		"changed": "Bu maqola shu orada oʻzgartirilgan yoki oʻchirilgan.",
+		"confirm": {
+			"title": "“{{title}}” oʻchirilsinmi?",
+			"text": "U izohlari bilan hamjamiyatdan yoʻqoladi. Buni qaytarib boʻlmaydi.",
+			"confirm": "Maqolani oʻchirish"
+		}
+	},
+	"form": {
+		"newTitle": "Maqola yozish",
+		"editTitle": "Maqolani tahrirlash",
+		"loading": "Maqola yuklanmoqda…",
+		"leave": "Saqlanmagan oʻzgarishlar bor. Sahifadan chiqasizmi?",
+		"category": "Kategoriya",
+		"categoryPlaceholder": "Kategoriyani tanlang",
+		"title": "Sarlavha",
+		"content": "Matn",
+		"contentHint": "3 dan 250 gacha belgi. Oddiy matn.",
+		"optional": "(ixtiyoriy)",
+		"submitCreate": "Joylash",
+		"submitEdit": "Oʻzgarishlarni saqlash",
+		"created": "Maqolangiz joylandi.",
+		"saved": "Maqolangiz saqlandi.",
+		"image": {
+			"label": "Rasm",
+			"add": "Rasm qoʻshish",
+			"change": "Rasmni almashtirish",
+			"remove": "Oʻchirish",
+			"type": "PNG yoki JPEG rasm tanlang.",
+			"size": "Rasm 15 MB dan katta."
+		},
+		"errors": {
+			"categoryRequired": "Kategoriyani tanlang.",
+			"titleRequired": "Sarlavha kiriting.",
+			"titleLength": "Sarlavha 3 dan 50 gacha belgi boʻlishi kerak.",
+			"contentRequired": "Biror narsa yozing.",
+			"contentLength": "Matn 3 dan 250 gacha belgi boʻlishi kerak.",
+			"gone": "Bu maqola oʻchirilgan yoki endi sizniki emas.",
+			"saveFailed": "Maqola saqlanmadi",
+			"loadFailed": "Maqolani yuklab boʻlmadi"
+		}
+	}
+}

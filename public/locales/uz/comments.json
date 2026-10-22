@@ -1,0 +1,35 @@
+{
+	"title": "Savol va javoblar",
+	"loading": "Izohlar yuklanmoqda…",
+	"errorTitle": "Izohlarni yuklab boʻlmadi",
+	"unavailable": "Bu sahifada izohlar mavjud emas.",
+	"empty": "Hali savollar yoʻq. Birinchi boʻlib soʻrang.",
+	"unknownMember": "aʼzo",
+	"author": "Muallif",
+	"delete": "Oʻchirish",
+	"deleteLabel": "Izohingizni oʻchirish",
+	"deleted": "Izohingiz oʻchirildi.",
+	"showMore_one": "Yana {{count}} tasini koʻrsatish",
+	"showMore_other": "Yana {{count}} tasini koʻrsatish",
+	"guest": {
+		"text": "Savol berish yoki javob yozish uchun tizimga kiring.",
+		"login": "Izoh yozish uchun kiring"
+	},
+	"form": {
+		"label": "Savol bering",
+		"placeholder": "Savolingizni yozing.",
+		"public": "Izohlar hammaga koʻrinadi.",
+		"submit": "Savolni yuborish",
+		"posted": "Savolingiz joylandi.",
+		"invalid": "1 dan {{max}} gacha belgi yozing."
+	},
+	"confirm": {
+		"title": "Bu izoh oʻchirilsinmi?",
+		"text": "U hamma uchun oʻchadi. Buni qaytarib boʻlmaydi.",
+		"confirm": "Izohni oʻchirish"
+	},
+	"errors": {
+		"closed": "Bu yerda izohlar hozir yopiq. Sahifani yangilang.",
+		"changed": "Bu izoh allaqachon oʻchirilgan. Roʻyxat qayta yuklanadi."
+	}
+}

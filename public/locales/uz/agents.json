@@ -130,5 +130,110 @@
 			"label": "Like",
 			"own": "Oʻz agentingizga like bosib boʻlmaydi."
 		}
+	},
+	"form": {
+		"breadcrumb": "Mening agentlarim",
+		"newCrumb": "Yangi agent",
+		"newTitle": "Yangi agent joylash",
+		"newSubtitle": "Aniq nom va halol narx koʻproq murojaat olib keladi. Hammasini keyin tahrirlash mumkin.",
+		"editTitle": "“{{title}}” ni tahrirlash",
+		"editSubtitle": "Oʻzgarishlar saqlangan zahoti koʻrinadi.",
+		"pausedNote": "Bu agent toʻxtatilgan, shuning uchun uni boshqalar koʻrmaydi. Uni tahrirlashingiz mumkin; qayta faollashtirish Mening agentlarim boʻlimida.",
+		"loading": "Agent yuklanmoqda…",
+		"backToList": "Mening agentlarimga qaytish",
+		"preview": "Koʻrinishi",
+		"previewTitle": "Agent nomi",
+		"submitCreate": "Agentni joylash",
+		"submitEdit": "Oʻzgarishlarni saqlash",
+		"publishNote": "Yangi agentlar joylangan zahoti qidiruvda chiqadi. Eʼlonni istalgan vaqt Mening agentlarim boʻlimidan toʻxtatib qoʻyish mumkin.",
+		"created": "“{{title}}” joylandi.",
+		"saved": "“{{title}}” dagi oʻzgarishlar saqlandi.",
+		"leave": "Saqlanmagan oʻzgarishlar bor. Sahifadan chiqib ketsangiz, ular yoʻqoladi. Chiqasizmi?",
+		"sections": {
+			"basics": "Asosiy maʼlumotlar",
+			"pricing": "Narx",
+			"images": "Rasmlar",
+			"details": "Tafsilotlar"
+		},
+		"title": {
+			"label": "Nomi"
+		},
+		"category": {
+			"label": "Kategoriya",
+			"placeholder": "Kategoriyani tanlang"
+		},
+		"demoUrl": {
+			"label": "Demo URL (ixtiyoriy)",
+			"hint": "Agentni sinab koʻrish mumkin boʻlgan ochiq havola. http:// yoki https:// bilan boshlanadi."
+		},
+		"pricing": {
+			"label": "Narx turi",
+			"hints": {
+				"FREE": "Narx koʻrsatilmaydi",
+				"ONE_TIME": "Bir marta toʻlanadi",
+				"SUBSCRIPTION": "Oylik narx",
+				"CUSTOM": "Soʻrov boʻyicha narx"
+			}
+		},
+		"price": {
+			"oneTime": "Narx (USD)",
+			"monthly": "Oylik narx (USD)",
+			"perMonth": "/ oy"
+		},
+		"images": {
+			"label": "{{count}} ta rasmdan {{index}}-si",
+			"cover": "Muqova",
+			"remove": "{{index}}-rasmni olib tashlash",
+			"uploading": "{{index}}-rasm yuklanmoqda",
+			"failed": "{{index}}-rasm yuklanmadi.",
+			"retry": "Qayta urinish",
+			"earlier": "{{index}}-rasmni oldinga surish",
+			"later": "{{index}}-rasmni orqaga surish",
+			"add": "Rasm qoʻshish",
+			"hint": "JPG yoki PNG, har biri {{mb}} MB gacha, koʻpi bilan {{max}} ta rasm. Birinchi rasm muqova boʻladi.",
+			"moved": "{{from}}-rasm {{to}}-oʻringa koʻchirildi.",
+			"removed": "{{index}}-rasm olib tashlandi.",
+			"rejectedTitle": "Baʼzi fayllar qoʻshilmadi:",
+			"rejected": {
+				"type": "{{name}}: faqat JPG va PNG rasmlarni yuklash mumkin.",
+				"size": "{{name}}: {{mb}} MB dan katta.",
+				"count": "{{name}}: bitta agentda koʻpi bilan {{max}} ta rasm boʻlishi mumkin."
+			}
+		},
+		"tags": {
+			"label": "Teglar (ixtiyoriy)",
+			"remove": "{{tag}} tegini olib tashlash",
+			"placeholder": "Teg yozing va Enter bosing",
+			"full": "Siz maksimal {{max}} ta teg qoʻshdingiz.",
+			"hint": "Koʻpi bilan {{max}} ta teg, har biri {{length}} belgigacha. Qoʻshish uchun Enter yoki vergul bosing."
+		},
+		"description": {
+			"label": "Tavsif",
+			"hint": "Agent nima qiladi, kim uchun va qanday sozlanadi. Oddiy matn."
+		},
+		"errors": {
+			"titleRequired": "Nomini kiriting.",
+			"titleLength": "Nomi 3 tadan 100 tagacha belgidan iborat boʻlishi kerak.",
+			"titleTaken": "Sizda shu nomli agent allaqachon bor. Boshqa nom tanlang.",
+			"categoryRequired": "Kategoriyani tanlang.",
+			"pricingRequired": "Agent qanday narxlanishini tanlang.",
+			"priceRequired": "Bir martalik va obuna uchun narx kiriting.",
+			"pricePositive": "Narx 0 dan katta son boʻlishi kerak.",
+			"priceServer": "Narxni tekshiring: bir martalik va obunali agentlarda narx 0 dan katta boʻlishi kerak.",
+			"demoUrl": "http:// yoki https:// bilan boshlanadigan toʻliq manzil kiriting, masalan https://demo.example.com.",
+			"demoUrlLength": "Demo URL koʻpi bilan 500 belgidan iborat boʻlishi mumkin.",
+			"tagsMax": "Koʻpi bilan 10 ta teg qoʻshish mumkin.",
+			"tagLength": "Teg 1 tadan {{max}} tagacha belgidan iborat boʻlishi kerak.",
+			"imagesRequired": "Kamida bitta rasm qoʻshing.",
+			"imagesMax": "Bitta agentda koʻpi bilan 10 ta rasm boʻlishi mumkin.",
+			"imagesUploading": "Barcha rasmlar yuklanib boʻlishini kuting.",
+			"imagesFailed": "Baʼzi rasmlar yuklanmadi. Qayta urinib koʻring yoki ularni olib tashlang.",
+			"descRequired": "Tavsif kiriting.",
+			"descLength": "Tavsif 20 tadan 3000 tagacha belgidan iborat boʻlishi kerak.",
+			"server": "Bu qiymat qabul qilinmadi. Tekshirib, qayta urinib koʻring.",
+			"gone": "Bu agent endi mavjud emas. Ehtimol, boshqa oynada oʻchirilgan.",
+			"saveFailed": "Agentni saqlab boʻlmadi",
+			"loadFailed": "Agentni yuklab boʻlmadi"
+		}
 	}
 }

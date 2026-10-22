@@ -130,5 +130,110 @@
 			"label": "Like",
 			"own": "You can’t like your own agent."
 		}
+	},
+	"form": {
+		"breadcrumb": "My agents",
+		"newCrumb": "New agent",
+		"newTitle": "List a new agent",
+		"newSubtitle": "Clear titles and honest pricing get more contacts. You can edit everything later.",
+		"editTitle": "Edit “{{title}}”",
+		"editSubtitle": "Changes are visible right after you save.",
+		"pausedNote": "This agent is paused, so nobody else sees it. You can still edit it; activate it from My agents.",
+		"loading": "Loading the agent…",
+		"backToList": "Back to My agents",
+		"preview": "Preview",
+		"previewTitle": "Your agent title",
+		"submitCreate": "Publish agent",
+		"submitEdit": "Save changes",
+		"publishNote": "New agents appear in search right after publishing. You can pause a listing at any time from My agents.",
+		"created": "“{{title}}” is published.",
+		"saved": "Changes to “{{title}}” are saved.",
+		"leave": "You have unsaved changes. Leave this page and lose them?",
+		"sections": {
+			"basics": "Basics",
+			"pricing": "Pricing",
+			"images": "Images",
+			"details": "Details"
+		},
+		"title": {
+			"label": "Title"
+		},
+		"category": {
+			"label": "Category",
+			"placeholder": "Choose a category"
+		},
+		"demoUrl": {
+			"label": "Demo URL (optional)",
+			"hint": "A public link where people can try the agent. Starts with http:// or https://."
+		},
+		"pricing": {
+			"label": "Pricing",
+			"hints": {
+				"FREE": "No price shown",
+				"ONE_TIME": "Pay once",
+				"SUBSCRIPTION": "Monthly price",
+				"CUSTOM": "Quote on request"
+			}
+		},
+		"price": {
+			"oneTime": "Price (USD)",
+			"monthly": "Price per month (USD)",
+			"perMonth": "/ month"
+		},
+		"images": {
+			"label": "Image {{index}} of {{count}}",
+			"cover": "Cover",
+			"remove": "Remove image {{index}}",
+			"uploading": "Uploading image {{index}}",
+			"failed": "Image {{index}} didn’t upload.",
+			"retry": "Retry",
+			"earlier": "Move image {{index}} earlier",
+			"later": "Move image {{index}} later",
+			"add": "Add images",
+			"hint": "JPG or PNG, up to {{mb}} MB each, up to {{max}} images. The first image is the cover.",
+			"moved": "Image {{from}} moved to position {{to}}.",
+			"removed": "Image {{index}} removed.",
+			"rejectedTitle": "Some files were not added:",
+			"rejected": {
+				"type": "{{name}}: only JPG and PNG images can be uploaded.",
+				"size": "{{name}}: larger than {{mb}} MB.",
+				"count": "{{name}}: an agent can have up to {{max}} images."
+			}
+		},
+		"tags": {
+			"label": "Tags (optional)",
+			"remove": "Remove tag {{tag}}",
+			"placeholder": "Type a tag and press Enter",
+			"full": "You’ve added {{max}} tags, the maximum.",
+			"hint": "Up to {{max}} tags, {{length}} characters each. Press Enter or comma to add."
+		},
+		"description": {
+			"label": "Description",
+			"hint": "What the agent does, who it is for and how setup works. Plain text."
+		},
+		"errors": {
+			"titleRequired": "Enter a title.",
+			"titleLength": "The title must be 3 to 100 characters.",
+			"titleTaken": "You already have an agent with this title. Choose another one.",
+			"categoryRequired": "Choose a category.",
+			"pricingRequired": "Choose how the agent is priced.",
+			"priceRequired": "Enter a price for one-time and subscription pricing.",
+			"pricePositive": "The price must be a number greater than 0.",
+			"priceServer": "Check the price: one-time and subscription agents need a price above 0.",
+			"demoUrl": "Enter a full web address starting with http:// or https://, like https://demo.example.com.",
+			"demoUrlLength": "The demo URL can be at most 500 characters.",
+			"tagsMax": "You can add up to 10 tags.",
+			"tagLength": "A tag can be 1 to {{max}} characters.",
+			"imagesRequired": "Add at least one image.",
+			"imagesMax": "An agent can have up to 10 images.",
+			"imagesUploading": "Wait until every image has finished uploading.",
+			"imagesFailed": "Some images didn’t upload. Retry or remove them.",
+			"descRequired": "Enter a description.",
+			"descLength": "The description must be 20 to 3000 characters.",
+			"server": "This value was not accepted. Check it and try again.",
+			"gone": "This agent no longer exists. It may have been deleted in another tab.",
+			"saveFailed": "We couldn’t save the agent",
+			"loadFailed": "We couldn’t load the agent"
+		}
 	}
 }

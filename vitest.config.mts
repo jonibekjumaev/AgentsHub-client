@@ -42,6 +42,9 @@ export default defineConfig({
 		setupFiles: ['./src/test/setup.ts'],
 		include: ['src/**/*.test.{ts,tsx}'],
 		restoreMocks: true,
+		// The first test of a file also pays for cold MUI / next/image imports; under a full parallel run that
+		// passed 5 s once (AgentsCatalog). Real hangs still fail.
+		testTimeout: 15_000,
 		// Same public example values as .env.example, so src/config/env.ts validates in tests.
 		env: {
 			NEXT_PUBLIC_API_URL: 'http://localhost:3005',

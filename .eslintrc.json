@@ -2,14 +2,23 @@
 	"extends": "next/core-web-vitals",
 	"overrides": [
 		{
-			"files": ["src/**/*.ts", "src/**/*.tsx"],
-			"excludedFiles": ["src/theme/**"],
+			"files": [
+				"src/**/*.ts",
+				"src/**/*.tsx"
+			],
+			"excludedFiles": [
+				"src/theme/**"
+			],
 			"rules": {
 				"no-restricted-syntax": [
 					"error",
 					{
 						"selector": "Property[key.name='borderRadius'][value.type='Literal'][value.raw=/^(?!0$)[0-9.]/]",
 						"message": "sx multiplies a numeric borderRadius by shape.borderRadius (10px). Use radiusPx.* from @/theme/tokens."
+					},
+					{
+						"selector": "Property[key.name='borderRadius'] > ObjectExpression > Property > Literal[raw=/^(?!0$)[0-9.]/]",
+						"message": "A responsive borderRadius ({ md: 2 }) is multiplied by shape.borderRadius (10px) too. Use radiusPx.* from @/theme/tokens."
 					},
 					{
 						"selector": "Property[key.name='borderRadius'] > MemberExpression[object.name='radius']",

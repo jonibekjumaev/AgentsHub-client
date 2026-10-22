@@ -1,0 +1,89 @@
+{
+	"search": "검색",
+	"status": "상태",
+	"allStatuses": "전체 상태",
+	"loading": "불러오는 중…",
+	"errorTitle": "목록을 불러오지 못했습니다",
+	"empty": "항목이 없습니다",
+	"total_one": "{{count}}개",
+	"total_other": "{{count}}개",
+	"changed": "그 사이에 변경되었거나 삭제되었습니다. 목록을 다시 불러왔습니다.",
+	"memberStatus": {
+		"ACTIVE": "활성",
+		"BLOCK": "차단",
+		"DELETE": "삭제됨"
+	},
+	"articleStatus": {
+		"ACTIVE": "활성",
+		"DELETE": "삭제됨"
+	},
+	"columns": {
+		"member": "회원",
+		"type": "유형",
+		"status": "상태",
+		"contacts": "연락처",
+		"joined": "가입일",
+		"agent": "에이전트",
+		"creator": "크리에이터",
+		"category": "카테고리",
+		"stats": "좋아요 · 조회",
+		"updated": "수정일",
+		"brief": "브리프",
+		"author": "작성자",
+		"deadline": "마감일",
+		"created": "작성일",
+		"article": "글"
+	},
+	"actions": {
+		"label": "작업",
+		"aria": "{{action}}: {{title}}",
+		"pause": "일시중지",
+		"resume": "활성화",
+		"close": "마감",
+		"reopen": "다시 열기",
+		"delete": "삭제",
+		"remove": "영구 삭제",
+		"block": "차단",
+		"unblock": "차단 해제"
+	},
+	"done": {
+		"pause": "“{{title}}”을(를) 일시중지했습니다.",
+		"resume": "“{{title}}”을(를) 다시 활성화했습니다.",
+		"close": "“{{title}}”을(를) 마감했습니다.",
+		"reopen": "“{{title}}”을(를) 다시 열었습니다.",
+		"delete": "“{{title}}”을(를) 삭제했습니다.",
+		"remove": "“{{title}}”을(를) 영구 삭제했습니다.",
+		"block": "{{title}}을(를) 차단했습니다.",
+		"unblock": "{{title}}의 차단을 해제했습니다."
+	},
+	"confirm": {
+		"delete": {
+			"title": "“{{title}}”을(를) 삭제할까요?",
+			"text": "사이트에서 사라집니다. 이후 영구 삭제할 수 있습니다."
+		},
+		"remove": {
+			"title": "“{{title}}”을(를) 영구 삭제할까요?",
+			"text": "되돌릴 수 없습니다. 데이터베이스에서 지워집니다."
+		},
+		"block": {
+			"title": "{{title}}을(를) 차단할까요?",
+			"text": "다음 요청 때 로그아웃되며 차단이 풀릴 때까지 로그인할 수 없습니다."
+		}
+	},
+	"members": {
+		"title": "회원",
+		"subtitle": "회원을 차단, 차단 해제, 삭제합니다. 유형과 비밀번호는 여기서 바꿀 수 없습니다."
+	},
+	"agents": {
+		"title": "에이전트",
+		"subtitle": "일시중지·삭제된 것을 포함한 모든 에이전트."
+	},
+	"briefs": {
+		"title": "브리프",
+		"subtitle": "모든 브리프. 마감일이 지난 브리프를 다시 열면 마감일이 없어집니다."
+	},
+	"articles": {
+		"title": "글",
+		"subtitle": "커뮤니티 글. 먼저 삭제한 뒤 영구 삭제합니다."
+	}
+}

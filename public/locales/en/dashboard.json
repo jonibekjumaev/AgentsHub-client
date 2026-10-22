@@ -2,5 +2,105 @@
 	"placeholder": {
 		"title": "Dashboard",
 		"text": "Your dashboard is on its way. Use the menu to see the sections for your role."
+	},
+	"overview": {
+		"title": "Overview",
+		"subtitle": "How your profile and agents are doing.",
+		"loading": "Loading your numbers…",
+		"errorTitle": "We couldn't load your numbers",
+		"recent": "Recently updated agents",
+		"manage": "Manage all agents",
+		"stats": {
+			"label": "Your numbers",
+			"agents": "Agents",
+			"agentsHint": "Active and paused",
+			"profileViews": "Profile views",
+			"profileLikes": "Profile likes",
+			"followers": "Followers"
+		}
+	},
+	"myAgents": {
+		"title": "My agents",
+		"subtitle": "Pause an agent to hide it from the marketplace without losing it.",
+		"new": "New agent",
+		"loading": "Loading your agents…",
+		"errorTitle": "We couldn't load your agents",
+		"tabs": {
+			"label": "Agent status",
+			"all": "All",
+			"active": "Active",
+			"paused": "Paused"
+		},
+		"table": {
+			"caption": "Your agents",
+			"agent": "Agent",
+			"status": "Status",
+			"price": "Price",
+			"views": "Views",
+			"likes": "Likes",
+			"questions": "Questions",
+			"updated": "Updated",
+			"actions": "Actions",
+			"hidden": "hidden from the marketplace"
+		},
+		"actions": {
+			"edit": "Edit",
+			"editLabel": "Edit {{title}}",
+			"preview": "Preview",
+			"previewLabel": "Preview {{title}}",
+			"pause": "Pause",
+			"pauseLabel": "Pause {{title}}",
+			"resume": "Activate",
+			"resumeLabel": "Activate {{title}}",
+			"delete": "Delete",
+			"deleteLabel": "Delete {{title}}"
+		},
+		"confirm": {
+			"pause": {
+				"title": "Pause “{{title}}”?",
+				"text": "It disappears from the marketplace, your profile, rankings and other members' favorites. Likes, views and comments stop until you activate it again.",
+				"confirm": "Pause agent"
+			},
+			"delete": {
+				"title": "Delete “{{title}}”?",
+				"text": "This can't be undone: the agent leaves your list for good. To hide it for a while, pause it instead.",
+				"confirm": "Delete agent"
+			}
+		},
+		"done": {
+			"pause": "“{{title}}” is paused.",
+			"resume": "“{{title}}” is active again.",
+			"delete": "“{{title}}” was deleted."
+		},
+		"errors": {
+			"changed": "This agent was changed or removed in the meantime. The list has been reloaded."
+		},
+		"empty": {
+			"title": "List your first agent",
+			"text": "Add an agent with a clear title, honest pricing and a few screenshots. You can edit it any time.",
+			"action": "List your first agent"
+		},
+		"emptyTab": {
+			"active": "No active agents",
+			"paused": "No paused agents",
+			"all": "No agents",
+			"action": "Show all agents"
+		},
+		"emptyPage": {
+			"title": "This page is empty",
+			"action": "Go to the first page"
+		},
+		"deleteNote": {
+			"strong": "Deleting is permanent.",
+			"text": "A deleted agent disappears from your list and can't be restored. To hide it for a while, pause it instead."
+		}
+	},
+	"preview": {
+		"metaTitle": "Preview: {{title}}",
+		"crumb": "Preview",
+		"paused": "This agent is paused. Only you can see it. Activate it to list it in the marketplace again.",
+		"live": "This agent is live in the marketplace.",
+		"publicLink": "Open the public page",
+		"actionsLabel": "Agent actions"
 	}
 }

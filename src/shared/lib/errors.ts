@@ -16,6 +16,15 @@ export const ErrorCode = {
 } as const;
 
 /** Machine-readable `extensions.reason` values (D-33). Unknown reasons are treated like none. */
+/**
+ * Business messages the UI tells apart (FRONTEND_MIGRATION appendix). Matched, never shown.
+ * Many errors share BAD_REQUEST, so the message is the only way to know which field to mark.
+ */
+export const ErrorMessage = {
+	PriceRequired: 'Price greater than 0 is required for ONE_TIME and SUBSCRIPTION pricing!',
+	PriceNotAllowed: 'Price is not allowed for FREE and CUSTOM pricing!',
+} as const;
+
 export const ErrorReason = {
 	MemberBlocked: 'MEMBER_BLOCKED',
 } as const;
@@ -61,6 +70,24 @@ const errorsFromNetworkError = (networkError: unknown): readonly GraphQLFormatte
 
 const graphQLErrorsOf = (error: ApolloError): readonly GraphQLFormattedError[] =>
 	error.graphQLErrors.length ? error.graphQLErrors : errorsFromNetworkError(error.networkError);
+
+/** The backend messages of an Apollo error (to match against ErrorMessage; never to display). */
+export const getErrorMessages = (error: unknown): string[] =>
+	error instanceof ApolloError ? graphQLErrorsOf(error).map((item) => item.message) : [];
+
+/**
+ * `extensions.validationErrors` (§1.2): one message per failed DTO rule. Built-in rules start with the
+ * field name ("productTitle must be…"), so `field` is that first word.
+ */
+export const getValidationErrors = (error: unknown): { field: string; message: string }[] => {
+	if (!(error instanceof ApolloError)) return [];
+	return graphQLErrorsOf(error).flatMap((item) => {
+		const list = item.extensions?.validationErrors;
+		return Array.isArray(list)
+			? list.filter((message): message is string => typeof message === 'string').map((message) => ({ field: message.split(/[s.]/)[0], message }))
+			: [];
+	});
+};
 
 /** The first `extensions.reason` of an Apollo error, if any. */
 export const getErrorReason = (error: unknown): string | undefined =>

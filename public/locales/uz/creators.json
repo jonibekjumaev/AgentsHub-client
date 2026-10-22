@@ -1,0 +1,83 @@
+{
+	"rank": "#{{rank}}",
+	"stats": {
+		"agents_one": "agent",
+		"agents_other": "agent",
+		"followers_one": "kuzatuvchi",
+		"followers_other": "kuzatuvchi",
+		"likes_one": "layk",
+		"likes_other": "layk"
+	},
+	"list": {
+		"title": "Kreatorlar",
+		"subtitle": "Agentlarni yaratadigan odamlar va jamoalar. Har kecha layk va koʻrishlar boʻyicha reyting tuziladi.",
+		"count_one": "<strong>{{formatted}}</strong> ta kreator",
+		"count_other": "<strong>{{formatted}}</strong> ta kreator",
+		"searchLabel": "Kreatorlarni qidirish",
+		"searchPlaceholder": "Nik boʻyicha qidirish",
+		"sortLabel": "Saralash",
+		"sort": {
+			"rank": "Reyting boʻyicha",
+			"products": "Eng koʻp agent",
+			"likes": "Eng koʻp layk",
+			"views": "Eng koʻp koʻrilgan",
+			"newest": "Eng yangi"
+		},
+		"loading": "Kreatorlar yuklanmoqda…",
+		"errorTitle": "Kreatorlarni yuklab boʻlmadi",
+		"resultsLabel": "Kreatorlar"
+	},
+	"empty": {
+		"noneTitle": "Hali kreatorlar yoʻq",
+		"noneText": "Kreatorlar qoʻshilgach, shu yerda chiqadi.",
+		"noResultsTitle": "Mos kreator topilmadi",
+		"noResultsText": "Qisqaroq yoki boshqacha yozib qidiring.",
+		"clear": "Qidiruvni tozalash",
+		"pageTitle": "Bu sahifa boʻsh",
+		"firstPage": "1-sahifaga oʻtish"
+	},
+	"seo": {
+		"title": "AI agent kreatorlari",
+		"description": "AgentsHubʼda AI agent yaratadigan odamlar va jamoalar, layk va koʻrishlar reytingi bilan.",
+		"paged": "{{title}} — {{page}}-sahifa",
+		"profileTitle": "{{name}} (@{{nick}})",
+		"profileDescription": "AgentsHubʼdagi @{{nick}}."
+	},
+	"profile": {
+		"breadcrumb": "Joylashuv",
+		"errorTitle": "Profilni yuklab boʻlmadi",
+		"loading": "Yuklanmoqda…",
+		"since": "{{date}} dan beri aʼzo",
+		"blocked": "Bu akkaunt bloklangan.",
+		"contacts": {
+			"guest": "Kontaktlarni koʻrish uchun tizimga kiring.",
+			"login": "Kirish",
+			"error": "Kontaktlarni yuklab boʻlmadi",
+			"none": "Hali kontakt qoʻshilmagan.",
+			"visible": "Tizimga kirganingiz uchun koʻrinadi."
+		},
+		"stats": {
+			"agents": "Agentlar",
+			"briefs": "Brieflar",
+			"followers": "Kuzatuvchilar",
+			"following": "Kuzatayotganlari",
+			"likes": "Layklar",
+			"views": "Koʻrishlar",
+			"articles": "Maqolalar"
+		},
+		"tabs": {
+			"label": "Profil boʻlimlari",
+			"agents": "Agentlar",
+			"briefs": "Ochiq brieflar",
+			"followers": "Kuzatuvchilar",
+			"following": "Kuzatayotganlari"
+		},
+		"workError": "Roʻyxatni yuklab boʻlmadi",
+		"noAgents": "Hali ochiq agentlar yoʻq",
+		"noBriefs": "Ochiq brieflar yoʻq",
+		"showMoreAgents_one": "Yana {{count}} ta agentni koʻrsatish",
+		"showMoreAgents_other": "Yana {{count}} ta agentni koʻrsatish",
+		"showMoreBriefs_one": "Yana {{count}} ta briefni koʻrsatish",
+		"showMoreBriefs_other": "Yana {{count}} ta briefni koʻrsatish"
+	}
+}
