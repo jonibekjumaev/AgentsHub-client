@@ -107,7 +107,7 @@
 			"change": "Change image",
 			"remove": "Remove",
 			"type": "Use a PNG or JPEG image.",
-			"size": "The image is larger than 15 MB."
+			"size": "The image is larger than 10 MB."
 		},
 		"errors": {
 			"categoryRequired": "Choose a category.",

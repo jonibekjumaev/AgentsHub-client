@@ -1,12 +1,12 @@
 /**
  * Client-side checks before any upload (a rejected file is never sent). Same limits as the API:
  * - type: the browser's MIME type must be one the API accepts (libs/config.ts validMimeTypes);
- * - size: graphqlUploadExpress({ maxFileSize: 15000000 }) — 15 000 000 bytes, decimal megabytes;
+ * - size: graphqlUploadExpress({ maxFileSize: uploadMaxFileSize }) — 10 000 000 bytes, decimal megabytes (D-41);
  * - count: the form keeps at most IMAGES_MAX images.
  */
 export const IMAGE_MIME_TYPES = ['image/png', 'image/jpeg', 'image/jpg'];
 export const IMAGE_ACCEPT = 'image/png,image/jpeg';
-export const IMAGE_MAX_BYTES = 15_000_000;
+export const IMAGE_MAX_BYTES = 10_000_000;
 
 export type ImageRejection = { name: string; reason: 'type' | 'size' | 'count' };
 

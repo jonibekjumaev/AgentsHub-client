@@ -56,6 +56,17 @@ describe('CommentsSection (§3.8)', () => {
 		expect(screen.getByRole('heading', { name: /Questions and answers · 2/ })).toBeInTheDocument();
 	});
 
+	it('shows a deleted author as "Deleted member" without a profile link (D-38)', async () => {
+		const orphan = { ...answer, memberData: null } as unknown as typeof answer; // the API sends null for a deleted author
+		renderWithProviders(<CommentsSection target={target} canPost />, { mocks: [listMock([orphan])], auth: { status: 'guest' } });
+
+		const list = await screen.findByRole('list', { name: /Questions and answers/ });
+		const row = within(list).getByRole('listitem');
+		expect(within(row).getByText('Deleted member')).toBeInTheDocument();
+		expect(within(row).queryByRole('link')).not.toBeInTheDocument();
+		expect(row).toHaveTextContent('The Business app for now.');
+	});
+
 	it('treats NOT_FOUND as "not available", not as "no comments"', async () => {
 		renderWithProviders(<CommentsSection target={target} canPost />, {
 			mocks: [

@@ -7,6 +7,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { Me } from '@/auth';
 import { renderWithProviders } from '@/test/renderWithProviders';
 import { CreateAgentMutation, UploadAgentImageMutation } from '../../graphql/agentForm';
+import { IMAGE_MAX_BYTES } from '../../lib/imageFiles';
 import { NewAgent } from './AgentFormPages';
 
 const creator = { _id: '6ac7992dd87bde19b9216c99', memberType: 'CREATOR', memberStatus: 'ACTIVE', memberNick: 'nova_labs' } as Me;
@@ -114,13 +115,14 @@ describe('AgentForm (create)', () => {
 		const user = setup([]);
 		const gif = new File(['gif'], 'anim.gif', { type: 'image/gif' });
 		const huge = png('huge.png');
-		Object.defineProperty(huge, 'size', { value: 15_000_001 });
+		// one byte over the limit, whatever the limit is (10 MB since D-41)
+		Object.defineProperty(huge, 'size', { value: IMAGE_MAX_BYTES + 1 });
 
 		await addFiles(user, gif, huge);
 
 		const alert = screen.getByRole('alert');
 		expect(alert).toHaveTextContent('anim.gif: only JPG and PNG images can be uploaded.');
-		expect(alert).toHaveTextContent('huge.png: larger than 15 MB.');
+		expect(alert).toHaveTextContent(`huge.png: larger than ${IMAGE_MAX_BYTES / 1_000_000} MB.`);
 		expect(screen.queryByRole('listitem', { name: /^Image 1/ })).not.toBeInTheDocument();
 	});
 

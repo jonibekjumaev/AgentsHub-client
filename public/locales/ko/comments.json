@@ -4,7 +4,7 @@
 	"errorTitle": "댓글을 불러오지 못했습니다",
 	"unavailable": "이 페이지에서는 댓글을 볼 수 없습니다.",
 	"empty": "아직 질문이 없습니다. 첫 질문을 남겨 보세요.",
-	"unknownMember": "회원",
+	"unknownMember": "탈퇴한 회원",
 	"author": "작성자",
 	"delete": "삭제",
 	"deleteLabel": "내 댓글 삭제",

@@ -8,9 +8,9 @@
 		"add": "사진 올리기",
 		"change": "사진 변경",
 		"remove": "삭제",
-		"hint": "PNG 또는 JPEG, 최대 15MB.",
+		"hint": "PNG 또는 JPEG, 최대 10MB.",
 		"type": "PNG 또는 JPEG 이미지를 사용하세요.",
-		"size": "사진이 15MB보다 큽니다."
+		"size": "사진이 10MB보다 큽니다."
 	},
 	"profile": {
 		"title": "프로필",

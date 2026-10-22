@@ -59,7 +59,7 @@ export const BriefDeadline = ({ brief }: { brief: Pick<BriefCardFragment, 'brief
  * Closed rows use surfaceMuted (DESIGN §2.1).
  */
 export const BriefRow = ({ brief }: { brief: BriefCardFragment }) => {
-	const { t } = useTranslation('briefs');
+	const { t } = useTranslation(['briefs', 'common']);
 	const format = useFormat();
 	const closed = brief.briefStatus === BriefStatus.Closed;
 	const nick = brief.memberData?.memberNick;
@@ -112,7 +112,7 @@ export const BriefRow = ({ brief }: { brief: BriefCardFragment }) => {
 					{brief.briefContent}
 				</Typography>
 				<Typography variant="meta">
-					{nick && <>@{nick} · </>}
+					{nick ? <>@{nick} · </> : <>{t('common:deletedMember')} · </>}
 					<time dateTime={brief.createdAt} suppressHydrationWarning>
 						{format.relative(brief.createdAt)}
 					</time>{' '}

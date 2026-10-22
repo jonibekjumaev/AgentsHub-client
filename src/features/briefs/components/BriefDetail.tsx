@@ -152,6 +152,22 @@ const PostedBy = ({ brief, author }: { brief: Brief; author: Author }) => {
 	);
 };
 
+/** The author was deleted (D-38): the API sends memberData null. No profile link, follow or contacts. */
+const DeletedAuthorBox = () => {
+	const { t } = useTranslation(['briefs', 'common']);
+	return (
+		<Box sx={cardSx}>
+			<Typography variant="overline" component="h2">
+				{t('briefs:detail.postedBy')}
+			</Typography>
+			<Stack direction="row" spacing={3} alignItems="center">
+				<Avatar memberId="deleted" name={t('common:deletedMember')} size={48} />
+				<Typography sx={{ color: 'muted', fontWeight: 800 }}>{t('common:deletedMember')}</Typography>
+			</Stack>
+		</Box>
+	);
+};
+
 /** For creators: the brief is a lead — point them to their listings (BriefDetail.html aside). */
 const CreatorHint = () => {
 	const { t } = useTranslation('briefs');
@@ -260,7 +276,7 @@ export const BriefDetail = ({ briefId }: { briefId: string }) => {
 						component="aside"
 						sx={{ gridColumn: { md: 2 }, gridRow: { md: '1 / -1' }, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 4 }}
 					>
-						{author && <PostedBy brief={brief} author={author} />}
+						{author ? <PostedBy brief={brief} author={author} /> : <DeletedAuthorBox />}
 						<CreatorHint />
 					</Box>
 

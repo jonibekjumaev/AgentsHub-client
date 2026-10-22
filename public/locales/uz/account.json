@@ -8,9 +8,9 @@
 		"add": "Rasm yuklash",
 		"change": "Rasmni almashtirish",
 		"remove": "Oʻchirish",
-		"hint": "PNG yoki JPEG, 15 MB gacha.",
+		"hint": "PNG yoki JPEG, 10 MB gacha.",
 		"type": "PNG yoki JPEG rasm tanlang.",
-		"size": "Rasm 15 MB dan katta."
+		"size": "Rasm 10 MB dan katta."
 	},
 	"profile": {
 		"title": "Profil",

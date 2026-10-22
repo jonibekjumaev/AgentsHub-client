@@ -1,4 +1,5 @@
 {
+	"deletedMember": "Deleted member",
 	"app": {
 		"name": "AgentsHub",
 		"rebuilding": "AgentsHub is being rebuilt."

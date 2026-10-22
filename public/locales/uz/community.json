@@ -107,7 +107,7 @@
 			"change": "Rasmni almashtirish",
 			"remove": "Oʻchirish",
 			"type": "PNG yoki JPEG rasm tanlang.",
-			"size": "Rasm 15 MB dan katta."
+			"size": "Rasm 10 MB dan katta."
 		},
 		"errors": {
 			"categoryRequired": "Kategoriyani tanlang.",

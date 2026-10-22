@@ -20,7 +20,7 @@ export const ArticleCategoryChip = ({ category }: { category: string }) => {
 
 /** One article row: category, title (the link), two lines of text, author · time · likes · comments; image on the right. */
 export const ArticleCard = ({ article, headingLevel = 'h2' }: { article: ArticleCardFragment; headingLevel?: 'h2' | 'h3' }) => {
-	const { t } = useTranslation('community');
+	const { t } = useTranslation(['community', 'common']);
 	const format = useFormat();
 	const src = mediaUrl(article.articleImage);
 
@@ -61,7 +61,7 @@ export const ArticleCard = ({ article, headingLevel = 'h2' }: { article: Article
 					{article.articleContent}
 				</Typography>
 				<Typography variant="meta">
-					{article.memberData && <>@{article.memberData.memberNick} · </>}
+					{article.memberData ? <>@{article.memberData.memberNick} · </> : <>{t('common:deletedMember')} · </>}
 					<time dateTime={article.createdAt} suppressHydrationWarning>
 						{format.relative(article.createdAt)}
 					</time>{' '}

@@ -114,21 +114,31 @@ export const ArticleDetail = ({ articleId }: { articleId: string }) => {
 					<Typography id="article-title" variant="h1" sx={{ fontSize: { xs: 26, md: 32 }, overflowWrap: 'anywhere' }}>
 						{article.articleTitle}
 					</Typography>
-					{author && (
-						<Stack direction="row" spacing={2.5} alignItems="center">
-							<Avatar memberId={author._id} name={author.memberFullName || author.memberNick} image={author.memberImage} size={36} />
-							<Typography variant="meta">
+					{/* author is null when the member was deleted (D-38): name without a link */}
+					<Stack direction="row" spacing={2.5} alignItems="center">
+						<Avatar
+							memberId={article.memberId}
+							name={author ? author.memberFullName || author.memberNick : t('common:deletedMember')}
+							image={author?.memberImage}
+							size={36}
+						/>
+						<Typography variant="meta">
+							{author ? (
 								<Link component={NextLink} href={`/members/${author._id}`} sx={{ color: 'ink', fontWeight: 700 }}>
 									@{author.memberNick}
-								</Link>{' '}
-								·{' '}
-								<time dateTime={article.createdAt} suppressHydrationWarning>
-									{format.date(article.createdAt)}
-								</time>{' '}
-								· {t('community:views', { count: article.articleViews, formatted: format.compact(article.articleViews) })}
-							</Typography>
-						</Stack>
-					)}
+								</Link>
+							) : (
+								<Box component="span" sx={{ fontWeight: 700 }}>
+									{t('common:deletedMember')}
+								</Box>
+							)}{' '}
+							·{' '}
+							<time dateTime={article.createdAt} suppressHydrationWarning>
+								{format.date(article.createdAt)}
+							</time>{' '}
+							· {t('community:views', { count: article.articleViews, formatted: format.compact(article.articleViews) })}
+						</Typography>
+					</Stack>
 					{src && (
 						<Box sx={{ position: 'relative', width: '100%', aspectRatio: '16 / 9', borderRadius: radiusPx.md, overflow: 'hidden', bgcolor: 'ground' }}>
 							<Image src={src} alt="" fill sizes="(max-width: 900px) 100vw, 760px" style={{ objectFit: 'cover' }} />

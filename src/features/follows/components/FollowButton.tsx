@@ -1,6 +1,7 @@
 import { Button } from '@mui/material';
 import { Check as CheckIcon, PersonAddAlt1Outlined as PersonAddIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
+import { useAuth } from '@/auth';
 import { useFollow } from '../hooks/useFollow';
 
 type FollowButtonProps = {
@@ -14,12 +15,14 @@ type FollowButtonProps = {
 
 /**
  * Follow / Following toggle (DESIGN §3 Soft button, aria-pressed). Hidden on your own card or profile
- * (following yourself is refused, §3.9). Guests see it and go to login.
+ * (following yourself is refused, §3.9). Hidden from admins: they can't follow anyone (D-40).
+ * Guests see it and go to login.
  */
 export const FollowButton = ({ memberId, nick, following: known, size = 'medium', fullWidth }: FollowButtonProps) => {
 	const { t } = useTranslation('follows');
+	const { me } = useAuth();
 	const { following, isSelf, pending, loading, toggle } = useFollow(memberId, known);
-	if (isSelf) return null;
+	if (isSelf || me?.memberType === 'ADMIN') return null;
 
 	const inactive = pending || loading;
 	return (

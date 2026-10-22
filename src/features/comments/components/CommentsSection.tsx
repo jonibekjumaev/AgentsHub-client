@@ -109,8 +109,9 @@ const CommentRow = ({ comment, isAuthor, isMine, isModerator, onDelete }: Commen
 							@{nick}
 						</Link>
 					) : (
-						<Typography component="span" sx={{ fontWeight: 800, fontSize: 14 }}>
-							@{nick}
+						// memberData is null for a deleted author (D-38): no link, their profile answers 404
+						<Typography component="span" sx={{ fontWeight: 800, fontSize: 14, color: 'muted' }}>
+							{nick}
 						</Typography>
 					)}
 					{isAuthor && (
