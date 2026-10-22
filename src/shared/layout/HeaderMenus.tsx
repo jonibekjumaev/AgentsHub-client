@@ -13,7 +13,7 @@ import { Avatar } from '@/shared/ui/Avatar';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { Logo } from './Logo';
 import { NavLinks } from './NavLinks';
-import { SETTINGS_HREF, dashboardHref, memberDisplayName, profileHref } from './navigation';
+import { SETTINGS_HREF, dashboardHref, hasPublicProfile, memberDisplayName, profileHref } from './navigation';
 
 /**
  * The popups Header opens on click. They live in their own chunk (Header loads them with next/dynamic
@@ -50,12 +50,14 @@ export const AccountMenuPopup = ({ me, id, anchorEl, onClose }: AccountMenuPopup
 					})}
 				</Typography>
 			</Box>
-			<MenuItem component={NextLink} href={profileHref(me)} onClick={onClose}>
-				<ListItemIcon>
-					<PersonOutlineIcon fontSize="small" />
-				</ListItemIcon>
-				{t('common:header.myProfile')}
-			</MenuItem>
+			{hasPublicProfile(me.memberType) && (
+				<MenuItem component={NextLink} href={profileHref(me)} onClick={onClose}>
+					<ListItemIcon>
+						<PersonOutlineIcon fontSize="small" />
+					</ListItemIcon>
+					{t('common:header.myProfile')}
+				</MenuItem>
+			)}
 			<MenuItem component={NextLink} href={SETTINGS_HREF} onClick={onClose}>
 				<ListItemIcon>
 					<SettingsOutlinedIcon fontSize="small" />
@@ -126,9 +128,11 @@ export const MobileDrawer = ({ id, open, onClose }: MobileDrawerProps) => {
 					<Button component={NextLink} href={dashboardHref(me.memberType)} onClick={onClose}>
 						{t('common:header.dashboard')}
 					</Button>
-					<Button component={NextLink} href={profileHref(me)} variant="outlined" onClick={onClose}>
-						{t('common:header.myProfile')}
-					</Button>
+					{hasPublicProfile(me.memberType) && (
+						<Button component={NextLink} href={profileHref(me)} variant="outlined" onClick={onClose}>
+							{t('common:header.myProfile')}
+						</Button>
+					)}
 					<Button component={NextLink} href={SETTINGS_HREF} variant="outlined" onClick={onClose}>
 						{t('common:header.settings')}
 					</Button>

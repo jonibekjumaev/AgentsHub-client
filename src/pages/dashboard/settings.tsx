@@ -22,6 +22,7 @@ const Page: NextPageWithLayout = () => {
 	);
 };
 
-Page.getLayout = (page) => <DashboardLayout roles={['CREATOR', 'USER']}>{page}</DashboardLayout>;
+// ADMIN too: an admin must be able to change their own password and nick (the backend allows it: AuthGuard only).
+Page.getLayout = (page) => <DashboardLayout roles={['CREATOR', 'USER', 'ADMIN']}>{page}</DashboardLayout>;
 
 export default Page;
