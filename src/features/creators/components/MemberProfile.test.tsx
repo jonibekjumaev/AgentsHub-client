@@ -9,7 +9,7 @@ import { ArticlesListQuery } from '@/features/community';
 import { MyFollowingIdsQuery, SubscribeMutation } from '@/features/follows';
 import { renderWithProviders } from '@/test/renderWithProviders';
 import { MemberProfileQuery, MemberViewerQuery } from '../graphql/creators';
-import { profileAgentsVariables, profileArticlesVariables } from '../lib/profile';
+import { DEFAULT_PROFILE_AGENT_FILTERS, profileAgentsVariables, profileArticlesVariables, type ProfileAgentFilters } from '../lib/profile';
 import { CREATOR_ID, VIEWER_ID, makeProfile } from '../test/fixtures';
 import { MemberProfile } from './MemberProfile';
 
@@ -18,8 +18,8 @@ const profileMock = (member = makeProfile()): MockedResponse => ({
 	result: { data: { getMember: member } },
 });
 
-const agentsMock = (): MockedResponse => ({
-	request: { query: AgentsListQuery, variables: profileAgentsVariables(CREATOR_ID) },
+const agentsMock = (filters: ProfileAgentFilters = DEFAULT_PROFILE_AGENT_FILTERS): MockedResponse => ({
+	request: { query: AgentsListQuery, variables: profileAgentsVariables(CREATOR_ID, filters) },
 	result: { data: { getProducts: { __typename: 'Products', list: [], metaCounter: [{ __typename: 'TotalCounter', total: 0 }] } } },
 });
 
@@ -85,12 +85,13 @@ describe('MemberProfile (S6)', () => {
 		mockRouter.setCurrentUrl(`/members/${CREATOR_ID}`);
 	});
 
-	it('renders a creator for a guest: badge, stats, tabs, no contacts', async () => {
+	it('renders a creator for a guest: badge, tabs, no contacts', async () => {
 		renderWithProviders(<MemberProfile memberId={CREATOR_ID} />, { mocks: [profileMock(), agentsMock()], auth: { status: 'guest' } });
 
 		expect(await screen.findByRole('heading', { level: 1, name: 'Nova Labs' })).toBeInTheDocument();
 		expect(screen.getByText('Creator')).toBeInTheDocument();
-		expect(screen.getByText('48.2K')).toBeInTheDocument();
+		// Likes and views are not shown on the profile any more.
+		expect(screen.queryByText('48.2K')).not.toBeInTheDocument();
 		expect(screen.getByText('Log in to see contact details.')).toBeInTheDocument();
 		const tabs = screen.getByRole('navigation', { name: 'Profile sections' });
 		expect(within(tabs).getByRole('link', { name: 'Agents 8' })).toHaveAttribute('aria-current', 'page');
@@ -155,7 +156,68 @@ describe('MemberProfile (S6)', () => {
 		expect(within(nav).getByText('Work')).toBeInTheDocument();
 		expect(within(nav).getByRole('link', { name: 'Following 36' })).toHaveAttribute('href', `/members/${CREATOR_ID}?tab=following`);
 		expect(screen.getByRole('heading', { level: 2, name: 'Agents' })).toBeInTheDocument();
-		// Likes and views have no list: plain numbers, not links.
-		expect(screen.queryByRole('link', { name: /Likes/ })).not.toBeInTheDocument();
+	});
+
+	it('keeps contacts out of the page for a guest: a locked placeholder and a log-in link', async () => {
+		renderWithProviders(<MemberProfile memberId={CREATOR_ID} />, { mocks: [profileMock(), agentsMock()], auth: { status: 'guest' } });
+
+		expect(await screen.findByText('Hidden for guests')).toBeInTheDocument();
+		expect(screen.getByRole('link', { name: 'Log in' })).toHaveAttribute('href', `/login?next=%2Fmembers%2F${CREATOR_ID}`);
+		expect(screen.queryByRole('link', { name: /novalabs/ })).not.toBeInTheDocument();
+		expect(screen.getByRole('button', { name: 'Copy profile link' })).toBeInTheDocument();
+	});
+
+	it('shows the section header: group, title, count and what the list is', async () => {
+		renderWithProviders(<MemberProfile memberId={CREATOR_ID} />, { mocks: [profileMock(), agentsMock()], auth: { status: 'guest' } });
+
+		const section = (await screen.findByRole('heading', { level: 2, name: 'Agents' })).closest('section') as HTMLElement;
+		expect(within(section).getByText('Work')).toBeInTheDocument();
+		expect(within(section).getByText('AI agents built and sold by @nova_labs.')).toBeInTheDocument();
+	});
+
+	it('shows the agent toolbar for any number of agents, but not when there are none', async () => {
+		const { unmount } = renderWithProviders(<MemberProfile memberId={CREATOR_ID} />, {
+			mocks: [profileMock(makeProfile({ memberProducts: 2 })), agentsMock()],
+			auth: { status: 'guest' },
+		});
+		expect(await screen.findByRole('searchbox', { name: 'Search agents by title' })).toBeInTheDocument();
+		unmount();
+
+		renderWithProviders(<MemberProfile memberId={CREATOR_ID} />, { mocks: [profileMock(makeProfile({ memberProducts: 0 })), agentsMock()], auth: { status: 'guest' } });
+		expect(await screen.findByRole('heading', { name: 'No public agents yet' })).toBeInTheDocument();
+		expect(screen.queryByRole('searchbox', { name: 'Search agents by title' })).not.toBeInTheDocument();
+	});
+
+	it('focuses the agent search with "/" and clears it with Esc', async () => {
+		const user = userEvent.setup();
+		renderWithProviders(<MemberProfile memberId={CREATOR_ID} />, {
+			mocks: [profileMock(), agentsMock(), agentsMock({ ...DEFAULT_PROFILE_AGENT_FILTERS, text: 'blog' })],
+			auth: { status: 'guest' },
+		});
+
+		const search = await screen.findByRole('searchbox', { name: 'Search agents by title' });
+		await user.keyboard('/');
+		expect(search).toHaveFocus();
+		expect(search).toHaveValue('');
+
+		await user.type(search, 'blog');
+		await user.keyboard('{Escape}');
+		expect(search).toHaveValue('');
+	});
+
+	it('filters agents by category and clears the filters from the empty state', async () => {
+		const user = userEvent.setup();
+		renderWithProviders(<MemberProfile memberId={CREATOR_ID} />, {
+			mocks: [profileMock(), agentsMock(), agentsMock({ ...DEFAULT_PROFILE_AGENT_FILTERS, category: 'CONTENT' })],
+			auth: { status: 'guest' },
+		});
+
+		expect(await screen.findByRole('searchbox', { name: 'Search agents by title' })).toBeInTheDocument();
+		await user.selectOptions(screen.getByRole('combobox', { name: 'Category' }), 'CONTENT');
+		expect(await screen.findByRole('heading', { name: 'No agents match your filters' })).toBeInTheDocument();
+
+		await user.click(screen.getByRole('button', { name: 'Clear filters' }));
+		expect(await screen.findByRole('heading', { name: 'No public agents yet' })).toBeInTheDocument();
+		expect(screen.getByRole('combobox', { name: 'Category' })).toHaveValue('');
 	});
 });

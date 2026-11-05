@@ -54,7 +54,13 @@
 			"login": "로그인",
 			"error": "연락처를 불러오지 못했습니다",
 			"none": "아직 연락처가 없습니다.",
-			"visible": "로그인했기 때문에 보입니다."
+			"visible": "로그인했기 때문에 보입니다.",
+			"label": "연락처",
+			"hidden": "게스트에게는 숨겨집니다",
+			"whatsapp": "WhatsApp",
+			"email": "이메일",
+			"copy": "{{label}} 복사",
+			"copied": "{{label}}을(를) 복사했습니다"
 		},
 		"stats": {
 			"agents": "에이전트",
@@ -86,6 +92,37 @@
 		"showMoreBriefs_one": "브리프 {{count}}개 더 보기",
 		"showMoreBriefs_other": "브리프 {{count}}개 더 보기",
 		"showMoreArticles_one": "게시글 {{count}}개 더 보기",
-		"showMoreArticles_other": "게시글 {{count}}개 더 보기"
+		"showMoreArticles_other": "게시글 {{count}}개 더 보기",
+		"cardLabel": "{{name}}님의 프로필",
+		"memberSince": "{{date}} 가입",
+		"share": "프로필 링크 복사",
+		"shareDone": "프로필 링크를 복사했습니다",
+		"copyFailed": "복사하지 못했습니다. 직접 선택해서 복사해 주세요.",
+		"statsLabel": "프로필 통계",
+		"sections": {
+			"agents": "@{{nick}}님이 만들어 판매하는 AI 에이전트입니다.",
+			"briefs": "@{{nick}}님이 올린 진행 중인 브리프입니다.",
+			"articles": "@{{nick}}님이 쓴 가이드와 글입니다.",
+			"followers": "@{{nick}}님을 팔로우하는 회원입니다.",
+			"following": "@{{nick}}님이 팔로우하는 회원입니다."
+		},
+		"noAgentsText": "@{{nick}}님이 에이전트를 공개하면 여기에 표시됩니다.",
+		"noBriefsText": "@{{nick}}님이 브리프를 올리면 여기에 표시됩니다.",
+		"noArticlesText": "@{{nick}}님이 글을 쓰면 여기에 표시됩니다.",
+		"agents": {
+			"categoryLabel": "카테고리",
+			"allCategories": "모든 카테고리",
+			"layout": "보기 방식",
+			"grid": "그리드 보기",
+			"list": "목록 보기",
+			"range": "{{total}}개 중 {{from}}–{{to}}",
+			"noMatch": "조건에 맞는 에이전트가 없습니다",
+			"noMatchText": "다른 키워드나 카테고리로 찾아보세요.",
+			"clearFilters": "필터 초기화",
+			"colAgent": "에이전트",
+			"colPrice": "가격",
+			"colLikes": "좋아요",
+			"colViews": "조회수"
+		}
 	}
 }

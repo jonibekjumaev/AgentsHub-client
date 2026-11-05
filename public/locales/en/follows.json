@@ -1,6 +1,7 @@
 {
 	"follow": "Follow",
 	"following": "Following",
+	"unfollow": "Unfollow",
 	"followLabel": "Follow @{{nick}}",
 	"followingLabel": "Following @{{nick}}, click to unfollow",
 	"followed": "You follow @{{nick}} now.",

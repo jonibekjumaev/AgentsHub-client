@@ -1,6 +1,6 @@
 import { ApolloError } from '@apollo/client';
 import { describe, expect, it, vi } from 'vitest';
-import { parseProfileTab, prefetchMemberProfile, profileTabHref } from './profile';
+import { DEFAULT_PROFILE_AGENT_FILTERS, parseProfileTab, prefetchMemberProfile, profileAgentsVariables, profileTabHref } from './profile';
 
 const ID = '6ac7992dd87bde19b9216c99';
 const gqlError = (code: string) => new ApolloError({ graphQLErrors: [{ message: 'x', extensions: { code } }] });
@@ -15,6 +15,25 @@ describe('profile tabs', () => {
 		expect(profileTabHref(ID, 'work')).toBe(`/members/${ID}`);
 		expect(profileTabHref(ID, 'following')).toBe(`/members/${ID}?tab=following`);
 		expect(profileTabHref(ID, 'articles')).toBe(`/members/${ID}?tab=articles`);
+	});
+});
+
+describe('profileAgentsVariables', () => {
+	it('lists the newest ACTIVE agents of one member by default', () => {
+		expect(profileAgentsVariables(ID)).toEqual({
+			input: { page: 1, limit: 6, sort: 'createdAt', direction: 'DESC', search: { memberId: ID } },
+		});
+	});
+
+	it('adds text, category and the API sort only when set', () => {
+		const variables = profileAgentsVariables(ID, { ...DEFAULT_PROFILE_AGENT_FILTERS, text: 'blog', category: 'CONTENT', sort: 'price-asc', page: 2 });
+		expect(variables.input).toEqual({
+			page: 2,
+			limit: 6,
+			sort: 'productPrice',
+			direction: 'ASC',
+			search: { memberId: ID, text: 'blog', categoryList: ['CONTENT'] },
+		});
 	});
 });
 

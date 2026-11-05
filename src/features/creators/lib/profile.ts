@@ -1,6 +1,7 @@
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import type { ParsedUrlQuery } from 'querystring';
-import { Direction, MemberType } from '@/gql/enums';
+import { agentSortToApi, type AgentSort } from '@/features/agents';
+import { Direction, MemberType, type AgentCategory } from '@/gql/enums';
 import { ErrorCode, getErrorCode } from '@/shared/lib/errors';
 import { MemberProfileQuery } from '../graphql/creators';
 
@@ -23,10 +24,47 @@ export const profileTabHref = (memberId: string, tab: ProfileTab) => (tab === 'w
 
 export const PROFILE_WORK_PAGE_SIZE = 6;
 
-/** A creator's ACTIVE agents (the public list never returns PAUSED ones, D-16). */
-export const profileAgentsVariables = (memberId: string, limit = PROFILE_WORK_PAGE_SIZE) => ({
-	input: { page: 1, limit, sort: 'createdAt', direction: Direction.Desc, search: { memberId } },
-});
+/** The profile's agent list: local state, not in the URL (the tab is). */
+export type ProfileAgentFilters = {
+	text: string;
+	category: AgentCategory | null;
+	sort: AgentSort;
+	page: number;
+};
+
+export const DEFAULT_PROFILE_AGENT_FILTERS: ProfileAgentFilters = { text: '', category: null, sort: 'newest', page: 1 };
+
+/** Sorts that make sense inside one creator's list ("Top ranked" is for the whole catalog). */
+export const PROFILE_AGENT_SORTS: readonly AgentSort[] = ['newest', 'likes', 'views', 'price-asc', 'price-desc'];
+
+/**
+ * Search, category, sort and grid/list appear as soon as the creator has an agent, so the page looks the
+ * same on every profile. With no agents there is nothing to filter: only the empty state.
+ */
+export const PROFILE_AGENT_TOOLBAR_MIN = 0;
+
+export const hasProfileAgentFilters = (filters: ProfileAgentFilters) => Boolean(filters.text || filters.category);
+
+/**
+ * A creator's ACTIVE agents (the public list never returns PAUSED ones, D-16), paged. Search keys are
+ * only present when set, so the default list keeps one cache key.
+ */
+export const profileAgentsVariables = (memberId: string, filters: ProfileAgentFilters = DEFAULT_PROFILE_AGENT_FILTERS) => {
+	const { sort, direction } = agentSortToApi(filters.sort);
+	return {
+		input: {
+			page: filters.page,
+			limit: PROFILE_WORK_PAGE_SIZE,
+			sort,
+			direction,
+			search: {
+				memberId,
+				...(filters.text && { text: filters.text }),
+				...(filters.category && { categoryList: [filters.category] }),
+			},
+		},
+	};
+};
 
 /** A user's OPEN briefs (getBriefs default status). */
 export const profileBriefsVariables = (memberId: string, limit = PROFILE_WORK_PAGE_SIZE) => ({

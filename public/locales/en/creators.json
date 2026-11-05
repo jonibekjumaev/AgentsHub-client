@@ -54,7 +54,13 @@
 			"login": "Log in",
 			"error": "Couldn't load the contacts",
 			"none": "No contacts added yet.",
-			"visible": "Visible because you are signed in."
+			"visible": "Visible because you are signed in.",
+			"label": "Contacts",
+			"hidden": "Hidden for guests",
+			"whatsapp": "WhatsApp",
+			"email": "Email",
+			"copy": "Copy {{label}}",
+			"copied": "{{label}} copied"
 		},
 		"stats": {
 			"agents": "Agents",
@@ -86,6 +92,37 @@
 		"showMoreBriefs_one": "Show {{count}} more brief",
 		"showMoreBriefs_other": "Show {{count}} more briefs",
 		"showMoreArticles_one": "Show {{count}} more article",
-		"showMoreArticles_other": "Show {{count}} more articles"
+		"showMoreArticles_other": "Show {{count}} more articles",
+		"cardLabel": "{{name}}'s profile",
+		"memberSince": "Member since {{date}}",
+		"share": "Copy profile link",
+		"shareDone": "Profile link copied",
+		"copyFailed": "Couldn't copy. Select the text and copy it by hand.",
+		"statsLabel": "Profile stats",
+		"sections": {
+			"agents": "AI agents built and sold by @{{nick}}.",
+			"briefs": "Open briefs posted by @{{nick}}.",
+			"articles": "Guides and write-ups from @{{nick}}.",
+			"followers": "Members who follow @{{nick}}.",
+			"following": "Members @{{nick}} follows."
+		},
+		"noAgentsText": "When @{{nick}} publishes an agent, it shows up here.",
+		"noBriefsText": "When @{{nick}} posts a brief, it shows up here.",
+		"noArticlesText": "When @{{nick}} writes an article, it shows up here.",
+		"agents": {
+			"categoryLabel": "Category",
+			"allCategories": "All categories",
+			"layout": "Layout",
+			"grid": "Grid view",
+			"list": "List view",
+			"range": "Showing {{from}}–{{to}} of {{total}} agents",
+			"noMatch": "No agents match your filters",
+			"noMatchText": "Try a different keyword or category.",
+			"clearFilters": "Clear filters",
+			"colAgent": "Agent",
+			"colPrice": "Price",
+			"colLikes": "Likes",
+			"colViews": "Views"
+		}
 	}
 }

@@ -56,8 +56,15 @@ const ListSkeleton = () => {
 	);
 };
 
+type FollowListProps = {
+	memberId: string;
+	kind: 'followers' | 'following';
+	/** grid (default): cards side by side (dashboard). list: one member per row (public profile). */
+	layout?: 'grid' | 'list';
+};
+
 /** A profile's Followers or Following tab. Paged with buttons: the page is not in the URL. */
-export const FollowList = ({ memberId, kind }: { memberId: string; kind: 'followers' | 'following' }) => {
+export const FollowList = ({ memberId, kind, layout = 'grid' }: FollowListProps) => {
 	const { t } = useTranslation('follows');
 	const [page, setPage] = useState(1);
 	const followers = useQuery(FollowersQuery, { variables: followersVariables(memberId, page), skip: kind !== 'followers' });
@@ -83,7 +90,7 @@ export const FollowList = ({ memberId, kind }: { memberId: string; kind: 'follow
 
 	return (
 		<Stack spacing={4}>
-			<Box component="ul" aria-label={t(`follows:listLabel.${kind}`)} sx={{ m: 0, p: 0, listStyle: 'none', display: 'grid', gap: 3, gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' }}>
+			<Box component="ul" aria-label={t(`follows:listLabel.${kind}`)} sx={{ m: 0, p: 0, listStyle: 'none', display: 'grid', gap: 3, gridTemplateColumns: layout === 'list' ? 'minmax(0, 1fr)' : 'repeat(auto-fill, minmax(300px, 1fr))' }}>
 				{members.map((member) => (
 					<MemberRow key={member._id} member={member} />
 				))}

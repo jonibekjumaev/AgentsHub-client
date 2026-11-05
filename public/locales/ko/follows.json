@@ -1,6 +1,7 @@
 {
 	"follow": "팔로우",
 	"following": "팔로잉",
+	"unfollow": "언팔로우",
 	"followLabel": "@{{nick}} 팔로우",
 	"followingLabel": "@{{nick}} 팔로잉 중, 누르면 팔로우 취소",
 	"followed": "이제 @{{nick}}님을 팔로우합니다.",

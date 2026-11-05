@@ -11,6 +11,11 @@ type FollowButtonProps = {
 	following?: boolean | null;
 	size?: 'small' | 'medium';
 	fullWidth?: boolean;
+	/**
+	 * soft (default): accentSoft pill for lists. solid: the profile's main action — a filled button
+	 * while not following; "Following" turns into "Unfollow" on hover so the click is predictable.
+	 */
+	variant?: 'soft' | 'solid';
 };
 
 /**
@@ -18,13 +23,19 @@ type FollowButtonProps = {
  * (following yourself is refused, §3.9). Hidden from admins: they can't follow anyone (D-40).
  * Guests see it and go to login.
  */
-export const FollowButton = ({ memberId, nick, following: known, size = 'medium', fullWidth }: FollowButtonProps) => {
+export const FollowButton = ({ memberId, nick, following: known, size = 'medium', fullWidth, variant = 'soft' }: FollowButtonProps) => {
 	const { t } = useTranslation('follows');
 	const { me } = useAuth();
 	const { following, isSelf, pending, loading, toggle } = useFollow(memberId, known);
 	if (isSelf || me?.memberType === 'ADMIN') return null;
 
 	const inactive = pending || loading;
+	const solid = variant === 'solid';
+	const colorsSx = following
+		? { bgcolor: 'surface', borderColor: solid ? 'inputBorder' : 'border', color: 'ink' }
+		: solid
+			? { bgcolor: 'primary.main', borderColor: 'primary.main', color: 'primary.contrastText', '&:hover': { bgcolor: 'accentHover', borderColor: 'accentHover' } }
+			: { bgcolor: 'accentSoft', borderColor: 'accentBorder', color: 'primary.main' };
 	return (
 		<Button
 			variant="outlined"
@@ -40,13 +51,21 @@ export const FollowButton = ({ memberId, nick, following: known, size = 'medium'
 			}}
 			sx={{
 				flex: 'none',
-				...(following
-					? { bgcolor: 'surface', borderColor: 'border', color: 'ink' }
-					: { bgcolor: 'accentSoft', borderColor: 'accentBorder', color: 'primary.main' }),
+				...colorsSx,
+				...(solid && following && { '& .label-hover': { display: 'none' }, '&:hover .label-on': { display: 'none' }, '&:hover .label-hover': { display: 'inline' } }),
 				...(inactive && { opacity: 0.6, cursor: 'not-allowed' }),
 			}}
 		>
-			{t(following ? 'follows:following' : 'follows:follow')}
+			{solid && following ? (
+				<>
+					<span className="label-on">{t('follows:following')}</span>
+					<span className="label-hover" aria-hidden="true">
+						{t('follows:unfollow')}
+					</span>
+				</>
+			) : (
+				t(following ? 'follows:following' : 'follows:follow')
+			)}
 		</Button>
 	);
 };

@@ -5,7 +5,16 @@ export { AgentsCatalog } from './components/AgentsCatalog';
 export { AgentsSeo } from './components/AgentsSeo';
 export { AgentsListQuery } from './graphql/agents';
 export { useAgentFilters } from './hooks/useAgentFilters';
-export { agentsHref, agentsListVariables, parseAgentFilters, type AgentFilters } from './lib/listQuery';
+export {
+	AGENT_CATEGORIES,
+	SEARCH_TEXT_MAX,
+	agentSortToApi,
+	agentsHref,
+	agentsListVariables,
+	parseAgentFilters,
+	type AgentFilters,
+	type AgentSort,
+} from './lib/listQuery';
 export { prefetchAgentDetail, type AgentDetailPrefetch } from './lib/prefetchAgentDetail';
 export { MyAgents } from './components/manage/MyAgents';
 export { RecentAgents } from './components/manage/RecentAgents';

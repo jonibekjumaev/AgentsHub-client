@@ -54,7 +54,13 @@
 			"login": "Kirish",
 			"error": "Kontaktlarni yuklab boʻlmadi",
 			"none": "Hali kontakt qoʻshilmagan.",
-			"visible": "Tizimga kirganingiz uchun koʻrinadi."
+			"visible": "Tizimga kirganingiz uchun koʻrinadi.",
+			"label": "Kontaktlar",
+			"hidden": "Mehmonlar uchun yashirilgan",
+			"whatsapp": "WhatsApp",
+			"email": "Email",
+			"copy": "{{label}} ni nusxalash",
+			"copied": "{{label}} nusxalandi"
 		},
 		"stats": {
 			"agents": "Agentlar",
@@ -86,6 +92,37 @@
 		"showMoreBriefs_one": "Yana {{count}} ta briefni koʻrsatish",
 		"showMoreBriefs_other": "Yana {{count}} ta briefni koʻrsatish",
 		"showMoreArticles_one": "Yana {{count}} ta maqolani koʻrsatish",
-		"showMoreArticles_other": "Yana {{count}} ta maqolani koʻrsatish"
+		"showMoreArticles_other": "Yana {{count}} ta maqolani koʻrsatish",
+		"cardLabel": "{{name}} profili",
+		"memberSince": "{{date}} dan beri aʼzo",
+		"share": "Profil havolasini nusxalash",
+		"shareDone": "Profil havolasi nusxalandi",
+		"copyFailed": "Nusxalab boʻlmadi. Matnni belgilab, qoʻlda nusxalang.",
+		"statsLabel": "Profil statistikasi",
+		"sections": {
+			"agents": "@{{nick}} yaratgan va sotayotgan AI agentlar.",
+			"briefs": "@{{nick}} joylagan ochiq brieflar.",
+			"articles": "@{{nick}} yozgan qoʻllanma va maqolalar.",
+			"followers": "@{{nick}} ni kuzatayotgan aʼzolar.",
+			"following": "@{{nick}} kuzatayotgan aʼzolar."
+		},
+		"noAgentsText": "@{{nick}} agent eʼlon qilganda, u shu yerda chiqadi.",
+		"noBriefsText": "@{{nick}} brief joylaganda, u shu yerda chiqadi.",
+		"noArticlesText": "@{{nick}} maqola yozganda, u shu yerda chiqadi.",
+		"agents": {
+			"categoryLabel": "Kategoriya",
+			"allCategories": "Barcha kategoriyalar",
+			"layout": "Koʻrinish",
+			"grid": "Grid koʻrinish",
+			"list": "Roʻyxat koʻrinish",
+			"range": "{{total}} ta agentdan {{from}}–{{to}}",
+			"noMatch": "Filtrlarga mos agent topilmadi",
+			"noMatchText": "Boshqa soʻz yoki kategoriya bilan qidirib koʻring.",
+			"clearFilters": "Filtrlarni tozalash",
+			"colAgent": "Agent",
+			"colPrice": "Narx",
+			"colLikes": "Layklar",
+			"colViews": "Koʻrishlar"
+		}
 	}
 }

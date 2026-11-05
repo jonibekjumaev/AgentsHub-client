@@ -1,6 +1,7 @@
 {
 	"follow": "Kuzatish",
 	"following": "Kuzatilmoqda",
+	"unfollow": "Bekor qilish",
 	"followLabel": "@{{nick}} ni kuzatish",
 	"followingLabel": "@{{nick}} kuzatilmoqda, bekor qilish uchun bosing",
 	"followed": "Endi @{{nick}} ni kuzatyapsiz.",

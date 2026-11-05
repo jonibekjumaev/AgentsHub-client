@@ -58,6 +58,9 @@ const SORT_TO_API: Record<AgentSort, { sort: string; direction: Direction }> = {
 	'price-desc': { sort: 'productPrice', direction: Direction.Desc },
 };
 
+/** The API sort for a UI sort value (also used by the profile's agent list). */
+export const agentSortToApi = (sort: AgentSort) => SORT_TO_API[sort];
+
 export type AgentFilters = {
 	/** Title search; '' = none. */
 	text: string;
