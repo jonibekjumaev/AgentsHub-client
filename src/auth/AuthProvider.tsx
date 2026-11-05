@@ -27,6 +27,26 @@ const meContext: { authErrors: AuthErrorMode } = { authErrors: 'silent' };
 /** No session on the server, so SSR and the hydration render agree. */
 const getServerToken = () => null;
 
+type LoadedMe = { token: string; me: Me | null; loading: boolean };
+
+/**
+ * Watches getMe for ONE token. AuthProvider renders it with `key={token}`, so every session gets a
+ * fresh query: a skip -> unskip useQuery kept the previous member's result, and after
+ * "logout admin -> login user1" the header still showed the admin (B23).
+ * network-only first, so a new session never starts from cached data; cache-first afterwards,
+ * so refetchMe() and profile updates still flow in through the cache.
+ */
+const MeLoader = ({ token, onChange }: { token: string; onChange: (loaded: LoadedMe) => void }) => {
+	const { data, loading } = useQuery(MeQuery, {
+		context: meContext,
+		fetchPolicy: 'network-only',
+		nextFetchPolicy: 'cache-first',
+	});
+	const me = data?.getMe ?? null;
+	useEffect(() => onChange({ token, me, loading }), [token, me, loading, onChange]);
+	return null;
+};
+
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
 	const client = useApolloClient();
 	const token = useSyncExternalStore(subscribeToSession, getToken, getServerToken);
@@ -35,7 +55,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 	const [mounted, setMounted] = useState(false);
 	useEffect(() => setMounted(true), []);
 
-	const { data, loading } = useQuery(MeQuery, { skip: !token, context: meContext });
+	const [loaded, setLoaded] = useState<LoadedMe | null>(null);
 
 	// The token was removed or replaced (logout here or in another tab): drop the old member's data.
 	const previousToken = useRef(token);
@@ -44,7 +64,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 		previousToken.current = token;
 	}, [client, token]);
 
-	const me = token ? data?.getMe ?? null : null;
+	// Only a result loaded for the current token counts; anything older belongs to another session.
+	const current = token && loaded?.token === token ? loaded : null;
+	const me = current?.me ?? null;
+	const loading = !current || current.loading;
 
 	let status: AuthStatus;
 	if (!mounted) status = 'loading';
@@ -62,7 +85,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 	/**
 	 * Same effect as client.resetStore(), ordered so no query is in flight while the store is cleared:
-	 * clearing first (as a guest, getMe is still skipped) avoids the "Store reset while query was in
+	 * clearing first (as a guest, no getMe is mounted) avoids the "Store reset while query was in
 	 * flight" error that would briefly turn the status into 'guest' and trip RequireRole.
 	 */
 	const startSession = useCallback(
@@ -85,7 +108,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 		[me, status, startSession, refetchMe, logout],
 	);
 
-	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+	return (
+		<AuthContext.Provider value={value}>
+			{token ? <MeLoader key={token} token={token} onChange={setLoaded} /> : null}
+			{children}
+		</AuthContext.Provider>
+	);
 };
 
 export const useAuth = (): AuthContextValue => {
