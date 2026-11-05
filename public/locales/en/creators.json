@@ -65,19 +65,27 @@
 			"views": "Views",
 			"articles": "Articles"
 		},
+		"groups": {
+			"work": "Work",
+			"community": "Community"
+		},
 		"tabs": {
 			"label": "Profile sections",
 			"agents": "Agents",
 			"briefs": "Open briefs",
+			"articles": "Articles",
 			"followers": "Followers",
 			"following": "Following"
 		},
 		"workError": "We couldn't load this list",
 		"noAgents": "No public agents yet",
 		"noBriefs": "No open briefs",
+		"noArticles": "No articles yet",
 		"showMoreAgents_one": "Show {{count}} more agent",
 		"showMoreAgents_other": "Show {{count}} more agents",
 		"showMoreBriefs_one": "Show {{count}} more brief",
-		"showMoreBriefs_other": "Show {{count}} more briefs"
+		"showMoreBriefs_other": "Show {{count}} more briefs",
+		"showMoreArticles_one": "Show {{count}} more article",
+		"showMoreArticles_other": "Show {{count}} more articles"
 	}
 }

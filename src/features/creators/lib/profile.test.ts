@@ -10,9 +10,11 @@ describe('profile tabs', () => {
 	it('reads the tab from the URL, "work" by default', () => {
 		expect(parseProfileTab({})).toBe('work');
 		expect(parseProfileTab({ tab: 'followers' })).toBe('followers');
+		expect(parseProfileTab({ tab: 'articles' })).toBe('articles');
 		expect(parseProfileTab({ tab: 'nope' })).toBe('work');
 		expect(profileTabHref(ID, 'work')).toBe(`/members/${ID}`);
 		expect(profileTabHref(ID, 'following')).toBe(`/members/${ID}?tab=following`);
+		expect(profileTabHref(ID, 'articles')).toBe(`/members/${ID}?tab=articles`);
 	});
 });
 

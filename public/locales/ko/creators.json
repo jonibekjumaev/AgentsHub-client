@@ -65,19 +65,27 @@
 			"views": "조회수",
 			"articles": "게시글"
 		},
+		"groups": {
+			"work": "활동",
+			"community": "커뮤니티"
+		},
 		"tabs": {
 			"label": "프로필 섹션",
 			"agents": "에이전트",
 			"briefs": "진행 중인 브리프",
+			"articles": "게시글",
 			"followers": "팔로워",
 			"following": "팔로잉"
 		},
 		"workError": "목록을 불러오지 못했습니다",
 		"noAgents": "아직 공개된 에이전트가 없습니다",
 		"noBriefs": "진행 중인 브리프가 없습니다",
+		"noArticles": "아직 게시글이 없습니다",
 		"showMoreAgents_one": "에이전트 {{count}}개 더 보기",
 		"showMoreAgents_other": "에이전트 {{count}}개 더 보기",
 		"showMoreBriefs_one": "브리프 {{count}}개 더 보기",
-		"showMoreBriefs_other": "브리프 {{count}}개 더 보기"
+		"showMoreBriefs_other": "브리프 {{count}}개 더 보기",
+		"showMoreArticles_one": "게시글 {{count}}개 더 보기",
+		"showMoreArticles_other": "게시글 {{count}}개 더 보기"
 	}
 }

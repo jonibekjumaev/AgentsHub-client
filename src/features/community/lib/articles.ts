@@ -73,7 +73,7 @@ export const toArticlesInquiry = (filters: ArticleFilters): BoardArticlesInquiry
 
 export const articlesListVariables = (filters: ArticleFilters) => ({ input: toArticlesInquiry(filters) });
 
-/** One member's articles (their dashboard list and profile). */
+/** One member's articles, page by page (their dashboard list). The public profile uses profileArticlesVariables. */
 export const memberArticlesVariables = (memberId: string, page = 1) => ({
 	input: { page, limit: ARTICLES_PAGE_SIZE, sort: 'createdAt', direction: Direction.Desc, search: { memberId } },
 });

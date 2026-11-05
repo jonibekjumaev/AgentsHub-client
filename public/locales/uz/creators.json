@@ -65,19 +65,27 @@
 			"views": "Koʻrishlar",
 			"articles": "Maqolalar"
 		},
+		"groups": {
+			"work": "Faoliyat",
+			"community": "Hamjamiyat"
+		},
 		"tabs": {
 			"label": "Profil boʻlimlari",
 			"agents": "Agentlar",
 			"briefs": "Ochiq brieflar",
+			"articles": "Maqolalar",
 			"followers": "Kuzatuvchilar",
 			"following": "Kuzatayotganlari"
 		},
 		"workError": "Roʻyxatni yuklab boʻlmadi",
 		"noAgents": "Hali ochiq agentlar yoʻq",
 		"noBriefs": "Ochiq brieflar yoʻq",
+		"noArticles": "Hali maqolalar yoʻq",
 		"showMoreAgents_one": "Yana {{count}} ta agentni koʻrsatish",
 		"showMoreAgents_other": "Yana {{count}} ta agentni koʻrsatish",
 		"showMoreBriefs_one": "Yana {{count}} ta briefni koʻrsatish",
-		"showMoreBriefs_other": "Yana {{count}} ta briefni koʻrsatish"
+		"showMoreBriefs_other": "Yana {{count}} ta briefni koʻrsatish",
+		"showMoreArticles_one": "Yana {{count}} ta maqolani koʻrsatish",
+		"showMoreArticles_other": "Yana {{count}} ta maqolani koʻrsatish"
 	}
 }

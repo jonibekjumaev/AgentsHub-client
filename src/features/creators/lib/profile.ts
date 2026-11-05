@@ -7,8 +7,11 @@ import { MemberProfileQuery } from '../graphql/creators';
 /** Every id is a 24-character hex ObjectId (§1.3). */
 export const isObjectId = (value: unknown): value is string => typeof value === 'string' && /^[a-f\d]{24}$/i.test(value);
 
-/** Profile tabs (MemberProfile.html). Creators list agents, users list their open briefs. */
-export const PROFILE_TABS = ['work', 'followers', 'following'] as const;
+/**
+ * Profile tabs (MemberProfile.html). "work": creators list agents, users their open briefs.
+ * Content first, then the social lists.
+ */
+export const PROFILE_TABS = ['work', 'articles', 'followers', 'following'] as const;
 export type ProfileTab = (typeof PROFILE_TABS)[number];
 
 export const parseProfileTab = (query: ParsedUrlQuery): ProfileTab => {
@@ -27,6 +30,11 @@ export const profileAgentsVariables = (memberId: string, limit = PROFILE_WORK_PA
 
 /** A user's OPEN briefs (getBriefs default status). */
 export const profileBriefsVariables = (memberId: string, limit = PROFILE_WORK_PAGE_SIZE) => ({
+	input: { page: 1, limit, sort: 'createdAt', direction: Direction.Desc, search: { memberId } },
+});
+
+/** A member's ACTIVE articles (getBoardArticles returns only ACTIVE ones). */
+export const profileArticlesVariables = (memberId: string, limit = PROFILE_WORK_PAGE_SIZE) => ({
 	input: { page: 1, limit, sort: 'createdAt', direction: Direction.Desc, search: { memberId } },
 });
 

@@ -6,5 +6,5 @@ export { CommunitySeo } from './components/CommunitySeo';
 export { MyArticles } from './components/MyArticles';
 export { EditArticle, NewArticle } from './components/form/ArticleFormPages';
 export { ArticlesListQuery } from './graphql/articles';
-export { articleHref, articlesListVariables, memberArticlesVariables, parseArticleFilters } from './lib/articles';
+export { articleHref, articlesListVariables, parseArticleFilters } from './lib/articles';
 export { prefetchArticleDetail } from './lib/prefetchArticleDetail';

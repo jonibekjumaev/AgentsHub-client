@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps<MemberPageProps> = async ({ 
 	return addApolloState(client, {
 		props: {
 			memberId: result.memberId,
-			...(await serverSideTranslations(locale ?? 'en', ['common', 'creators', 'follows', 'agents', 'briefs', 'errors'])),
+			...(await serverSideTranslations(locale ?? 'en', ['common', 'creators', 'follows', 'agents', 'briefs', 'community', 'errors'])),
 		},
 	});
 };
