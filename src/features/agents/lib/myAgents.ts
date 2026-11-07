@@ -76,3 +76,13 @@ export const statusActions = (status: ProductStatus): StatusAction[] => {
 
 /** Pause and delete change what other members see, so they confirm first; resume does not. */
 export const needsConfirm = (action: StatusAction): boolean => action !== 'resume';
+
+export const TOP_AGENTS_SHOWN = 5;
+
+/** getCreatorProducts input for the overview's top list: most views first (ties: newest agent first, `_id` desc on the API). */
+export const topAgentsVariables = (): { input: CreatorProductsInquiry } => ({
+	input: { page: 1, limit: TOP_AGENTS_SHOWN, sort: 'productViews', direction: Direction.Desc, search: {} },
+});
+
+/** Bar width in % of the most viewed agent (#1 = 100). Nobody viewed yet → no bars. */
+export const viewsShare = (views: number, top: number): number => (top > 0 ? Math.round((views / top) * 100) : 0);

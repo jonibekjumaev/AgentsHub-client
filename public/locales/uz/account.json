@@ -45,5 +45,12 @@
 		"wrongPassword": "Joriy parol notoʻgʻri.",
 		"samePassword": "Yangi parol joriy paroldan farq qilishi kerak.",
 		"confirmMismatch": "Parollar mos kelmadi."
+	},
+	"privacy": {
+		"title": "Maxfiylik",
+		"label": "Yashirin koʻrib chiqish",
+		"hint": "Boshqa aʼzoning profilini ochganingizda u kimdir kirganini koʻradi, lekin ismingizni koʻrmaydi.",
+		"on": "Endi yashirin koʻrib chiqyapsiz.",
+		"off": "Siz kirgan aʼzolar yana ismingizni koʻradi."
 	}
 }

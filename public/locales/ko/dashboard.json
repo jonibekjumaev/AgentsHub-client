@@ -5,10 +5,10 @@
 	},
 	"overview": {
 		"title": "개요",
-		"subtitle": "내 프로필과 에이전트 현황입니다.",
+		"subtitle": "프로필과 에이전트 현황입니다.",
 		"loading": "통계를 불러오는 중…",
 		"errorTitle": "통계를 불러오지 못했습니다",
-		"recent": "최근 업데이트한 에이전트",
+		"recent": "내 에이전트",
 		"manage": "모든 에이전트 관리",
 		"stats": {
 			"label": "내 통계",
@@ -16,7 +16,44 @@
 			"agentsHint": "활성 및 일시 중지",
 			"profileViews": "프로필 조회수",
 			"profileLikes": "프로필 좋아요",
-			"followers": "팔로워"
+			"followers": "팔로워",
+			"agentsSplit": "활성 {{active}} · 일시중지 {{paused}}",
+			"since": "{{date}}부터",
+			"likesHint": "프로필 좋아요",
+			"youFollow_one": "{{formatted}}명을 팔로우 중",
+			"youFollow_other": "{{formatted}}명을 팔로우 중"
+		},
+		"eyebrow": "크리에이터 스튜디오",
+		"welcome": "다시 오신 것을 환영합니다, {{name}}님",
+		"writeArticle": "글 쓰기",
+		"agents": {
+			"subtitle": "{{total}}개 중 {{shown}}개, 최근 변경 순",
+			"updated": "{{when}} 수정",
+			"views_one": "조회 {{formatted}}",
+			"views_other": "조회 {{formatted}}",
+			"likes_one": "좋아요 {{formatted}}",
+			"likes_other": "좋아요 {{formatted}}",
+			"menuLabel": "{{title}} 작업",
+			"viewPublic": "공개 페이지 보기"
+		},
+		"top": {
+			"title": "조회수 상위 에이전트",
+			"subtitle": "막대는 가장 많이 조회된 에이전트와 비교한 값입니다.",
+			"loading": "상위 에이전트를 불러오는 중…",
+			"paused": "일시중지"
+		},
+		"steps": {
+			"title": "다음 단계",
+			"progress": "{{total}}개 중 {{done}}개 완료",
+			"progressLabel": "프로필 진행률",
+			"done": "(완료)",
+			"items": {
+				"photo": "프로필 사진 추가",
+				"bio": "짧은 소개 작성",
+				"contact": "WhatsApp 또는 이메일 추가",
+				"agent": "첫 에이전트 추가",
+				"article": "첫 글 작성"
+			}
 		}
 	},
 	"myAgents": {
@@ -102,5 +139,17 @@
 		"live": "이 에이전트는 마켓플레이스에 게시되어 있습니다.",
 		"publicLink": "공개 페이지 열기",
 		"actionsLabel": "에이전트 작업"
+	},
+	"visitors": {
+		"title": "프로필 방문자",
+		"subtitle": "최근 {{days}}일 동안 내 프로필을 연 회원입니다. 최신순.",
+		"privacyLink": "나도 비공개로 둘러보기",
+		"loading": "방문자를 불러오는 중…",
+		"errorTitle": "방문자를 불러오지 못했습니다",
+		"emptyTitle": "아직 방문자가 없습니다",
+		"emptyText": "앞으로 {{days}}일 동안 프로필을 연 회원이 여기에 표시됩니다.",
+		"listLabel": "프로필 방문자",
+		"private_one": "{{count}}명이 비공개로 방문해 이름이 숨겨졌습니다.",
+		"private_other": "{{count}}명이 비공개로 방문해 이름이 숨겨졌습니다."
 	}
 }

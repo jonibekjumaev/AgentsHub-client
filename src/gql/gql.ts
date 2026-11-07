@@ -15,10 +15,11 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  */
 type Documents = {
     "\n\tquery Me {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\tmemberStatus\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberPhone\n\t\t\tmemberEmail\n\t\t\tmemberWhatsapp\n\t\t}\n\t}\n": typeof types.MeDocument,
-    "\n\tquery Account {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberPhone\n\t\t\tmemberEmail\n\t\t\tmemberWhatsapp\n\t\t\tmemberDesc\n\t\t}\n\t}\n": typeof types.AccountDocument,
+    "\n\tquery Account {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberPhone\n\t\t\tmemberEmail\n\t\t\tmemberWhatsapp\n\t\t\tmemberDesc\n\t\t\tmemberBrowsePrivately\n\t\t}\n\t}\n": typeof types.AccountDocument,
     "\n\tmutation UpdateAccount($input: MemberUpdate!) {\n\t\tupdateMember(input: $input) {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberPhone\n\t\t\tmemberEmail\n\t\t\tmemberWhatsapp\n\t\t\tmemberDesc\n\t\t}\n\t}\n": typeof types.UpdateAccountDocument,
     "\n\tmutation ChangePassword($input: ChangePasswordInput!) {\n\t\tchangePassword(input: $input)\n\t}\n": typeof types.ChangePasswordDocument,
     "\n\tmutation UploadAvatar($file: Upload!) {\n\t\timageUploader(file: $file, target: \"member\")\n\t}\n": typeof types.UploadAvatarDocument,
+    "\n\tmutation UpdateBrowsePrivately($input: MemberUpdate!) {\n\t\tupdateMember(input: $input) {\n\t\t\t_id\n\t\t\tmemberBrowsePrivately\n\t\t}\n\t}\n": typeof types.UpdateBrowsePrivatelyDocument,
     "\n\tquery AdminMembers($input: MembersInquiry!) {\n\t\tgetAllMembersByAdmin(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tmemberType\n\t\t\t\tmemberStatus\n\t\t\t\tmemberNick\n\t\t\t\tmemberFullName\n\t\t\t\tmemberImage\n\t\t\t\tmemberPhone\n\t\t\t\tmemberEmail\n\t\t\t\tmemberProducts\n\t\t\t\tmemberBriefs\n\t\t\t\tcreatedAt\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": typeof types.AdminMembersDocument,
     "\n\tmutation AdminUpdateMember($input: MemberUpdateByAdmin!) {\n\t\tupdateMemberByAdmin(input: $input) {\n\t\t\t_id\n\t\t\tmemberStatus\n\t\t}\n\t}\n": typeof types.AdminUpdateMemberDocument,
     "\n\tquery AdminProducts($input: AllProductsInquiry!) {\n\t\tgetAllProductsByAdmin(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tproductTitle\n\t\t\t\tproductStatus\n\t\t\t\tproductCategory\n\t\t\t\tproductPricing\n\t\t\t\tproductPrice\n\t\t\t\tproductLikes\n\t\t\t\tproductViews\n\t\t\t\tupdatedAt\n\t\t\t\tmemberData {\n\t\t\t\t\t_id\n\t\t\t\t\tmemberNick\n\t\t\t\t}\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": typeof types.AdminProductsDocument,
@@ -42,6 +43,7 @@ type Documents = {
     "\n\tfragment CreatorAgentRow on Product {\n\t\t_id\n\t\tproductTitle\n\t\tproductCategory\n\t\tproductStatus\n\t\tproductPricing\n\t\tproductPrice\n\t\tproductImages\n\t\tproductViews\n\t\tproductLikes\n\t\tproductComments\n\t\tupdatedAt\n\t}\n": typeof types.CreatorAgentRowFragmentDoc,
     "\n\tquery CreatorAgents($input: CreatorProductsInquiry!) {\n\t\tlist: getCreatorProducts(input: $input) {\n\t\t\tlist {\n\t\t\t\t...CreatorAgentRow\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t\tactive: getCreatorProducts(input: { page: 1, limit: 1, search: { productStatus: ACTIVE } }) {\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t\tpaused: getCreatorProducts(input: { page: 1, limit: 1, search: { productStatus: PAUSED } }) {\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": typeof types.CreatorAgentsDocument,
     "\n\tmutation UpdateAgentStatus($input: ProductUpdate!) {\n\t\tupdateProduct(input: $input) {\n\t\t\t_id\n\t\t\tproductStatus\n\t\t\tupdatedAt\n\t\t}\n\t}\n": typeof types.UpdateAgentStatusDocument,
+    "\n\tquery TopCreatorAgents($input: CreatorProductsInquiry!) {\n\t\tgetCreatorProducts(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tproductTitle\n\t\t\t\tproductStatus\n\t\t\t\tproductViews\n\t\t\t}\n\t\t}\n\t}\n": typeof types.TopCreatorAgentsDocument,
     "\n\tquery FavoriteAgents($input: OrdinaryInquiry!) {\n\t\tgetFavorities(input: $input) {\n\t\t\tlist {\n\t\t\t\t...AgentCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": typeof types.FavoriteAgentsDocument,
     "\n\tquery VisitedAgents($input: OrdinaryInquiry!) {\n\t\tgetVisited(input: $input) {\n\t\t\tlist {\n\t\t\t\t...AgentCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": typeof types.VisitedAgentsDocument,
     "\n\tmutation Login($input: LoginInput!) {\n\t\tlogin(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n": typeof types.LoginDocument,
@@ -74,7 +76,8 @@ type Documents = {
     "\n\tquery CreatorsList($input: CreatorsInquiry!) {\n\t\tgetCreators(input: $input) {\n\t\t\tlist {\n\t\t\t\t...CreatorCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": typeof types.CreatorsListDocument,
     "\n\tquery MemberProfile($memberId: String!) {\n\t\tgetMember(memberId: $memberId) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\tmemberStatus\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberDesc\n\t\t\tmemberRank\n\t\t\tmemberProducts\n\t\t\tmemberBriefs\n\t\t\tmemberArticles\n\t\t\tmemberFollowers\n\t\t\tmemberFollowings\n\t\t\tmemberLikes\n\t\t\tmemberViews\n\t\t\tcreatedAt\n\t\t}\n\t}\n": typeof types.MemberProfileDocument,
     "\n\tquery MemberViewer($memberId: String!) {\n\t\tgetMember(memberId: $memberId) {\n\t\t\t_id\n\t\t\tmemberViews\n\t\t\tmemberEmail\n\t\t\tmemberWhatsapp\n\t\t\tmeFollowed {\n\t\t\t\tfollowingId\n\t\t\t\tfollowerId\n\t\t\t\tmyFollowing\n\t\t\t}\n\t\t}\n\t}\n": typeof types.MemberViewerDocument,
-    "\n\tquery CreatorStats {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberProducts\n\t\t\tmemberViews\n\t\t\tmemberLikes\n\t\t\tmemberFollowers\n\t\t}\n\t}\n": typeof types.CreatorStatsDocument,
+    "\n\tquery CreatorStats {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberDesc\n\t\t\tmemberWhatsapp\n\t\t\tmemberEmail\n\t\t\tmemberProducts\n\t\t\tmemberArticles\n\t\t\tmemberViews\n\t\t\tmemberLikes\n\t\t\tmemberFollowers\n\t\t\tmemberFollowings\n\t\t\tcreatedAt\n\t\t}\n\t}\n": typeof types.CreatorStatsDocument,
+    "\n\tquery ProfileVisitors($input: OrdinaryInquiry!) {\n\t\tgetProfileVisitors(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tvisitedAt\n\t\t\t\tvisitor {\n\t\t\t\t\t_id\n\t\t\t\t\tmemberType\n\t\t\t\t\tmemberNick\n\t\t\t\t\tmemberFullName\n\t\t\t\t\tmemberImage\n\t\t\t\t\tmemberFollowers\n\t\t\t\t}\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t\tprivateCount\n\t\t}\n\t}\n": typeof types.ProfileVisitorsDocument,
     "\n\tfragment FollowMember on Member {\n\t\t_id\n\t\tmemberType\n\t\tmemberNick\n\t\tmemberFullName\n\t\tmemberImage\n\t\tmemberFollowers\n\t}\n": typeof types.FollowMemberFragmentDoc,
     "\n\tmutation Subscribe($memberId: String!) {\n\t\tsubscribe(input: $memberId) {\n\t\t\t_id\n\t\t\tfollowingId\n\t\t\tfollowerId\n\t\t}\n\t}\n": typeof types.SubscribeDocument,
     "\n\tmutation Unsubscribe($memberId: String!) {\n\t\tunsubscribe(input: $memberId) {\n\t\t\t_id\n\t\t\tfollowingId\n\t\t\tfollowerId\n\t\t}\n\t}\n": typeof types.UnsubscribeDocument,
@@ -82,13 +85,15 @@ type Documents = {
     "\n\tquery Followers($input: FollowInquiry!) {\n\t\tgetMemberFollowers(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tfollowerId\n\t\t\t\tfollowerData {\n\t\t\t\t\t...FollowMember\n\t\t\t\t}\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": typeof types.FollowersDocument,
     "\n\tquery Followings($input: FollowInquiry!) {\n\t\tgetMemberFollowings(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tfollowingId\n\t\t\t\tfollowingData {\n\t\t\t\t\t...FollowMember\n\t\t\t\t}\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": typeof types.FollowingsDocument,
     "\n\tquery DevApiProducts($input: ProductsInquiry!) {\n\t\tgetProducts(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tproductTitle\n\t\t\t\tproductCategory\n\t\t\t\tproductPricing\n\t\t\t\tproductPrice\n\t\t\t\tproductLikes\n\t\t\t\tproductViews\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": typeof types.DevApiProductsDocument,
+    "\n\tquery DashboardNavCounts {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberProducts\n\t\t\tmemberBriefs\n\t\t\tmemberArticles\n\t\t\tmemberFollowers\n\t\t\tmemberFollowings\n\t\t}\n\t}\n": typeof types.DashboardNavCountsDocument,
 };
 const documents: Documents = {
     "\n\tquery Me {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\tmemberStatus\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberPhone\n\t\t\tmemberEmail\n\t\t\tmemberWhatsapp\n\t\t}\n\t}\n": types.MeDocument,
-    "\n\tquery Account {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberPhone\n\t\t\tmemberEmail\n\t\t\tmemberWhatsapp\n\t\t\tmemberDesc\n\t\t}\n\t}\n": types.AccountDocument,
+    "\n\tquery Account {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberPhone\n\t\t\tmemberEmail\n\t\t\tmemberWhatsapp\n\t\t\tmemberDesc\n\t\t\tmemberBrowsePrivately\n\t\t}\n\t}\n": types.AccountDocument,
     "\n\tmutation UpdateAccount($input: MemberUpdate!) {\n\t\tupdateMember(input: $input) {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberPhone\n\t\t\tmemberEmail\n\t\t\tmemberWhatsapp\n\t\t\tmemberDesc\n\t\t}\n\t}\n": types.UpdateAccountDocument,
     "\n\tmutation ChangePassword($input: ChangePasswordInput!) {\n\t\tchangePassword(input: $input)\n\t}\n": types.ChangePasswordDocument,
     "\n\tmutation UploadAvatar($file: Upload!) {\n\t\timageUploader(file: $file, target: \"member\")\n\t}\n": types.UploadAvatarDocument,
+    "\n\tmutation UpdateBrowsePrivately($input: MemberUpdate!) {\n\t\tupdateMember(input: $input) {\n\t\t\t_id\n\t\t\tmemberBrowsePrivately\n\t\t}\n\t}\n": types.UpdateBrowsePrivatelyDocument,
     "\n\tquery AdminMembers($input: MembersInquiry!) {\n\t\tgetAllMembersByAdmin(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tmemberType\n\t\t\t\tmemberStatus\n\t\t\t\tmemberNick\n\t\t\t\tmemberFullName\n\t\t\t\tmemberImage\n\t\t\t\tmemberPhone\n\t\t\t\tmemberEmail\n\t\t\t\tmemberProducts\n\t\t\t\tmemberBriefs\n\t\t\t\tcreatedAt\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": types.AdminMembersDocument,
     "\n\tmutation AdminUpdateMember($input: MemberUpdateByAdmin!) {\n\t\tupdateMemberByAdmin(input: $input) {\n\t\t\t_id\n\t\t\tmemberStatus\n\t\t}\n\t}\n": types.AdminUpdateMemberDocument,
     "\n\tquery AdminProducts($input: AllProductsInquiry!) {\n\t\tgetAllProductsByAdmin(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tproductTitle\n\t\t\t\tproductStatus\n\t\t\t\tproductCategory\n\t\t\t\tproductPricing\n\t\t\t\tproductPrice\n\t\t\t\tproductLikes\n\t\t\t\tproductViews\n\t\t\t\tupdatedAt\n\t\t\t\tmemberData {\n\t\t\t\t\t_id\n\t\t\t\t\tmemberNick\n\t\t\t\t}\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": types.AdminProductsDocument,
@@ -112,6 +117,7 @@ const documents: Documents = {
     "\n\tfragment CreatorAgentRow on Product {\n\t\t_id\n\t\tproductTitle\n\t\tproductCategory\n\t\tproductStatus\n\t\tproductPricing\n\t\tproductPrice\n\t\tproductImages\n\t\tproductViews\n\t\tproductLikes\n\t\tproductComments\n\t\tupdatedAt\n\t}\n": types.CreatorAgentRowFragmentDoc,
     "\n\tquery CreatorAgents($input: CreatorProductsInquiry!) {\n\t\tlist: getCreatorProducts(input: $input) {\n\t\t\tlist {\n\t\t\t\t...CreatorAgentRow\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t\tactive: getCreatorProducts(input: { page: 1, limit: 1, search: { productStatus: ACTIVE } }) {\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t\tpaused: getCreatorProducts(input: { page: 1, limit: 1, search: { productStatus: PAUSED } }) {\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": types.CreatorAgentsDocument,
     "\n\tmutation UpdateAgentStatus($input: ProductUpdate!) {\n\t\tupdateProduct(input: $input) {\n\t\t\t_id\n\t\t\tproductStatus\n\t\t\tupdatedAt\n\t\t}\n\t}\n": types.UpdateAgentStatusDocument,
+    "\n\tquery TopCreatorAgents($input: CreatorProductsInquiry!) {\n\t\tgetCreatorProducts(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tproductTitle\n\t\t\t\tproductStatus\n\t\t\t\tproductViews\n\t\t\t}\n\t\t}\n\t}\n": types.TopCreatorAgentsDocument,
     "\n\tquery FavoriteAgents($input: OrdinaryInquiry!) {\n\t\tgetFavorities(input: $input) {\n\t\t\tlist {\n\t\t\t\t...AgentCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": types.FavoriteAgentsDocument,
     "\n\tquery VisitedAgents($input: OrdinaryInquiry!) {\n\t\tgetVisited(input: $input) {\n\t\t\tlist {\n\t\t\t\t...AgentCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": types.VisitedAgentsDocument,
     "\n\tmutation Login($input: LoginInput!) {\n\t\tlogin(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n": types.LoginDocument,
@@ -144,7 +150,8 @@ const documents: Documents = {
     "\n\tquery CreatorsList($input: CreatorsInquiry!) {\n\t\tgetCreators(input: $input) {\n\t\t\tlist {\n\t\t\t\t...CreatorCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": types.CreatorsListDocument,
     "\n\tquery MemberProfile($memberId: String!) {\n\t\tgetMember(memberId: $memberId) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\tmemberStatus\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberDesc\n\t\t\tmemberRank\n\t\t\tmemberProducts\n\t\t\tmemberBriefs\n\t\t\tmemberArticles\n\t\t\tmemberFollowers\n\t\t\tmemberFollowings\n\t\t\tmemberLikes\n\t\t\tmemberViews\n\t\t\tcreatedAt\n\t\t}\n\t}\n": types.MemberProfileDocument,
     "\n\tquery MemberViewer($memberId: String!) {\n\t\tgetMember(memberId: $memberId) {\n\t\t\t_id\n\t\t\tmemberViews\n\t\t\tmemberEmail\n\t\t\tmemberWhatsapp\n\t\t\tmeFollowed {\n\t\t\t\tfollowingId\n\t\t\t\tfollowerId\n\t\t\t\tmyFollowing\n\t\t\t}\n\t\t}\n\t}\n": types.MemberViewerDocument,
-    "\n\tquery CreatorStats {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberProducts\n\t\t\tmemberViews\n\t\t\tmemberLikes\n\t\t\tmemberFollowers\n\t\t}\n\t}\n": types.CreatorStatsDocument,
+    "\n\tquery CreatorStats {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberDesc\n\t\t\tmemberWhatsapp\n\t\t\tmemberEmail\n\t\t\tmemberProducts\n\t\t\tmemberArticles\n\t\t\tmemberViews\n\t\t\tmemberLikes\n\t\t\tmemberFollowers\n\t\t\tmemberFollowings\n\t\t\tcreatedAt\n\t\t}\n\t}\n": types.CreatorStatsDocument,
+    "\n\tquery ProfileVisitors($input: OrdinaryInquiry!) {\n\t\tgetProfileVisitors(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tvisitedAt\n\t\t\t\tvisitor {\n\t\t\t\t\t_id\n\t\t\t\t\tmemberType\n\t\t\t\t\tmemberNick\n\t\t\t\t\tmemberFullName\n\t\t\t\t\tmemberImage\n\t\t\t\t\tmemberFollowers\n\t\t\t\t}\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t\tprivateCount\n\t\t}\n\t}\n": types.ProfileVisitorsDocument,
     "\n\tfragment FollowMember on Member {\n\t\t_id\n\t\tmemberType\n\t\tmemberNick\n\t\tmemberFullName\n\t\tmemberImage\n\t\tmemberFollowers\n\t}\n": types.FollowMemberFragmentDoc,
     "\n\tmutation Subscribe($memberId: String!) {\n\t\tsubscribe(input: $memberId) {\n\t\t\t_id\n\t\t\tfollowingId\n\t\t\tfollowerId\n\t\t}\n\t}\n": types.SubscribeDocument,
     "\n\tmutation Unsubscribe($memberId: String!) {\n\t\tunsubscribe(input: $memberId) {\n\t\t\t_id\n\t\t\tfollowingId\n\t\t\tfollowerId\n\t\t}\n\t}\n": types.UnsubscribeDocument,
@@ -152,6 +159,7 @@ const documents: Documents = {
     "\n\tquery Followers($input: FollowInquiry!) {\n\t\tgetMemberFollowers(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tfollowerId\n\t\t\t\tfollowerData {\n\t\t\t\t\t...FollowMember\n\t\t\t\t}\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": types.FollowersDocument,
     "\n\tquery Followings($input: FollowInquiry!) {\n\t\tgetMemberFollowings(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tfollowingId\n\t\t\t\tfollowingData {\n\t\t\t\t\t...FollowMember\n\t\t\t\t}\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": types.FollowingsDocument,
     "\n\tquery DevApiProducts($input: ProductsInquiry!) {\n\t\tgetProducts(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tproductTitle\n\t\t\t\tproductCategory\n\t\t\t\tproductPricing\n\t\t\t\tproductPrice\n\t\t\t\tproductLikes\n\t\t\t\tproductViews\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": types.DevApiProductsDocument,
+    "\n\tquery DashboardNavCounts {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberProducts\n\t\t\tmemberBriefs\n\t\t\tmemberArticles\n\t\t\tmemberFollowers\n\t\t\tmemberFollowings\n\t\t}\n\t}\n": types.DashboardNavCountsDocument,
 };
 
 /**
@@ -175,7 +183,7 @@ export function graphql(source: "\n\tquery Me {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tm
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n\tquery Account {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberPhone\n\t\t\tmemberEmail\n\t\t\tmemberWhatsapp\n\t\t\tmemberDesc\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery Account {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberPhone\n\t\t\tmemberEmail\n\t\t\tmemberWhatsapp\n\t\t\tmemberDesc\n\t\t}\n\t}\n"];
+export function graphql(source: "\n\tquery Account {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberPhone\n\t\t\tmemberEmail\n\t\t\tmemberWhatsapp\n\t\t\tmemberDesc\n\t\t\tmemberBrowsePrivately\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery Account {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberPhone\n\t\t\tmemberEmail\n\t\t\tmemberWhatsapp\n\t\t\tmemberDesc\n\t\t\tmemberBrowsePrivately\n\t\t}\n\t}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -188,6 +196,10 @@ export function graphql(source: "\n\tmutation ChangePassword($input: ChangePassw
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n\tmutation UploadAvatar($file: Upload!) {\n\t\timageUploader(file: $file, target: \"member\")\n\t}\n"): (typeof documents)["\n\tmutation UploadAvatar($file: Upload!) {\n\t\timageUploader(file: $file, target: \"member\")\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tmutation UpdateBrowsePrivately($input: MemberUpdate!) {\n\t\tupdateMember(input: $input) {\n\t\t\t_id\n\t\t\tmemberBrowsePrivately\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation UpdateBrowsePrivately($input: MemberUpdate!) {\n\t\tupdateMember(input: $input) {\n\t\t\t_id\n\t\t\tmemberBrowsePrivately\n\t\t}\n\t}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -280,6 +292,10 @@ export function graphql(source: "\n\tquery CreatorAgents($input: CreatorProducts
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n\tmutation UpdateAgentStatus($input: ProductUpdate!) {\n\t\tupdateProduct(input: $input) {\n\t\t\t_id\n\t\t\tproductStatus\n\t\t\tupdatedAt\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation UpdateAgentStatus($input: ProductUpdate!) {\n\t\tupdateProduct(input: $input) {\n\t\t\t_id\n\t\t\tproductStatus\n\t\t\tupdatedAt\n\t\t}\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tquery TopCreatorAgents($input: CreatorProductsInquiry!) {\n\t\tgetCreatorProducts(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tproductTitle\n\t\t\t\tproductStatus\n\t\t\t\tproductViews\n\t\t\t}\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery TopCreatorAgents($input: CreatorProductsInquiry!) {\n\t\tgetCreatorProducts(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tproductTitle\n\t\t\t\tproductStatus\n\t\t\t\tproductViews\n\t\t\t}\n\t\t}\n\t}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -411,7 +427,11 @@ export function graphql(source: "\n\tquery MemberViewer($memberId: String!) {\n\
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n\tquery CreatorStats {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberProducts\n\t\t\tmemberViews\n\t\t\tmemberLikes\n\t\t\tmemberFollowers\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery CreatorStats {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberProducts\n\t\t\tmemberViews\n\t\t\tmemberLikes\n\t\t\tmemberFollowers\n\t\t}\n\t}\n"];
+export function graphql(source: "\n\tquery CreatorStats {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberDesc\n\t\t\tmemberWhatsapp\n\t\t\tmemberEmail\n\t\t\tmemberProducts\n\t\t\tmemberArticles\n\t\t\tmemberViews\n\t\t\tmemberLikes\n\t\t\tmemberFollowers\n\t\t\tmemberFollowings\n\t\t\tcreatedAt\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery CreatorStats {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t\tmemberDesc\n\t\t\tmemberWhatsapp\n\t\t\tmemberEmail\n\t\t\tmemberProducts\n\t\t\tmemberArticles\n\t\t\tmemberViews\n\t\t\tmemberLikes\n\t\t\tmemberFollowers\n\t\t\tmemberFollowings\n\t\t\tcreatedAt\n\t\t}\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tquery ProfileVisitors($input: OrdinaryInquiry!) {\n\t\tgetProfileVisitors(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tvisitedAt\n\t\t\t\tvisitor {\n\t\t\t\t\t_id\n\t\t\t\t\tmemberType\n\t\t\t\t\tmemberNick\n\t\t\t\t\tmemberFullName\n\t\t\t\t\tmemberImage\n\t\t\t\t\tmemberFollowers\n\t\t\t\t}\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t\tprivateCount\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery ProfileVisitors($input: OrdinaryInquiry!) {\n\t\tgetProfileVisitors(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tvisitedAt\n\t\t\t\tvisitor {\n\t\t\t\t\t_id\n\t\t\t\t\tmemberType\n\t\t\t\t\tmemberNick\n\t\t\t\t\tmemberFullName\n\t\t\t\t\tmemberImage\n\t\t\t\t\tmemberFollowers\n\t\t\t\t}\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t\tprivateCount\n\t\t}\n\t}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -440,6 +460,10 @@ export function graphql(source: "\n\tquery Followings($input: FollowInquiry!) {\
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n\tquery DevApiProducts($input: ProductsInquiry!) {\n\t\tgetProducts(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tproductTitle\n\t\t\t\tproductCategory\n\t\t\t\tproductPricing\n\t\t\t\tproductPrice\n\t\t\t\tproductLikes\n\t\t\t\tproductViews\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery DevApiProducts($input: ProductsInquiry!) {\n\t\tgetProducts(input: $input) {\n\t\t\tlist {\n\t\t\t\t_id\n\t\t\t\tproductTitle\n\t\t\t\tproductCategory\n\t\t\t\tproductPricing\n\t\t\t\tproductPrice\n\t\t\t\tproductLikes\n\t\t\t\tproductViews\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tquery DashboardNavCounts {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberProducts\n\t\t\tmemberBriefs\n\t\t\tmemberArticles\n\t\t\tmemberFollowers\n\t\t\tmemberFollowings\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery DashboardNavCounts {\n\t\tgetMe {\n\t\t\t_id\n\t\t\tmemberProducts\n\t\t\tmemberBriefs\n\t\t\tmemberArticles\n\t\t\tmemberFollowers\n\t\t\tmemberFollowings\n\t\t}\n\t}\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

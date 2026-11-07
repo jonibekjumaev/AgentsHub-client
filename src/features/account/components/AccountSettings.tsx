@@ -5,9 +5,10 @@ import { ErrorState } from '@/shared/ui/ErrorState';
 import { AccountQuery } from '../graphql/account';
 import { fromAccount } from '../lib/accountForm';
 import { PasswordForm } from './PasswordForm';
+import { PrivacyForm } from './PrivacyForm';
 import { ProfileForm } from './ProfileForm';
 
-/** /dashboard/settings: profile and password. Own data, loaded in the browser with the token (rule 11). */
+/** /dashboard/settings: profile, privacy (D-42) and password. Own data, loaded in the browser with the token (rule 11). */
 export const AccountSettings = () => {
 	const { t } = useTranslation('account');
 	// Always the stored values: a settings form must not start from a stale cache.
@@ -30,6 +31,10 @@ export const AccountSettings = () => {
 			{member && (
 				<>
 					<ProfileForm memberId={member._id} initialValues={fromAccount(member)} />
+					{/* Admin visits are never recorded (D-42), so there is nothing to hide. */}
+					{member.memberType !== 'ADMIN' && (
+						<PrivacyForm browsePrivately={member.memberBrowsePrivately ?? false} />
+					)}
 					<PasswordForm />
 				</>
 			)}

@@ -1,6 +1,6 @@
 {
 	"title": "Profile settings",
-	"subtitle": "How other members see you, and your password.",
+	"subtitle": "How other members see you, your privacy and your password.",
 	"loading": "Loading your profile…",
 	"errorTitle": "We couldn't load your profile",
 	"leave": "You have unsaved changes. Leave this page?",
@@ -45,5 +45,12 @@
 		"wrongPassword": "The current password is wrong.",
 		"samePassword": "The new password must be different from the current one.",
 		"confirmMismatch": "The passwords don't match."
+	},
+	"privacy": {
+		"title": "Privacy",
+		"label": "Browse privately",
+		"hint": "When you open another member's profile, they see that someone visited, but not your name.",
+		"on": "You now browse privately.",
+		"off": "Members you visit can see your name again."
 	}
 }
