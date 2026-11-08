@@ -1,5 +1,6 @@
 export { AppliedChips, type AppliedChip } from './AppliedChips';
 export { CategoryRail, RAIL_CATEGORIES, isDeadOption } from './CategoryRail';
+export { FilterSwitch } from './FilterSwitch';
 export { LoadMore, outlineButtonSx } from './LoadMore';
 export { enterSx, focusRingSx, focusVisibleSx } from './motion';
 export { PLACEHOLDER_INTERVAL_MS, SEARCH_DEBOUNCE_MS, SearchBand, type SearchSuggestion } from './SearchBand';

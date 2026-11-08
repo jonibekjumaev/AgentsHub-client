@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'rea
 import { Box, ButtonBase, IconButton, Typography } from '@mui/material';
 import { Close as CloseIcon, Search as SearchIcon } from '@mui/icons-material';
 import { visuallyHidden } from '@/shared/ui/visuallyHidden';
-import { catalog, colors, home, radiusPx } from '@/theme/tokens';
+import { catalog, catalogLight, colors, home, radiusPx } from '@/theme/tokens';
 import { focusVisibleSx } from './motion';
 
 /** Typing pauses this long before the URL (and the list) follows. Enter or "Search" applies at once. */
@@ -31,10 +31,14 @@ type SearchBandProps = {
 	/** After the suggestions, behind a thin divider (the /briefs "Post a brief" pill). */
 	trailing?: ReactNode;
 	labels: { search: string; clear: string; submit: string; try: string };
+	/** dark: night band (/agents, /briefs). light: pale indigo band with soft glows (/creators). Same layout. */
+	variant?: 'dark' | 'light';
 };
 
 const reducedMotion = () =>
-	typeof window !== 'undefined' && typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	typeof window !== 'undefined' &&
+	typeof window.matchMedia === 'function' &&
+	window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /**
  * The dark search band at the top of the catalog pages (/agents, /briefs): headline, one big search field
@@ -53,7 +57,9 @@ export const SearchBand = ({
 	suggestions,
 	trailing,
 	labels,
+	variant = 'dark',
 }: SearchBandProps) => {
+	const light = variant === 'light';
 	const [text, setText] = useState(value);
 	const [example, setExample] = useState(0);
 	const timer = useRef<ReturnType<typeof setTimeout>>();
@@ -106,34 +112,77 @@ export const SearchBand = ({
 	};
 
 	return (
-		<Box component="section" aria-labelledby={titleId} sx={{ position: 'relative', overflow: 'hidden', bgcolor: home.night, color: colors.white }}>
+		<Box
+			component="section"
+			aria-labelledby={titleId}
+			sx={{
+				position: 'relative',
+				overflow: 'hidden',
+				bgcolor: light ? catalogLight.bg : home.night,
+				color: light ? 'ink' : colors.white,
+				...(light && { borderBottom: `1px solid ${catalogLight.border}` }),
+			}}
+		>
 			<Box
 				aria-hidden="true"
 				sx={{
 					position: 'absolute',
 					inset: 0,
 					pointerEvents: 'none',
-					backgroundImage: catalog.heroDots,
+					backgroundImage: light ? catalogLight.dots : catalog.heroDots,
 					backgroundSize: '24px 24px',
 					WebkitMaskImage: catalog.heroDotsMask,
 					maskImage: catalog.heroDotsMask,
 				}}
 			/>
-			<Box
-				aria-hidden="true"
-				sx={{
-					position: 'absolute',
-					left: '50%',
-					bottom: -260,
-					width: 900,
-					height: 420,
-					ml: '-450px',
-					borderRadius: '50%',
-					bgcolor: catalog.heroGlow,
-					filter: 'blur(100px)',
-					pointerEvents: 'none',
-				}}
-			/>
+			{light ? (
+				<>
+					<Box
+						aria-hidden="true"
+						sx={{
+							position: 'absolute',
+							left: -120,
+							top: -140,
+							width: 460,
+							height: 380,
+							borderRadius: '50%',
+							bgcolor: catalogLight.glowIndigo,
+							filter: 'blur(80px)',
+							pointerEvents: 'none',
+						}}
+					/>
+					<Box
+						aria-hidden="true"
+						sx={{
+							position: 'absolute',
+							right: -100,
+							bottom: -180,
+							width: 480,
+							height: 380,
+							borderRadius: '50%',
+							bgcolor: catalogLight.glowGold,
+							filter: 'blur(90px)',
+							pointerEvents: 'none',
+						}}
+					/>
+				</>
+			) : (
+				<Box
+					aria-hidden="true"
+					sx={{
+						position: 'absolute',
+						left: '50%',
+						bottom: -260,
+						width: 900,
+						height: 420,
+						ml: '-450px',
+						borderRadius: '50%',
+						bgcolor: catalog.heroGlow,
+						filter: 'blur(100px)',
+						pointerEvents: 'none',
+					}}
+				/>
+			)}
 			<Box
 				sx={{
 					position: 'relative',
@@ -153,11 +202,26 @@ export const SearchBand = ({
 				<Typography
 					id={titleId}
 					variant="h1"
-					sx={{ fontSize: 'clamp(38px, 5vw, 64px)', lineHeight: 1, fontWeight: 700, letterSpacing: '-0.04em', color: colors.white }}
+					sx={{
+						fontSize: 'clamp(38px, 5vw, 64px)',
+						lineHeight: 1,
+						fontWeight: 700,
+						letterSpacing: '-0.04em',
+						color: light ? 'ink' : colors.white,
+					}}
 				>
 					{title}
 				</Typography>
-				<Typography sx={{ maxWidth: 560, fontSize: { xs: 16, sm: 18 }, lineHeight: 1.5, color: home.nightText }}>{subtitle}</Typography>
+				<Typography
+					sx={{
+						maxWidth: 560,
+						fontSize: { xs: 16, sm: 18 },
+						lineHeight: 1.5,
+						color: light ? 'bodySoft' : home.nightText,
+					}}
+				>
+					{subtitle}
+				</Typography>
 				<Box
 					component="form"
 					role="search"
@@ -174,9 +238,10 @@ export const SearchBand = ({
 						boxSizing: 'border-box',
 						borderRadius: '18px',
 						bgcolor: colors.white,
-						boxShadow: catalog.searchShadow,
+						...(light && { border: `1px solid ${catalogLight.searchBorder}` }),
+						boxShadow: light ? catalogLight.searchShadow : catalog.searchShadow,
 						transition: 'box-shadow 200ms',
-						'&:focus-within': { boxShadow: catalog.searchFocus },
+						'&:focus-within': { boxShadow: light ? catalogLight.searchFocus : catalog.searchFocus },
 					}}
 				>
 					<SearchIcon aria-hidden="true" sx={{ fontSize: 22, color: 'primary.main', flex: 'none' }} />
@@ -211,7 +276,11 @@ export const SearchBand = ({
 						}}
 					/>
 					{text && (
-						<IconButton aria-label={labels.clear} onClick={clearText} sx={{ flex: 'none', width: 40, height: 40, bgcolor: 'neutralSoft', color: 'body' }}>
+						<IconButton
+							aria-label={labels.clear}
+							onClick={clearText}
+							sx={{ flex: 'none', width: 40, height: 40, bgcolor: 'neutralSoft', color: 'body' }}
+						>
 							<CloseIcon sx={{ fontSize: 16 }} />
 						</IconButton>
 					)}
@@ -235,7 +304,7 @@ export const SearchBand = ({
 					</ButtonBase>
 				</Box>
 				<Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: 2 }}>
-					<Typography component="span" sx={{ fontSize: 14, color: home.nightText }}>
+					<Typography component="span" sx={{ fontSize: 14, color: light ? 'bodySoft' : home.nightText }}>
 						{labels.try}
 					</Typography>
 					{suggestions.map(({ key, label, onPick }) => (
@@ -246,13 +315,13 @@ export const SearchBand = ({
 								minHeight: 36,
 								px: 3.5,
 								border: 1,
-								borderColor: catalog.suggestionBorder,
+								borderColor: light ? catalogLight.pillBorder : catalog.suggestionBorder,
 								borderRadius: radiusPx.pill,
-								bgcolor: catalog.suggestionBg,
-								color: colors.white,
+								bgcolor: light ? colors.white : catalog.suggestionBg,
+								color: light ? catalogLight.pillText : colors.white,
 								fontSize: 14,
-								fontWeight: 500,
-								'&:hover': { bgcolor: home.nightFillStrong },
+								fontWeight: light ? 600 : 500,
+								'&:hover': { bgcolor: light ? 'accentSoft' : home.nightFillStrong },
 								...focusVisibleSx,
 							}}
 						>
@@ -261,7 +330,10 @@ export const SearchBand = ({
 					))}
 					{trailing && (
 						<>
-							<Box aria-hidden="true" sx={{ width: '1px', height: 22, mx: 1.5, bgcolor: catalog.suggestionBorder }} />
+							<Box
+								aria-hidden="true"
+								sx={{ width: '1px', height: 22, mx: 1.5, bgcolor: light ? catalog.divider : catalog.suggestionBorder }}
+							/>
 							{trailing}
 						</>
 					)}

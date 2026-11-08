@@ -280,3 +280,37 @@ export const briefFeed = {
 	/** Past-deadline rows, when shown. */
 	pastOpacity: 0.8,
 } as const;
+
+/**
+ * The light search band of /creators (agentshub-creators design): the same layout as the dark one, with a pale
+ * indigo ground, two soft glows (indigo top-left, gold bottom-right) and white pills.
+ */
+export const catalogLight = {
+	bg: '#F7F7FF',
+	border: '#E4E7F5',
+	dots: 'radial-gradient(rgba(67, 56, 202, 0.14) 1px, transparent 1.4px)',
+	glowIndigo: 'rgba(165, 180, 252, 0.35)',
+	glowGold: 'rgba(253, 224, 171, 0.45)',
+	searchBorder: '#DCDDFB',
+	searchShadow: '0 20px 50px rgba(55, 48, 163, 0.14)',
+	searchFocus: '0 0 0 4px rgba(129, 140, 248, 0.35), 0 20px 50px rgba(55, 48, 163, 0.18)',
+	pillBorder: '#DCDDFB',
+	pillText: '#3730A3',
+} as const;
+
+/** Creator rank medals (#1–3), background / text; other ranks are white / bodySoft. */
+export const rankMedals: Record<1 | 2 | 3, { bg: string; text: string }> = {
+	1: { bg: '#FEF0C7', text: '#93370D' },
+	2: { bg: '#EAECF0', text: '#344054' },
+	3: { bg: '#FDE7D7', text: '#9C2A10' },
+};
+
+/** /creators cards: the #1 card's border and glow, the cover's dot pattern opacity. */
+export const creatorCard = {
+	topBorder: '#C7CBF5',
+	topShadow: '0 18px 40px rgba(55, 48, 163, 0.12)',
+	avatarShadow: '0 6px 16px rgba(16, 24, 40, 0.10)',
+	coverDotsOpacity: 0.55,
+	emptyBio: '#98A2B3',
+} as const;
+

@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { Check as CheckIcon, PersonAddAlt1Outlined as PersonAddIcon } from '@mui/icons-material';
+import { Add as AddIcon, Check as CheckIcon, PersonAddAlt1Outlined as PersonAddIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
 import { useAuth } from '@/auth';
 import { useFollow } from '../hooks/useFollow';
@@ -14,8 +14,9 @@ type FollowButtonProps = {
 	/**
 	 * soft (default): accentSoft pill for lists. solid: the profile's main action — a filled button
 	 * while not following; "Following" turns into "Unfollow" on hover so the click is predictable.
+	 * pill: the /creators card (agentshub-creators design): white "+ Follow", indigo "✓ Following".
 	 */
-	variant?: 'soft' | 'solid';
+	variant?: 'soft' | 'solid' | 'pill';
 };
 
 /**
@@ -23,7 +24,14 @@ type FollowButtonProps = {
  * (following yourself is refused, §3.9). Hidden from admins: they can't follow anyone (D-40).
  * Guests see it and go to login.
  */
-export const FollowButton = ({ memberId, nick, following: known, size = 'medium', fullWidth, variant = 'soft' }: FollowButtonProps) => {
+export const FollowButton = ({
+	memberId,
+	nick,
+	following: known,
+	size = 'medium',
+	fullWidth,
+	variant = 'soft',
+}: FollowButtonProps) => {
 	const { t } = useTranslation('follows');
 	const { me } = useAuth();
 	const { following, isSelf, pending, loading, toggle } = useFollow(memberId, known);
@@ -31,11 +39,31 @@ export const FollowButton = ({ memberId, nick, following: known, size = 'medium'
 
 	const inactive = pending || loading;
 	const solid = variant === 'solid';
-	const colorsSx = following
+	const pill = variant === 'pill';
+	const colorsSx = pill
+		? following
+			? {
+					bgcolor: 'primary.main',
+					borderColor: 'primary.main',
+					color: 'primary.contrastText',
+					'&:hover': { bgcolor: 'accentHover', borderColor: 'accentHover' },
+			  }
+			: {
+					bgcolor: 'surface',
+					borderColor: 'accentBorder',
+					color: 'primary.main',
+					'&:hover': { bgcolor: 'accentSoft', borderColor: 'accentBorder' },
+			  }
+		: following
 		? { bgcolor: 'surface', borderColor: solid ? 'inputBorder' : 'border', color: 'ink' }
 		: solid
-			? { bgcolor: 'primary.main', borderColor: 'primary.main', color: 'primary.contrastText', '&:hover': { bgcolor: 'accentHover', borderColor: 'accentHover' } }
-			: { bgcolor: 'accentSoft', borderColor: 'accentBorder', color: 'primary.main' };
+		? {
+				bgcolor: 'primary.main',
+				borderColor: 'primary.main',
+				color: 'primary.contrastText',
+				'&:hover': { bgcolor: 'accentHover', borderColor: 'accentHover' },
+		  }
+		: { bgcolor: 'accentSoft', borderColor: 'accentBorder', color: 'primary.main' };
 	return (
 		<Button
 			variant="outlined"
@@ -45,14 +73,20 @@ export const FollowButton = ({ memberId, nick, following: known, size = 'medium'
 			aria-disabled={inactive || undefined}
 			aria-busy={loading || undefined}
 			aria-label={t(following ? 'follows:followingLabel' : 'follows:followLabel', { nick })}
-			startIcon={following ? <CheckIcon /> : <PersonAddIcon />}
+			startIcon={following ? <CheckIcon /> : pill ? <AddIcon /> : <PersonAddIcon />}
 			onClick={() => {
 				if (!inactive) void toggle(nick);
 			}}
 			sx={{
 				flex: 'none',
+				...(pill && { minHeight: 40, px: 4, borderRadius: '999px', fontSize: 14, fontWeight: 700 }),
 				...colorsSx,
-				...(solid && following && { '& .label-hover': { display: 'none' }, '&:hover .label-on': { display: 'none' }, '&:hover .label-hover': { display: 'inline' } }),
+				...(solid &&
+					following && {
+						'& .label-hover': { display: 'none' },
+						'&:hover .label-on': { display: 'none' },
+						'&:hover .label-hover': { display: 'inline' },
+					}),
 				...(inactive && { opacity: 0.6, cursor: 'not-allowed' }),
 			}}
 		>

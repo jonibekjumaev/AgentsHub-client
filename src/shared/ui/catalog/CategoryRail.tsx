@@ -64,7 +64,15 @@ const CategoryPill = ({ label, count, selected, onClick, icon, tint, ink }: Pill
 			<Box
 				component="span"
 				aria-hidden="true"
-				sx={{ width: 28, height: 28, display: 'grid', placeItems: 'center', borderRadius: '50%', bgcolor: selected ? colors.white : tint, color: ink }}
+				sx={{
+					width: 28,
+					height: 28,
+					display: 'grid',
+					placeItems: 'center',
+					borderRadius: '50%',
+					bgcolor: selected ? colors.white : tint,
+					color: ink,
+				}}
 			>
 				{icon}
 			</Box>
@@ -99,12 +107,17 @@ type CategoryRailProps = {
 	counts: Partial<Record<AgentCategory, number>> | undefined;
 	onChange: (categories: AgentCategory[]) => void;
 	labels: { group: string; all: string };
+	/**
+	 * The "All" count when it is not the sum of the category counts (a creator builds in several categories).
+	 * Left out: the sum (an agent or brief has exactly one category).
+	 */
+	allCount?: number;
 };
 
 /** "All" plus the 8 categories, multi-select, each with its icon and live count; scrolls sideways when narrow. */
-export const CategoryRail = ({ selected, counts, onChange, labels }: CategoryRailProps) => {
+export const CategoryRail = ({ selected, counts, onChange, labels, allCount: knownAll }: CategoryRailProps) => {
 	const { t } = useTranslation('common');
-	const allCount = counts ? RAIL_CATEGORIES.reduce((sum, category) => sum + (counts[category] ?? 0), 0) : undefined;
+	const allCount = !counts ? undefined : (knownAll ?? RAIL_CATEGORIES.reduce((sum, category) => sum + (counts[category] ?? 0), 0));
 	const toggle = (category: AgentCategory) =>
 		onChange(selected.includes(category) ? selected.filter((item) => item !== category) : [...selected, category]);
 

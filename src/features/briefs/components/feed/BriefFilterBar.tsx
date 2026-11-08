@@ -2,8 +2,17 @@ import { Box, ButtonBase } from '@mui/material';
 import { useTranslation } from 'next-i18next';
 import type { AgentCategory, BriefBudgetType, BriefStatus } from '@/gql/enums';
 import { useFormat } from '@/shared/lib/format';
-import { CategoryRail, FilterBarRow, FilterDivider, SortSelect, StickyFilterBar, ToggleChip, focusVisibleSx } from '@/shared/ui/catalog';
-import { catalog, colors, home } from '@/theme/tokens';
+import {
+	CategoryRail,
+	FilterBarRow,
+	FilterDivider,
+	FilterSwitch,
+	SortSelect,
+	StickyFilterBar,
+	ToggleChip,
+	focusVisibleSx,
+} from '@/shared/ui/catalog';
+import { colors, home } from '@/theme/tokens';
 import type { BriefFilterPatch } from '../../hooks/useBriefFilters';
 import { BRIEF_BUDGET_TYPES, BRIEF_SORTS, BRIEF_TABS, type BriefFilters, type BriefTab } from '../../lib/listQuery';
 
@@ -17,7 +26,15 @@ export type BriefFacetCounts = {
 const TAB_STATUS: Record<BriefTab, BriefStatus> = { open: 'OPEN', closed: 'CLOSED' };
 
 /** Open / Closed: a segmented, single-choice control with counts. */
-const StatusTabs = ({ tab, counts, onChange }: { tab: BriefTab; counts: BriefFacetCounts; onChange: (tab: BriefTab) => void }) => {
+const StatusTabs = ({
+	tab,
+	counts,
+	onChange,
+}: {
+	tab: BriefTab;
+	counts: BriefFacetCounts;
+	onChange: (tab: BriefTab) => void;
+}) => {
 	const { t } = useTranslation('briefs');
 	const format = useFormat();
 	return (
@@ -61,62 +78,6 @@ const StatusTabs = ({ tab, counts, onChange }: { tab: BriefTab; counts: BriefFac
 	);
 };
 
-/** "Hide past deadline": a real switch (`role="switch"`, `aria-checked`). Only the open tab has passed deadlines to hide. */
-const PastDeadlineSwitch = ({ checked, disabled, onChange }: { checked: boolean; disabled: boolean; onChange: (checked: boolean) => void }) => {
-	const { t } = useTranslation('briefs');
-	return (
-		<ButtonBase
-			role="switch"
-			aria-checked={checked}
-			disabled={disabled}
-			onClick={() => onChange(!checked)}
-			sx={{
-				minHeight: 38,
-				gap: 2.5,
-				px: 3,
-				border: 1,
-				borderColor: 'border',
-				borderRadius: '10px',
-				bgcolor: 'surface',
-				color: 'body',
-				fontSize: 14,
-				fontWeight: 600,
-				'&.Mui-disabled': { opacity: catalog.disabledOpacity, color: 'body' },
-				...focusVisibleSx,
-			}}
-		>
-			<Box
-				component="span"
-				aria-hidden="true"
-				sx={{
-					position: 'relative',
-					width: 34,
-					height: 20,
-					borderRadius: '999px',
-					bgcolor: checked ? 'primary.main' : catalog.divider,
-					transition: 'background-color 200ms',
-				}}
-			>
-				<Box
-					component="span"
-					sx={{
-						position: 'absolute',
-						top: 2,
-						left: checked ? 16 : 2,
-						width: 16,
-						height: 16,
-						borderRadius: '50%',
-						bgcolor: colors.white,
-						transition: 'left 200ms',
-						'@media (prefers-reduced-motion: reduce)': { transition: 'none' },
-					}}
-				/>
-			</Box>
-			{t('briefs:feed.filters.hidePast')}
-		</ButtonBase>
-	);
-};
-
 type BriefFilterBarProps = {
 	filters: BriefFilters;
 	onChange: (patch: BriefFilterPatch) => void;
@@ -129,7 +90,8 @@ type BriefFilterBarProps = {
  */
 export const BriefFilterBar = ({ filters, onChange, counts }: BriefFilterBarProps) => {
 	const { t } = useTranslation('briefs');
-	const toggle = <T,>(list: T[], value: T) => (list.includes(value) ? list.filter((item) => item !== value) : [...list, value]);
+	const toggle = <T,>(list: T[], value: T) =>
+		list.includes(value) ? list.filter((item) => item !== value) : [...list, value];
 
 	return (
 		<StickyFilterBar>
@@ -144,7 +106,11 @@ export const BriefFilterBar = ({ filters, onChange, counts }: BriefFilterBarProp
 					<>
 						<StatusTabs tab={filters.tab} counts={counts} onChange={(tab) => onChange({ tab })} />
 						<FilterDivider />
-						<Box role="group" aria-label={t('briefs:feed.filters.budget')} sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5 }}>
+						<Box
+							role="group"
+							aria-label={t('briefs:feed.filters.budget')}
+							sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5 }}
+						>
 							{BRIEF_BUDGET_TYPES.map((type) => (
 								<ToggleChip
 									key={type}
@@ -155,7 +121,9 @@ export const BriefFilterBar = ({ filters, onChange, counts }: BriefFilterBarProp
 								/>
 							))}
 						</Box>
-						<PastDeadlineSwitch
+						{/* Only the open tab has passed deadlines to hide. */}
+						<FilterSwitch
+							label={t('briefs:feed.filters.hidePast')}
 							checked={filters.hidePast}
 							disabled={filters.tab !== 'open'}
 							onChange={(hidePast) => onChange({ hidePast })}

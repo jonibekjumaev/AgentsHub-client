@@ -15,17 +15,24 @@
 		"count_other": "<strong>{{formatted}}</strong> creators",
 		"searchLabel": "Search creators",
 		"searchPlaceholder": "Search by nickname",
-		"sortLabel": "Sort by",
+		"sortLabel": "Sort",
 		"sort": {
 			"rank": "Top ranked",
-			"products": "Most agents",
-			"likes": "Most liked",
-			"views": "Most viewed",
-			"newest": "Newest"
+			"followers": "Most followers",
+			"agents": "Most agents",
+			"name": "Name A–Z"
 		},
 		"loading": "Loading creators…",
 		"errorTitle": "We couldn't load the creators",
-		"resultsLabel": "Creators"
+		"resultsLabel": "Creators",
+		"results_one": "creator",
+		"results_other": "creators",
+		"resultsFor": "for “{{text}}”",
+		"hiddenEmpty_one": "{{count}} creator has no agents yet. Show them",
+		"hiddenEmpty_other": "{{count}} creators have no agents yet. Show them",
+		"showing": "Showing {{shown}} of {{total}}",
+		"showMore_one": "Show {{count}} more",
+		"showMore_other": "Show {{count}} more"
 	},
 	"empty": {
 		"noneTitle": "No creators yet",
@@ -34,7 +41,17 @@
 		"noResultsText": "Try a shorter search or another spelling.",
 		"clear": "Clear search",
 		"pageTitle": "This page is empty",
-		"firstPage": "Go to page 1"
+		"firstPage": "Go to page 1",
+		"noMatch": {
+			"title": "No creator matches this",
+			"text": "Try another name or category, or post a brief and let creators come to you."
+		},
+		"noFollows": {
+			"title": "You are not following anyone yet",
+			"text": "Follow creators to see their new agents first. Their profiles will collect here."
+		},
+		"postBrief": "Post a brief instead",
+		"clearAll": "Clear all filters"
 	},
 	"seo": {
 		"title": "AI agent creators",
@@ -124,5 +141,43 @@
 			"colLikes": "Likes",
 			"colViews": "Views"
 		}
+	},
+	"hero": {
+		"title": "Meet the people building agents",
+		"text": "Find a creator by what they build, follow them for new agents, or contact them for a custom one.",
+		"stats": "{{creators}}, {{agents}} listed",
+		"creators_one": "{{formatted}} creator",
+		"creators_other": "{{formatted}} creators",
+		"agents_one": "{{formatted}} agent",
+		"agents_other": "{{formatted}} agents",
+		"examples": {
+			"0": "Search by name or handle, e.g. Nova Labs",
+			"1": "Search by what they build, e.g. invoices",
+			"2": "Search by agent name, e.g. Blog Drafter"
+		},
+		"clear": "Clear search",
+		"submit": "Search",
+		"try": "Try:"
+	},
+	"become": {
+		"title": "Build AI agents?",
+		"text": "Create a creator profile, list your agents and climb the ranking with likes and views.",
+		"action": "Become a creator"
+	},
+	"filters": {
+		"buildsFor": "Builds agents for",
+		"all": "All",
+		"withAgents": "Only creators with agents",
+		"following": "Following",
+		"remove": "Remove filter: {{label}}",
+		"clearAll": "Clear all"
+	},
+	"card": {
+		"noBio": "This creator has not added a bio yet.",
+		"agentsBy": "Agents by {{name}}",
+		"seeAll_one": "See {{count}} agent",
+		"seeAll_other": "See all {{count}} agents",
+		"noAgents": "No agents listed yet.",
+		"buildsFor": "Builds agents for"
 	}
 }

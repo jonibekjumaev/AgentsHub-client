@@ -1,173 +1,334 @@
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
-import type { FormEvent } from 'react';
+import { useMemo, useState } from 'react';
+import NextLink from 'next/link';
 import { useQuery } from '@apollo/client';
-import { Box, InputAdornment, NativeSelect, OutlinedInput, Typography } from '@mui/material';
-import { Search as SearchIcon, SearchOff as SearchOffIcon } from '@mui/icons-material';
-import { Trans, useTranslation } from 'next-i18next';
+import { Box, Button, ButtonBase, Link, Skeleton, Typography } from '@mui/material';
+import { PeopleOutline as PeopleOutlineIcon } from '@mui/icons-material';
+import { useTranslation } from 'next-i18next';
+import { useAuth } from '@/auth';
+import { canPostBrief, newBriefHref } from '@/features/briefs';
 import { useFormat } from '@/shared/lib/format';
 import { useRouteLoading } from '@/shared/lib/useRouteLoading';
-import { EmptyState } from '@/shared/ui/EmptyState';
+import { AppliedChips, LoadMore, focusVisibleSx, outlineButtonSx, type AppliedChip } from '@/shared/ui/catalog';
 import { ErrorState } from '@/shared/ui/ErrorState';
-import { Pagination } from '@/shared/ui/Pagination';
-import { CardSkeleton } from '@/shared/ui/Skeletons';
-import { radiusPx } from '@/theme/tokens';
-import { CreatorsListQuery } from '../graphql/creators';
+import { fonts, home } from '@/theme/tokens';
+import { CreatorFacetsQuery, CreatorsCatalogQuery, CreatorsHeroStatsQuery } from '../graphql/creators';
 import { useCreatorFilters } from '../hooks/useCreatorFilters';
-import { CREATORS_PAGE_SIZE, CREATOR_SEARCH_MAX, CREATOR_SORTS, creatorsListVariables, type CreatorSort } from '../lib/creatorsQuery';
+import {
+	CREATORS_FIRST_SHOWN,
+	CREATORS_PAGE_SIZE,
+	creatorFacetsVariables,
+	creatorsListVariables,
+	hasActiveCreatorFilters,
+} from '../lib/creatorsQuery';
 import { CreatorCard } from './CreatorCard';
+import { CreatorFilterBar, type CreatorFacetCounts } from './catalog/CreatorFilterBar';
+import { BECOME_CREATOR_HREF, CreatorsHero } from './catalog/CreatorsHero';
 
-const SEARCH_DEBOUNCE_MS = 400;
-const gridSx = { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 5 } as const;
-const controlSx = { height: 42, borderRadius: radiusPx.md, bgcolor: 'surface', fontSize: 14 } as const;
+/** 3 columns → 2 under 1024px → 1 under 640px; each item stretches so cards in a row line up. */
+const gridSx = {
+	m: 0,
+	p: 0,
+	listStyle: 'none',
+	display: 'grid',
+	gap: 5,
+	gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+	'@media (max-width: 1024px)': { gridTemplateColumns: 'repeat(2, minmax(0, 1fr))' },
+	'@media (max-width: 640px)': { gridTemplateColumns: 'minmax(0, 1fr)' },
+	'& > li': { minWidth: 0, display: 'flex' },
+} as const;
 
-const SearchBox = ({ value, onApply }: { value: string; onApply: (text: string) => void }) => {
+/** The last grid tile: how a creator joins. */
+const BecomeCreatorTile = () => {
 	const { t } = useTranslation('creators');
-	const [text, setText] = useState(value);
-	const timer = useRef<ReturnType<typeof setTimeout>>();
-	const applied = useRef(value);
-
-	useEffect(() => {
-		if (value === applied.current) return;
-		applied.current = value;
-		clearTimeout(timer.current);
-		setText(value);
-	}, [value]);
-	useEffect(() => () => clearTimeout(timer.current), []);
-
-	const apply = (next: string) => {
-		clearTimeout(timer.current);
-		const trimmed = next.trim();
-		if (trimmed === value) return;
-		applied.current = trimmed;
-		onApply(trimmed);
-	};
-
 	return (
 		<Box
-			component="form"
-			role="search"
-			onSubmit={(event: FormEvent) => {
-				event.preventDefault();
-				apply(text);
+			sx={{
+				flex: '1 1 auto',
+				minHeight: 220,
+				display: 'flex',
+				flexDirection: 'column',
+				justifyContent: 'center',
+				gap: 3,
+				p: 7,
+				borderRadius: home.radius.card,
+				border: `1.5px dashed ${home.dashedBorder}`,
+				bgcolor: 'surface',
 			}}
-			sx={{ width: { xs: '100%', sm: 300 } }}
 		>
-			<OutlinedInput
-				type="search"
-				value={text}
-				onChange={(event) => {
-					const next = event.target.value;
-					setText(next);
-					clearTimeout(timer.current);
-					timer.current = setTimeout(() => apply(next), SEARCH_DEBOUNCE_MS);
-				}}
-				placeholder={t('creators:list.searchPlaceholder')}
-				fullWidth
-				startAdornment={
-					<InputAdornment position="start">
-						<SearchIcon aria-hidden="true" sx={{ fontSize: 18, color: 'muted' }} />
-					</InputAdornment>
-				}
-				inputProps={{ 'aria-label': t('creators:list.searchLabel'), maxLength: CREATOR_SEARCH_MAX, enterKeyHint: 'search' }}
-				sx={controlSx}
-			/>
+			<Typography
+				variant="h2"
+				sx={{ fontFamily: fonts.display, fontSize: 24, lineHeight: 1.1, fontWeight: 700, letterSpacing: '-0.02em' }}
+			>
+				{t('creators:become.title')}
+			</Typography>
+			<Typography sx={{ fontSize: 15, lineHeight: 1.5, color: 'bodySoft' }}>{t('creators:become.text')}</Typography>
+			<Button
+				component={NextLink}
+				href={BECOME_CREATOR_HREF}
+				sx={{ alignSelf: 'flex-start', minHeight: 44, px: 4.5, borderRadius: '11px' }}
+			>
+				{t('creators:become.action')}
+			</Button>
 		</Box>
 	);
 };
 
-/** /creators (Creators.html): search, sort, cards, pagination. */
+/**
+ * /creators (agentshub-creators design, D-45): the light search band with faces, the sticky filter bar with
+ * live counts, the result summary with removable chips, then profile cards, 20 per page. The first 9 show at
+ * once, "Show more" opens the rest of the page, then numbered pages follow. Filters live in the URL.
+ */
 export const CreatorsCatalog = () => {
-	const { t } = useTranslation('creators');
+	const { t } = useTranslation(['creators', 'common']);
 	const format = useFormat();
-	const sortId = useId();
-	const { filters, update, pageHref } = useCreatorFilters();
+	const { status, me } = useAuth();
+	const { filters, update, clear, pageHref } = useCreatorFilters();
 	const routeLoading = useRouteLoading();
 	const variables = useMemo(() => creatorsListVariables(filters), [filters]);
-	const { data, loading, error, refetch } = useQuery(CreatorsListQuery, { variables });
+	const facetVariables = useMemo(() => creatorFacetsVariables(filters), [filters]);
 
+	// The server render has no token: meFollowed and the "Following" count are asked again with it.
+	const member = status === 'member';
+	const { data, loading, error, refetch } = useQuery(CreatorsCatalogQuery, {
+		variables,
+		fetchPolicy: member ? 'cache-and-network' : 'cache-first',
+	});
+	const facets = useQuery(CreatorFacetsQuery, {
+		variables: facetVariables,
+		fetchPolicy: member ? 'cache-and-network' : 'cache-first',
+	});
+	const stats = useQuery(CreatorsHeroStatsQuery);
+
+	// "Show more" opens the rest of this page; any new result set starts collapsed again.
+	const resultKey = JSON.stringify(variables);
+	const [expandedFor, setExpandedFor] = useState<string | null>(null);
+	const expanded = expandedFor === resultKey;
+
+	const counts: CreatorFacetCounts = facets.data
+		? {
+				categories: Object.fromEntries(
+					facets.data.getCreatorFacets.categories.map(({ value, count }) => [value, count]),
+				),
+				all: facets.data.getCreatorFacets.all,
+				following: facets.data.getCreatorFacets.following,
+		  }
+		: null;
+	const hiddenEmpty = facets.data?.getCreatorFacets.withoutAgents ?? 0;
+
+	const canFollow = member && me?.memberType !== 'ADMIN';
+	const showBecome = status === 'guest' || (member && me?.memberType === 'USER');
+	const canPost = canPostBrief(status, me?.memberType);
 	const creators = data?.getCreators.list ?? [];
 	const total = data?.getCreators.metaCounter?.[0]?.total ?? 0;
-	const busy = routeLoading || (loading && !data);
+	const pageCount = Math.ceil(total / CREATORS_PAGE_SIZE);
+	const visible = expanded ? creators : creators.slice(0, CREATORS_FIRST_SHOWN);
+	const hidden = creators.length - visible.length;
+	const shownUpTo = (filters.page - 1) * CREATORS_PAGE_SIZE + visible.length;
+	const showSkeleton = routeLoading || (loading && !data);
 
-	const results = () => {
-		if (busy) {
+	const chips: AppliedChip[] = [
+		...(filters.text ? [{ key: 'text', label: `“${filters.text}”`, onRemove: () => void update({ text: '' }) }] : []),
+		...filters.categories.map((category) => ({
+			key: `category-${category}`,
+			label: t(`common:enums.AgentCategory.${category}`),
+			onRemove: () => void update({ categories: filters.categories.filter((item) => item !== category) }),
+		})),
+		...(filters.followingOnly
+			? [
+					{
+						key: 'following',
+						label: t('creators:filters.following'),
+						onRemove: () => void update({ followingOnly: false }),
+					},
+			  ]
+			: []),
+	];
+
+	const renderResults = () => {
+		if (showSkeleton) {
 			return (
 				<Box role="status" aria-busy="true" aria-label={t('creators:list.loading')} sx={gridSx}>
 					{Array.from({ length: 6 }, (_, index) => (
-						<CardSkeleton key={index} />
+						<Skeleton
+							key={index}
+							variant="rounded"
+							height={460}
+							aria-hidden="true"
+							sx={{ borderRadius: home.radius.card }}
+						/>
 					))}
 				</Box>
 			);
 		}
-		if (error && !data) return <ErrorState error={error} title={t('creators:list.errorTitle')} onRetry={() => void refetch()} />;
-		if (creators.length === 0) {
-			if (total > 0) {
-				return <EmptyState title={t('creators:empty.pageTitle')} action={{ label: t('creators:empty.firstPage'), href: pageHref(1) }} />;
-			}
-			if (filters.text) {
-				return (
-					<EmptyState
-						icon={<SearchOffIcon />}
-						title={t('creators:empty.noResultsTitle')}
-						text={t('creators:empty.noResultsText')}
-						action={{ label: t('creators:empty.clear'), onClick: () => void update({ text: '' }) }}
-					/>
-				);
-			}
-			return <EmptyState title={t('creators:empty.noneTitle')} text={t('creators:empty.noneText')} />;
+		if (error && !data) {
+			return <ErrorState error={error} title={t('creators:list.errorTitle')} onRetry={() => void refetch()} />;
 		}
+		if (creators.length === 0 && total > 0) {
+			// A page number past the end (an old link): back to page 1.
+			return (
+				<Box sx={{ textAlign: 'center', py: 10 }}>
+					<Typography variant="h2" sx={{ fontSize: 26 }}>
+						{t('creators:empty.pageTitle')}
+					</Typography>
+					<Button component={NextLink} href={pageHref(1)} sx={{ mt: 4 }}>
+						{t('creators:empty.firstPage')}
+					</Button>
+				</Box>
+			);
+		}
+		if (creators.length === 0) {
+			// "Following" alone, and I follow nobody: a different message, and nothing to clear but that.
+			const noFollows =
+				filters.followingOnly && counts?.following === 0 && !filters.text && filters.categories.length === 0;
+			const key = noFollows ? 'noFollows' : 'noMatch';
+			return (
+				<Box
+					sx={{
+						display: 'flex',
+						flexDirection: 'column',
+						alignItems: 'center',
+						gap: 3.5,
+						px: 6,
+						py: 18,
+						textAlign: 'center',
+						borderRadius: home.radius.panel,
+						bgcolor: 'surface',
+						border: `1.5px dashed ${home.dashedBorder}`,
+					}}
+				>
+					<Box
+						aria-hidden="true"
+						sx={{
+							width: 60,
+							height: 60,
+							display: 'grid',
+							placeItems: 'center',
+							borderRadius: '18px',
+							bgcolor: 'accentSoft',
+							color: 'primary.main',
+						}}
+					>
+						<PeopleOutlineIcon sx={{ fontSize: 28 }} />
+					</Box>
+					<Typography
+						variant="h2"
+						sx={{
+							fontFamily: fonts.display,
+							fontSize: 30,
+							lineHeight: 1.1,
+							fontWeight: 700,
+							letterSpacing: '-0.025em',
+						}}
+					>
+						{t(`creators:empty.${key}.title`)}
+					</Typography>
+					<Typography sx={{ maxWidth: 460, fontSize: 16, lineHeight: 1.55, color: 'bodySoft' }}>
+						{t(`creators:empty.${key}.text`)}
+					</Typography>
+					<Box sx={{ mt: 1.5, display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 2.5 }}>
+						{!noFollows && canPost && (
+							<Button
+								component={NextLink}
+								href={newBriefHref('')}
+								sx={{ minHeight: 48, px: 5.5, borderRadius: home.radius.button }}
+							>
+								{t('creators:empty.postBrief')}
+							</Button>
+						)}
+						{hasActiveCreatorFilters(filters) && (
+							<ButtonBase onClick={() => void clear()} sx={outlineButtonSx}>
+								{t('creators:empty.clearAll')}
+							</ButtonBase>
+						)}
+					</Box>
+				</Box>
+			);
+		}
+
 		return (
 			<>
-				<Box component="ul" aria-label={t('creators:list.resultsLabel')} sx={{ ...gridSx, m: 0, p: 0, listStyle: 'none' }}>
-					{creators.map((creator, index) => (
+				{/* A new key per result set replays the entrance animation. */}
+				<Box key={resultKey} component="ol" aria-label={t('creators:list.resultsLabel')} sx={gridSx}>
+					{visible.map((creator, index) => (
 						<li key={creator._id}>
-							<CreatorCard
-								creator={creator}
-								// Positions only make sense in rank order, and without a search narrowing the list.
-								position={filters.sort === 'rank' && !filters.text ? (filters.page - 1) * CREATORS_PAGE_SIZE + index + 1 : undefined}
-							/>
+							<CreatorCard creator={creator} index={index} />
 						</li>
 					))}
+					{hidden === 0 && showBecome && (
+						<li>
+							<BecomeCreatorTile />
+						</li>
+					)}
 				</Box>
-				<Pagination page={filters.page} count={Math.ceil(total / CREATORS_PAGE_SIZE)} getHref={pageHref} />
+				<LoadMore
+					showingLabel={t('creators:list.showing', { shown: format.number(shownUpTo), total: format.number(total) })}
+					shown={shownUpTo}
+					total={total}
+					hidden={hidden}
+					showMoreLabel={t('creators:list.showMore', { count: hidden })}
+					onShowMore={() => setExpandedFor(resultKey)}
+					page={filters.page}
+					pageCount={pageCount}
+					getHref={pageHref}
+				/>
 			</>
 		);
 	};
 
 	return (
-		<Box sx={{ maxWidth: 1200, mx: 'auto', px: { xs: 4, sm: 6 }, pt: 8, pb: 16, display: 'flex', flexDirection: 'column', gap: 6 }}>
-			<Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: 4 }}>
-				<Box>
-					<Typography variant="h1">{t('creators:list.title')}</Typography>
-					<Typography sx={{ mt: 1.5, color: 'muted' }}>{t('creators:list.subtitle')}</Typography>
-				</Box>
-				<Typography role="status" variant="body2" sx={{ color: 'muted', minHeight: '1.55em', '& strong': { color: 'ink' } }}>
-					{!busy && total > 0 && (
-						<Trans t={t} i18nKey="creators:list.count" count={total} values={{ formatted: format.number(total) }} components={{ strong: <strong /> }} />
-					)}
-				</Typography>
-			</Box>
-			<Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 2 }}>
-				<SearchBox value={filters.text} onApply={(text) => void update({ text })} />
-				<Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-					<Typography component="label" htmlFor={sortId} variant="body2" sx={{ color: 'muted' }}>
-						{t('creators:list.sortLabel')}
+		<>
+			<CreatorsHero filters={filters} onChange={update} stats={stats.data?.getCreatorStats} showBecome={showBecome} />
+			<CreatorFilterBar filters={filters} onChange={update} counts={counts} canFollow={canFollow} />
+			<Box
+				sx={{
+					maxWidth: 1240,
+					mx: 'auto',
+					px: { xs: 4, sm: 6 },
+					pt: 7,
+					pb: 24,
+					display: 'flex',
+					flexDirection: 'column',
+					gap: 5.5,
+				}}
+			>
+				<Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', columnGap: 3.5, rowGap: 2.5 }}>
+					{/* Announced politely after every change; empty while loading. */}
+					<Typography role="status" aria-live="polite" sx={{ fontSize: 16, color: 'bodySoft', minHeight: '1.5em' }}>
+						{!showSkeleton && data && (
+							<>
+								<Box
+									component="b"
+									sx={{ fontFamily: fonts.display, fontSize: 22, letterSpacing: '-0.02em', color: 'ink' }}
+								>
+									{format.number(total)}
+								</Box>{' '}
+								{t('creators:list.results', { count: total })}
+								{filters.text && ` ${t('creators:list.resultsFor', { text: filters.text })}`}
+							</>
+						)}
 					</Typography>
-					<NativeSelect
-						id={sortId}
-						value={filters.sort}
-						onChange={(event) => void update({ sort: event.target.value as CreatorSort })}
-						input={<OutlinedInput sx={{ ...controlSx, fontWeight: 600 }} />}
-					>
-						{CREATOR_SORTS.map((sort) => (
-							<option key={sort} value={sort}>
-								{t(`creators:list.sort.${sort}`)}
-							</option>
-						))}
-					</NativeSelect>
+					<AppliedChips
+						chips={chips}
+						onClear={() => void clear()}
+						labels={{
+							remove: (label) => t('creators:filters.remove', { label }),
+							clearAll: t('creators:filters.clearAll'),
+						}}
+					/>
+					{filters.withAgentsOnly && hiddenEmpty > 0 && (
+						<Link
+							component="button"
+							type="button"
+							onClick={() => void update({ withAgentsOnly: false })}
+							underline="always"
+							sx={{ minHeight: 34, px: 1, fontSize: 13, fontWeight: 600, color: 'muted', ...focusVisibleSx }}
+						>
+							{t('creators:list.hiddenEmpty', { count: hiddenEmpty })}
+						</Link>
+					)}
 				</Box>
+				{renderResults()}
 			</Box>
-			{results()}
-		</Box>
+		</>
 	);
 };
