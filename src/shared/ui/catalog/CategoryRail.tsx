@@ -114,7 +114,7 @@ type CategoryRailProps = {
 	allCount?: number;
 };
 
-/** "All" plus the 8 categories, multi-select, each with its icon and live count; scrolls sideways when narrow. */
+/** "All" plus the 8 categories, multi-select, each with its icon and live count; wraps (scrolls sideways on phones). */
 export const CategoryRail = ({ selected, counts, onChange, labels, allCount: knownAll }: CategoryRailProps) => {
 	const { t } = useTranslation('common');
 	const allCount = !counts ? undefined : (knownAll ?? RAIL_CATEGORIES.reduce((sum, category) => sum + (counts[category] ?? 0), 0));
@@ -128,9 +128,12 @@ export const CategoryRail = ({ selected, counts, onChange, labels, allCount: kno
 			sx={{
 				display: 'flex',
 				gap: 2,
-				overflowX: 'auto',
 				p: '2px',
 				m: '-2px',
+				// Phones: one row that scrolls sideways (a wrapped rail would push the results off the screen).
+				// From sm up: every option visible, wrapping onto a second row instead of being cut off at the edge.
+				flexWrap: { xs: 'nowrap', sm: 'wrap' },
+				overflowX: { xs: 'auto', sm: 'visible' },
 				scrollbarWidth: 'none',
 				'&::-webkit-scrollbar': { display: 'none' },
 			}}

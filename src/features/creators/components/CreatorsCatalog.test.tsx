@@ -237,7 +237,8 @@ describe('CreatorsCatalog (agentshub-creators design, D-45)', () => {
 		expect(mockRouter.asPath).toBe('/creators?category=sales');
 		await user.click(screen.getByRole('switch', { name: 'Only creators with agents' }));
 		expect(mockRouter.asPath).toBe('/creators?category=sales&agents=any');
-		await user.selectOptions(screen.getByRole('combobox', { name: 'Sort' }), 'Name A–Z');
+		await user.click(screen.getByRole('combobox', { name: /^Sort/ }));
+		await user.click(await screen.findByRole('option', { name: 'Name A–Z' }));
 		expect(mockRouter.asPath).toBe('/creators?category=sales&agents=any&sort=name');
 	});
 

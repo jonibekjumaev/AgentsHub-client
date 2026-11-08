@@ -192,8 +192,11 @@ describe('AgentsCatalog', () => {
 		renderCatalog([listMock(at('/agents?sort=newest'), agentsOf(2))]);
 		await results();
 
-		const sort = screen.getByRole('combobox', { name: 'Sort' });
-		expect(within(sort).getAllByRole('option').map((option) => option.textContent)).toEqual([
+		const sort = screen.getByRole('combobox', { name: /^Sort/ });
+		expect(sort).toHaveTextContent('Newest');
+		await user.click(sort);
+		const menu = await screen.findByRole('listbox');
+		expect(within(menu).getAllByRole('option').map((option) => option.textContent)).toEqual([
 			'Most liked',
 			'Newest',
 			'Most viewed',
@@ -201,7 +204,8 @@ describe('AgentsCatalog', () => {
 			'Price: low to high',
 			'Price: high to low',
 		]);
-		await user.selectOptions(sort, 'Most liked');
+		expect(within(menu).getByRole('option', { name: 'Newest' })).toHaveAttribute('aria-selected', 'true');
+		await user.click(within(menu).getByRole('option', { name: 'Most liked' }));
 		expect(mockRouter.asPath).toBe('/agents');
 	});
 

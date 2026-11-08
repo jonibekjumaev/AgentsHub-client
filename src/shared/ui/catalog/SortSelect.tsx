@@ -1,5 +1,7 @@
 import { useId } from 'react';
-import { Box, NativeSelect } from '@mui/material';
+import { Box, InputBase, MenuItem, Select } from '@mui/material';
+import { KeyboardArrowDown as KeyboardArrowDownIcon } from '@mui/icons-material';
+import { catalog, home } from '@/theme/tokens';
 import { focusRingSx } from './motion';
 
 type SortSelectProps<T extends string> = {
@@ -9,22 +11,46 @@ type SortSelectProps<T extends string> = {
 	onChange: (value: T) => void;
 };
 
-/** "Sort [Most liked ▾]": a native select (keyboard and screen-reader friendly on every platform). */
+/**
+ * "Sort [Most liked ▾]". A MUI Select, not a native one: the native list is drawn by the operating system
+ * (plain, its own font and size, no way to style it), and looked out of place on the catalog pages. MUI's is a
+ * real combobox + listbox, so the keyboard (arrows, Enter, Escape, type-ahead) and screen readers keep working.
+ */
 export const SortSelect = <T extends string>({ label, value, options, onChange }: SortSelectProps<T>) => {
-	const id = useId();
+	const labelId = useId();
 	return (
 		<Box sx={{ display: 'flex', alignItems: 'center', gap: 2.5 }}>
-			<Box component="label" htmlFor={id} sx={{ fontSize: 14, color: 'bodySoft' }}>
+			<Box component="span" id={labelId} sx={{ fontSize: 14, color: 'bodySoft' }}>
 				{label}
 			</Box>
-			<NativeSelect
-				id={id}
+			<Select
+				labelId={labelId}
 				value={value}
 				onChange={(event) => onChange(event.target.value as T)}
-				disableUnderline
+				input={<InputBase />}
+				IconComponent={KeyboardArrowDownIcon}
+				MenuProps={{
+					// keep the page scrollable and the sticky bar in place while the list is open
+					disableScrollLock: true,
+					anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
+					transformOrigin: { vertical: 'top', horizontal: 'right' },
+					slotProps: {
+						paper: {
+							sx: {
+								mt: 1.5,
+								minWidth: 200,
+								borderRadius: '12px',
+								border: 1,
+								borderColor: 'border',
+								boxShadow: home.topShadow,
+								'& .MuiMenu-list': { p: 1.5 },
+							},
+						},
+					},
+				}}
 				sx={{
 					minHeight: 38,
-					px: 3,
+					minWidth: 168,
 					border: 1,
 					borderColor: 'border',
 					borderRadius: '10px',
@@ -32,16 +58,33 @@ export const SortSelect = <T extends string>({ label, value, options, onChange }
 					fontSize: 14,
 					fontWeight: 600,
 					color: 'ink',
-					'&:focus-within': focusRingSx,
-					'& select:focus': { bgcolor: 'transparent' },
+					'& .MuiSelect-select': { display: 'flex', alignItems: 'center', minHeight: 'unset', py: 2, pl: 3, pr: '36px !important' },
+					'& .MuiSelect-icon': { right: 8, fontSize: 20, color: 'bodySoft' },
+					'&:hover': { borderColor: catalog.divider },
+					'&.Mui-focused': focusRingSx,
 				}}
 			>
 				{options.map((option) => (
-					<option key={option.value} value={option.value}>
+					<MenuItem
+						key={option.value}
+						value={option.value}
+						sx={{
+							minHeight: 40,
+							px: 3,
+							borderRadius: '8px',
+							fontSize: 14,
+							fontWeight: 600,
+							color: 'body',
+							'&:hover': { bgcolor: 'neutralSoft' },
+							'&.Mui-selected, &.Mui-selected:hover': { bgcolor: 'accentSoft', color: 'primary.main' },
+							'&.Mui-focusVisible': { bgcolor: 'neutralSoft', outline: `2px solid ${home.focusRing}`, outlineOffset: '-2px' },
+							'& + &': { mt: 0.5 },
+						}}
+					>
 						{option.label}
-					</option>
+					</MenuItem>
 				))}
-			</NativeSelect>
+			</Select>
 		</Box>
 	);
 };

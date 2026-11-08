@@ -212,14 +212,15 @@ describe('BriefsCatalog (agentshub-briefs design, D-44)', () => {
 		renderCatalog([listMock(at('/briefs'), briefsOf(2))]);
 		await feed();
 
-		const sort = screen.getByRole('combobox', { name: 'Sort' });
-		expect(within(sort).getAllByRole('option').map((option) => option.textContent)).toEqual([
+		await user.click(screen.getByRole('combobox', { name: /^Sort/ }));
+		const menu = await screen.findByRole('listbox');
+		expect(within(menu).getAllByRole('option').map((option) => option.textContent)).toEqual([
 			'Newest',
 			'Highest budget',
 			'Deadline soonest',
 			'Most discussed',
 		]);
-		await user.selectOptions(sort, 'Most discussed');
+		await user.click(within(menu).getByRole('option', { name: 'Most discussed' }));
 		expect(mockRouter.asPath).toBe('/briefs?sort=discussed');
 	});
 
