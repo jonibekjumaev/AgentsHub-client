@@ -67,7 +67,14 @@
 		"settings": "프로필 설정",
 		"members": "회원",
 		"agents": "에이전트",
-		"briefs": "브리프"
+		"briefs": "브리프",
+		"groups": {
+			"workspace": "작업 공간",
+			"library": "보관함",
+			"account": "계정"
+		},
+		"visitors": "프로필 방문자",
+		"publicProfile": "공개 프로필 보기"
 	},
 	"errorPages": {
 		"home": "홈으로 돌아가기",

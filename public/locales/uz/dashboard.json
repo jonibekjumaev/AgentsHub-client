@@ -8,7 +8,7 @@
 		"subtitle": "Profilingiz va agentlaringiz holati.",
 		"loading": "Raqamlar yuklanmoqda…",
 		"errorTitle": "Raqamlarni yuklab boʻlmadi",
-		"recent": "Yaqinda yangilangan agentlar",
+		"recent": "Agentlaringiz",
 		"manage": "Barcha agentlarni boshqarish",
 		"stats": {
 			"label": "Sizning raqamlaringiz",
@@ -16,7 +16,44 @@
 			"agentsHint": "Faol va toʻxtatilgan",
 			"profileViews": "Profil koʻrishlari",
 			"profileLikes": "Profil likelari",
-			"followers": "Obunachilar"
+			"followers": "Obunachilar",
+			"agentsSplit": "{{active}} faol · {{paused}} toʻxtatilgan",
+			"since": "{{date}} dan beri",
+			"likesHint": "Profilingizdagi layklar",
+			"youFollow_one": "Siz {{formatted}} kishini kuzatyapsiz",
+			"youFollow_other": "Siz {{formatted}} kishini kuzatyapsiz"
+		},
+		"eyebrow": "Kreator studiyasi",
+		"welcome": "Xush kelibsiz, {{name}}",
+		"writeArticle": "Maqola yozish",
+		"agents": {
+			"subtitle": "{{total}} tadan {{shown}} tasi, oxirgi oʻzgargani birinchi",
+			"updated": "{{when}} yangilangan",
+			"views_one": "{{formatted}} koʻrish",
+			"views_other": "{{formatted}} koʻrish",
+			"likes_one": "{{formatted}} layk",
+			"likes_other": "{{formatted}} layk",
+			"menuLabel": "{{title}} uchun amallar",
+			"viewPublic": "Ommaviy sahifani koʻrish"
+		},
+		"top": {
+			"title": "Eng koʻp koʻrilgan agentlar",
+			"subtitle": "Chiziqlar har bir agentni eng koʻp koʻrilgani bilan solishtiradi.",
+			"loading": "Top agentlar yuklanmoqda…",
+			"paused": "Toʻxtatilgan"
+		},
+		"steps": {
+			"title": "Keyingi qadamlar",
+			"progress": "{{total}} tadan {{done}} tasi bajarildi",
+			"progressLabel": "Profil toʻliqligi",
+			"done": "(bajarildi)",
+			"items": {
+				"photo": "Profil rasmini qoʻshing",
+				"bio": "Qisqa bio yozing",
+				"contact": "WhatsApp yoki e-mail qoʻshing",
+				"agent": "Birinchi agentingizni qoʻshing",
+				"article": "Birinchi maqolangizni yozing"
+			}
 		}
 	},
 	"myAgents": {
@@ -102,5 +139,17 @@
 		"live": "Bu agent marketpleysda faol.",
 		"publicLink": "Ochiq sahifani ochish",
 		"actionsLabel": "Agent amallari"
+	},
+	"visitors": {
+		"title": "Profil mehmonlari",
+		"subtitle": "Soʻnggi {{days}} kunda profilingizni ochgan aʼzolar, eng yangisi birinchi.",
+		"privacyLink": "Oʻzingiz yashirin koʻrib chiqing",
+		"loading": "Mehmonlar yuklanmoqda…",
+		"errorTitle": "Mehmonlarni yuklab boʻlmadi",
+		"emptyTitle": "Hali mehmonlar yoʻq",
+		"emptyText": "Keyingi {{days}} kunda profilingizni ochgan aʼzolar shu yerda chiqadi.",
+		"listLabel": "Profil mehmonlari",
+		"private_one": "{{count}} aʼzo yashirin kirdi, ismi koʻrsatilmaydi.",
+		"private_other": "{{count}} aʼzo yashirin kirdi, ismlari koʻrsatilmaydi."
 	}
 }

@@ -67,7 +67,14 @@
 		"settings": "Profile settings",
 		"members": "Members",
 		"agents": "Agents",
-		"briefs": "Briefs"
+		"briefs": "Briefs",
+		"groups": {
+			"workspace": "Workspace",
+			"library": "Library",
+			"account": "Account"
+		},
+		"visitors": "Profile visitors",
+		"publicProfile": "View public profile"
 	},
 	"errorPages": {
 		"home": "Back to home",

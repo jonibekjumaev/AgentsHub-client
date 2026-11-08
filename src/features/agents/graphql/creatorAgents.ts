@@ -54,3 +54,17 @@ export const UpdateAgentStatusMutation = graphql(`
 		}
 	}
 `);
+
+/** Overview "Top agents by views": the creator's own ACTIVE + PAUSED agents, most viewed first. */
+export const TopCreatorAgentsQuery = graphql(`
+	query TopCreatorAgents($input: CreatorProductsInquiry!) {
+		getCreatorProducts(input: $input) {
+			list {
+				_id
+				productTitle
+				productStatus
+				productViews
+			}
+		}
+	}
+`);

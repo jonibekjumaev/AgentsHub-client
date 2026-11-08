@@ -67,7 +67,14 @@
 		"settings": "Profil sozlamalari",
 		"members": "Aʼzolar",
 		"agents": "Agentlar",
-		"briefs": "Brieflar"
+		"briefs": "Brieflar",
+		"groups": {
+			"workspace": "Ish maydoni",
+			"library": "Kutubxona",
+			"account": "Hisob"
+		},
+		"visitors": "Profil mehmonlari",
+		"publicProfile": "Ommaviy profilni koʻrish"
 	},
 	"errorPages": {
 		"home": "Bosh sahifaga qaytish",

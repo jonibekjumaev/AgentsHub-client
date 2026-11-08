@@ -13,6 +13,7 @@ export const AccountQuery = graphql(`
 			memberEmail
 			memberWhatsapp
 			memberDesc
+			memberBrowsePrivately
 		}
 	}
 `);
@@ -47,5 +48,15 @@ export const ChangePasswordMutation = graphql(`
 export const UploadAvatarMutation = graphql(`
 	mutation UploadAvatar($file: Upload!) {
 		imageUploader(file: $file, target: "member")
+	}
+`);
+
+/** D-42: browse privately — profile visits are still counted but the visitor is not named. */
+export const UpdateBrowsePrivatelyMutation = graphql(`
+	mutation UpdateBrowsePrivately($input: MemberUpdate!) {
+		updateMember(input: $input) {
+			_id
+			memberBrowsePrivately
+		}
 	}
 `);
