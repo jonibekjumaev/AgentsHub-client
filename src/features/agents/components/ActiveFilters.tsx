@@ -1,8 +1,6 @@
-import { Box, ButtonBase, Link } from '@mui/material';
-import { Close as CloseIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
 import { useFormat } from '@/shared/lib/format';
-import { home, radiusPx } from '@/theme/tokens';
+import { AppliedChips } from '@/shared/ui/catalog';
 import type { FilterPatch } from '../hooks/useAgentFilters';
 import { hasActiveFilters, type AgentFilters } from '../lib/listQuery';
 
@@ -55,47 +53,10 @@ export const ActiveFilters = ({ filters, onChange, onClear }: ActiveFiltersProps
 	];
 
 	return (
-		<Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 2 }}>
-			<Box component="ul" sx={{ display: 'contents', listStyle: 'none' }}>
-				{chips.map((chip) => (
-					<li key={chip.key}>
-						<ButtonBase
-							onClick={() => onChange(chip.remove)}
-							aria-label={t('agents:filters.remove', { label: chip.label })}
-							sx={{
-								display: 'inline-flex',
-								alignItems: 'center',
-								gap: 1.5,
-								minHeight: 34,
-								pl: 3,
-								pr: 2,
-								borderRadius: radiusPx.pill,
-								bgcolor: 'accentSoft',
-								color: 'primary.main',
-								fontSize: 13,
-								fontWeight: 600,
-								maxWidth: '100%',
-								'&:hover': { bgcolor: 'accentBorder' },
-								'&:focus-visible': { outline: `3px solid ${home.focusRing}`, outlineOffset: '3px' },
-							}}
-						>
-							<Box component="span" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-								{chip.label}
-							</Box>
-							<CloseIcon aria-hidden="true" sx={{ fontSize: 15 }} />
-						</ButtonBase>
-					</li>
-				))}
-			</Box>
-			<Link
-				component="button"
-				type="button"
-				onClick={onClear}
-				underline="always"
-				sx={{ minHeight: 34, px: 2.5, fontSize: 13, fontWeight: 700, color: 'bodySoft', '&:focus-visible': { outline: `3px solid ${home.focusRing}`, outlineOffset: '3px' } }}
-			>
-				{t('agents:filters.clearAll')}
-			</Link>
-		</Box>
+		<AppliedChips
+			chips={chips.map(({ key, label, remove }) => ({ key, label, onRemove: () => onChange(remove) }))}
+			onClear={onClear}
+			labels={{ remove: (label) => t('agents:filters.remove', { label }), clearAll: t('agents:filters.clearAll') }}
+		/>
 	);
 };

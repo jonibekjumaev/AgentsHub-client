@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useRef } from 'react';
 import { useRouter } from 'next/router';
-import { BRIEFS_PATH, briefsHref, parseBriefFilters, toBriefsUrlQuery, type BriefFilters } from '../lib/listQuery';
+import { BRIEFS_PATH, DEFAULT_BRIEF_FILTERS, briefsHref, parseBriefFilters, toBriefsUrlQuery, type BriefFilters } from '../lib/listQuery';
 
 /** Every filter except the page, which is reset to 1 whenever a filter changes. */
 export type BriefFilterPatch = Partial<Omit<BriefFilters, 'page'>>;
@@ -26,8 +26,18 @@ export const useBriefFilters = () => {
 
 	const update = useCallback((patch: BriefFilterPatch) => push({ ...latest.current, ...patch, page: 1 }), [push]);
 
-	/** Drops category and search; the tab and sort stay. */
-	const clear = useCallback(() => push({ ...latest.current, category: null, text: '', page: 1 }), [push]);
+	/** Drops categories, budget types and search; the tab, sort and past-deadline switch stay. */
+	const clear = useCallback(
+		() =>
+			push({
+				...latest.current,
+				categories: DEFAULT_BRIEF_FILTERS.categories,
+				budgetTypes: DEFAULT_BRIEF_FILTERS.budgetTypes,
+				text: '',
+				page: 1,
+			}),
+		[push],
+	);
 
 	const pageHref = useCallback((page: number) => briefsHref({ ...filters, page }), [filters]);
 

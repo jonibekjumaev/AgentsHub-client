@@ -9,7 +9,7 @@ import { newBriefHref } from '@/features/briefs';
 import { useFormat } from '@/shared/lib/format';
 import { useRouteLoading } from '@/shared/lib/useRouteLoading';
 import { ErrorState } from '@/shared/ui/ErrorState';
-import { Pagination } from '@/shared/ui/Pagination';
+import { LoadMore, outlineButtonSx } from '@/shared/ui/catalog';
 import { fonts, home } from '@/theme/tokens';
 import { AgentsCatalogQuery, ProductFacetsQuery } from '../graphql/agents';
 import { useAgentFilters } from '../hooks/useAgentFilters';
@@ -38,20 +38,6 @@ const gridSx = {
 } as const;
 
 const listSx = { m: 0, p: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 2.5 } as const;
-
-const outlineButtonSx = {
-	minHeight: 48,
-	px: 6.5,
-	border: 1,
-	borderColor: 'inputBorder',
-	borderRadius: home.radius.button,
-	bgcolor: 'surface',
-	color: 'ink',
-	fontSize: 15,
-	fontWeight: 700,
-	'&:hover': { bgcolor: 'ground' },
-	'&:focus-visible': { outline: `3px solid ${home.focusRing}`, outlineOffset: '3px' },
-} as const;
 
 /** The last grid tile: briefs are the way to get an agent that doesn't exist yet. */
 const BriefTile = ({ text }: { text: string }) => {
@@ -207,29 +193,17 @@ export const AgentsCatalog = () => {
 				</Box>
 				{hidden === 0 && view === 'list' && <BriefTile text={filters.text} />}
 
-				<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3.5, pt: 3 }}>
-					<Typography sx={{ fontSize: 14, color: 'bodySoft' }}>
-						{t('agents:catalog.showing', { shown: format.number(shownUpTo), total: format.number(total) })}
-					</Typography>
-					<Box aria-hidden="true" sx={{ width: 220, height: 4, borderRadius: '999px', bgcolor: 'border', overflow: 'hidden' }}>
-						<Box
-							sx={{
-								width: `${total ? Math.round((shownUpTo / total) * 100) : 0}%`,
-								height: '100%',
-								borderRadius: '999px',
-								bgcolor: 'primary.main',
-								transition: 'width 400ms ease',
-							}}
-						/>
-					</Box>
-					{hidden > 0 ? (
-						<ButtonBase onClick={() => setExpandedFor(resultKey)} sx={outlineButtonSx}>
-							{t('agents:catalog.showMore', { count: hidden })}
-						</ButtonBase>
-					) : (
-						<Pagination page={filters.page} count={pageCount} getHref={pageHref} />
-					)}
-				</Box>
+				<LoadMore
+					showingLabel={t('agents:catalog.showing', { shown: format.number(shownUpTo), total: format.number(total) })}
+					shown={shownUpTo}
+					total={total}
+					hidden={hidden}
+					showMoreLabel={t('agents:catalog.showMore', { count: hidden })}
+					onShowMore={() => setExpandedFor(resultKey)}
+					page={filters.page}
+					pageCount={pageCount}
+					getHref={pageHref}
+				/>
 			</>
 		);
 	};

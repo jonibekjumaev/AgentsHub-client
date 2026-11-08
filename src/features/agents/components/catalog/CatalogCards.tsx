@@ -1,29 +1,18 @@
 import NextLink from 'next/link';
 import Image from 'next/image';
 import { Box, Typography } from '@mui/material';
-import { keyframes } from '@mui/material/styles';
 import { useTranslation } from 'next-i18next';
 import type { CatalogAgentFragment } from '@/gql/graphql';
 import { useFormat } from '@/shared/lib/format';
 import { mediaUrl } from '@/shared/lib/media';
 import { CategoryIcon, categoryTint } from '@/shared/ui/CategoryIcon';
+import { enterSx, focusRingSx } from '@/shared/ui/catalog';
 import { colors, fonts, home, radiusPx } from '@/theme/tokens';
 import { agentHref } from '../AgentCard';
 import { CardLikeButton } from './CardLikeButton';
 
-const pop = keyframes`
-	from { opacity: 0; transform: translateY(18px) scale(0.98); }
-	to { opacity: 1; transform: none; }
-`;
-
-/** Cards rise in when the results change; 0.05s apart, at most 8 steps. Off under reduced motion. */
-export const enterSx = (index: number) =>
-	({
-		animation: `${pop} 0.5s cubic-bezier(.2,.7,.2,1) ${Math.min(index, 8) * 0.05}s both`,
-		'@media (prefers-reduced-motion: reduce)': { animation: 'none' },
-	}) as const;
-
-const focusRing = { outline: `3px solid ${home.focusRing}`, outlineOffset: '3px' } as const;
+/** Re-exported for the agent cards' callers; the animation lives with the shared catalog parts. */
+export { enterSx };
 
 /** The title link covers the whole card (one link per card); the like button sits above it. */
 const stretchedLinkSx = {
@@ -31,7 +20,7 @@ const stretchedLinkSx = {
 	textDecoration: 'none',
 	'&::after': { content: '""', position: 'absolute', inset: 0, borderRadius: 'inherit' },
 	'&:focus-visible': { outline: 'none' },
-	'&:focus-visible::after': focusRing,
+	'&:focus-visible::after': focusRingSx,
 } as const;
 
 /** "$49 / mo", "$1,000", "Custom" or "Free" (green). */

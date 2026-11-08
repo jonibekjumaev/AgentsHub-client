@@ -1,17 +1,28 @@
 import type { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { addApolloState, initializeApollo } from '@/apollo/client';
-import { BriefsCatalog, BriefsListQuery, BriefsSeo, briefsListVariables, parseBriefFilters } from '@/features/briefs';
+import {
+	BriefFacetsQuery,
+	BriefsCatalog,
+	BriefsListQuery,
+	BriefsSeo,
+	OpenBriefStatsQuery,
+	briefFacetsVariables,
+	briefsListVariables,
+	parseBriefFilters,
+} from '@/features/briefs';
 import { PublicLayout, type NextPageWithLayout } from '@/shared/layout';
 
 export const getServerSideProps: GetServerSideProps = async ({ locale, query }) => {
 	// One client per request, no auth header: public data only (CLAUDE.md rules 11–12).
 	const client = initializeApollo();
-	try {
-		await client.query({ query: BriefsListQuery, variables: briefsListVariables(parseBriefFilters(query)) });
-	} catch {
-		// Leave the cache empty: the browser runs the query again and shows the error state if it still fails.
-	}
+	const filters = parseBriefFilters(query);
+	// In parallel; a failure leaves that part of the cache empty, and the browser asks again (and shows the error).
+	await Promise.all([
+		client.query({ query: BriefsListQuery, variables: briefsListVariables(filters) }).catch(() => undefined),
+		client.query({ query: BriefFacetsQuery, variables: briefFacetsVariables(filters) }).catch(() => undefined),
+		client.query({ query: OpenBriefStatsQuery }).catch(() => undefined),
+	]);
 
 	return addApolloState(client, {
 		props: {

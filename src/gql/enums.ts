@@ -24,6 +24,12 @@ export const BoardArticleStatus = {
 } as const;
 
 export type BoardArticleStatus = typeof BoardArticleStatus[keyof typeof BoardArticleStatus];
+export const BriefBudgetType = {
+  Fixed: 'FIXED',
+  OpenToOffers: 'OPEN_TO_OFFERS'
+} as const;
+
+export type BriefBudgetType = typeof BriefBudgetType[keyof typeof BriefBudgetType];
 export const BriefStatus = {
   Closed: 'CLOSED',
   Delete: 'DELETE',

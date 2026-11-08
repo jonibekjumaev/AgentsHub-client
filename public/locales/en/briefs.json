@@ -212,5 +212,104 @@
 			"saveFailed": "The brief wasn't saved",
 			"loadFailed": "We couldn't load this brief"
 		}
+	},
+	"feed": {
+		"hero": {
+			"title": "Agents businesses want built",
+			"text": "Read what businesses need, ask questions in the comments, then reach out with an offer.",
+			"examples": {
+				"0": "Telegram bot for my online store",
+				"1": "Weekly report from a spreadsheet",
+				"2": "Answer shipping questions",
+				"3": "Product descriptions for 400 items",
+				"4": "Slack updates from an API"
+			},
+			"clear": "Clear search",
+			"submit": "Search",
+			"try": "Try:",
+			"suggestions": {
+				"telegram": "Telegram",
+				"shopify": "Shopify",
+				"slack": "Slack",
+				"offers": "Open to offers"
+			}
+		},
+		"live": {
+			"openOnly_one": "{{formatted}} brief open now",
+			"openOnly_other": "{{formatted}} briefs open now",
+			"withBudget_one": "{{formatted}} brief open now, {{budget}} in posted budgets",
+			"withBudget_other": "{{formatted}} briefs open now, {{budget}} in posted budgets"
+		},
+		"filters": {
+			"all": "All",
+			"budget": "Budget",
+			"hidePast": "Hide past deadline",
+			"remove": "Remove filter: {{label}}",
+			"clearAll": "Clear all"
+		},
+		"budgetType": {
+			"FIXED": "Fixed budget",
+			"OPEN_TO_OFFERS": "Open to offers"
+		},
+		"sort": {
+			"newest": "Newest",
+			"budget": "Highest budget",
+			"deadline": "Deadline soonest",
+			"discussed": "Most discussed"
+		},
+		"results": {
+			"open_one": "brief open",
+			"open_other": "briefs open",
+			"closed_one": "brief closed",
+			"closed_other": "briefs closed",
+			"for": "for “{{text}}”"
+		},
+		"hiddenPast_one": "{{count}} brief is past deadline. Show it",
+		"hiddenPast_other": "{{count}} briefs are past deadline. Show them",
+		"status": {
+			"past": "Past deadline"
+		},
+		"posted": "Posted {{when}}",
+		"facts": {
+			"budgetType": "Budget type",
+			"deadline": "Deadline",
+			"questions": "Questions",
+			"views": "Views"
+		},
+		"deadline": {
+			"due_one": "Due {{date}}, {{count}} day left",
+			"due_other": "Due {{date}}, {{count}} days left",
+			"passed": "Deadline passed {{date}}"
+		},
+		"questions": {
+			"none": "No questions yet",
+			"count_one": "{{formatted}} question",
+			"count_other": "{{formatted}} questions"
+		},
+		"contactAfterSignIn": "Contact after sign-in",
+		"view": "View brief",
+		"cta": {
+			"title": "Need an agent built?",
+			"text": "Describe the job in a brief. Creators who build custom agents will see it today."
+		},
+		"showing": "Showing {{shown}} of {{total}}",
+		"showMore_one": "Show {{count}} more",
+		"showMore_other": "Show {{count}} more",
+		"empty": {
+			"noMatch": {
+				"title": "No brief matches this",
+				"text": "Remove a filter to widen the search, or post the brief yourself."
+			},
+			"open": {
+				"title": "No open briefs yet",
+				"text": "When a business posts what it needs, it shows up here."
+			},
+			"closed": {
+				"title": "No closed briefs yet",
+				"text": "When a business picks a creator and closes its brief, it appears here."
+			},
+			"briefFor": "Post a brief for “{{text}}”",
+			"clearAll": "Clear all filters"
+		}
 	}
 }

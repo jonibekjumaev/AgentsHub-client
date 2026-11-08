@@ -82,3 +82,33 @@ export const BriefViewerQuery = graphql(`
 		}
 	}
 `);
+
+/** Live counts next to the /briefs filters (D-44). Public, no page or sort. */
+export const BriefFacetsQuery = graphql(`
+	query BriefFacets($input: BISearch!) {
+		getBriefFacets(input: $input) {
+			categories {
+				value
+				count
+			}
+			budgetTypes {
+				value
+				count
+			}
+			statuses {
+				value
+				count
+			}
+		}
+	}
+`);
+
+/** The /briefs live badge (D-44): open briefs not past their deadline, and the sum of their fixed budgets. */
+export const OpenBriefStatsQuery = graphql(`
+	query OpenBriefStats {
+		getOpenBriefStats {
+			openNow
+			budgetTotal
+		}
+	}
+`);

@@ -73,3 +73,10 @@ export const briefActions = (status: BriefStatus): BriefAction[] => {
 
 /** Only delete confirms: close and reopen undo each other. */
 export const briefNeedsConfirm = (action: BriefAction): boolean => action === 'delete';
+
+/**
+ * Briefs are posted by USERs (ER rule 2): guests see the "Post a brief" calls too (login first);
+ * creators and admins don't.
+ */
+export const canPostBrief = (status: 'loading' | 'guest' | 'member', memberType: string | null | undefined): boolean =>
+	status === 'guest' || (status === 'member' && memberType === 'USER');

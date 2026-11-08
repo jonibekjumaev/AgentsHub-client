@@ -260,3 +260,23 @@ export const catalog = {
 	disabledOpacity: 0.45,
 	heart: '#C01048',
 } as const;
+
+/**
+ * /briefs feed (agentshub-briefs design): deadline and status colors (text / dot / soft background), the live
+ * badge in the dark hero, and the list container's row divider and hover.
+ */
+export const briefFeed = {
+	deadline: {
+		future: { text: '#067647', dot: '#12B76A' },
+		soon: { text: '#B54708', dot: '#F79009' },
+		passed: { text: '#B42318', dot: '#F04438' },
+		none: { text: '#344054', dot: '#98A2B3' },
+	},
+	openPill: { bg: '#E8F7EF', text: '#067647', dot: '#12B76A' },
+	pastPill: { bg: '#FEF3F2', text: '#B42318', dot: '#F04438' },
+	liveBadge: { bg: 'rgba(18, 183, 106, 0.16)', border: 'rgba(110, 231, 183, 0.35)', text: '#D1FADF', dot: '#32D583' },
+	rowDivider: '#EEF0F4',
+	rowHover: '#FAFAFF',
+	/** Past-deadline rows, when shown. */
+	pastOpacity: 0.8,
+} as const;
