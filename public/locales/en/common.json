@@ -43,11 +43,20 @@
 		}
 	},
 	"footer": {
-		"label": "Footer",
 		"faq": "FAQ",
 		"about": "About",
 		"copyright": "© {{year}} AgentsHub",
-		"prices": "All prices in USD."
+		"prices": "All prices in USD.",
+		"tagline": "Where businesses find AI agents and creators get them built.",
+		"columns": {
+			"marketplace": "Marketplace",
+			"creators": "For creators",
+			"company": "Company"
+		},
+		"categories": "Categories",
+		"sell": "Sell your agent",
+		"answerBriefs": "Answer briefs",
+		"ranking": "How ranking works"
 	},
 	"dashboardNav": {
 		"label": "Dashboard",

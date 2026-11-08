@@ -10,7 +10,7 @@ import type { GetLayout, NextPageWithLayout } from '@/shared/layout/types';
 import { ToastProvider } from '@/shared/ui/toast'; // direct: the barrel would pull the whole UI kit into _app
 import { theme } from '@/theme/theme';
 import { fontVars } from '@/theme/tokens';
-import { jetbrainsMono, manrope, notoSansKr } from '@/theme/fonts';
+import { bricolage, jetbrainsMono, manrope, notoSansKr } from '@/theme/fonts';
 
 // Font CSS variables live on :root so portals (menus, dialogs) inherit them too.
 const fontVariables = (
@@ -20,6 +20,7 @@ const fontVariables = (
 				[fontVars.sans]: manrope.style.fontFamily,
 				[fontVars.mono]: jetbrainsMono.style.fontFamily,
 				[fontVars.korean]: notoSansKr.style.fontFamily,
+				[fontVars.display]: bricolage.style.fontFamily,
 			},
 		}}
 	/>

@@ -169,3 +169,7 @@ export const fromBrief = (brief: OwnerBriefQuery['getBrief']): BriefFormValues =
 	openToOffers: brief.briefBudget == null,
 	briefDeadline: deadlineFromIso(brief.briefDeadline),
 });
+
+/** A `?title=` value for the new-brief form: the first value, trimmed, cut to the title limit. */
+export const prefillTitle = (value: string | string[] | undefined): string =>
+	(Array.isArray(value) ? value[0] ?? '' : value ?? '').trim().slice(0, BRIEF_TITLE_MAX);

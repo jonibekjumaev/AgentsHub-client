@@ -43,11 +43,20 @@
 		}
 	},
 	"footer": {
-		"label": "Pastki qism",
 		"faq": "Koʻp soʻraladigan savollar",
 		"about": "Biz haqimizda",
 		"copyright": "© {{year}} AgentsHub",
-		"prices": "Barcha narxlar AQSh dollarida."
+		"prices": "Barcha narxlar AQSh dollarida.",
+		"tagline": "Bizneslar AI agent topadigan, kreatorlar ularni yaratadigan joy.",
+		"columns": {
+			"marketplace": "Marketplace",
+			"creators": "Kreatorlar uchun",
+			"company": "Kompaniya"
+		},
+		"categories": "Kategoriyalar",
+		"sell": "Agentingizni soting",
+		"answerBriefs": "Brieflarga javob berish",
+		"ranking": "Reyting qanday ishlaydi"
 	},
 	"dashboardNav": {
 		"label": "Boshqaruv paneli",

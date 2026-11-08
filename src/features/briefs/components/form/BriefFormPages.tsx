@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { Box, Link, Skeleton, Stack, Typography } from '@mui/material';
 import { LockOutlined as LockOutlinedIcon, SearchOff as SearchOffIcon } from '@mui/icons-material';
@@ -12,7 +13,7 @@ import { ErrorState } from '@/shared/ui/ErrorState';
 import { StatusPage } from '@/shared/ui/StatusPage';
 import { radiusPx } from '@/theme/tokens';
 import { OwnerBriefQuery } from '../../graphql/myBriefs';
-import { EMPTY_BRIEF_FORM, fromBrief } from '../../lib/briefForm';
+import { EMPTY_BRIEF_FORM, fromBrief, prefillTitle } from '../../lib/briefForm';
 import { isObjectId } from '../../lib/detail';
 import { MY_BRIEFS_PATH } from '../../lib/myBriefs';
 import { BriefForm } from './BriefForm';
@@ -60,13 +61,17 @@ export const BriefNotFound = () => {
 const Frame = ({ children }: { children: ReactNode }) => <Box sx={{ maxWidth: 1100 }}>{children}</Box>;
 
 /** /dashboard/briefs/new */
+/** /dashboard/briefs/new. `?title=` pre-fills the title (the agents catalog's "Post a brief for …"). */
 export const NewBrief = () => {
 	const { t } = useTranslation('briefs');
+	const { query } = useRouter();
+	const title = prefillTitle(query.title);
 	return (
 		<Frame>
 			<Seo title={t('briefs:form.newTitle')} noindex />
 			<PageHeader current={t('briefs:form.newCrumb')} title={t('briefs:form.newTitle')} subtitle={t('briefs:form.newSubtitle')} />
-			<BriefForm mode="create" initialValues={EMPTY_BRIEF_FORM} />
+			{/* The query arrives after hydration on a static page: a new key starts the form with it. */}
+			<BriefForm key={title} mode="create" initialValues={{ ...EMPTY_BRIEF_FORM, briefTitle: title }} />
 		</Frame>
 	);
 };

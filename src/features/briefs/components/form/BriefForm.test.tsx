@@ -50,4 +50,10 @@ describe('NewBrief (S5)', () => {
 		await waitFor(() => expect(mockRouter.asPath).toBe(`/briefs/${NEW_ID}`));
 		expect(screen.getByText('“WhatsApp orders” is published.')).toBeInTheDocument();
 	});
+
+	it('starts the title from ?title= (an /agents search with no results)', () => {
+		mockRouter.setCurrentUrl('/dashboard/briefs/new?title=invoice%20router');
+		renderWithProviders(<NewBrief />, { auth: { status: 'member', me: user } });
+		expect(screen.getByRole('textbox', { name: /Title/ })).toHaveValue('invoice router');
+	});
 });

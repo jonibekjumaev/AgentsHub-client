@@ -1,189 +1,262 @@
 import { useMemo, useState } from 'react';
-import dynamic from 'next/dynamic';
 import NextLink from 'next/link';
 import { useQuery } from '@apollo/client';
-import { Box, Button, Typography } from '@mui/material';
-import { SearchOff as SearchOffIcon, Tune as TuneIcon } from '@mui/icons-material';
-import { Trans, useTranslation } from 'next-i18next';
+import { Box, Button, ButtonBase, Skeleton, Typography } from '@mui/material';
+import { SearchOff as SearchOffIcon } from '@mui/icons-material';
+import { useTranslation } from 'next-i18next';
 import { useAuth } from '@/auth';
+import { newBriefHref } from '@/features/briefs';
 import { useFormat } from '@/shared/lib/format';
 import { useRouteLoading } from '@/shared/lib/useRouteLoading';
-import { EmptyState } from '@/shared/ui/EmptyState';
 import { ErrorState } from '@/shared/ui/ErrorState';
 import { Pagination } from '@/shared/ui/Pagination';
-import { CardSkeleton } from '@/shared/ui/Skeletons';
-import { radiusPx } from '@/theme/tokens';
-import { AgentsListQuery } from '../graphql/agents';
+import { fonts, home } from '@/theme/tokens';
+import { AgentsCatalogQuery, ProductFacetsQuery } from '../graphql/agents';
 import { useAgentFilters } from '../hooks/useAgentFilters';
-import { AGENTS_PAGE_SIZE, activeFilterCount, agentsListVariables, hasActiveFilters } from '../lib/listQuery';
+import { AGENTS_FIRST_SHOWN, AGENTS_PAGE_SIZE, agentFacetsVariables, agentsListVariables } from '../lib/listQuery';
 import { ActiveFilters } from './ActiveFilters';
-import { AgentCard } from './AgentCard';
-import { AgentFiltersPanel } from './AgentFiltersPanel';
-import { AgentsToolbar } from './AgentsToolbar';
+import { CatalogCard, CatalogRow } from './catalog/CatalogCards';
+import { FilterToolbar, type FacetCounts } from './catalog/FilterToolbar';
+import { SearchHero } from './catalog/SearchHero';
 
-// Below md only, after a click: Drawer + Modal stay out of the page chunk.
-const FiltersDrawer = dynamic(() => import('./FiltersDrawer').then((mod) => mod.FiltersDrawer), { ssr: false });
+/** One rounded block the size of a result, so the layout does not jump when the results arrive. */
+const SkeletonCard = ({ list }: { list: boolean }) => (
+	<Skeleton variant="rounded" height={list ? 96 : 400} aria-hidden="true" sx={{ borderRadius: list ? '18px' : home.radius.card }} />
+);
 
-const POST_BRIEF_HREF = '/dashboard/briefs/new';
+/** 3 columns → 2 under 1024px → 1 under 640px. */
+const gridSx = {
+	m: 0,
+	p: 0,
+	listStyle: 'none',
+	display: 'grid',
+	gap: 5,
+	gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+	'@media (max-width: 1024px)': { gridTemplateColumns: 'repeat(2, minmax(0, 1fr))' },
+	'@media (max-width: 640px)': { gridTemplateColumns: 'minmax(0, 1fr)' },
+	'& > li': { minWidth: 0 },
+} as const;
 
-const gridSx = { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 5 } as const;
+const listSx = { m: 0, p: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 2.5 } as const;
 
-const ListSkeleton = () => {
+const outlineButtonSx = {
+	minHeight: 48,
+	px: 6.5,
+	border: 1,
+	borderColor: 'inputBorder',
+	borderRadius: home.radius.button,
+	bgcolor: 'surface',
+	color: 'ink',
+	fontSize: 15,
+	fontWeight: 700,
+	'&:hover': { bgcolor: 'ground' },
+	'&:focus-visible': { outline: `3px solid ${home.focusRing}`, outlineOffset: '3px' },
+} as const;
+
+/** The last grid tile: briefs are the way to get an agent that doesn't exist yet. */
+const BriefTile = ({ text }: { text: string }) => {
 	const { t } = useTranslation('agents');
-	return (
-		<Box role="status" aria-busy="true" aria-label={t('agents:list.loading')} sx={gridSx}>
-			{Array.from({ length: 6 }, (_, index) => (
-				<CardSkeleton key={index} />
-			))}
-		</Box>
-	);
-};
-
-/** Briefs are posted by USERs: guests see it too (login first), creators and admins don't (DESIGN §3). */
-const BriefCta = () => {
-	const { t } = useTranslation('agents');
-	const { status, me } = useAuth();
-	const visible = status === 'guest' || (status === 'member' && me?.memberType === 'USER');
-	if (!visible) return null;
-
 	return (
 		<Box
 			sx={{
+				height: '100%',
+				minHeight: 220,
+				boxSizing: 'border-box',
 				display: 'flex',
 				flexDirection: 'column',
-				alignItems: 'center',
-				gap: 2.5,
-				py: 8,
-				px: 5,
-				textAlign: 'center',
+				justifyContent: 'center',
+				gap: 3,
+				p: 7,
+				borderRadius: home.radius.card,
+				border: `1.5px dashed ${home.dashedBorder}`,
 				bgcolor: 'surface',
-				border: '1px dashed',
-				borderColor: 'inputBorder',
-				borderRadius: radiusPx.lg,
 			}}
 		>
-			<Typography component="h2" sx={{ fontWeight: 800 }}>
+			<Typography variant="h2" sx={{ fontSize: 24, lineHeight: 1.1, fontWeight: 700, letterSpacing: '-0.02em' }}>
 				{t('agents:briefCta.title')}
 			</Typography>
-			<Typography variant="body2" sx={{ color: 'muted' }}>
-				{t('agents:briefCta.text')}
-			</Typography>
-			<Button component={NextLink} href={POST_BRIEF_HREF} sx={{ height: 40 }}>
+			<Typography sx={{ fontSize: 15, lineHeight: 1.5, color: 'bodySoft' }}>{t('agents:briefCta.text')}</Typography>
+			<Button component={NextLink} href={newBriefHref(text)} sx={{ alignSelf: 'flex-start', minHeight: 44, px: 4.5, borderRadius: '11px' }}>
 				{t('agents:briefCta.action')}
 			</Button>
 		</Box>
 	);
 };
 
-/** /agents: toolbar, filters, results. Every state comes from the URL filters and one list query. */
+/**
+ * /agents (agentshub-agents design): dark search band, sticky filter toolbar with live counts (D-43),
+ * the result summary with removable chips, then a grid or list of 20 per page. The first 9 show at once,
+ * "Show more" opens the rest of the page, then numbered pages follow. Filters and layout live in the URL.
+ */
 export const AgentsCatalog = () => {
 	const { t } = useTranslation('agents');
 	const format = useFormat();
-	const { filters, update, clear, pageHref } = useAgentFilters();
+	const { status } = useAuth();
+	const { filters, view, update, clear, setView, pageHref } = useAgentFilters();
 	const routeLoading = useRouteLoading();
 	const variables = useMemo(() => agentsListVariables(filters), [filters]);
-	const { data, loading, error, refetch } = useQuery(AgentsListQuery, { variables });
-	const [drawerOpen, setDrawerOpen] = useState(false);
-	const [drawerLoaded, setDrawerLoaded] = useState(false);
-	const filterCount = activeFilterCount(filters);
+	const facetVariables = useMemo(() => agentFacetsVariables(filters), [filters]);
 
-	const filtered = hasActiveFilters(filters);
+	// The server render has no token, so its meLiked is empty: a member asks again with the token.
+	const member = status === 'member';
+	const { data, loading, error, refetch } = useQuery(AgentsCatalogQuery, {
+		variables,
+		fetchPolicy: member ? 'cache-and-network' : 'cache-first',
+	});
+	const facets = useQuery(ProductFacetsQuery, { variables: facetVariables });
+	const everything = useQuery(ProductFacetsQuery, { variables: { input: {} } });
+
+	// "Show more" opens the rest of this page; any new result set starts collapsed again.
+	const resultKey = JSON.stringify(variables);
+	const [expandedFor, setExpandedFor] = useState<string | null>(null);
+	const expanded = expandedFor === resultKey;
+
+	const counts: FacetCounts = facets.data
+		? {
+				categories: Object.fromEntries(facets.data.getProductFacets.categories.map(({ value, count }) => [value, count])),
+				pricing: Object.fromEntries(facets.data.getProductFacets.pricing.map(({ value, count }) => [value, count])),
+			}
+		: null;
+	const allAgents = everything.data ? everything.data.getProductFacets.categories.reduce((sum, { count }) => sum + count, 0) : null;
+
 	const agents = data?.getProducts.list ?? [];
 	const total = data?.getProducts.metaCounter?.[0]?.total ?? 0;
 	const pageCount = Math.ceil(total / AGENTS_PAGE_SIZE);
+	const visible = expanded ? agents : agents.slice(0, AGENTS_FIRST_SHOWN);
+	const hidden = agents.length - visible.length;
+	const shownUpTo = (filters.page - 1) * AGENTS_PAGE_SIZE + visible.length;
+	const showSkeleton = routeLoading || (loading && !data);
+	const likesReady = !(member && loading);
 
 	const renderResults = () => {
-		if (routeLoading || (loading && !data)) return <ListSkeleton />;
+		if (showSkeleton) {
+			return (
+				<Box role="status" aria-busy="true" aria-label={t('agents:list.loading')} sx={view === 'list' ? listSx : gridSx}>
+					{Array.from({ length: view === 'list' ? 4 : 6 }, (_, index) => (
+						<SkeletonCard key={index} list={view === 'list'} />
+					))}
+				</Box>
+			);
+		}
 		if (error && !data) {
 			return <ErrorState error={error} title={t('agents:list.errorTitle')} onRetry={() => void refetch()} />;
 		}
+		if (agents.length === 0 && total > 0) {
+			// A page number past the end (an old link): back to page 1.
+			return (
+				<Box sx={{ textAlign: 'center', py: 10 }}>
+					<Typography variant="h2" sx={{ fontSize: 26 }}>
+						{t('agents:empty.pageTitle')}
+					</Typography>
+					<Button component={NextLink} href={pageHref(1)} sx={{ mt: 4 }}>
+						{t('agents:empty.firstPage')}
+					</Button>
+				</Box>
+			);
+		}
 		if (agents.length === 0) {
-			if (total > 0) {
-				return (
-					<EmptyState
-						title={t('agents:empty.pageTitle')}
-						text={t('agents:empty.pageText')}
-						action={{ label: t('agents:empty.firstPage'), href: pageHref(1) }}
-					/>
-				);
-			}
-			if (filtered) {
-				return (
-					<EmptyState
-						icon={<SearchOffIcon />}
-						title={t('agents:empty.noResultsTitle')}
-						text={t('agents:empty.noResultsText')}
-						action={{ label: t('agents:empty.clearFilters'), onClick: () => void clear() }}
-					/>
-				);
-			}
-			return <EmptyState title={t('agents:empty.noAgentsTitle')} text={t('agents:empty.noAgentsText')} />;
+			return (
+				<Box
+					sx={{
+						display: 'flex',
+						flexDirection: 'column',
+						alignItems: 'center',
+						gap: 3.5,
+						px: 6,
+						py: 18,
+						textAlign: 'center',
+						borderRadius: home.radius.panel,
+						bgcolor: 'surface',
+						border: `1.5px dashed ${home.dashedBorder}`,
+					}}
+				>
+					<Box aria-hidden="true" sx={{ width: 60, height: 60, display: 'grid', placeItems: 'center', borderRadius: '18px', bgcolor: 'accentSoft', color: 'primary.main' }}>
+						<SearchOffIcon sx={{ fontSize: 28 }} />
+					</Box>
+					<Typography variant="h2" sx={{ fontSize: 30, lineHeight: 1.1, fontWeight: 700, letterSpacing: '-0.025em' }}>
+						{t('agents:empty.title')}
+					</Typography>
+					<Typography sx={{ maxWidth: 460, fontSize: 16, lineHeight: 1.55, color: 'bodySoft' }}>{t('agents:empty.text')}</Typography>
+					<Box sx={{ mt: 1.5, display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 2.5 }}>
+						<Button component={NextLink} href={newBriefHref(filters.text)} sx={{ minHeight: 48, px: 5.5, borderRadius: home.radius.button }}>
+							{filters.text ? t('agents:empty.briefFor', { text: filters.text }) : t('agents:briefCta.action')}
+						</Button>
+						<ButtonBase onClick={() => void clear()} sx={outlineButtonSx}>
+							{t('agents:empty.clearAll')}
+						</ButtonBase>
+					</Box>
+				</Box>
+			);
 		}
 
+		const Item = view === 'list' ? CatalogRow : CatalogCard;
 		return (
 			<>
-				<Box component="ul" aria-label={t('agents:list.resultsLabel')} sx={{ ...gridSx, m: 0, p: 0, listStyle: 'none' }}>
-					{agents.map((agent) => (
+				{/* A new key per result set replays the entrance animation. */}
+				<Box key={`${resultKey}-${view}`} component="ul" aria-label={t('agents:list.resultsLabel')} sx={view === 'list' ? listSx : gridSx}>
+					{visible.map((agent, index) => (
 						<li key={agent._id}>
-							<AgentCard agent={agent} />
+							<Item agent={agent} index={index} likesReady={likesReady} />
 						</li>
 					))}
+					{hidden === 0 && view === 'grid' && (
+						<li>
+							<BriefTile text={filters.text} />
+						</li>
+					)}
 				</Box>
-				<BriefCta />
-				<Pagination page={filters.page} count={pageCount} getHref={pageHref} />
+				{hidden === 0 && view === 'list' && <BriefTile text={filters.text} />}
+
+				<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3.5, pt: 3 }}>
+					<Typography sx={{ fontSize: 14, color: 'bodySoft' }}>
+						{t('agents:catalog.showing', { shown: format.number(shownUpTo), total: format.number(total) })}
+					</Typography>
+					<Box aria-hidden="true" sx={{ width: 220, height: 4, borderRadius: '999px', bgcolor: 'border', overflow: 'hidden' }}>
+						<Box
+							sx={{
+								width: `${total ? Math.round((shownUpTo / total) * 100) : 0}%`,
+								height: '100%',
+								borderRadius: '999px',
+								bgcolor: 'primary.main',
+								transition: 'width 400ms ease',
+							}}
+						/>
+					</Box>
+					{hidden > 0 ? (
+						<ButtonBase onClick={() => setExpandedFor(resultKey)} sx={outlineButtonSx}>
+							{t('agents:catalog.showMore', { count: hidden })}
+						</ButtonBase>
+					) : (
+						<Pagination page={filters.page} count={pageCount} getHref={pageHref} />
+					)}
+				</Box>
 			</>
 		);
 	};
 
-	const showCount = Boolean(data) && !routeLoading && !(loading && !data) && total > 0;
-
 	return (
-		<Box sx={{ maxWidth: 1200, mx: 'auto', px: { xs: 4, sm: 6 }, pt: 8, pb: 16, display: 'flex', flexDirection: 'column', gap: 6 }}>
-			<AgentsToolbar filters={filters} onChange={update} />
-			<ActiveFilters filters={filters} onChange={update} onClear={() => void clear()} />
-			<Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', gap: 6 }}>
-				<AgentFiltersPanel filters={filters} onChange={update} />
-				<Box sx={{ flex: '999 1 560px', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 5 }}>
-					<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 3 }}>
-						{/* Announced politely after every filter change; empty while loading. */}
-						<Typography role="status" variant="body2" sx={{ color: 'muted', minHeight: '1.55em', '& strong': { color: 'ink' } }}>
-							{showCount && (
-								<Trans
-									t={t}
-									i18nKey={filtered ? 'agents:list.countFiltered' : 'agents:list.count'}
-									count={total}
-									values={{ formatted: format.number(total) }}
-									components={{ strong: <strong /> }}
-								/>
-							)}
-						</Typography>
-						<Button
-							variant="outlined"
-							size="small"
-							startIcon={<TuneIcon />}
-							aria-haspopup="dialog"
-							aria-expanded={drawerOpen}
-							onClick={() => {
-								setDrawerOpen(true);
-								setDrawerLoaded(true);
-							}}
-							sx={{ display: { xs: 'inline-flex', md: 'none' } }}
-						>
-							{filterCount ? t('agents:filters.openWithCount', { count: filterCount }) : t('agents:filters.open')}
-						</Button>
-					</Box>
-					{renderResults()}
+		<>
+			<SearchHero filters={filters} onChange={update} total={allAgents} />
+			<FilterToolbar filters={filters} onChange={update} counts={counts} view={view} onView={(next) => void setView(next)} />
+			<Box sx={{ maxWidth: 1240, mx: 'auto', px: { xs: 4, sm: 6 }, pt: 7, pb: 24, display: 'flex', flexDirection: 'column', gap: 5.5 }}>
+				<Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', columnGap: 3.5, rowGap: 2.5 }}>
+					{/* Announced politely after every change; empty while loading. */}
+					<Typography role="status" aria-live="polite" sx={{ fontSize: 16, color: 'bodySoft', minHeight: '1.5em' }}>
+						{!showSkeleton && data && (
+							<>
+								<Box component="b" sx={{ fontFamily: fonts.display, fontSize: 22, letterSpacing: '-0.02em', color: 'ink' }}>
+									{format.number(total)}
+								</Box>{' '}
+								{filters.text
+									? t('agents:catalog.resultsFor', { count: total, text: filters.text })
+									: t('agents:catalog.results', { count: total })}
+							</>
+						)}
+					</Typography>
+					<ActiveFilters filters={filters} onChange={update} onClear={() => void clear()} />
 				</Box>
+				{renderResults()}
 			</Box>
-			{drawerLoaded && (
-				<FiltersDrawer
-					open={drawerOpen}
-					onClose={() => setDrawerOpen(false)}
-					filters={filters}
-					onChange={update}
-					onClear={() => void clear()}
-				/>
-			)}
-		</Box>
+		</>
 	);
 };

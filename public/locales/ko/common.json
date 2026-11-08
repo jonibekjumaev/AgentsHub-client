@@ -43,11 +43,20 @@
 		}
 	},
 	"footer": {
-		"label": "푸터",
 		"faq": "자주 묻는 질문",
 		"about": "소개",
 		"copyright": "© {{year}} AgentsHub",
-		"prices": "모든 가격은 USD 기준입니다."
+		"prices": "모든 가격은 USD 기준입니다.",
+		"tagline": "비즈니스가 AI 에이전트를 찾고 크리에이터가 만드는 곳.",
+		"columns": {
+			"marketplace": "마켓플레이스",
+			"creators": "크리에이터",
+			"company": "회사"
+		},
+		"categories": "카테고리",
+		"sell": "에이전트 판매하기",
+		"answerBriefs": "브리프에 답하기",
+		"ranking": "랭킹 방식"
 	},
 	"dashboardNav": {
 		"label": "대시보드",

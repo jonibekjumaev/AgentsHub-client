@@ -62,11 +62,15 @@
 		"noAgentsText": "Creators haven't listed any agents. Check back soon.",
 		"pageTitle": "This page is empty",
 		"pageText": "There are fewer results than this page number.",
-		"firstPage": "Go to the first page"
+		"firstPage": "Go to the first page",
+		"title": "No agent does this yet",
+		"text": "Remove a filter to widen the search, or post a brief so creators can build it for you.",
+		"briefFor": "Post a brief for “{{text}}”",
+		"clearAll": "Clear all filters"
 	},
 	"briefCta": {
-		"title": "Didn't find the right agent?",
-		"text": "Post a brief with what you need. Creators who build custom agents will see it.",
+		"title": "Not quite right?",
+		"text": "Post a brief and creators who build custom agents will see it today.",
 		"action": "Post a brief"
 	},
 	"seo": {
@@ -235,5 +239,55 @@
 			"saveFailed": "We couldn’t save the agent",
 			"loadFailed": "We couldn’t load the agent"
 		}
+	},
+	"hero": {
+		"title": "Find an agent for the job",
+		"text_one": "Describe the work in plain words. We search names, categories and descriptions from {{formatted}} agent.",
+		"text_other": "Describe the work in plain words. We search names, categories and descriptions from {{formatted}} agents.",
+		"textNoCount": "Describe the work in plain words. We search names, categories and descriptions.",
+		"examples": {
+			"0": "Answer customer questions on my website",
+			"1": "Write product descriptions from a spreadsheet",
+			"2": "Send invoices to the right person",
+			"3": "Plan a course for my students",
+			"4": "Find leads worth calling"
+		},
+		"clear": "Clear search",
+		"submit": "Search",
+		"try": "Try:",
+		"suggestions": {
+			"support": "Customer support",
+			"invoices": "Invoices",
+			"blog": "Blog posts",
+			"free": "Free agents"
+		}
+	},
+	"toolbar": {
+		"all": "All",
+		"maxPrice": "Max price",
+		"anyPrice": "Any",
+		"layout": "Layout",
+		"grid": "Grid view",
+		"list": "List view",
+		"pricing": {
+			"FREE": "Free",
+			"ONE_TIME": "One-time",
+			"SUBSCRIPTION": "Monthly",
+			"CUSTOM": "Custom"
+		}
+	},
+	"catalog": {
+		"open": "Open",
+		"like_one": "Like {{title}}, {{count}} like",
+		"like_other": "Like {{title}}, {{count}} likes",
+		"unlike_one": "Unlike {{title}}, {{count}} like",
+		"unlike_other": "Unlike {{title}}, {{count}} likes",
+		"showing": "Showing {{shown}} of {{total}}",
+		"showMore_one": "Show {{count}} more",
+		"showMore_other": "Show {{count}} more",
+		"results_one": "agent",
+		"results_other": "agents",
+		"resultsFor_one": "agent for “{{text}}”",
+		"resultsFor_other": "agents for “{{text}}”"
 	}
 }

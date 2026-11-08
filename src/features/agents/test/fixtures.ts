@@ -46,3 +46,28 @@ export const makeAgentDetail = (patch: Record<string, unknown> = {}) => ({
 	},
 	...patch,
 });
+
+/** A CatalogAgent (the /agents card) as the API returns it; meLiked is empty for a guest. */
+export const makeCatalogAgent = (patch: Record<string, unknown> = {}, index = 0) => ({
+	...makeAgent({}, index),
+	productImages: [] as string[],
+	productLikes: 12,
+	productDesc: `Answers customer questions, agent ${index}.`,
+	meLiked: [] as { __typename: 'MeLiked'; memberId: string; likeRefId: string; myFavorite: boolean }[],
+	...patch,
+});
+
+/** getProductFacets: zeros except the given counts, in enum order (as the API sends them). */
+export const makeFacets = (categories: Record<string, number> = {}, pricing: Record<string, number> = {}) => ({
+	__typename: 'ProductFacets' as const,
+	categories: ['CUSTOMER_SUPPORT', 'SALES', 'MARKETING', 'CONTENT', 'DATA_ANALYSIS', 'AUTOMATION', 'EDUCATION', 'OTHER'].map((value) => ({
+		__typename: 'CategoryFacet' as const,
+		value,
+		count: categories[value] ?? 0,
+	})),
+	pricing: ['FREE', 'ONE_TIME', 'SUBSCRIPTION', 'CUSTOM'].map((value) => ({
+		__typename: 'PricingFacet' as const,
+		value,
+		count: pricing[value] ?? 0,
+	})),
+});

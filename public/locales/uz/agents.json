@@ -62,11 +62,15 @@
 		"noAgentsText": "Kreatorlar hali agent joylamagan. Tez orada qaytib keling.",
 		"pageTitle": "Bu sahifa boʻsh",
 		"pageText": "Natijalar soni bu sahifa raqamidan kam.",
-		"firstPage": "Birinchi sahifaga oʻtish"
+		"firstPage": "Birinchi sahifaga oʻtish",
+		"title": "Bu ishni qiladigan agent hali yoʻq",
+		"text": "Qidiruvni kengaytirish uchun filtrni olib tashlang yoki brief joylang — kreatorlar siz uchun yaratadi.",
+		"briefFor": "“{{text}}” uchun brief joylash",
+		"clearAll": "Barcha filtrlarni tozalash"
 	},
 	"briefCta": {
-		"title": "Kerakli agentni topmadingizmi?",
-		"text": "Nima kerakligini yozib brief joylang. Maxsus agent yaratadigan kreatorlar uni koʻradi.",
+		"title": "Mos kelmadimi?",
+		"text": "Brief joylang — maxsus agent yaratadigan kreatorlar uni bugunoq koʻradi.",
 		"action": "Brief joylash"
 	},
 	"seo": {
@@ -235,5 +239,55 @@
 			"saveFailed": "Agentni saqlab boʻlmadi",
 			"loadFailed": "Agentni yuklab boʻlmadi"
 		}
+	},
+	"hero": {
+		"title": "Ish uchun agent toping",
+		"text_one": "Ishni oddiy soʻzlar bilan yozing. {{formatted}} ta agentning nomi, kategoriyasi va tavsifidan qidiramiz.",
+		"text_other": "Ishni oddiy soʻzlar bilan yozing. {{formatted}} ta agentning nomi, kategoriyasi va tavsifidan qidiramiz.",
+		"textNoCount": "Ishni oddiy soʻzlar bilan yozing. Agentlarning nomi, kategoriyasi va tavsifidan qidiramiz.",
+		"examples": {
+			"0": "Saytimda mijozlar savollariga javob berish",
+			"1": "Jadvaldan mahsulot tavsiflarini yozish",
+			"2": "Hisob-fakturalarni kerakli odamga yuborish",
+			"3": "Oʻquvchilarim uchun kurs rejalash",
+			"4": "Qoʻngʻiroq qilishga arziydigan lidlarni topish"
+		},
+		"clear": "Qidiruvni tozalash",
+		"submit": "Qidirish",
+		"try": "Sinab koʻring:",
+		"suggestions": {
+			"support": "Mijozlarga xizmat",
+			"invoices": "Hisob-fakturalar",
+			"blog": "Blog postlar",
+			"free": "Bepul agentlar"
+		}
+	},
+	"toolbar": {
+		"all": "Hammasi",
+		"maxPrice": "Maks. narx",
+		"anyPrice": "Istalgan",
+		"layout": "Koʻrinish",
+		"grid": "Toʻr koʻrinishi",
+		"list": "Roʻyxat koʻrinishi",
+		"pricing": {
+			"FREE": "Bepul",
+			"ONE_TIME": "Bir martalik",
+			"SUBSCRIPTION": "Oylik",
+			"CUSTOM": "Kelishilgan"
+		}
+	},
+	"catalog": {
+		"open": "Ochish",
+		"like_one": "{{title}} ga layk, {{count}} layk",
+		"like_other": "{{title}} ga layk, {{count}} layk",
+		"unlike_one": "{{title}} laykini olish, {{count}} layk",
+		"unlike_other": "{{title}} laykini olish, {{count}} layk",
+		"showing": "{{total}} tadan {{shown}} tasi",
+		"showMore_one": "Yana {{count}} tasini koʻrsatish",
+		"showMore_other": "Yana {{count}} tasini koʻrsatish",
+		"results_one": "ta agent",
+		"results_other": "ta agent",
+		"resultsFor_one": "ta agent: “{{text}}”",
+		"resultsFor_other": "ta agent: “{{text}}”"
 	}
 }

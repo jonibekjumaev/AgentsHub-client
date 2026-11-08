@@ -8,12 +8,18 @@ import type { ProductsInquiry } from '@/gql/graphql';
  * URL query ⇄ AgentFilters ⇄ getProducts input, used by getServerSideProps and the page alike,
  * so the SSR cache entry and the browser query always have identical variables.
  *
- * URL shape: ?q=support&category=customer-support&pricing=subscription&min=10&max=100&tag=telegram&sort=rank&page=2
+ * URL shape: ?q=support&category=customer-support&pricing=subscription&min=10&max=100&tag=telegram&sort=rank&page=2&view=list
  * Lists repeat the key (category=sales&category=marketing); a comma list is accepted too.
  * Any invalid value falls back to its default on its own — one bad param never resets the others.
  */
 
-export const AGENTS_PAGE_SIZE = 12;
+/** One page of /agents: 20 agents + the "Post a brief" tile = 7 full rows of 3. */
+export const AGENTS_PAGE_SIZE = 20;
+/** Shown before "Show more" opens the rest of the page (3 rows of 3). */
+export const AGENTS_FIRST_SHOWN = 9;
+/** The max-price slider: 0 … 1000 in steps of 10; the far end means "any price". */
+export const PRICE_SLIDER_MAX = 1000;
+export const PRICE_SLIDER_STEP = 10;
 /** search.text max length (FRONTEND_MIGRATION §1.5). */
 export const SEARCH_TEXT_MAX = 100;
 /** Backend libs/config.ts: productTagsMaxCount, productTagMaxLength. */
@@ -46,7 +52,8 @@ const PRICED: readonly ProductPricing[] = [ProductPricing.OneTime, ProductPricin
 
 export const AGENT_SORTS = ['newest', 'rank', 'likes', 'views', 'price-asc', 'price-desc'] as const;
 export type AgentSort = (typeof AGENT_SORTS)[number];
-export const DEFAULT_SORT: AgentSort = 'newest';
+/** Most liked first: what other members found useful (agents page design). */
+export const DEFAULT_SORT: AgentSort = 'likes';
 
 /** FRONTEND_MIGRATION §2.5 sort values. `productPrice` puts unpriced products last in both directions. */
 const SORT_TO_API: Record<AgentSort, { sort: string; direction: Direction }> = {
@@ -243,3 +250,16 @@ export const toProductsInquiry = (input: AgentFilters): ProductsInquiry => {
 };
 
 export const agentsListVariables = (filters: AgentFilters) => ({ input: toProductsInquiry(filters) });
+
+/**
+ * getProductFacets variables (D-43): the same search as the list, without page and sort, so changing only
+ * those reuses the cached counts.
+ */
+export const agentFacetsVariables = (filters: AgentFilters) => ({ input: toProductsInquiry(filters).search });
+
+// ---------- layout (not a filter: it never resets the page) ----------
+
+export const AGENT_VIEWS = ['grid', 'list'] as const;
+export type AgentView = (typeof AGENT_VIEWS)[number];
+
+export const parseAgentView = (query: ParsedUrlQuery): AgentView => (single(query.view) === 'list' ? 'list' : 'grid');

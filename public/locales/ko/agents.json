@@ -62,11 +62,15 @@
 		"noAgentsText": "아직 등록된 에이전트가 없습니다. 곧 다시 확인해 주세요.",
 		"pageTitle": "이 페이지는 비어 있습니다",
 		"pageText": "결과 수가 이 페이지 번호보다 적습니다.",
-		"firstPage": "첫 페이지로 이동"
+		"firstPage": "첫 페이지로 이동",
+		"title": "아직 이 일을 하는 에이전트가 없습니다",
+		"text": "필터를 줄여 검색을 넓히거나, 브리프를 올려 크리에이터에게 제작을 맡기세요.",
+		"briefFor": "“{{text}}” 브리프 올리기",
+		"clearAll": "모든 필터 지우기"
 	},
 	"briefCta": {
-		"title": "원하는 에이전트를 찾지 못하셨나요?",
-		"text": "필요한 내용을 브리프로 올려 보세요. 맞춤 에이전트를 만드는 크리에이터가 확인합니다.",
+		"title": "딱 맞는 게 없나요?",
+		"text": "브리프를 올리면 맞춤 에이전트를 만드는 크리에이터가 오늘 확인합니다.",
 		"action": "브리프 올리기"
 	},
 	"seo": {
@@ -235,5 +239,55 @@
 			"saveFailed": "에이전트를 저장하지 못했습니다",
 			"loadFailed": "에이전트를 불러오지 못했습니다"
 		}
+	},
+	"hero": {
+		"title": "일에 맞는 에이전트 찾기",
+		"text_one": "하고 싶은 일을 쉬운 말로 적어 보세요. 에이전트 {{formatted}}개의 이름, 카테고리, 설명에서 찾습니다.",
+		"text_other": "하고 싶은 일을 쉬운 말로 적어 보세요. 에이전트 {{formatted}}개의 이름, 카테고리, 설명에서 찾습니다.",
+		"textNoCount": "하고 싶은 일을 쉬운 말로 적어 보세요. 에이전트의 이름, 카테고리, 설명에서 찾습니다.",
+		"examples": {
+			"0": "웹사이트에서 고객 질문에 답하기",
+			"1": "스프레드시트로 상품 설명 쓰기",
+			"2": "인보이스를 담당자에게 보내기",
+			"3": "학생들을 위한 강의 계획하기",
+			"4": "연락할 만한 리드 찾기"
+		},
+		"clear": "검색어 지우기",
+		"submit": "검색",
+		"try": "추천:",
+		"suggestions": {
+			"support": "고객 지원",
+			"invoices": "인보이스",
+			"blog": "블로그 글",
+			"free": "무료 에이전트"
+		}
+	},
+	"toolbar": {
+		"all": "전체",
+		"maxPrice": "최대 가격",
+		"anyPrice": "제한 없음",
+		"layout": "보기 방식",
+		"grid": "그리드 보기",
+		"list": "목록 보기",
+		"pricing": {
+			"FREE": "무료",
+			"ONE_TIME": "일회성",
+			"SUBSCRIPTION": "월간",
+			"CUSTOM": "협의"
+		}
+	},
+	"catalog": {
+		"open": "열기",
+		"like_one": "{{title}} 좋아요, 좋아요 {{count}}",
+		"like_other": "{{title}} 좋아요, 좋아요 {{count}}",
+		"unlike_one": "{{title}} 좋아요 취소, 좋아요 {{count}}",
+		"unlike_other": "{{title}} 좋아요 취소, 좋아요 {{count}}",
+		"showing": "{{total}}개 중 {{shown}}개 표시",
+		"showMore_one": "{{count}}개 더 보기",
+		"showMore_other": "{{count}}개 더 보기",
+		"results_one": "개 에이전트",
+		"results_other": "개 에이전트",
+		"resultsFor_one": "개 에이전트: “{{text}}”",
+		"resultsFor_other": "개 에이전트: “{{text}}”"
 	}
 }

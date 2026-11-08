@@ -5,84 +5,423 @@
 	},
 	"hero": {
 		"eyebrow": "AI agentlar bozori",
-		"title": "Biznesingiz uchun AI agent toping yoki yaratib berishsin.",
-		"text": "Mustaqil kreatorlarning tayyor agentlarini koʻring. Mosi topilmadimi? Brief joylang, kreatorlar oʻzlari murojaat qiladi.",
+		"title": "Biznesingizni <accent>AI agentlar</accent> bilan rivojlantiring va avtomatlashtiring.",
+		"text": "Mijozlarga javob beradigan, lid topadigan va mayda ishlarni bajaradigan tayyor agentlarni oling — yoki brief joylang, kreatorlar siz uchun yaratib berishadi.",
 		"searchLabel": "Agentlarni qidirish",
 		"searchPlaceholder": "Agentingiz nima qilishi kerak?",
 		"search": "Agentlarni qidirish",
-		"postBrief": "Brief joylash →",
-		"sell": "Agentingizni soting →"
+		"postBrief": "Brief joylash",
+		"sell": "Agentingizni soting",
+		"carouselLabel": "Ishlayotgan agentlar namunasi",
+		"caption": "AgentsHub agentlari bajara oladigan vazifalar namunasi",
+		"pause": "Animatsiyani toʻxtatish",
+		"running": "Ishlamoqda",
+		"example": "Namuna",
+		"cards": {
+			"support": {
+				"name": "Support agent",
+				"category": "Mijozlarga xizmat",
+				"output": "Bugun mijozlarning 312 ta savoliga javob berdi",
+				"metricLabel": "Oʻrtacha javob",
+				"metricValue": "8 soniya"
+			},
+			"social": {
+				"name": "Social media agent",
+				"category": "Marketing",
+				"output": "Bu hafta 20 ta post tayyorlab, rejalashtirdi",
+				"metricLabel": "Qamrov",
+				"metricValue": "+18%"
+			},
+			"invoice": {
+				"name": "Invoice agent",
+				"category": "Moliya",
+				"output": "45 ta hisob-fakturani avtomatik qayta ishladi",
+				"metricLabel": "Toʻlov",
+				"metricValue": "6 kun tezroq"
+			},
+			"leads": {
+				"name": "Lead qualifier",
+				"category": "Savdo",
+				"output": "48 ta yangi lidni baholadi, 11 tasi issiq",
+				"metricLabel": "Issiq lidlar",
+				"metricValue": "+23%"
+			},
+			"inbox": {
+				"name": "Email inbox agent",
+				"category": "Samaradorlik",
+				"output": "540 ta xatni saraladi, 32 ta javob qoralamasini yozdi",
+				"metricLabel": "Tejalgan vaqt",
+				"metricValue": "2,5 soat/kun"
+			},
+			"shop": {
+				"name": "E-commerce agent",
+				"category": "Onlayn doʻkon",
+				"output": "900 ta xaridorga mahsulot tavsiya qildi",
+				"metricLabel": "Oʻrtacha buyurtma",
+				"metricValue": "+14%"
+			},
+			"scheduler": {
+				"name": "Uchrashuv rejalashtiruvchi",
+				"category": "Operatsiyalar",
+				"output": "27 ta uchrashuvni band qildi va eslatma yubordi",
+				"metricLabel": "Kelmay qolganlar",
+				"metricValue": "−35%"
+			},
+			"recruiting": {
+				"name": "Recruiting agent",
+				"category": "HR",
+				"output": "120 ta CV koʻrib, 8 tasini tanladi",
+				"metricLabel": "Yollash vaqti",
+				"metricValue": "−50%"
+			},
+			"followUp": {
+				"name": "Sales follow-up agent",
+				"category": "Savdo",
+				"output": "64 ta shaxsiy follow-up xabar yubordi",
+				"metricLabel": "Uchrashuvlar",
+				"metricValue": "Bu hafta 9 ta"
+			},
+			"analyst": {
+				"name": "Biznes tahlilchi",
+				"category": "Maʼlumot va hisobotlar",
+				"output": "Haftalik savdo hisobotingizni tayyorladi",
+				"metricLabel": "Yetkaziladi",
+				"metricValue": "Dushanba 9:00"
+			}
+		}
 	},
 	"values": {
 		"label": "Nega AgentsHub",
 		"contacts": {
-			"title": "Kontaktlar maxfiy",
-			"text": "Email va WhatsApp faqat tizimga kirgan aʼzolarga koʻrinadi."
+			"title": "Kontaktlar maxfiy.",
+			"short": "Email va WhatsApp faqat tizimga kirgan aʼzolarga koʻrinadi."
 		},
 		"pricing": {
-			"title": "Aniq narxlar",
-			"text": "Har bir agent bepul, bir martalik, oylik yoki kelishilgan narxda — USD da."
+			"title": "Aniq narxlar.",
+			"short": "Bepul, bir martalik, oylik yoki kelishilgan — USD da."
 		},
 		"ranking": {
-			"title": "Adolatli reyting",
-			"text": "Kreatorlar hajm boʻyicha emas, boshqalarning haqiqiy layk va koʻrishlari boʻyicha saralanadi."
+			"title": "Adolatli reyting.",
+			"short": "Sonini emas, haqiqiy layk va koʻrishlar hal qiladi."
 		}
 	},
 	"categories": {
-		"title": "Kategoriyalar boʻyicha",
-		"text": "Agentlar va brieflar uchun bir xil kategoriyalar.",
-		"all": "Barcha agentlar"
+		"title": "Vositadan emas, vazifadan boshlang",
+		"text": "Nima qilish kerakligini tanlang. Bu kategoriyalar agentlar va brieflar uchun bir xil.",
+		"listLabel": "Agent kategoriyalari",
+		"previous": "Oldingi kategoriyalar",
+		"next": "Keyingi kategoriyalar",
+		"agentsHere": "Bu yerdagi agentlar",
+		"noAgents": "Hali agent yoʻq",
+		"postBrief": "Buning uchun brief joylang",
+		"items": {
+			"CUSTOMER_SUPPORT": "Mijozlarga kecha-kunduz javob bering.",
+			"SALES": "Lid toping va oʻz vaqtida bogʻlaning.",
+			"MARKETING": "Kampaniyalarni rejalang, yozing va joylang.",
+			"CONTENT": "Sizning uslubingizdagi blog va mahsulot matnlari.",
+			"DATA_ANALYSIS": "Jadvallarni aniq hisobotlarga aylantiring.",
+			"AUTOMATION": "Ishlatib yurgan vositalaringizni ulang.",
+			"EDUCATION": "Kurslar, repetitorlik va mashq.",
+			"OTHER": "Yuqoridagilarga toʻgʻri kelmaydigan hamma narsa."
+		}
 	},
 	"agents": {
-		"title": "Eng yaxshi agentlar",
-		"text": "Har kecha boshqa aʼzolarning layk va koʻrishlari boʻyicha saralanadi.",
-		"all": "Hammasi"
+		"title": "Top agentlar",
+		"text": "Reyting har kecha boshqa aʼzolarning layk va koʻrishlaridan yangilanadi.",
+		"all": "Barcha agentlar",
+		"tabsLabel": "Agent roʻyxatlari",
+		"tabs": {
+			"top": "Top reyting",
+			"newest": "Eng yangi",
+			"free": "Bepul"
+		},
+		"position": "Bu roʻyxatda {{position}}-oʻrin",
+		"by": "@{{nick}} tomonidan",
+		"likes_one": "{{formatted}} layk",
+		"likes_other": "{{formatted}} layk",
+		"views_one": "{{formatted}} koʻrish",
+		"views_other": "{{formatted}} koʻrish",
+		"view": "Agentni koʻrish",
+		"viewLabel": "{{title}} ni koʻrish",
+		"loading": "Agentlar yuklanmoqda…",
+		"errorTitle": "Bu agentlarni yuklab boʻlmadi",
+		"emptyTitle": "Bu roʻyxatda hali agent yoʻq",
+		"emptyText": "Agent joylang — u birinchi kundan layk yigʻa boshlaydi."
 	},
-	"activity": "Soʻnggi faollik",
 	"briefs": {
-		"title": "Soʻnggi brieflar",
-		"all": "Barcha brieflar"
+		"title": "Bizneslar soʻrayapti",
+		"all": "Barcha brieflar",
+		"text": "Hamjamiyatdagi ochiq brieflar. Toʻxtatish uchun ustiga olib boring.",
+		"open": "Ochiq",
+		"noComments": "Hali izoh yoʻq"
 	},
 	"creators": {
-		"title": "Eng yaxshi kreatorlar",
-		"all": "Barcha kreatorlar"
+		"title": "Top kreatorlar",
+		"all": "Barcha kreatorlar",
+		"text": "Agentlaridagi layklar boʻyicha. Yangi agentlarini birinchi koʻrish uchun kreatorni kuzating.",
+		"position": "{{position}}-oʻrin",
+		"agents_one": "agent",
+		"agents_other": "agent",
+		"followers_one": "kuzatuvchi",
+		"followers_other": "kuzatuvchi",
+		"likes_one": "layk",
+		"likes_other": "layk"
 	},
 	"how": {
-		"title": "AgentsHub qanday ishlaydi",
+		"title": "AgentsHub siz uchun qanday ishlaydi",
 		"business": {
 			"title": "Bizneslar uchun",
 			"step1": {
 				"title": "Agentlarni qidiring",
-				"text": "Kategoriya, narx turi va teglar boʻyicha saralang."
+				"text": "Kategoriya, narx turi va teglar boʻyicha saralang.",
+				"panel": {
+					"kicker": "Qidiruv",
+					"title": "Mijozlar emaillariga javob",
+					"rows": [
+						{
+							"k": "HelpDesk Copilot",
+							"v": "$49 / oy"
+						},
+						{
+							"k": "Customer support dagi natijalar",
+							"v": "1 ta agent"
+						},
+						{
+							"k": "Narx turlari",
+							"v": "Bepul, bir martalik, oylik"
+						}
+					],
+					"button": "Agentni koʻrish"
+				}
 			},
 			"step2": {
 				"title": "Mosi yoʻqmi? Brief joylang",
-				"text": "Ehtiyojni yozing. Byudjet va muddat ixtiyoriy."
+				"text": "Ehtiyojni yozing. Byudjet va muddat ixtiyoriy.",
+				"panel": {
+					"kicker": "Yangi brief",
+					"title": "Slack da yetkazib berish holati",
+					"rows": [
+						{
+							"k": "Kategoriya",
+							"v": "Avtomatlashtirish"
+						},
+						{
+							"k": "Byudjet",
+							"v": "$1,200"
+						},
+						{
+							"k": "Muddat",
+							"v": "Ixtiyoriy"
+						}
+					],
+					"button": "Brief joylash"
+				}
 			},
 			"step3": {
 				"title": "Kreator bilan bogʻlaning",
-				"text": "Tafsilotlarni email yoki WhatsApp orqali kelishing."
+				"text": "Tafsilotlarni email yoki WhatsApp orqali kelishing.",
+				"panel": {
+					"kicker": "Kreator",
+					"title": "Nova Labs",
+					"rows": [
+						{
+							"k": "Email",
+							"v": "Kirgandan keyin koʻrinadi"
+						},
+						{
+							"k": "WhatsApp",
+							"v": "Kirgandan keyin koʻrinadi"
+						},
+						{
+							"k": "Joylangan agentlar",
+							"v": "3"
+						}
+					],
+					"button": "Kreator bilan bogʻlanish"
+				}
 			}
 		},
 		"creator": {
 			"title": "Kreatorlar uchun",
 			"step1": {
 				"title": "Agentingizni joylang",
-				"text": "Skrinshotlar, demo havola va aniq narx qoʻshing."
+				"text": "Skrinshotlar, demo havola va aniq narx qoʻshing.",
+				"panel": {
+					"kicker": "Yangi eʼlon",
+					"title": "Blog Drafter",
+					"rows": [
+						{
+							"k": "Kategoriya",
+							"v": "Kontent"
+						},
+						{
+							"k": "Narx",
+							"v": "$29 / oy"
+						},
+						{
+							"k": "Demo havola",
+							"v": "Qoʻshilgan"
+						}
+					],
+					"button": "Eʼlonni chop etish"
+				}
 			},
 			"step2": {
 				"title": "Ochiq brieflarga javob bering",
-				"text": "Izohlarda savol bering, keyin bogʻlaning."
+				"text": "Izohlarda savol bering, keyin bogʻlaning.",
+				"panel": {
+					"kicker": "Ochiq brief",
+					"title": "Yetkazishdagi kechikishlar tahlili",
+					"rows": [
+						{
+							"k": "Byudjet",
+							"v": "Takliflar ochiq"
+						},
+						{
+							"k": "Izohingiz",
+							"v": "Qaysi kuryerlardan foydalanasiz?"
+						},
+						{
+							"k": "Izohlar",
+							"v": "1"
+						}
+					],
+					"button": "Izoh qoldirish"
+				}
 			},
 			"step3": {
 				"title": "Reytingingizni oshiring",
-				"text": "Boshqalarning layk va koʻrishlari sizni har kecha yuqoriga olib chiqadi."
+				"text": "Boshqa aʼzolarning layk va koʻrishlari sizni har kecha yuqoriga koʻtaradi.",
+				"panel": {
+					"kicker": "Reyting",
+					"title": "Bu kecha Pixel Writer #1",
+					"rows": [
+						{
+							"k": "Agentlar",
+							"v": "2"
+						},
+						{
+							"k": "Kuzatuvchilar",
+							"v": "3"
+						},
+						{
+							"k": "Layklar",
+							"v": "1"
+						}
+					],
+					"button": "Reytingni koʻrish"
+				}
 			}
-		}
+		},
+		"sidesLabel": "Tomoningizni tanlang",
+		"example": "Namuna"
 	},
 	"cta": {
-		"title": "Hali hech bir agent qilmaydigan ish kerakmi?",
-		"text": "Ikki daqiqada brief joylang. Kreatorlar uni bugun koʻradi.",
+		"title": "Kreatorlarga nima yaratishni ayting.",
+		"text": "Ikki daqiqada brief joylang — kreatorlar bugunoq koʻradi. Agent yaratib boʻlganmisiz? Joylang va topilsin.",
 		"action": "Brief joylash"
+	},
+	"sellAgent": "Agentingizni soting",
+	"work": {
+		"title": "Agentlar ishini koʻring",
+		"text": "AgentsHub agentlari biznes egasining zimmasidan oladigan bir nechta ish. Demolar namuna sifatida.",
+		"chat": {
+			"title": "Siz uxlayotganingizda mijozlarga javob beradi",
+			"text": "Support agentlar soniyalarda javob beradi, murakkab holatlarni esa sizga qaytaradi.",
+			"label": "Support suhbati namunasi",
+			"m1": "Salom, #2041 buyurtmam qayerda?",
+			"m2": "Bugun ertalab joʻnatildi, payshanba kuni yetib boradi. Kuzatuv havolasini emailingizga yubordim.",
+			"m3": "Manzilni oʻzgartirsam boʻladimi?",
+			"m4": "Tayyor. Kuryerda yangi manzilingiz bor.",
+			"action": "Support agentlarni koʻrish"
+		},
+		"leads": {
+			"title": "Qoʻngʻiroq qilishga arziydigan lidlarni topadi",
+			"label": "Lid bahosi",
+			"aria": "Lid baholari namunasi",
+			"l1": {
+				"name": "Dilnoza K.",
+				"biz": "Novvoyxonalar tarmogʻi"
+			},
+			"l2": {
+				"name": "Mark T.",
+				"biz": "Onlayn doʻkon"
+			},
+			"l3": {
+				"name": "Aziz R.",
+				"biz": "Stomatologiya"
+			},
+			"l4": {
+				"name": "Sora L.",
+				"biz": "Kafe"
+			}
+		},
+		"calendar": {
+			"title": "Uchrashuvlarni band qiladi va eslatma yuboradi",
+			"aria": "Band qilinayotgan kalendar namunasi",
+			"days": [
+				"Du",
+				"Se",
+				"Ch",
+				"Pa",
+				"Ju"
+			]
+		},
+		"invoices": {
+			"title": "Hisob-fakturalarni oʻz vaqtida yuboradi",
+			"aria": "Namuna hisoblagich: {{count}} ta hisob-faktura yuborildi",
+			"text": "bu oy yuborilgan hisob-fakturalar, nusxa koʻchirishsiz"
+		},
+		"queue": {
+			"title": "Sahifangizni faol saqlaydi",
+			"label": "Bu haftaga rejalashtirilgan",
+			"aria": "Rejalashtirilgan postlar namunasi",
+			"p1": {
+				"when": "Du 10:00",
+				"title": "Yangi bahorgi menyu tayyor",
+				"channel": "Instagram"
+			},
+			"p2": {
+				"when": "Ch 18:00",
+				"title": "Novvoyxona jamoasi bilan tanishing",
+				"channel": "Facebook"
+			},
+			"p3": {
+				"when": "Ju 12:00",
+				"title": "Dam olish taklifi: 2 ta kruassan 1 narxida",
+				"channel": "Telegram"
+			}
+		},
+		"cta": {
+			"title": "Shunday agent yaratganmisiz?",
+			"text": "Uni AgentsHub ga joylang, bizneslar topib olsin."
+		}
+	},
+	"faq": {
+		"title": "Yaxshi savollar",
+		"text": "Bu yerda javob yoʻqmi? Hamjamiyatda soʻrang — kreatorlar va bizneslar javob beradi.",
+		"community": "Hamjamiyatga oʻtish",
+		"items": {
+			"pricing": {
+				"q": "Narxlar qanday ishlaydi?",
+				"a": "Har bir agent bepul, bir martalik, oylik yoki kelishilgan, doim USD da. Yakuniy tafsilotlarni kreator bilan toʻgʻridan-toʻgʻri kelishasiz."
+			},
+			"contacts": {
+				"q": "Email va WhatsApp ni kim koʻradi?",
+				"a": "Faqat tizimga kirgan aʼzolar. Kirmagan mehmonlar kontaktlaringizni hech qachon koʻrmaydi."
+			},
+			"ranking": {
+				"q": "Agentlar va kreatorlar qanday baholanadi?",
+				"a": "Har kecha, boshqa aʼzolarning layk va koʻrishlari boʻyicha. Koʻproq agent joylash sizni yuqoriga koʻtarmaydi."
+			},
+			"brief": {
+				"q": "Brief nima?",
+				"a": "Sizga kerak boʻlgan agentning qisqa tavsifi. Byudjet va muddat ixtiyoriy, kreatorlar izohlarda savol beradi."
+			},
+			"sell": {
+				"q": "Oʻz agentimni sotsam boʻladimi?",
+				"a": "Ha. Skrinshotlar, demo havola va aniq narx bilan eʼlon yarating — u marketplace da chiqadi."
+			}
+		}
 	}
 }
