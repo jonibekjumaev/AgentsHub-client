@@ -5,84 +5,423 @@
 	},
 	"hero": {
 		"eyebrow": "Marketplace for AI agents",
-		"title": "Find an AI agent for your business — or get one built.",
-		"text": "Browse ready-made agents from independent creators. Can't find the right one? Post a brief and let creators come to you.",
+		"title": "Grow and automate your business with <accent>AI agents.</accent>",
+		"text": "Hire ready-made agents that answer customers, find leads and handle the busywork — or post a brief and let creators build one for you.",
 		"searchLabel": "Search agents",
 		"searchPlaceholder": "What should your agent do?",
 		"search": "Search agents",
-		"postBrief": "Post a brief →",
-		"sell": "Sell your agent →"
+		"postBrief": "Post a brief",
+		"sell": "Sell your agent",
+		"carouselLabel": "Example agents at work",
+		"caption": "Example tasks agents can run on AgentsHub",
+		"pause": "Pause animation",
+		"running": "Running",
+		"example": "Example",
+		"cards": {
+			"support": {
+				"name": "Support Agent",
+				"category": "Customer Service",
+				"output": "Answered 312 customer questions today",
+				"metricLabel": "Avg reply",
+				"metricValue": "8 sec"
+			},
+			"social": {
+				"name": "Social Media Agent",
+				"category": "Marketing",
+				"output": "Created and scheduled 20 posts this week",
+				"metricLabel": "Reach",
+				"metricValue": "+18%"
+			},
+			"invoice": {
+				"name": "Invoice Agent",
+				"category": "Finance",
+				"output": "Processed 45 invoices automatically",
+				"metricLabel": "Paid",
+				"metricValue": "6 days faster"
+			},
+			"leads": {
+				"name": "Lead Qualifier",
+				"category": "Sales",
+				"output": "Scored 48 new leads, 11 marked hot",
+				"metricLabel": "Hot leads",
+				"metricValue": "+23%"
+			},
+			"inbox": {
+				"name": "Email Inbox Agent",
+				"category": "Productivity",
+				"output": "Sorted 540 emails and drafted 32 replies",
+				"metricLabel": "Time saved",
+				"metricValue": "2.5 hrs/day"
+			},
+			"shop": {
+				"name": "E-commerce Agent",
+				"category": "Online Store",
+				"output": "Recommended products to 900 shoppers",
+				"metricLabel": "Avg order",
+				"metricValue": "+14%"
+			},
+			"scheduler": {
+				"name": "Appointment Scheduler",
+				"category": "Operations",
+				"output": "Booked 27 appointments and sent reminders",
+				"metricLabel": "No-shows",
+				"metricValue": "−35%"
+			},
+			"recruiting": {
+				"name": "Recruiting Agent",
+				"category": "HR",
+				"output": "Screened 120 CVs and shortlisted 8",
+				"metricLabel": "Hiring time",
+				"metricValue": "−50%"
+			},
+			"followUp": {
+				"name": "Sales Follow-up Agent",
+				"category": "Sales",
+				"output": "Sent 64 personalized follow-up messages",
+				"metricLabel": "Meetings booked",
+				"metricValue": "9 this week"
+			},
+			"analyst": {
+				"name": "Business Analyst",
+				"category": "Data & Reports",
+				"output": "Built your weekly sales report",
+				"metricLabel": "Delivered",
+				"metricValue": "Mondays 9:00"
+			}
+		}
 	},
 	"values": {
 		"label": "Why AgentsHub",
 		"contacts": {
-			"title": "Contacts stay private",
-			"text": "Email and WhatsApp are shown only to signed-in members."
+			"title": "Contacts stay private.",
+			"short": "Email and WhatsApp are shown only to signed-in members."
 		},
 		"pricing": {
-			"title": "Clear pricing",
-			"text": "Every agent is free, one-time, monthly or custom — in USD."
+			"title": "Clear pricing.",
+			"short": "Free, one-time, monthly or custom, in USD."
 		},
 		"ranking": {
-			"title": "Fair ranking",
-			"text": "Creators rank by real likes and views from others, not by volume."
+			"title": "Fair ranking.",
+			"short": "Real likes and views decide, not volume."
 		}
 	},
 	"categories": {
-		"title": "Browse by category",
-		"text": "The same categories work for agents and for briefs.",
-		"all": "All agents"
+		"title": "Start with the job, not the tool",
+		"text": "Pick what you need done. The same categories work for agents and for briefs.",
+		"listLabel": "Agent categories",
+		"previous": "Previous categories",
+		"next": "Next categories",
+		"agentsHere": "Agents here",
+		"noAgents": "No agents yet",
+		"postBrief": "Post a brief for one",
+		"items": {
+			"CUSTOMER_SUPPORT": "Answer customers around the clock.",
+			"SALES": "Find leads and follow up on time.",
+			"MARKETING": "Plan, write and post campaigns.",
+			"CONTENT": "Blog posts and product copy in your voice.",
+			"DATA_ANALYSIS": "Turn spreadsheets into clear reports.",
+			"AUTOMATION": "Connect the tools you already use.",
+			"EDUCATION": "Courses, tutoring and practice.",
+			"OTHER": "Anything that does not fit above."
+		}
 	},
 	"agents": {
-		"title": "Top-ranked agents",
-		"text": "Ranked every night by likes and views from other members.",
-		"all": "See all"
+		"title": "Top Agents",
+		"text": "Rankings refresh every night from likes and views by other members.",
+		"tabsLabel": "Agent lists",
+		"tabs": {
+			"top": "Top-ranked",
+			"newest": "Newest",
+			"free": "Free"
+		},
+		"position": "Number {{position}} in this list",
+		"by": "by @{{nick}}",
+		"likes_one": "{{formatted}} like",
+		"likes_other": "{{formatted}} likes",
+		"views_one": "{{formatted}} view",
+		"views_other": "{{formatted}} views",
+		"view": "View agent",
+		"viewLabel": "View {{title}}",
+		"loading": "Loading agents…",
+		"errorTitle": "We couldn't load these agents",
+		"emptyTitle": "No agents in this list yet",
+		"emptyText": "List an agent and it starts collecting likes from day one.",
+		"all": "Browse all agents"
 	},
-	"activity": "Latest activity",
 	"briefs": {
-		"title": "Latest briefs",
-		"all": "All briefs"
+		"title": "Businesses are asking for",
+		"text": "Open briefs from the community. Hover to pause the feed.",
+		"all": "All briefs",
+		"open": "Open",
+		"noComments": "No comments yet"
 	},
 	"creators": {
-		"title": "Top creators",
-		"all": "All creators"
+		"title": "Top Creators",
+		"text": "Ranked by likes on their agents. Follow a creator to see their new agents first.",
+		"all": "All creators",
+		"position": "Rank {{position}}",
+		"agents_one": "agent",
+		"agents_other": "agents",
+		"followers_one": "follower",
+		"followers_other": "followers",
+		"likes_one": "like",
+		"likes_other": "likes"
 	},
 	"how": {
-		"title": "How AgentsHub works",
+		"title": "How AgentsHub works for you",
 		"business": {
 			"title": "For businesses",
 			"step1": {
 				"title": "Search or browse agents",
-				"text": "Filter by category, price type and tags."
+				"text": "Filter by category, price type and tags.",
+				"panel": {
+					"kicker": "Search",
+					"title": "Answer customer emails",
+					"rows": [
+						{
+							"k": "HelpDesk Copilot",
+							"v": "$49 / mo"
+						},
+						{
+							"k": "Matches in Customer support",
+							"v": "1 agent"
+						},
+						{
+							"k": "Price types",
+							"v": "Free, one-time, monthly"
+						}
+					],
+					"button": "View agent"
+				}
 			},
 			"step2": {
 				"title": "No match? Post a brief",
-				"text": "Describe the need. Budget and deadline are optional."
+				"text": "Describe the need. Budget and deadline are optional.",
+				"panel": {
+					"kicker": "New brief",
+					"title": "Shipment status updates in Slack",
+					"rows": [
+						{
+							"k": "Category",
+							"v": "Automation"
+						},
+						{
+							"k": "Budget",
+							"v": "$1,200"
+						},
+						{
+							"k": "Deadline",
+							"v": "Optional"
+						}
+					],
+					"button": "Post brief"
+				}
 			},
 			"step3": {
 				"title": "Contact the creator directly",
-				"text": "Agree on details by email or WhatsApp."
+				"text": "Agree on the details by email or WhatsApp.",
+				"panel": {
+					"kicker": "Creator",
+					"title": "Nova Labs",
+					"rows": [
+						{
+							"k": "Email",
+							"v": "Shown after sign-in"
+						},
+						{
+							"k": "WhatsApp",
+							"v": "Shown after sign-in"
+						},
+						{
+							"k": "Agents listed",
+							"v": "3"
+						}
+					],
+					"button": "Contact creator"
+				}
 			}
 		},
 		"creator": {
 			"title": "For creators",
 			"step1": {
 				"title": "List your agent",
-				"text": "Add screenshots, a demo link and a clear price."
+				"text": "Add screenshots, a demo link and a clear price.",
+				"panel": {
+					"kicker": "New listing",
+					"title": "Blog Drafter",
+					"rows": [
+						{
+							"k": "Category",
+							"v": "Content"
+						},
+						{
+							"k": "Price",
+							"v": "$29 / mo"
+						},
+						{
+							"k": "Demo link",
+							"v": "Added"
+						}
+					],
+					"button": "Publish listing"
+				}
 			},
 			"step2": {
 				"title": "Answer open briefs",
-				"text": "Ask questions in the comments, then reach out."
+				"text": "Ask questions in the comments, then reach out.",
+				"panel": {
+					"kicker": "Open brief",
+					"title": "Delivery delay analysis",
+					"rows": [
+						{
+							"k": "Budget",
+							"v": "Open to offers"
+						},
+						{
+							"k": "Your comment",
+							"v": "Which carriers do you use?"
+						},
+						{
+							"k": "Comments",
+							"v": "1"
+						}
+					],
+					"button": "Post comment"
+				}
 			},
 			"step3": {
 				"title": "Grow your rank",
-				"text": "Likes and views from others move you up each night."
+				"text": "Likes and views from other members move you up each night.",
+				"panel": {
+					"kicker": "Leaderboard",
+					"title": "Pixel Writer is #1 tonight",
+					"rows": [
+						{
+							"k": "Agents",
+							"v": "2"
+						},
+						{
+							"k": "Followers",
+							"v": "3"
+						},
+						{
+							"k": "Likes",
+							"v": "1"
+						}
+					],
+					"button": "See leaderboard"
+				}
 			}
-		}
+		},
+		"sidesLabel": "Choose your side",
+		"example": "Example"
 	},
 	"cta": {
-		"title": "Need something no agent does yet?",
-		"text": "Post a brief in two minutes. Creators will see it today.",
+		"title": "Tell creators what to build next.",
+		"text": "Post a brief in two minutes and creators see it today. Already built an agent? List it and get found.",
 		"action": "Post a brief"
+	},
+	"sellAgent": "Sell your agent",
+	"work": {
+		"title": "Watch agents do the work",
+		"text": "A few jobs that agents on AgentsHub take off a business owner's plate. The demos are illustrative.",
+		"chat": {
+			"title": "Answers customers while you sleep",
+			"text": "Support agents reply in seconds and hand the tricky cases back to you.",
+			"label": "Demo support conversation",
+			"m1": "Hi, where is my order #2041?",
+			"m2": "It shipped this morning and arrives Thursday. I just emailed you the tracking link.",
+			"m3": "Can I still change the address?",
+			"m4": "Done. The courier has your new address.",
+			"action": "Browse support agents"
+		},
+		"leads": {
+			"title": "Finds the leads worth calling",
+			"label": "Lead score",
+			"aria": "Demo lead scores",
+			"l1": {
+				"name": "Dilnoza K.",
+				"biz": "Bakery chain"
+			},
+			"l2": {
+				"name": "Mark T.",
+				"biz": "Online store"
+			},
+			"l3": {
+				"name": "Aziz R.",
+				"biz": "Dental clinic"
+			},
+			"l4": {
+				"name": "Sora L.",
+				"biz": "Café"
+			}
+		},
+		"calendar": {
+			"title": "Books appointments and sends reminders",
+			"aria": "Demo calendar filling with bookings",
+			"days": [
+				"Mon",
+				"Tue",
+				"Wed",
+				"Thu",
+				"Fri"
+			]
+		},
+		"invoices": {
+			"title": "Sends invoices on time",
+			"aria": "Demo counter: {{count}} invoices sent",
+			"text": "invoices sent this month, no copy and paste"
+		},
+		"queue": {
+			"title": "Keeps your feed busy",
+			"label": "Scheduled this week",
+			"aria": "Demo queue of scheduled social posts",
+			"p1": {
+				"when": "Mon 10:00",
+				"title": "New spring menu is here",
+				"channel": "Instagram"
+			},
+			"p2": {
+				"when": "Wed 18:00",
+				"title": "Meet the team behind the bakery",
+				"channel": "Facebook"
+			},
+			"p3": {
+				"when": "Fri 12:00",
+				"title": "Weekend offer: 2 for 1 croissants",
+				"channel": "Telegram"
+			}
+		},
+		"cta": {
+			"title": "Built an agent like these?",
+			"text": "List it on AgentsHub and let businesses find it."
+		}
+	},
+	"faq": {
+		"title": "Good questions",
+		"text": "Not covered here? Ask in the community. Creators and businesses answer there.",
+		"community": "Visit the community",
+		"items": {
+			"pricing": {
+				"q": "How does pricing work?",
+				"a": "Every agent is free, one-time, monthly or custom, always in USD. You agree on the final details directly with the creator."
+			},
+			"contacts": {
+				"q": "Who can see my email and WhatsApp?",
+				"a": "Only signed-in members. Visitors who are not logged in never see your contact details."
+			},
+			"ranking": {
+				"q": "How are agents and creators ranked?",
+				"a": "Every night, by likes and views from other members. Listing more agents does not move you up."
+			},
+			"brief": {
+				"q": "What is a brief?",
+				"a": "A short description of the agent you need. Budget and deadline are optional, and creators ask questions in the comments."
+			},
+			"sell": {
+				"q": "Can I sell my own agent?",
+				"a": "Yes. Create a listing with screenshots, a demo link and a clear price, and it appears in the marketplace."
+			}
+		}
 	}
 }

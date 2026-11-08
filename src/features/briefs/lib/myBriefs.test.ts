@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { briefActions, briefEditHref, briefNeedsConfirm, myBriefsHref, myBriefsVariables, parseMyBriefsView } from './myBriefs';
+import { briefActions, briefEditHref, briefNeedsConfirm, myBriefsHref, myBriefsVariables, newBriefHref, parseMyBriefsView } from './myBriefs';
 
 describe('my briefs view', () => {
 	it('reads the tab and page from the URL, with safe fallbacks', () => {
@@ -31,5 +31,13 @@ describe('brief actions (D-30)', () => {
 		expect(briefNeedsConfirm('delete')).toBe(true);
 		expect(briefNeedsConfirm('close')).toBe(false);
 		expect(briefNeedsConfirm('reopen')).toBe(false);
+	});
+});
+
+describe('newBriefHref', () => {
+	it('carries a search text as the brief title', () => {
+		expect(newBriefHref('')).toBe('/dashboard/briefs/new');
+		expect(newBriefHref('   ')).toBe('/dashboard/briefs/new');
+		expect(newBriefHref(' invoice & bills ')).toBe('/dashboard/briefs/new?title=invoice+%26+bills');
 	});
 });

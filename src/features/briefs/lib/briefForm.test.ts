@@ -6,6 +6,8 @@ import {
 	deadlineToIso,
 	isFutureDeadline,
 	makeBriefFormSchema,
+	prefillTitle,
+	BRIEF_TITLE_MAX,
 	toBriefInput,
 	toBriefUpdate,
 	type BriefFormValues,
@@ -104,5 +106,15 @@ describe('toBriefInput / toBriefUpdate', () => {
 		expect(
 			toBriefUpdate('id', { ...initial, briefDeadline: '' }, briefFormSchema.parse({ ...initial, briefDeadline: '' })),
 		).toBeNull();
+	});
+});
+
+describe('prefillTitle (?title= from an /agents search)', () => {
+	it('takes the first value, trimmed and cut to the title limit', () => {
+		expect(prefillTitle('  invoice bot ')).toBe('invoice bot');
+		expect(prefillTitle(['blog', 'other'])).toBe('blog');
+		expect(prefillTitle(undefined)).toBe('');
+		expect(prefillTitle([])).toBe('');
+		expect(prefillTitle('x'.repeat(BRIEF_TITLE_MAX + 20))).toHaveLength(BRIEF_TITLE_MAX);
 	});
 });

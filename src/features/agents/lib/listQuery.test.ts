@@ -1,8 +1,11 @@
+import type { ParsedUrlQuery } from 'querystring';
 import { describe, expect, it } from 'vitest';
 import {
 	AGENTS_PAGE_SIZE,
 	DEFAULT_FILTERS,
 	PRICE_MAX,
+	agentFacetsVariables,
+	parseAgentView,
 	agentsHref,
 	canonicalAgentsPath,
 	hasActiveFilters,
@@ -57,7 +60,7 @@ describe('parseAgentFilters', () => {
 		['page 0', { page: '0' }, { page: 1 }],
 		['negative page', { page: '-2' }, { page: 1 }],
 		['fractional page', { page: '2.5' }, { page: 1 }],
-		['unknown sort', { sort: 'propertyPrice' }, { sort: 'newest' }],
+		['unknown sort', { sort: 'propertyPrice' }, { sort: 'likes' }],
 		['text over 100 characters', { q: 'x'.repeat(101) }, { text: '' }],
 		['negative price', { min: '-5' }, { minPrice: null }],
 		['non-numeric price', { max: 'cheap' }, { maxPrice: null }],
@@ -157,11 +160,11 @@ describe('agentsHref and canonicalAgentsPath', () => {
 });
 
 describe('toProductsInquiry', () => {
-	it('sends the default sort and an empty search for no filters', () => {
+	it('sends the default sort (most liked) and an empty search for no filters', () => {
 		expect(toProductsInquiry(DEFAULT_FILTERS)).toEqual({
 			page: 1,
 			limit: AGENTS_PAGE_SIZE,
-			sort: 'createdAt',
+			sort: 'productLikes',
 			direction: 'DESC',
 			search: {},
 		});
@@ -169,7 +172,7 @@ describe('toProductsInquiry', () => {
 
 	it.each([
 		['rank', 'productRank', 'DESC'],
-		['likes', 'productLikes', 'DESC'],
+		['newest', 'createdAt', 'DESC'],
 		['views', 'productViews', 'DESC'],
 		['price-asc', 'productPrice', 'ASC'],
 		['price-desc', 'productPrice', 'DESC'],
@@ -217,5 +220,25 @@ describe('helpers', () => {
 		expect(normalizeTag('  Telegram ')).toBe('telegram');
 		expect(normalizeTag('   ')).toBeNull();
 		expect(normalizeTag('x'.repeat(31))).toBeNull();
+	});
+});
+
+describe('agentFacetsVariables (D-43)', () => {
+	it('sends the same search as the list, without page or sort', () => {
+		const current = filters({ text: 'bot', categories: ['SALES'], pricing: ['FREE'], sort: 'rank', page: 3 });
+		expect(agentFacetsVariables(current)).toEqual({ input: toProductsInquiry(current).search });
+		expect(agentFacetsVariables(filters({ sort: 'views', page: 2 }))).toEqual({ input: {} });
+	});
+});
+
+describe('parseAgentView', () => {
+	it.each<[ParsedUrlQuery, 'grid' | 'list']>([
+		[{ view: 'list' }, 'list'],
+		[{}, 'grid'],
+		[{ view: 'grid' }, 'grid'],
+		[{ view: 'cards' }, 'grid'],
+		[{ view: ['list', 'grid'] }, 'list'],
+	])('%o → %s', (query, expected) => {
+		expect(parseAgentView(query)).toBe(expected);
 	});
 });

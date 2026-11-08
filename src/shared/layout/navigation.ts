@@ -16,12 +16,6 @@ export const MAIN_NAV: NavItem[] = [
 	{ href: '/community', labelKey: 'common:nav.community' },
 ];
 
-export const FOOTER_NAV: NavItem[] = [
-	...MAIN_NAV,
-	{ href: '/faq', labelKey: 'common:footer.faq' },
-	{ href: '/about', labelKey: 'common:footer.about' },
-];
-
 /** Member counters a dashboard item can show next to its label (DashboardNavCountsQuery). */
 export type NavCount = 'memberProducts' | 'memberBriefs' | 'memberArticles' | 'memberFollowers' | 'memberFollowings';
 

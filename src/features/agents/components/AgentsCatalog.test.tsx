@@ -4,19 +4,21 @@ import userEvent from '@testing-library/user-event';
 import mockRouter from 'next-router-mock';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { renderWithProviders } from '@/test/renderWithProviders';
-import { AgentsListQuery } from '../graphql/agents';
+import { AgentsCatalogQuery, ProductFacetsQuery } from '../graphql/agents';
 import { DEFAULT_FILTERS, agentsListVariables, parseAgentFilters, type AgentFilters } from '../lib/listQuery';
-import { makeAgent } from '../test/fixtures';
+import { makeCatalogAgent, makeFacets } from '../test/fixtures';
 import { AgentsCatalog } from './AgentsCatalog';
-import { SEARCH_DEBOUNCE_MS } from './AgentsToolbar';
+import { SEARCH_DEBOUNCE_MS } from './catalog/SearchHero';
+
+const agentsOf = (count: number, start = 0) => Array.from({ length: count }, (_, index) => makeCatalogAgent({}, start + index));
 
 const listMock = (
 	filters: AgentFilters,
-	agents: ReturnType<typeof makeAgent>[],
+	agents: ReturnType<typeof makeCatalogAgent>[],
 	total = agents.length,
 	extra: Partial<MockedResponse> = {},
 ): MockedResponse => ({
-	request: { query: AgentsListQuery, variables: agentsListVariables(filters) },
+	request: { query: AgentsCatalogQuery, variables: agentsListVariables(filters) },
 	result: {
 		data: {
 			getProducts: {
@@ -30,62 +32,131 @@ const listMock = (
 	...extra,
 });
 
+/** The same counts for every search (the filtered and the "everything" query). */
+const facetsMock = (facets = makeFacets({ CUSTOMER_SUPPORT: 2, CONTENT: 1 }, { FREE: 1, SUBSCRIPTION: 2 })): MockedResponse => ({
+	request: { query: ProductFacetsQuery },
+	variableMatcher: () => true,
+	maxUsageCount: Number.POSITIVE_INFINITY,
+	result: { data: { getProductFacets: facets } },
+});
+
 const at = (url: string) => {
 	mockRouter.setCurrentUrl(url);
 	return parseAgentFilters(mockRouter.query);
 };
 
-const twoAgents = [makeAgent({}, 1), makeAgent({ productTitle: 'LeadCatcher', productPricing: 'FREE', productPrice: null }, 2)];
-
 const renderCatalog = (mocks: MockedResponse[], auth: Parameters<typeof renderWithProviders>[1] = {}) =>
-	renderWithProviders(<AgentsCatalog />, { mocks, auth: { status: 'guest' }, ...auth });
+	renderWithProviders(<AgentsCatalog />, { mocks: [...mocks, facetsMock()], auth: { status: 'guest' }, ...auth });
+
+/** The polite live region above the results. */
+const summary = () => screen.getAllByRole('status').find((element) => element.getAttribute('aria-live') === 'polite');
+
+const results = () => screen.findByRole('list', { name: 'Agents' });
 
 describe('AgentsCatalog', () => {
 	beforeEach(() => {
 		mockRouter.setCurrentUrl('/agents');
 	});
 
-	it('shows card skeletons while loading, then the agents with their count', async () => {
-		const filters = at('/agents');
-		renderCatalog([listMock(filters, twoAgents, 26, { delay: 30 })]);
+	it('shows skeletons while loading, then the first 9 agents with the total', async () => {
+		renderCatalog([listMock(at('/agents'), agentsOf(14), 14, { delay: 30 })]);
 
 		expect(screen.getByRole('status', { name: 'Loading agents…' })).toHaveAttribute('aria-busy', 'true');
 
-		const list = await screen.findByRole('list', { name: 'Agents' });
-		expect(within(list).getAllByRole('article')).toHaveLength(2);
-		expect(screen.getByText('26 agents')).toBeInTheDocument();
-		expect(screen.queryByRole('status', { name: 'Loading agents…' })).not.toBeInTheDocument();
+		const list = await results();
+		expect(within(list).getAllByRole('article')).toHaveLength(9);
+		expect(screen.getByText('Showing 9 of 14')).toBeInTheDocument();
+		expect(summary()).toHaveTextContent('14 agents');
+		// The brief tile waits until the whole page is shown.
+		expect(screen.queryByRole('link', { name: 'Post a brief' })).not.toBeInTheDocument();
 	});
 
-	it('links pagination pages with the current filters', async () => {
-		const filters = at('/agents?category=sales&sort=rank');
-		renderCatalog([listMock(filters, twoAgents, 30)]);
+	it('"Show more" opens the rest of the page without a new request, then the brief tile', async () => {
+		const user = userEvent.setup();
+		renderCatalog([listMock(at('/agents'), agentsOf(14))]);
+		await results();
+
+		await user.click(screen.getByRole('button', { name: 'Show 5 more' }));
+
+		expect(within(await results()).getAllByRole('article')).toHaveLength(14);
+		expect(screen.getByText('Showing 14 of 14')).toBeInTheDocument();
+		expect(screen.getByRole('link', { name: 'Post a brief' })).toHaveAttribute('href', '/dashboard/briefs/new');
+		// One page only: no pagination.
+		expect(screen.queryByRole('navigation', { name: 'Pagination' })).not.toBeInTheDocument();
+	});
+
+	it('shows the pagination after "Show more", with the filters and the list layout in the links', async () => {
+		const user = userEvent.setup();
+		const filters = at('/agents?category=sales&sort=rank&view=list');
+		renderCatalog([listMock(filters, agentsOf(20), 45)]);
+		await results();
+		expect(screen.queryByRole('navigation', { name: 'Pagination' })).not.toBeInTheDocument();
+
+		await user.click(screen.getByRole('button', { name: 'Show 11 more' }));
 
 		const pagination = await screen.findByRole('navigation', { name: 'Pagination' });
 		expect(within(pagination).getByRole('link', { name: 'Page 2' })).toHaveAttribute(
 			'href',
-			'/agents?category=sales&sort=rank&page=2',
+			'/agents?category=sales&sort=rank&page=2&view=list',
 		);
 		expect(within(pagination).getByRole('link', { name: 'Page 1' })).toHaveAttribute('aria-current', 'page');
-		expect(screen.getByRole('status')).toHaveTextContent('30 agents match your filters');
+		expect(screen.getByText('Showing 20 of 45')).toBeInTheDocument();
 	});
 
-	it('shows the empty state with "Clear filters", which keeps the sort', async () => {
+	it('counts the shown agents from the start of the page on page 2', async () => {
+		renderCatalog([listMock(at('/agents?page=2'), agentsOf(20, 20), 45)]);
+		await results();
+		expect(screen.getByText('Showing 29 of 45')).toBeInTheDocument();
+	});
+
+	it('shows the live counts and disables an option with no results (D-43)', async () => {
+		renderCatalog([listMock(at('/agents'), agentsOf(3))]);
+		await results();
+
+		const categories = screen.getByRole('group', { name: 'Category' });
+		await waitFor(() => expect(within(categories).getByRole('button', { name: 'Customer support 2' })).toBeEnabled());
+		expect(within(categories).getByRole('button', { name: 'All 3' })).toHaveAttribute('aria-pressed', 'true');
+		expect(within(categories).getByRole('button', { name: 'Sales 0' })).toBeDisabled();
+
+		const pricing = screen.getByRole('group', { name: 'Pricing' });
+		expect(within(pricing).getByRole('button', { name: 'Free 1' })).toBeEnabled();
+		expect(within(pricing).getByRole('button', { name: 'Custom 0' })).toBeDisabled();
+		// The hero counts every agent.
+		expect(screen.getByText(/descriptions from 3 agents\./)).toBeInTheDocument();
+	});
+
+	it('writes a category to the URL and resets the page', async () => {
 		const user = userEvent.setup();
-		const filters = at('/agents?category=sales&sort=rank&page=2');
-		renderCatalog([listMock(filters, []), listMock({ ...DEFAULT_FILTERS, sort: 'rank' }, twoAgents)]);
+		const filters = at('/agents?page=2');
+		renderCatalog([listMock(filters, agentsOf(3), 23), listMock({ ...DEFAULT_FILTERS, categories: ['CONTENT'] }, agentsOf(1))]);
+		await results();
 
-		expect(await screen.findByRole('heading', { name: 'No agents match your filters' })).toBeInTheDocument();
-		await user.click(screen.getByRole('button', { name: 'Clear filters' }));
+		await user.click(screen.getByRole('button', { name: 'Content 1' }));
 
-		expect(mockRouter.asPath).toBe('/agents?sort=rank');
-		expect(await screen.findByRole('list', { name: 'Agents' })).toBeInTheDocument();
+		expect(mockRouter.asPath).toBe('/agents?category=content');
+		expect(await screen.findByRole('button', { name: 'Remove filter: Content' })).toBeInTheDocument();
 	});
 
-	it('shows "No agents yet" without filters', async () => {
-		renderCatalog([listMock(at('/agents'), [])]);
-		expect(await screen.findByRole('heading', { name: 'No agents yet' })).toBeInTheDocument();
-		expect(screen.queryByRole('button', { name: 'Clear filters' })).not.toBeInTheDocument();
+	it('"All" drops the category filter', async () => {
+		const user = userEvent.setup();
+		renderCatalog([listMock(at('/agents?category=content&pricing=free'), agentsOf(1))]);
+		await results();
+
+		await user.click(screen.getByRole('button', { name: /^All/ }));
+		expect(mockRouter.asPath).toBe('/agents?pricing=free');
+	});
+
+	it('shows the empty state with a brief for the search text, and "Clear all" keeps the sort', async () => {
+		const user = userEvent.setup();
+		const filters = at('/agents?q=zzz&sort=rank');
+		renderCatalog([listMock(filters, []), listMock({ ...DEFAULT_FILTERS, sort: 'rank' }, agentsOf(2))]);
+
+		expect(await screen.findByRole('heading', { name: 'No agent does this yet' })).toBeInTheDocument();
+		expect(screen.getByRole('link', { name: 'Post a brief for “zzz”' })).toHaveAttribute('href', '/dashboard/briefs/new?title=zzz');
+
+		await user.click(screen.getByRole('button', { name: 'Clear all filters' }));
+		expect(mockRouter.asPath).toBe('/agents?sort=rank');
+		expect(await results()).toBeInTheDocument();
 	});
 
 	it('offers the first page when the page number is past the results', async () => {
@@ -97,70 +168,60 @@ describe('AgentsCatalog', () => {
 		const user = userEvent.setup();
 		const filters = at('/agents');
 		renderCatalog([
-			{ request: { query: AgentsListQuery, variables: agentsListVariables(filters) }, error: new TypeError('Failed to fetch') },
-			listMock(filters, twoAgents),
+			{ request: { query: AgentsCatalogQuery, variables: agentsListVariables(filters) }, error: new TypeError('Failed to fetch') },
+			listMock(filters, agentsOf(2)),
 		]);
 
 		const alert = await screen.findByRole('alert');
 		expect(alert).toHaveTextContent("We couldn't load the agents");
-		expect(alert).toHaveTextContent("Can't reach the server.");
-
 		await user.click(within(alert).getByRole('button', { name: 'Try again' }));
-		expect(await screen.findByRole('list', { name: 'Agents' })).toBeInTheDocument();
-	});
-
-	it('writes a filter change to the URL and resets the page', async () => {
-		const user = userEvent.setup();
-		const filters = at('/agents?page=3');
-		renderCatalog([listMock(filters, twoAgents, 40), listMock({ ...DEFAULT_FILTERS, categories: ['SALES'] }, twoAgents)]);
-		await screen.findByRole('list', { name: 'Agents' });
-
-		await user.click(screen.getByRole('checkbox', { name: 'Sales' }));
-
-		expect(mockRouter.asPath).toBe('/agents?category=sales');
-		expect(await screen.findByRole('button', { name: 'Remove filter: Sales' })).toBeInTheDocument();
-	});
-
-	it('opens the filters in a drawer below md (results stay first) and applies changes at once', async () => {
-		const user = userEvent.setup();
-		const filters = at('/agents?tag=crm');
-		renderCatalog([listMock(filters, twoAgents), listMock({ ...filters, categories: ['SALES'] }, twoAgents)]);
-		await screen.findByRole('list', { name: 'Agents' });
-
-		// CSS shows this button below md only; jsdom's 1024px window is md, so query hidden elements too.
-		await user.click(screen.getByRole('button', { name: 'Filters (1)', hidden: true }));
-		const drawer = await screen.findByRole('dialog', { name: 'Filters' });
-
-		await user.click(within(drawer).getByRole('checkbox', { name: 'Sales' }));
-		expect(mockRouter.asPath).toBe('/agents?category=sales&tag=crm');
-
-		await user.click(within(drawer).getByRole('button', { name: 'Show results' }));
-		await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+		expect(await results()).toBeInTheDocument();
 	});
 
 	it('removes one filter from its chip', async () => {
 		const user = userEvent.setup();
-		const filters = at('/agents?category=sales&tag=crm');
-		renderCatalog([listMock(filters, twoAgents), listMock({ ...DEFAULT_FILTERS, categories: ['SALES'] }, twoAgents)]);
-		await screen.findByRole('list', { name: 'Agents' });
+		renderCatalog([listMock(at('/agents?category=sales&tag=crm'), agentsOf(2))]);
+		await results();
 
 		await user.click(screen.getByRole('button', { name: 'Remove filter: #crm' }));
 		expect(mockRouter.asPath).toBe('/agents?category=sales');
 	});
 
-	it('changes the sort through the URL', async () => {
+	it('changes the sort through the URL; the default (most liked) stays out of it', async () => {
 		const user = userEvent.setup();
-		renderCatalog([listMock(at('/agents'), twoAgents), listMock({ ...DEFAULT_FILTERS, sort: 'price-asc' }, twoAgents)]);
-		await screen.findByRole('list', { name: 'Agents' });
+		renderCatalog([listMock(at('/agents?sort=newest'), agentsOf(2))]);
+		await results();
 
-		await user.selectOptions(screen.getByRole('combobox', { name: 'Sort' }), 'Price: low to high');
-		expect(mockRouter.asPath).toBe('/agents?sort=price-asc');
+		const sort = screen.getByRole('combobox', { name: 'Sort' });
+		expect(within(sort).getAllByRole('option').map((option) => option.textContent)).toEqual([
+			'Most liked',
+			'Newest',
+			'Most viewed',
+			'Top ranked',
+			'Price: low to high',
+			'Price: high to low',
+		]);
+		await user.selectOptions(sort, 'Most liked');
+		expect(mockRouter.asPath).toBe('/agents');
+	});
+
+	it('switches to the list layout through the URL and keeps the filters', async () => {
+		const user = userEvent.setup();
+		renderCatalog([listMock(at('/agents?pricing=free'), agentsOf(2))]);
+		await results();
+
+		await user.click(screen.getByRole('button', { name: 'List view' }));
+		expect(mockRouter.asPath).toBe('/agents?pricing=free&view=list');
+		expect(screen.getByRole('button', { name: 'List view' })).toHaveAttribute('aria-pressed', 'true');
+
+		await user.click(screen.getByRole('button', { name: 'Grid view' }));
+		expect(mockRouter.asPath).toBe('/agents?pricing=free');
 	});
 
 	it('debounces the search box into the URL', async () => {
 		const user = userEvent.setup();
-		renderCatalog([listMock(at('/agents'), twoAgents), listMock({ ...DEFAULT_FILTERS, text: 'bot' }, twoAgents)]);
-		await screen.findByRole('list', { name: 'Agents' });
+		renderCatalog([listMock(at('/agents'), agentsOf(2))]);
+		await results();
 
 		await user.type(screen.getByRole('searchbox', { name: 'Search agents by title' }), 'bot');
 		expect(mockRouter.asPath).toBe('/agents');
@@ -168,24 +229,12 @@ describe('AgentsCatalog', () => {
 	});
 
 	it('shows skeletons during a non-shallow navigation (pagination)', async () => {
-		renderCatalog([listMock(at('/agents'), twoAgents, 30)]);
-		await screen.findByRole('list', { name: 'Agents' });
+		renderCatalog([listMock(at('/agents'), agentsOf(20), 30)]);
+		await results();
 
 		act(() => {
 			mockRouter.events.emit('routeChangeStart', '/agents?page=2', { shallow: false });
 		});
 		expect(screen.getByRole('status', { name: 'Loading agents…' })).toBeInTheDocument();
-	});
-
-	it('shows the "Post a brief" call to action to guests and users, not to creators', async () => {
-		const { unmount } = renderCatalog([listMock(at('/agents'), twoAgents)]);
-		expect(await screen.findByRole('link', { name: 'Post a brief' })).toHaveAttribute('href', '/dashboard/briefs/new');
-		unmount();
-
-		renderCatalog([listMock(at('/agents'), twoAgents)], {
-			auth: { status: 'member', me: { memberType: 'CREATOR' } as never },
-		});
-		await screen.findByRole('list', { name: 'Agents' });
-		expect(screen.queryByRole('link', { name: 'Post a brief' })).not.toBeInTheDocument();
 	});
 });

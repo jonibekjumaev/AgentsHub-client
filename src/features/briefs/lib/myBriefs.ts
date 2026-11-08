@@ -7,6 +7,9 @@ import type { MyBriefsInquiry } from '@/gql/graphql';
 
 export const MY_BRIEFS_PATH = '/dashboard/briefs';
 export const NEW_BRIEF_PATH = '/dashboard/briefs/new';
+/** The new-brief form with its title filled in (e.g. from an agents search with no results). */
+export const newBriefHref = (title: string): string =>
+	title.trim() ? `${NEW_BRIEF_PATH}?${new URLSearchParams({ title: title.trim() })}` : NEW_BRIEF_PATH;
 export const briefEditHref = (briefId: string) => `${MY_BRIEFS_PATH}/${briefId}/edit`;
 export const MY_BRIEFS_PAGE_SIZE = 10;
 

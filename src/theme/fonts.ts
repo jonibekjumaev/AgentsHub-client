@@ -1,4 +1,4 @@
-import { JetBrains_Mono, Manrope, Noto_Sans_KR } from 'next/font/google';
+import { Bricolage_Grotesque, JetBrains_Mono, Manrope, Noto_Sans_KR } from 'next/font/google';
 
 /*
  * Manrope and Noto Sans KR are variable fonts: with no `weight`, next/font emits one @font-face per
@@ -23,4 +23,13 @@ export const jetbrainsMono = JetBrains_Mono({
 export const notoSansKr = Noto_Sans_KR({
 	display: 'swap',
 	preload: false,
+});
+
+/**
+ * Headings (h1–h3 and display text): Bricolage Grotesque, variable 500–800. It has no Cyrillic or Hangul,
+ * so those glyphs fall through to Manrope / Noto Sans KR in the font stack (tokens.fonts.display).
+ */
+export const bricolage = Bricolage_Grotesque({
+	subsets: ['latin', 'latin-ext'],
+	display: 'swap',
 });

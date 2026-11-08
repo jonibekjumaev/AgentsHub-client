@@ -3,13 +3,14 @@ export { AgentDetail } from './components/AgentDetail';
 export { AgentDetailSeo } from './components/AgentDetailSeo';
 export { AgentsCatalog } from './components/AgentsCatalog';
 export { AgentsSeo } from './components/AgentsSeo';
-export { AgentsListQuery } from './graphql/agents';
+export { AgentsCatalogQuery, AgentsListQuery, ProductFacetsQuery } from './graphql/agents';
 export { useAgentFilters } from './hooks/useAgentFilters';
 export {
 	AGENT_CATEGORIES,
 	SEARCH_TEXT_MAX,
 	agentSortToApi,
 	agentsHref,
+	agentFacetsVariables,
 	agentsListVariables,
 	parseAgentFilters,
 	type AgentFilters,

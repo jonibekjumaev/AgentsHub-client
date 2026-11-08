@@ -13,3 +13,4 @@ export { SubmitButton } from './SubmitButton';
 export { RHFPasswordField, RHFTextField } from './RHFTextField';
 export { ToastProvider, useToast } from './toast';
 export { visuallyHidden } from './visuallyHidden';
+export { CategoryIcon, categoryTint } from './CategoryIcon';

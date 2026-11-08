@@ -6,6 +6,7 @@ import { Button } from '@mui/material';
 import { Language as LanguageIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
 import { DEFAULT_LOCALE } from '@/shared/lib/locale';
+import { home } from '@/theme/tokens';
 
 // Menu + Popover + Modal are only needed after a click: loaded then, and kept mounted afterwards.
 const LanguageMenu = dynamic(() => import('./LanguageMenu').then((mod) => mod.LanguageMenu), { ssr: false });
@@ -13,10 +14,12 @@ const LanguageMenu = dynamic(() => import('./LanguageMenu').then((mod) => mod.La
 type LanguageSwitcherProps = {
 	/** Called after a language is picked (the mobile drawer closes itself). */
 	onSwitch?: () => void;
+	/** light (default): header. dark: an outlined button with the language name, for the dark footer. */
+	tone?: 'light' | 'dark';
 };
 
 /** en / ko / uz menu. Each item is a real link to the same page and query in that locale. */
-export const LanguageSwitcher = ({ onSwitch }: LanguageSwitcherProps) => {
+export const LanguageSwitcher = ({ onSwitch, tone = 'light' }: LanguageSwitcherProps) => {
 	const router = useRouter();
 	const { t } = useTranslation('common');
 	const [anchor, setAnchor] = useState<HTMLElement | null>(null);
@@ -49,9 +52,13 @@ export const LanguageSwitcher = ({ onSwitch }: LanguageSwitcherProps) => {
 					setAnchor(event.currentTarget);
 					setLoaded(true);
 				}}
-				sx={{ color: 'body', flexShrink: 0 }}
+				sx={
+					tone === 'dark'
+						? { flexShrink: 0, minHeight: 40, px: 3.5, border: 1, borderColor: home.footerButtonBorder, color: home.footerText, '&:hover': { borderColor: home.footerText } }
+						: { color: 'body', flexShrink: 0 }
+				}
 			>
-				{current.toUpperCase()}
+				{tone === 'dark' ? t(`common:language.names.${current}`) : current.toUpperCase()}
 			</Button>
 			{loaded && (
 				<LanguageMenu id={menuId} anchorEl={anchor} current={current} onClose={() => setAnchor(null)} onPick={switchTo} />
