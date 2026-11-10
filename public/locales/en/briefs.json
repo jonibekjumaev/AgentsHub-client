@@ -1,7 +1,5 @@
 {
 	"list": {
-		"title": "Briefs",
-		"subtitle": "Businesses describe the agent they need. Ask questions in the comments, then reach out.",
 		"post": "Post a brief",
 		"tabsLabel": "Brief status",
 		"tabs": {
@@ -9,36 +7,14 @@
 			"closed": "Closed"
 		},
 		"searchLabel": "Search briefs",
-		"searchPlaceholder": "Search brief titles",
 		"sortLabel": "Sort",
-		"sort": {
-			"newest": "Newest",
-			"budget-desc": "Budget: high to low",
-			"budget-asc": "Budget: low to high",
-			"deadline": "Deadline: soonest",
-			"views": "Most viewed"
-		},
 		"categoriesLabel": "Categories",
-		"allCategories": "All categories",
 		"loading": "Loading briefs…",
 		"errorTitle": "Couldn't load the briefs",
-		"resultsLabel": "Briefs",
-		"countOpen_one": "<strong>{{formatted}} open brief</strong>",
-		"countOpen_other": "<strong>{{formatted}} open briefs</strong>",
-		"countClosed_one": "<strong>{{formatted}} closed brief</strong>",
-		"countClosed_other": "<strong>{{formatted}} closed briefs</strong>",
-		"optionalLast": "When sorting by budget or deadline, briefs without one are listed last."
+		"resultsLabel": "Briefs"
 	},
 	"empty": {
-		"noOpenTitle": "No open briefs yet",
-		"noOpenText": "When a business posts what it needs, it shows up here.",
-		"noClosedTitle": "No closed briefs",
-		"noClosedText": "Briefs their authors have closed show up here.",
-		"noResultsTitle": "No briefs match",
-		"noResultsText": "Try another category or a shorter search.",
-		"clearFilters": "Clear filters",
 		"pageTitle": "This page is empty",
-		"pageText": "There are fewer briefs now than when this link was made.",
 		"firstPage": "Go to page 1"
 	},
 	"card": {

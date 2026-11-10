@@ -1,4 +1,5 @@
 export { AppliedChips, type AppliedChip } from './AppliedChips';
+export { CatalogBand } from './CatalogBand';
 export { CategoryRail, RAIL_CATEGORIES, isDeadOption } from './CategoryRail';
 export { FilterSwitch } from './FilterSwitch';
 export { LoadMore, outlineButtonSx } from './LoadMore';

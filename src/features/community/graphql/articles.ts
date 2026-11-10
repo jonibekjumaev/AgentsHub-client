@@ -36,6 +36,66 @@ export const ArticlesListQuery = graphql(`
 	}
 `);
 
+/** One row of the /community feed: the card fields and whether I liked it (empty for guests, D-46 list lookup). */
+export const CommunityArticleFragment = graphql(`
+	fragment CommunityArticle on BoardArticle {
+		...ArticleCard
+		meLiked {
+			memberId
+			likeRefId
+			myFavorite
+		}
+	}
+`);
+
+/** The /community feed. Public; with a token, meLiked says which ones I liked. */
+export const CommunityArticlesQuery = graphql(`
+	query CommunityArticles($input: BoardArticlesInquiry!) {
+		getBoardArticles(input: $input) {
+			list {
+				...CommunityArticle
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`);
+
+/** D-46: the topic counts; the same search as the feed. */
+export const ArticleFacetsQuery = graphql(`
+	query ArticleFacets($input: BAISearch!) {
+		getArticleFacets(input: $input) {
+			categories {
+				value
+				count
+			}
+			all
+		}
+	}
+`);
+
+/** D-46: the hero numbers and "Active writers". Site-wide, public. */
+export const CommunityStatsQuery = graphql(`
+	query CommunityStats {
+		getCommunityStats {
+			articles
+			writers
+			topWriters {
+				articles
+				likes
+				memberData {
+					_id
+					memberNick
+					memberFullName
+					memberImage
+					memberType
+				}
+			}
+		}
+	}
+`);
+
 /** /community/[id] public data (SSR, no token: no view, no meLiked). Deleted or missing → NOT_FOUND. */
 export const ArticleDetailQuery = graphql(`
 	query ArticleDetail($articleId: String!) {

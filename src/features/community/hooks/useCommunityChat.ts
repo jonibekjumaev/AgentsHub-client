@@ -81,3 +81,5 @@ export const useCommunityChat = () => {
 
 	return { messages, online, status, errorKey, coolingDown, send, canSend: authStatus === 'member' && me?.memberStatus === 'ACTIVE' };
 };
+
+export type CommunityChatState = ReturnType<typeof useCommunityChat>;

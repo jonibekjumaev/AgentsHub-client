@@ -7,6 +7,7 @@ import { AgentsListQuery } from '@/features/agents';
 import { BriefsListQuery } from '@/features/briefs';
 import { CreatorsListQuery } from '@/features/creators';
 import { renderWithProviders } from '@/test/renderWithProviders';
+import { rankMedals } from '@/theme/tokens';
 import { HOME_CATEGORIES, categoryAgentsVariables, homeAgentsVariables, latestBriefsVariables, topCreatorsVariables, type HomeAgentTab } from '../lib/home';
 import { scoreColors } from './bento/tiles';
 import { BriefsFeed, feedLoop } from './BriefsFeed';
@@ -139,9 +140,9 @@ describe('RankedCreators', () => {
 		expect(cards[0]).toHaveTextContent('2 agents1 follower3 likes');
 	});
 
-	it('colors the badges #1 indigo, #2 grey, #3 amber, then light grey', () => {
-		expect(medalColors(1)[0]).toBe('#4338CA');
-		expect(medalColors(3)[0]).toBe('#B54708');
+	it('colors the badges #1–3 gold, silver, bronze (the /creators medals), then light grey', () => {
+		expect(medalColors(1)).toEqual([rankMedals[1].bg, rankMedals[1].text]);
+		expect(medalColors(3)).toEqual([rankMedals[3].bg, rankMedals[3].text]);
 		expect(medalColors(6)).toEqual(['#EAECF0', '#344054']);
 	});
 });

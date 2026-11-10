@@ -70,6 +70,10 @@ type Documents = {
     "\n\tmutation DeleteComment($input: CommentUpdate!) {\n\t\tupdateComment(input: $input) {\n\t\t\t_id\n\t\t\tcommentStatus\n\t\t}\n\t}\n": typeof types.DeleteCommentDocument,
     "\n\tfragment ArticleCard on BoardArticle {\n\t\t_id\n\t\tarticleCategory\n\t\tarticleStatus\n\t\tarticleTitle\n\t\tarticleContent\n\t\tarticleImage\n\t\tarticleLikes\n\t\tarticleViews\n\t\tarticleComments\n\t\tcreatedAt\n\t\tmemberData {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t}\n\t}\n": typeof types.ArticleCardFragmentDoc,
     "\n\tquery ArticlesList($input: BoardArticlesInquiry!) {\n\t\tgetBoardArticles(input: $input) {\n\t\t\tlist {\n\t\t\t\t...ArticleCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": typeof types.ArticlesListDocument,
+    "\n\tfragment CommunityArticle on BoardArticle {\n\t\t...ArticleCard\n\t\tmeLiked {\n\t\t\tmemberId\n\t\t\tlikeRefId\n\t\t\tmyFavorite\n\t\t}\n\t}\n": typeof types.CommunityArticleFragmentDoc,
+    "\n\tquery CommunityArticles($input: BoardArticlesInquiry!) {\n\t\tgetBoardArticles(input: $input) {\n\t\t\tlist {\n\t\t\t\t...CommunityArticle\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": typeof types.CommunityArticlesDocument,
+    "\n\tquery ArticleFacets($input: BAISearch!) {\n\t\tgetArticleFacets(input: $input) {\n\t\t\tcategories {\n\t\t\t\tvalue\n\t\t\t\tcount\n\t\t\t}\n\t\t\tall\n\t\t}\n\t}\n": typeof types.ArticleFacetsDocument,
+    "\n\tquery CommunityStats {\n\t\tgetCommunityStats {\n\t\t\tarticles\n\t\t\twriters\n\t\t\ttopWriters {\n\t\t\t\tarticles\n\t\t\t\tlikes\n\t\t\t\tmemberData {\n\t\t\t\t\t_id\n\t\t\t\t\tmemberNick\n\t\t\t\t\tmemberFullName\n\t\t\t\t\tmemberImage\n\t\t\t\t\tmemberType\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n": typeof types.CommunityStatsDocument,
     "\n\tquery ArticleDetail($articleId: String!) {\n\t\tgetBoardArticle(articleId: $articleId) {\n\t\t\t...ArticleCard\n\t\t\tmemberId\n\t\t\tupdatedAt\n\t\t}\n\t}\n": typeof types.ArticleDetailDocument,
     "\n\tquery ArticleViewer($articleId: String!) {\n\t\tgetBoardArticle(articleId: $articleId) {\n\t\t\t_id\n\t\t\tarticleViews\n\t\t\tmeLiked {\n\t\t\t\tmemberId\n\t\t\t\tlikeRefId\n\t\t\t\tmyFavorite\n\t\t\t}\n\t\t}\n\t}\n": typeof types.ArticleViewerDocument,
     "\n\tmutation LikeArticle($articleId: String!) {\n\t\tlikeTargetBoardArticle(articleId: $articleId) {\n\t\t\t_id\n\t\t\tarticleLikes\n\t\t}\n\t}\n": typeof types.LikeArticleDocument,
@@ -153,6 +157,10 @@ const documents: Documents = {
     "\n\tmutation DeleteComment($input: CommentUpdate!) {\n\t\tupdateComment(input: $input) {\n\t\t\t_id\n\t\t\tcommentStatus\n\t\t}\n\t}\n": types.DeleteCommentDocument,
     "\n\tfragment ArticleCard on BoardArticle {\n\t\t_id\n\t\tarticleCategory\n\t\tarticleStatus\n\t\tarticleTitle\n\t\tarticleContent\n\t\tarticleImage\n\t\tarticleLikes\n\t\tarticleViews\n\t\tarticleComments\n\t\tcreatedAt\n\t\tmemberData {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t}\n\t}\n": types.ArticleCardFragmentDoc,
     "\n\tquery ArticlesList($input: BoardArticlesInquiry!) {\n\t\tgetBoardArticles(input: $input) {\n\t\t\tlist {\n\t\t\t\t...ArticleCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": types.ArticlesListDocument,
+    "\n\tfragment CommunityArticle on BoardArticle {\n\t\t...ArticleCard\n\t\tmeLiked {\n\t\t\tmemberId\n\t\t\tlikeRefId\n\t\t\tmyFavorite\n\t\t}\n\t}\n": types.CommunityArticleFragmentDoc,
+    "\n\tquery CommunityArticles($input: BoardArticlesInquiry!) {\n\t\tgetBoardArticles(input: $input) {\n\t\t\tlist {\n\t\t\t\t...CommunityArticle\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": types.CommunityArticlesDocument,
+    "\n\tquery ArticleFacets($input: BAISearch!) {\n\t\tgetArticleFacets(input: $input) {\n\t\t\tcategories {\n\t\t\t\tvalue\n\t\t\t\tcount\n\t\t\t}\n\t\t\tall\n\t\t}\n\t}\n": types.ArticleFacetsDocument,
+    "\n\tquery CommunityStats {\n\t\tgetCommunityStats {\n\t\t\tarticles\n\t\t\twriters\n\t\t\ttopWriters {\n\t\t\t\tarticles\n\t\t\t\tlikes\n\t\t\t\tmemberData {\n\t\t\t\t\t_id\n\t\t\t\t\tmemberNick\n\t\t\t\t\tmemberFullName\n\t\t\t\t\tmemberImage\n\t\t\t\t\tmemberType\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n": types.CommunityStatsDocument,
     "\n\tquery ArticleDetail($articleId: String!) {\n\t\tgetBoardArticle(articleId: $articleId) {\n\t\t\t...ArticleCard\n\t\t\tmemberId\n\t\t\tupdatedAt\n\t\t}\n\t}\n": types.ArticleDetailDocument,
     "\n\tquery ArticleViewer($articleId: String!) {\n\t\tgetBoardArticle(articleId: $articleId) {\n\t\t\t_id\n\t\t\tarticleViews\n\t\t\tmeLiked {\n\t\t\t\tmemberId\n\t\t\t\tlikeRefId\n\t\t\t\tmyFavorite\n\t\t\t}\n\t\t}\n\t}\n": types.ArticleViewerDocument,
     "\n\tmutation LikeArticle($articleId: String!) {\n\t\tlikeTargetBoardArticle(articleId: $articleId) {\n\t\t\t_id\n\t\t\tarticleLikes\n\t\t}\n\t}\n": types.LikeArticleDocument,
@@ -418,6 +426,22 @@ export function graphql(source: "\n\tfragment ArticleCard on BoardArticle {\n\t\
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n\tquery ArticlesList($input: BoardArticlesInquiry!) {\n\t\tgetBoardArticles(input: $input) {\n\t\t\tlist {\n\t\t\t\t...ArticleCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery ArticlesList($input: BoardArticlesInquiry!) {\n\t\tgetBoardArticles(input: $input) {\n\t\t\tlist {\n\t\t\t\t...ArticleCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tfragment CommunityArticle on BoardArticle {\n\t\t...ArticleCard\n\t\tmeLiked {\n\t\t\tmemberId\n\t\t\tlikeRefId\n\t\t\tmyFavorite\n\t\t}\n\t}\n"): (typeof documents)["\n\tfragment CommunityArticle on BoardArticle {\n\t\t...ArticleCard\n\t\tmeLiked {\n\t\t\tmemberId\n\t\t\tlikeRefId\n\t\t\tmyFavorite\n\t\t}\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tquery CommunityArticles($input: BoardArticlesInquiry!) {\n\t\tgetBoardArticles(input: $input) {\n\t\t\tlist {\n\t\t\t\t...CommunityArticle\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery CommunityArticles($input: BoardArticlesInquiry!) {\n\t\tgetBoardArticles(input: $input) {\n\t\t\tlist {\n\t\t\t\t...CommunityArticle\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tquery ArticleFacets($input: BAISearch!) {\n\t\tgetArticleFacets(input: $input) {\n\t\t\tcategories {\n\t\t\t\tvalue\n\t\t\t\tcount\n\t\t\t}\n\t\t\tall\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery ArticleFacets($input: BAISearch!) {\n\t\tgetArticleFacets(input: $input) {\n\t\t\tcategories {\n\t\t\t\tvalue\n\t\t\t\tcount\n\t\t\t}\n\t\t\tall\n\t\t}\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tquery CommunityStats {\n\t\tgetCommunityStats {\n\t\t\tarticles\n\t\t\twriters\n\t\t\ttopWriters {\n\t\t\t\tarticles\n\t\t\t\tlikes\n\t\t\t\tmemberData {\n\t\t\t\t\t_id\n\t\t\t\t\tmemberNick\n\t\t\t\t\tmemberFullName\n\t\t\t\t\tmemberImage\n\t\t\t\t\tmemberType\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery CommunityStats {\n\t\tgetCommunityStats {\n\t\t\tarticles\n\t\t\twriters\n\t\t\ttopWriters {\n\t\t\t\tarticles\n\t\t\t\tlikes\n\t\t\t\tmemberData {\n\t\t\t\t\t_id\n\t\t\t\t\tmemberNick\n\t\t\t\t\tmemberFullName\n\t\t\t\t\tmemberImage\n\t\t\t\t\tmemberType\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

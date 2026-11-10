@@ -7,19 +7,31 @@ import { Send as SendIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
 import { useAuth } from '@/auth';
 import { Avatar } from '@/shared/ui/Avatar';
-import { radiusPx } from '@/theme/tokens';
-import { useCommunityChat } from '../../hooks/useCommunityChat';
+import { communityFeed, home, radiusPx } from '@/theme/tokens';
+import type { CommunityChatState } from '../../hooks/useCommunityChat';
 import { CHAT_MESSAGE_MAX } from '../../lib/chat';
+
+type Translate = (key: string, options?: Record<string, unknown>) => string;
+
+/** "12 online" (every open connection, guests too: D-46), "Connecting…" or "Offline". */
+const chatStatusText = (t: Translate, status: CommunityChatState['status'], online: number | null): string => {
+	if (status === 'open') return online === null ? t('community:chat.connected') : t('community:chat.online', { count: online });
+	return t(status === 'connecting' ? 'community:chat.connecting' : 'community:chat.offline');
+};
+
+/** The id of the chat section: the hero's "Join the chat" links here. */
+export const CHAT_SECTION_ID = 'community-chat';
 
 /**
  * Public chat (D-19, §3.11). Everyone reads; signed-in ACTIVE members write. Text is rendered as text
- * nodes only. No private messages (D-08).
+ * nodes only. No private messages (D-08). The socket lives in the page (one per page view), so the hero can
+ * show the same online count.
  */
-export const CommunityChat = () => {
+export const CommunityChat = ({ chat }: { chat: CommunityChatState }) => {
 	const { t } = useTranslation('community');
 	const { asPath } = useRouter();
 	const { me } = useAuth();
-	const { messages, online, status, errorKey, coolingDown, send, canSend } = useCommunityChat();
+	const { messages, online, status, errorKey, coolingDown, send, canSend } = chat;
 	const [text, setText] = useState('');
 	const inputId = useId();
 	const logRef = useRef<HTMLDivElement>(null);
@@ -38,17 +50,21 @@ export const CommunityChat = () => {
 	return (
 		<Box
 			component="section"
-			aria-labelledby="community-chat"
-			sx={{ display: 'flex', flexDirection: 'column', gap: 3, p: 5, bgcolor: 'surface', border: 1, borderColor: 'border', borderRadius: radiusPx.lg }}
+			id={CHAT_SECTION_ID}
+			aria-labelledby={`${CHAT_SECTION_ID}-title`}
+			sx={{ scrollMarginTop: 160, display: 'flex', flexDirection: 'column', gap: 3, p: 5, bgcolor: 'surface', border: 1, borderColor: 'border', borderRadius: home.radius.card }}
 		>
 			<Stack direction="row" justifyContent="space-between" alignItems="baseline" spacing={2}>
-				<Typography id="community-chat" variant="h2" sx={{ fontSize: 17 }}>
+				<Typography id={`${CHAT_SECTION_ID}-title`} variant="h2" sx={{ fontSize: 17 }}>
 					{t('community:chat.title')}
 				</Typography>
-				<Typography variant="meta" component="span" role="status">
-					{status === 'open'
-						? online !== null && t('community:chat.online', { count: online })
-						: t(status === 'connecting' ? 'community:chat.connecting' : 'community:chat.offline')}
+				<Typography variant="meta" component="span" role="status" sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.5 }}>
+					<Box
+						component="span"
+						aria-hidden="true"
+						sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: status === 'open' ? communityFeed.liveDot : communityFeed.offlineDot }}
+					/>
+					{chatStatusText(t, status, online)}
 				</Typography>
 			</Stack>
 
@@ -61,7 +77,8 @@ export const CommunityChat = () => {
 				sx={{ height: 320, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 3, p: 3, bgcolor: 'ground', borderRadius: radiusPx.md }}
 			>
 				{messages.length === 0 ? (
-					<Typography variant="body2" sx={{ color: 'muted', m: 'auto' }}>
+					// The server keeps only the last few messages in memory (D-46), so an empty chat is common.
+					<Typography variant="body2" sx={{ color: 'muted', m: 'auto', textAlign: 'center', px: 4 }}>
 						{t('community:chat.empty')}
 					</Typography>
 				) : (

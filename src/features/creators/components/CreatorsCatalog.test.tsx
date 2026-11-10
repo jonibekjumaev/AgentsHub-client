@@ -124,7 +124,7 @@ describe('CreatorsCatalog (agentshub-creators design, D-45)', () => {
 	it('shows the hero line from getCreatorStats', async () => {
 		renderCatalog([listMock(at('/creators'), creatorsOf(1))]);
 		expect(await screen.findByText('8 creators, 13 agents listed')).toBeInTheDocument();
-		expect(screen.getByRole('heading', { level: 1, name: 'Meet the people building agents' })).toBeInTheDocument();
+		expect(screen.getByRole('heading', { level: 1, name: 'AI Agents' })).toBeInTheDocument();
 	});
 
 	it('shows skeleton cards, then the first 9 of a page, "Show 11 more", then the pagination and the creator tile', async () => {

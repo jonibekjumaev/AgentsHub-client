@@ -9,12 +9,7 @@
 		"likes_other": "likes"
 	},
 	"list": {
-		"title": "Creators",
-		"subtitle": "People and teams who build the agents. Ranked nightly by likes and views.",
-		"count_one": "<strong>{{formatted}}</strong> creator",
-		"count_other": "<strong>{{formatted}}</strong> creators",
 		"searchLabel": "Search creators",
-		"searchPlaceholder": "Search by nickname",
 		"sortLabel": "Sort",
 		"sort": {
 			"rank": "Top ranked",
@@ -64,7 +59,6 @@
 		"breadcrumb": "Breadcrumb",
 		"errorTitle": "We couldn't load this profile",
 		"loading": "Loading…",
-		"since": "member since {{date}}",
 		"blocked": "This account is blocked.",
 		"contacts": {
 			"guest": "Log in to see contact details.",
@@ -78,15 +72,6 @@
 			"email": "Email",
 			"copy": "Copy {{label}}",
 			"copied": "{{label}} copied"
-		},
-		"stats": {
-			"agents": "Agents",
-			"briefs": "Briefs",
-			"followers": "Followers",
-			"following": "Following",
-			"likes": "Likes",
-			"views": "Views",
-			"articles": "Articles"
 		},
 		"groups": {
 			"work": "Work",
@@ -104,8 +89,6 @@
 		"noAgents": "No public agents yet",
 		"noBriefs": "No open briefs",
 		"noArticles": "No articles yet",
-		"showMoreAgents_one": "Show {{count}} more agent",
-		"showMoreAgents_other": "Show {{count}} more agents",
 		"showMoreBriefs_one": "Show {{count}} more brief",
 		"showMoreBriefs_other": "Show {{count}} more briefs",
 		"showMoreArticles_one": "Show {{count}} more article",
@@ -115,7 +98,6 @@
 		"share": "Copy profile link",
 		"shareDone": "Profile link copied",
 		"copyFailed": "Couldn't copy. Select the text and copy it by hand.",
-		"statsLabel": "Profile stats",
 		"sections": {
 			"agents": "AI agents built and sold by @{{nick}}.",
 			"briefs": "Open briefs posted by @{{nick}}.",

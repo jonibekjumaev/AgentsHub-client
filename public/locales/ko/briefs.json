@@ -1,7 +1,5 @@
 {
 	"list": {
-		"title": "브리프",
-		"subtitle": "기업이 필요한 에이전트를 설명합니다. 댓글로 질문한 뒤 직접 연락하세요.",
 		"post": "브리프 올리기",
 		"tabsLabel": "브리프 상태",
 		"tabs": {
@@ -9,36 +7,14 @@
 			"closed": "마감"
 		},
 		"searchLabel": "브리프 검색",
-		"searchPlaceholder": "브리프 제목 검색",
 		"sortLabel": "정렬",
-		"sort": {
-			"newest": "최신순",
-			"budget-desc": "예산 높은순",
-			"budget-asc": "예산 낮은순",
-			"deadline": "마감 임박순",
-			"views": "조회수순"
-		},
 		"categoriesLabel": "카테고리",
-		"allCategories": "전체 카테고리",
 		"loading": "브리프를 불러오는 중…",
 		"errorTitle": "브리프를 불러오지 못했습니다",
-		"resultsLabel": "브리프",
-		"countOpen_one": "진행 중인 브리프 <strong>{{formatted}}개</strong>",
-		"countOpen_other": "진행 중인 브리프 <strong>{{formatted}}개</strong>",
-		"countClosed_one": "마감된 브리프 <strong>{{formatted}}개</strong>",
-		"countClosed_other": "마감된 브리프 <strong>{{formatted}}개</strong>",
-		"optionalLast": "예산이나 마감일로 정렬하면 해당 값이 없는 브리프는 맨 뒤에 표시됩니다."
+		"resultsLabel": "브리프"
 	},
 	"empty": {
-		"noOpenTitle": "아직 진행 중인 브리프가 없습니다",
-		"noOpenText": "기업이 필요한 것을 올리면 여기에 표시됩니다.",
-		"noClosedTitle": "마감된 브리프가 없습니다",
-		"noClosedText": "작성자가 마감한 브리프가 여기에 표시됩니다.",
-		"noResultsTitle": "조건에 맞는 브리프가 없습니다",
-		"noResultsText": "다른 카테고리를 고르거나 검색어를 줄여 보세요.",
-		"clearFilters": "필터 지우기",
 		"pageTitle": "이 페이지는 비어 있습니다",
-		"pageText": "이 링크가 만들어졌을 때보다 브리프 수가 줄었습니다.",
 		"firstPage": "1페이지로 이동"
 	},
 	"card": {

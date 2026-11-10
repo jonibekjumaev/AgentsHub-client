@@ -9,12 +9,7 @@
 		"likes_other": "layk"
 	},
 	"list": {
-		"title": "Kreatorlar",
-		"subtitle": "Agentlarni yaratadigan odamlar va jamoalar. Har kecha layk va koʻrishlar boʻyicha reyting tuziladi.",
-		"count_one": "<strong>{{formatted}}</strong> ta kreator",
-		"count_other": "<strong>{{formatted}}</strong> ta kreator",
 		"searchLabel": "Kreatorlarni qidirish",
-		"searchPlaceholder": "Nik boʻyicha qidirish",
 		"sortLabel": "Saralash",
 		"sort": {
 			"rank": "Reyting boʻyicha",
@@ -47,7 +42,6 @@
 		"breadcrumb": "Joylashuv",
 		"errorTitle": "Profilni yuklab boʻlmadi",
 		"loading": "Yuklanmoqda…",
-		"since": "{{date}} dan beri aʼzo",
 		"blocked": "Bu akkaunt bloklangan.",
 		"contacts": {
 			"guest": "Kontaktlarni koʻrish uchun tizimga kiring.",
@@ -61,15 +55,6 @@
 			"email": "Email",
 			"copy": "{{label}} ni nusxalash",
 			"copied": "{{label}} nusxalandi"
-		},
-		"stats": {
-			"agents": "Agentlar",
-			"briefs": "Brieflar",
-			"followers": "Kuzatuvchilar",
-			"following": "Kuzatayotganlari",
-			"likes": "Layklar",
-			"views": "Koʻrishlar",
-			"articles": "Maqolalar"
 		},
 		"groups": {
 			"work": "Faoliyat",
@@ -87,8 +72,6 @@
 		"noAgents": "Hali ochiq agentlar yoʻq",
 		"noBriefs": "Ochiq brieflar yoʻq",
 		"noArticles": "Hali maqolalar yoʻq",
-		"showMoreAgents_one": "Yana {{count}} ta agentni koʻrsatish",
-		"showMoreAgents_other": "Yana {{count}} ta agentni koʻrsatish",
 		"showMoreBriefs_one": "Yana {{count}} ta briefni koʻrsatish",
 		"showMoreBriefs_other": "Yana {{count}} ta briefni koʻrsatish",
 		"showMoreArticles_one": "Yana {{count}} ta maqolani koʻrsatish",
@@ -98,7 +81,6 @@
 		"share": "Profil havolasini nusxalash",
 		"shareDone": "Profil havolasi nusxalandi",
 		"copyFailed": "Nusxalab boʻlmadi. Matnni belgilab, qoʻlda nusxalang.",
-		"statsLabel": "Profil statistikasi",
 		"sections": {
 			"agents": "@{{nick}} yaratgan va sotayotgan AI agentlar.",
 			"briefs": "@{{nick}} joylagan ochiq brieflar.",

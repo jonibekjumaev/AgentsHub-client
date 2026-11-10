@@ -7,13 +7,16 @@ import { FollowButton } from '@/features/follows';
 import type { CreatorCardFragment } from '@/gql/graphql';
 import { useFormat } from '@/shared/lib/format';
 import { Avatar } from '@/shared/ui/Avatar';
-import { home } from '@/theme/tokens';
+import { home, rankMedals } from '@/theme/tokens';
 import { useInView } from '../hooks/useInView';
 import { topCreatorsVariables } from '../lib/home';
 import { SectionTitle, displaySx, focusRingSx, grid3Sx, outlineButtonSx, revealSx } from './kit';
 
-/** Rank badge colors: #1 indigo, #2 grey, #3 amber, the rest light grey. */
-export const medalColors = (position: number) => home.medals[position - 1] ?? home.medalOther;
+/** Rank badge colors: the shared gold, silver and bronze of /creators (RankBadge) for #1–3, light grey for the rest. */
+export const medalColors = (position: number): readonly [string, string] => {
+	const medal = position >= 1 && position <= 3 ? rankMedals[position as 1 | 2 | 3] : null;
+	return medal ? [medal.bg, medal.text] : home.medalOther;
+};
 
 const Stat = ({ value, label }: { value: string; label: string }) => (
 	<span>

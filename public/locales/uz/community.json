@@ -12,11 +12,7 @@
 	"views_one": "{{formatted}} koʻrish",
 	"views_other": "{{formatted}} koʻrish",
 	"list": {
-		"title": "Hamjamiyat",
-		"subtitle": "AI agent yaratuvchilar va xaridorlardan maslahatlar, yangiliklar va savollar.",
 		"write": "Maqola yozish",
-		"searchLabel": "Maqolalarni qidirish",
-		"searchPlaceholder": "Sarlavhalarni qidirish",
 		"categoriesLabel": "Kategoriyalar",
 		"all": "Hammasi",
 		"loading": "Maqolalar yuklanmoqda…",
@@ -24,10 +20,6 @@
 		"resultsLabel": "Maqolalar"
 	},
 	"empty": {
-		"noneTitle": "Hali maqolalar yoʻq",
-		"noneText": "Birinchi post bilan suhbatni boshlang.",
-		"noResultsTitle": "Mos maqola topilmadi",
-		"clear": "Filtrlarni tozalash",
 		"pageTitle": "Bu sahifa boʻsh",
 		"firstPage": "1-sahifaga oʻtish"
 	},

@@ -1,7 +1,5 @@
 {
 	"list": {
-		"title": "AI agentlar",
-		"subtitle": "Mustaqil kreatorlarning tayyor agentlari.",
 		"searchLabel": "Agentlarni nomi boʻyicha qidirish",
 		"searchPlaceholder": "Agentlarni qidirish",
 		"sortLabel": "Saralash",
@@ -14,17 +12,11 @@
 			"price-desc": "Narx: qimmatdan arzonga"
 		},
 		"resultsLabel": "Agentlar",
-		"count_one": "<strong>{{formatted}} ta agent</strong>",
-		"count_other": "<strong>{{formatted}} ta agent</strong>",
-		"countFiltered_one": "Filtrlarga mos <strong>{{formatted}} ta agent</strong>",
-		"countFiltered_other": "Filtrlarga mos <strong>{{formatted}} ta agent</strong>",
 		"loading": "Agentlar yuklanmoqda…",
 		"errorTitle": "Agentlarni yuklab boʻlmadi"
 	},
 	"filters": {
 		"label": "Filtrlar",
-		"open": "Filtrlar",
-		"openWithCount": "Filtrlar ({{count}})",
 		"close": "Filtrlarni yopish",
 		"showResults": "Natijalarni koʻrsatish",
 		"category": "Kategoriya",
@@ -39,7 +31,6 @@
 		"tagPlaceholder": "Teg yozing va Enter bosing",
 		"tagHint": "Faqat siz qoʻshgan barcha teglarga ega agentlar koʻrsatiladi.",
 		"tagLimit": "Koʻpi bilan {{max}} ta teg qoʻshish mumkin.",
-		"active": "Faol filtrlar:",
 		"remove": "Filtrni olib tashlash: {{label}}",
 		"clearAll": "Hammasini tozalash",
 		"tagChip": "#{{tag}}",
@@ -55,13 +46,7 @@
 		"views_other": "{{formatted}} marta koʻrilgan"
 	},
 	"empty": {
-		"noResultsTitle": "Filtrlarga mos agent topilmadi",
-		"noResultsText": "Filtrlarni kamaytiring yoki boshqa soʻz bilan qidiring.",
-		"clearFilters": "Filtrlarni tozalash",
-		"noAgentsTitle": "Hozircha agentlar yoʻq",
-		"noAgentsText": "Kreatorlar hali agent joylamagan. Tez orada qaytib keling.",
 		"pageTitle": "Bu sahifa boʻsh",
-		"pageText": "Natijalar soni bu sahifa raqamidan kam.",
 		"firstPage": "Birinchi sahifaga oʻtish",
 		"title": "Bu ishni qiladigan agent hali yoʻq",
 		"text": "Qidiruvni kengaytirish uchun filtrni olib tashlang yoki brief joylang — kreatorlar siz uchun yaratadi.",
@@ -113,7 +98,6 @@
 			"profile": "@{{nick}} profilini koʻrish"
 		},
 		"contacts": {
-			"title": "Kontaktlar",
 			"guestTitle": "Kontaktlar faqat aʼzolar uchun",
 			"guestText": "Bu kreatorning email va WhatsApp raqamini koʻrish uchun tizimga kiring. Bu kreatorlarni spamdan himoya qiladi.",
 			"login": "Bogʻlanish uchun kirish",
@@ -123,10 +107,6 @@
 			"visible": "Tizimga kirganingiz uchun koʻrinmoqda.",
 			"none": "Bu kreator hali kontakt maʼlumotlarini qoʻshmagan.",
 			"error": "Kontaktlarni yuklab boʻlmadi"
-		},
-		"questions": {
-			"title": "Savollar",
-			"soon": "Bu agent boʻyicha savol-javob boʻlimi tez orada qoʻshiladi."
 		},
 		"moreFrom": "@{{nick}} ning boshqa agentlari",
 		"errorTitle": "Bu agentni yuklab boʻlmadi",

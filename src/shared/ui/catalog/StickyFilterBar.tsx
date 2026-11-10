@@ -23,7 +23,7 @@ export const StickyFilterBar = ({ children }: { children: ReactNode }) => (
 /** The second row: filters on the left, sort and layout on the right; wraps on narrow screens. */
 export const FilterBarRow = ({ start, end }: { start: ReactNode; end: ReactNode }) => (
 	<Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 3 }}>
-		<Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 2 }}>{start}</Box>
+		<Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 2, minWidth: 0, maxWidth: '100%' }}>{start}</Box>
 		<Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 2.5 }}>{end}</Box>
 	</Box>
 );

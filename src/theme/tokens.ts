@@ -216,12 +216,7 @@ export const home = {
 	scoreWarm: ['#F79009', '#B54708'],
 	scoreMid: ['#4338CA', '#3730A3'],
 	scoreCold: ['#98A2B3', '#475467'],
-	/** Creator rank badges: [background, text]. */
-	medals: [
-		['#4338CA', '#FFFFFF'],
-		['#475467', '#FFFFFF'],
-		['#B54708', '#FFFFFF'],
-	],
+	/** A rank badge after #3 (#1–3 use rankMedals): [background, text]. */
 	medalOther: ['#EAECF0', '#344054'],
 	ctaText: '#E0E7FF',
 	ctaOrbit: 'rgba(255, 255, 255, 0.35)',
@@ -281,23 +276,6 @@ export const briefFeed = {
 	pastOpacity: 0.8,
 } as const;
 
-/**
- * The light search band of /creators (agentshub-creators design): the same layout as the dark one, with a pale
- * indigo ground, two soft glows (indigo top-left, gold bottom-right) and white pills.
- */
-export const catalogLight = {
-	bg: '#F7F7FF',
-	border: '#E4E7F5',
-	dots: 'radial-gradient(rgba(67, 56, 202, 0.14) 1px, transparent 1.4px)',
-	glowIndigo: 'rgba(165, 180, 252, 0.35)',
-	glowGold: 'rgba(253, 224, 171, 0.45)',
-	searchBorder: '#DCDDFB',
-	searchShadow: '0 20px 50px rgba(55, 48, 163, 0.14)',
-	searchFocus: '0 0 0 4px rgba(129, 140, 248, 0.35), 0 20px 50px rgba(55, 48, 163, 0.18)',
-	pillBorder: '#DCDDFB',
-	pillText: '#3730A3',
-} as const;
-
 /** Creator rank medals (#1–3), background / text; other ranks are white / bodySoft. */
 export const rankMedals: Record<1 | 2 | 3, { bg: string; text: string }> = {
 	1: { bg: '#FEF0C7', text: '#93370D' },
@@ -314,3 +292,20 @@ export const creatorCard = {
 	emptyBio: '#98A2B3',
 } as const;
 
+
+/**
+ * /community (agentshub-community design): [tint, ink] per article topic (thumbnails without an image, topic
+ * pills), the live dot of the chat and the liked pill.
+ */
+export const communityFeed = {
+	topics: {
+		FREE: ['#EEF0FF', '#4338CA'],
+		RECOMMEND: ['#E6F6F4', '#0E7066'],
+		NEWS: ['#E6F4FF', '#175CD3'],
+		HUMOR: ['#FFF1E6', '#B54708'],
+	},
+	liveDot: '#12B76A',
+	offlineDot: '#98A2B3',
+	liked: { bg: '#FDECEF', border: '#FBCFD8', text: '#C01048' },
+	thumbDots: 'radial-gradient(rgba(16, 24, 40, 0.10) 1px, transparent 1.4px)',
+} as const;

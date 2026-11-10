@@ -1,7 +1,5 @@
 {
 	"list": {
-		"title": "Brieflar",
-		"subtitle": "Bizneslar oʻzlariga kerakli agentni tasvirlaydi. Izohlarda savol bering, keyin bogʻlaning.",
 		"post": "Brief joylash",
 		"tabsLabel": "Brief holati",
 		"tabs": {
@@ -9,36 +7,14 @@
 			"closed": "Yopilgan"
 		},
 		"searchLabel": "Brieflarni qidirish",
-		"searchPlaceholder": "Brief sarlavhalarini qidirish",
 		"sortLabel": "Saralash",
-		"sort": {
-			"newest": "Eng yangi",
-			"budget-desc": "Byudjet: yuqoridan pastga",
-			"budget-asc": "Byudjet: pastdan yuqoriga",
-			"deadline": "Muddat: eng yaqini",
-			"views": "Eng koʻp koʻrilgan"
-		},
 		"categoriesLabel": "Kategoriyalar",
-		"allCategories": "Barcha kategoriyalar",
 		"loading": "Brieflar yuklanmoqda…",
 		"errorTitle": "Brieflarni yuklab boʻlmadi",
-		"resultsLabel": "Brieflar",
-		"countOpen_one": "<strong>{{formatted}} ta ochiq brief</strong>",
-		"countOpen_other": "<strong>{{formatted}} ta ochiq brief</strong>",
-		"countClosed_one": "<strong>{{formatted}} ta yopilgan brief</strong>",
-		"countClosed_other": "<strong>{{formatted}} ta yopilgan brief</strong>",
-		"optionalLast": "Byudjet yoki muddat boʻyicha saralaganda, ular koʻrsatilmagan brieflar oxirida chiqadi."
+		"resultsLabel": "Brieflar"
 	},
 	"empty": {
-		"noOpenTitle": "Hali ochiq brieflar yoʻq",
-		"noOpenText": "Biznes oʻziga keragini joylaganda, u shu yerda chiqadi.",
-		"noClosedTitle": "Yopilgan brieflar yoʻq",
-		"noClosedText": "Mualliflari yopgan brieflar shu yerda chiqadi.",
-		"noResultsTitle": "Mos brief topilmadi",
-		"noResultsText": "Boshqa kategoriyani tanlang yoki qisqaroq qidiring.",
-		"clearFilters": "Filtrlarni tozalash",
 		"pageTitle": "Bu sahifa boʻsh",
-		"pageText": "Bu havola yaratilganidan beri brieflar soni kamaygan.",
 		"firstPage": "1-sahifaga oʻtish"
 	},
 	"card": {

@@ -12,11 +12,7 @@
 	"views_one": "조회 {{formatted}}",
 	"views_other": "조회 {{formatted}}",
 	"list": {
-		"title": "커뮤니티",
-		"subtitle": "AI 에이전트를 만들고 사는 사람들의 팁, 소식, 질문.",
 		"write": "글쓰기",
-		"searchLabel": "글 검색",
-		"searchPlaceholder": "제목 검색",
 		"categoriesLabel": "카테고리",
 		"all": "전체",
 		"loading": "글을 불러오는 중…",
@@ -24,10 +20,6 @@
 		"resultsLabel": "글"
 	},
 	"empty": {
-		"noneTitle": "아직 글이 없습니다",
-		"noneText": "첫 글로 대화를 시작해 보세요.",
-		"noResultsTitle": "일치하는 글이 없습니다",
-		"clear": "필터 지우기",
 		"pageTitle": "이 페이지는 비어 있습니다",
 		"firstPage": "1페이지로 이동"
 	},

@@ -1,17 +1,28 @@
 import type { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { addApolloState, initializeApollo } from '@/apollo/client';
-import { ArticlesListQuery, CommunityBoard, CommunitySeo, articlesListVariables, parseArticleFilters } from '@/features/community';
+import {
+	ArticleFacetsQuery,
+	CommunityArticlesQuery,
+	CommunityBoard,
+	CommunitySeo,
+	CommunityStatsQuery,
+	articleFacetsVariables,
+	articlesListVariables,
+	parseArticleFilters,
+} from '@/features/community';
 import { PublicLayout, type NextPageWithLayout } from '@/shared/layout';
 
 export const getServerSideProps: GetServerSideProps = async ({ locale, query }) => {
 	// One client per request, no auth header: public data only (CLAUDE.md rules 11–12). The chat is browser-only.
 	const client = initializeApollo();
-	try {
-		await client.query({ query: ArticlesListQuery, variables: articlesListVariables(parseArticleFilters(query)) });
-	} catch {
-		// The browser runs the query again and shows the error state if it still fails.
-	}
+	const filters = parseArticleFilters(query);
+	// In parallel; a failed one is fetched again in the browser, which shows its error state if it still fails.
+	await Promise.all([
+		client.query({ query: CommunityArticlesQuery, variables: articlesListVariables(filters) }).catch(() => undefined),
+		client.query({ query: ArticleFacetsQuery, variables: articleFacetsVariables(filters) }).catch(() => undefined),
+		client.query({ query: CommunityStatsQuery }).catch(() => undefined),
+	]);
 	return addApolloState(client, {
 		props: { ...(await serverSideTranslations(locale ?? 'en', ['common', 'community', 'errors'])) },
 	});

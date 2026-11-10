@@ -12,11 +12,7 @@
 	"views_one": "{{formatted}} view",
 	"views_other": "{{formatted}} views",
 	"list": {
-		"title": "Community",
-		"subtitle": "Tips, news and questions from builders and buyers of AI agents.",
 		"write": "Write an article",
-		"searchLabel": "Search articles",
-		"searchPlaceholder": "Search titles",
 		"categoriesLabel": "Categories",
 		"all": "All",
 		"loading": "Loading articles…",
@@ -24,10 +20,6 @@
 		"resultsLabel": "Articles"
 	},
 	"empty": {
-		"noneTitle": "No articles yet",
-		"noneText": "Start the conversation with the first post.",
-		"noResultsTitle": "No articles match",
-		"clear": "Clear filters",
 		"pageTitle": "This page is empty",
 		"firstPage": "Go to page 1"
 	},
@@ -54,7 +46,7 @@
 		"connecting": "Connecting…",
 		"offline": "Offline",
 		"logLabel": "Chat messages",
-		"empty": "No messages yet. Say hello.",
+		"empty": "No messages yet. Say hello: the chat keeps only the latest messages.",
 		"guest": "guest",
 		"placeholder": "Write a message",
 		"inputLabel": "Message",
@@ -66,7 +58,8 @@
 			"length": "Write 1 to {{max}} characters.",
 			"rate": "Slow down: one message per second.",
 			"unknown": "The message wasn't sent."
-		}
+		},
+		"connected": "Connected"
 	},
 	"mine": {
 		"title": "My articles",
@@ -119,5 +112,60 @@
 			"saveFailed": "The article wasn't saved",
 			"loadFailed": "We couldn't load this article"
 		}
+	},
+	"hero": {
+		"title": "AgentsHub Community",
+		"text": "Tips, news and honest reviews from the people who build AI agents and the businesses that use them.",
+		"textWithStats_one": "Tips, news and honest reviews from builders and buyers of AI agents: {{articles}} article by {{writers}}.",
+		"textWithStats_other": "Tips, news and honest reviews from builders and buyers of AI agents: {{articles}} articles by {{writers}}.",
+		"writers_one": "{{formatted}} writer",
+		"writers_other": "{{formatted}} writers",
+		"online_one": "{{formatted}} online in the live chat",
+		"online_other": "{{formatted}} online in the live chat"
+	},
+	"feed": {
+		"sortLabel": "Sort",
+		"sort": {
+			"newest": "Newest",
+			"liked": "Most liked",
+			"discussed": "Most discussed",
+			"viewed": "Most viewed"
+		},
+		"results_one": "article",
+		"results_other": "articles",
+		"resultsFor": "for “{{text}}”",
+		"remove": "Remove filter: {{label}}",
+		"clearAll": "Clear all",
+		"readTime_one": "{{count}} min read",
+		"readTime_other": "{{count}} min read",
+		"like_one": "Like “{{title}}”, {{count}} like",
+		"like_other": "Like “{{title}}”, {{count}} likes",
+		"commentsLink_one": "{{count}} comment on “{{title}}”",
+		"commentsLink_other": "{{count}} comments on “{{title}}”",
+		"showing": "Showing {{shown}} of {{total}}",
+		"showMore_one": "Show {{count}} more",
+		"showMore_other": "Show {{count}} more",
+		"sidebarLabel": "Chat and writers",
+		"cta": {
+			"title": "Have something to share?",
+			"text": "A tip, a launch or a question: write it up for the community."
+		},
+		"empty": {
+			"none": {
+				"title": "No articles yet",
+				"text": "Start the conversation with the first post."
+			},
+			"noMatch": {
+				"title": "No articles match",
+				"text": "Try another topic or fewer words.",
+				"textFor": "Nothing matches “{{text}}”. Try another topic or fewer words."
+			}
+		}
+	},
+	"writers": {
+		"title": "Active writers",
+		"loading": "Loading writers…",
+		"articles_one": "{{formatted}} article",
+		"articles_other": "{{formatted}} articles"
 	}
 }

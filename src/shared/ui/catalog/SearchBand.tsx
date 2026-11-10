@@ -2,7 +2,8 @@ import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'rea
 import { Box, ButtonBase, IconButton, Typography } from '@mui/material';
 import { Close as CloseIcon, Search as SearchIcon } from '@mui/icons-material';
 import { visuallyHidden } from '@/shared/ui/visuallyHidden';
-import { catalog, catalogLight, colors, home, radiusPx } from '@/theme/tokens';
+import { catalog, colors, home, radiusPx } from '@/theme/tokens';
+import { CatalogBand } from './CatalogBand';
 import { focusVisibleSx } from './motion';
 
 /** Typing pauses this long before the URL (and the list) follows. Enter or "Search" applies at once. */
@@ -31,8 +32,6 @@ type SearchBandProps = {
 	/** After the suggestions, behind a thin divider (the /briefs "Post a brief" pill). */
 	trailing?: ReactNode;
 	labels: { search: string; clear: string; submit: string; try: string };
-	/** dark: night band (/agents, /briefs). light: pale indigo band with soft glows (/creators). Same layout. */
-	variant?: 'dark' | 'light';
 };
 
 const reducedMotion = () =>
@@ -41,8 +40,8 @@ const reducedMotion = () =>
 	window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /**
- * The dark search band at the top of the catalog pages (/agents, /briefs): headline, one big search field
- * (debounced, with a rotating example placeholder and a clear button) and "Try:" suggestions.
+ * The catalog band (CatalogBand) with one big search field under the headline (debounced, with a rotating
+ * example placeholder and a clear button) and "Try:" suggestions: /agents, /briefs, /creators.
  */
 export const SearchBand = ({
 	titleId,
@@ -57,9 +56,7 @@ export const SearchBand = ({
 	suggestions,
 	trailing,
 	labels,
-	variant = 'dark',
 }: SearchBandProps) => {
-	const light = variant === 'light';
 	const [text, setText] = useState(value);
 	const [example, setExample] = useState(0);
 	const timer = useRef<ReturnType<typeof setTimeout>>();
@@ -112,233 +109,127 @@ export const SearchBand = ({
 	};
 
 	return (
-		<Box
-			component="section"
-			aria-labelledby={titleId}
-			sx={{
-				position: 'relative',
-				overflow: 'hidden',
-				bgcolor: light ? catalogLight.bg : home.night,
-				color: light ? 'ink' : colors.white,
-				...(light && { borderBottom: `1px solid ${catalogLight.border}` }),
-			}}
-		>
+		<CatalogBand titleId={titleId} title={title} text={subtitle} badge={badge}>
 			<Box
-				aria-hidden="true"
+				component="form"
+				role="search"
+				onSubmit={onSubmit}
 				sx={{
-					position: 'absolute',
-					inset: 0,
-					pointerEvents: 'none',
-					backgroundImage: light ? catalogLight.dots : catalog.heroDots,
-					backgroundSize: '24px 24px',
-					WebkitMaskImage: catalog.heroDotsMask,
-					maskImage: catalog.heroDotsMask,
-				}}
-			/>
-			{light ? (
-				<>
-					<Box
-						aria-hidden="true"
-						sx={{
-							position: 'absolute',
-							left: -120,
-							top: -140,
-							width: 460,
-							height: 380,
-							borderRadius: '50%',
-							bgcolor: catalogLight.glowIndigo,
-							filter: 'blur(80px)',
-							pointerEvents: 'none',
-						}}
-					/>
-					<Box
-						aria-hidden="true"
-						sx={{
-							position: 'absolute',
-							right: -100,
-							bottom: -180,
-							width: 480,
-							height: 380,
-							borderRadius: '50%',
-							bgcolor: catalogLight.glowGold,
-							filter: 'blur(90px)',
-							pointerEvents: 'none',
-						}}
-					/>
-				</>
-			) : (
-				<Box
-					aria-hidden="true"
-					sx={{
-						position: 'absolute',
-						left: '50%',
-						bottom: -260,
-						width: 900,
-						height: 420,
-						ml: '-450px',
-						borderRadius: '50%',
-						bgcolor: catalog.heroGlow,
-						filter: 'blur(100px)',
-						pointerEvents: 'none',
-					}}
-				/>
-			)}
-			<Box
-				sx={{
-					position: 'relative',
-					maxWidth: 960,
-					mx: 'auto',
-					px: { xs: 4, sm: 6 },
-					pt: { xs: 12, md: badge ? 14 : 16 },
-					pb: { xs: 11, md: 13 },
+					width: '100%',
+					maxWidth: 760,
 					display: 'flex',
-					flexDirection: 'column',
 					alignItems: 'center',
-					gap: 5,
-					textAlign: 'center',
+					gap: 2.5,
+					py: 2,
+					pr: 2,
+					pl: 5,
+					boxSizing: 'border-box',
+					borderRadius: '18px',
+					bgcolor: colors.white,
+					boxShadow: catalog.searchShadow,
+					transition: 'box-shadow 200ms',
+					'&:focus-within': { boxShadow: catalog.searchFocus },
 				}}
 			>
-				{badge}
-				<Typography
-					id={titleId}
-					variant="h1"
-					sx={{
-						fontSize: 'clamp(38px, 5vw, 64px)',
-						lineHeight: 1,
-						fontWeight: 700,
-						letterSpacing: '-0.04em',
-						color: light ? 'ink' : colors.white,
-					}}
-				>
-					{title}
-				</Typography>
-				<Typography
-					sx={{
-						maxWidth: 560,
-						fontSize: { xs: 16, sm: 18 },
-						lineHeight: 1.5,
-						color: light ? 'bodySoft' : home.nightText,
-					}}
-				>
-					{subtitle}
-				</Typography>
+				<SearchIcon aria-hidden="true" sx={{ fontSize: 22, color: 'primary.main', flex: 'none' }} />
+				<Box component="label" htmlFor={inputId} sx={visuallyHidden}>
+					{labels.search}
+				</Box>
 				<Box
-					component="form"
-					role="search"
-					onSubmit={onSubmit}
+					ref={input}
+					component="input"
+					id={inputId}
+					type="search"
+					autoComplete="off"
+					enterKeyHint="search"
+					maxLength={maxLength}
+					value={text}
+					onChange={(event) => onType((event.target as HTMLInputElement).value)}
+					placeholder={examples[example % Math.max(exampleCount, 1)]}
 					sx={{
-						width: '100%',
-						maxWidth: 760,
-						display: 'flex',
-						alignItems: 'center',
-						gap: 2.5,
-						py: 2,
-						pr: 2,
-						pl: 5,
-						boxSizing: 'border-box',
-						borderRadius: '18px',
-						bgcolor: colors.white,
-						...(light && { border: `1px solid ${catalogLight.searchBorder}` }),
-						boxShadow: light ? catalogLight.searchShadow : catalog.searchShadow,
-						transition: 'box-shadow 200ms',
-						'&:focus-within': { boxShadow: light ? catalogLight.searchFocus : catalog.searchFocus },
+						flex: '1 1 auto',
+						minWidth: 0,
+						height: 52,
+						border: 0,
+						bgcolor: 'transparent',
+						font: 'inherit',
+						fontSize: { xs: 16, sm: 18 },
+						fontWeight: 500,
+						color: 'ink',
+						'&::placeholder': { color: catalog.placeholder, opacity: 1 },
+						'&:focus': { outline: 'none' },
+						// The browser's own clear button would duplicate ours.
+						'&::-webkit-search-cancel-button': { display: 'none' },
+					}}
+				/>
+				{text && (
+					<IconButton
+						aria-label={labels.clear}
+						onClick={clearText}
+						sx={{ flex: 'none', width: 40, height: 40, bgcolor: 'neutralSoft', color: 'body' }}
+					>
+						<CloseIcon sx={{ fontSize: 16 }} />
+					</IconButton>
+				)}
+				<ButtonBase
+					type="submit"
+					sx={{
+						display: { xs: 'none', sm: 'inline-flex' },
+						flex: 'none',
+						height: 52,
+						px: 6,
+						borderRadius: radiusPx.lg,
+						bgcolor: 'primary.main',
+						color: colors.white,
+						fontSize: 16,
+						fontWeight: 700,
+						'&:hover': { bgcolor: 'accentHover' },
+						...focusVisibleSx,
 					}}
 				>
-					<SearchIcon aria-hidden="true" sx={{ fontSize: 22, color: 'primary.main', flex: 'none' }} />
-					<Box component="label" htmlFor={inputId} sx={visuallyHidden}>
-						{labels.search}
-					</Box>
-					<Box
-						ref={input}
-						component="input"
-						id={inputId}
-						type="search"
-						autoComplete="off"
-						enterKeyHint="search"
-						maxLength={maxLength}
-						value={text}
-						onChange={(event) => onType((event.target as HTMLInputElement).value)}
-						placeholder={examples[example % Math.max(exampleCount, 1)]}
-						sx={{
-							flex: '1 1 auto',
-							minWidth: 0,
-							height: 52,
-							border: 0,
-							bgcolor: 'transparent',
-							font: 'inherit',
-							fontSize: { xs: 16, sm: 18 },
-							fontWeight: 500,
-							color: 'ink',
-							'&::placeholder': { color: catalog.placeholder, opacity: 1 },
-							'&:focus': { outline: 'none' },
-							// The browser's own clear button would duplicate ours.
-							'&::-webkit-search-cancel-button': { display: 'none' },
-						}}
-					/>
-					{text && (
-						<IconButton
-							aria-label={labels.clear}
-							onClick={clearText}
-							sx={{ flex: 'none', width: 40, height: 40, bgcolor: 'neutralSoft', color: 'body' }}
-						>
-							<CloseIcon sx={{ fontSize: 16 }} />
-						</IconButton>
-					)}
+					{labels.submit}
+				</ButtonBase>
+			</Box>
+			<Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: 2 }}>
+				<Typography component="span" sx={{ fontSize: 14, color: home.nightText }}>
+					{labels.try}
+				</Typography>
+				{suggestions.map(({ key, label, onPick }) => (
 					<ButtonBase
-						type="submit"
+						key={key}
+						onClick={onPick}
 						sx={{
-							display: { xs: 'none', sm: 'inline-flex' },
-							flex: 'none',
-							height: 52,
-							px: 6,
-							borderRadius: radiusPx.lg,
-							bgcolor: 'primary.main',
+							minHeight: 36,
+							px: 3.5,
+							border: 1,
+							borderColor: catalog.suggestionBorder,
+							borderRadius: radiusPx.pill,
+							bgcolor: catalog.suggestionBg,
 							color: colors.white,
-							fontSize: 16,
-							fontWeight: 700,
-							'&:hover': { bgcolor: 'accentHover' },
+							fontSize: 14,
+							fontWeight: 500,
+							'&:hover': { bgcolor: home.nightFillStrong },
 							...focusVisibleSx,
 						}}
 					>
-						{labels.submit}
+						{label}
 					</ButtonBase>
-				</Box>
-				<Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: 2 }}>
-					<Typography component="span" sx={{ fontSize: 14, color: light ? 'bodySoft' : home.nightText }}>
-						{labels.try}
-					</Typography>
-					{suggestions.map(({ key, label, onPick }) => (
-						<ButtonBase
-							key={key}
-							onClick={onPick}
+				))}
+				{trailing && (
+					<>
+						<Box
+							aria-hidden="true"
 							sx={{
-								minHeight: 36,
-								px: 3.5,
-								border: 1,
-								borderColor: light ? catalogLight.pillBorder : catalog.suggestionBorder,
-								borderRadius: radiusPx.pill,
-								bgcolor: light ? colors.white : catalog.suggestionBg,
-								color: light ? catalogLight.pillText : colors.white,
-								fontSize: 14,
-								fontWeight: light ? 600 : 500,
-								'&:hover': { bgcolor: light ? 'accentSoft' : home.nightFillStrong },
-								...focusVisibleSx,
+								width: '1px',
+								height: 22,
+								mx: 1.5,
+								bgcolor: catalog.suggestionBorder,
 							}}
-						>
-							{label}
-						</ButtonBase>
-					))}
-					{trailing && (
-						<>
-							<Box
-								aria-hidden="true"
-								sx={{ width: '1px', height: 22, mx: 1.5, bgcolor: light ? catalog.divider : catalog.suggestionBorder }}
-							/>
-							{trailing}
-						</>
-					)}
-				</Box>
+						/>
+						{trailing}
+					</>
+				)}
 			</Box>
-		</Box>
+		</CatalogBand>
 	);
 };

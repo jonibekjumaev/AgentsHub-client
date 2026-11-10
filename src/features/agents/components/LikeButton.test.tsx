@@ -155,6 +155,8 @@ describe('LikeButton', () => {
 		await waitFor(() => expect(client.readQuery({ query: AgentViewerQuery, variables: { productId: AGENT_ID } })).not.toBeNull());
 
 		expect(likeButton()).toHaveAttribute('aria-disabled', 'true');
+		// The tooltip is a lazy chunk: hovering before it has loaded shows nothing (this made the test flaky).
+		await waitFor(() => expect(likeButton()).toHaveAccessibleDescription('You can’t like your own agent.'));
 		await user.hover(likeButton());
 		expect(await screen.findByRole('tooltip')).toHaveTextContent('You can’t like your own agent.');
 		expect(likeButton()).toHaveAccessibleDescription('You can’t like your own agent.');

@@ -9,7 +9,7 @@ import { mediaUrl } from '@/shared/lib/media';
 import { initialsOf } from '@/shared/ui/Avatar';
 import { categoryTint } from '@/shared/ui/CategoryIcon';
 import { SearchBand, focusVisibleSx } from '@/shared/ui/catalog';
-import { catalogLight, colors, home, radiusPx } from '@/theme/tokens';
+import { colors, home, radiusPx } from '@/theme/tokens';
 import type { CreatorFilterPatch } from '../../hooks/useCreatorFilters';
 import { CREATOR_SEARCH_MAX, type CreatorFilters } from '../../lib/creatorsQuery';
 
@@ -51,7 +51,7 @@ const FaceRow = ({ stats }: { stats: Stats | undefined }) => {
 								placeItems: 'center',
 								boxSizing: 'border-box',
 								borderRadius: '50%',
-								border: `3px solid ${catalogLight.bg}`,
+								border: `3px solid ${home.night}`,
 								bgcolor: tint,
 								color: ink,
 								fontSize: 13,
@@ -68,7 +68,7 @@ const FaceRow = ({ stats }: { stats: Stats | undefined }) => {
 					);
 				})}
 			</Box>
-			<Typography component="p" sx={{ ml: 3, fontSize: 14, fontWeight: 600, color: 'bodySoft' }}>
+			<Typography component="p" sx={{ ml: 3, fontSize: 14, fontWeight: 600, color: home.nightText }}>
 				{t('creators:hero.stats', {
 					creators: t('creators:hero.creators', { count: stats.creators, formatted: format.number(stats.creators) }),
 					agents: t('creators:hero.agents', { count: stats.agents, formatted: format.number(stats.agents) }),
@@ -86,12 +86,11 @@ type CreatorsHeroProps = {
 	showBecome: boolean;
 };
 
-/** The light /creators search band (same layout as /agents): faces, headline, search, "Try:" and "+ Become a creator". */
+/** The /creators search band (the same dark band as /agents and /briefs): faces, headline, search, "Try:" and "+ Become a creator". */
 export const CreatorsHero = ({ filters, onChange, stats, showBecome }: CreatorsHeroProps) => {
 	const { t } = useTranslation(['creators', 'common']);
 	return (
 		<SearchBand
-			variant="light"
 			titleId="creators-title"
 			inputId="creators-search"
 			badge={<FaceRow stats={stats} />}
@@ -118,11 +117,11 @@ export const CreatorsHero = ({ filters, onChange, stats, showBecome }: CreatorsH
 							gap: 1.5,
 							px: 4,
 							borderRadius: radiusPx.pill,
-							bgcolor: home.footer,
-							color: colors.white,
+							bgcolor: colors.white,
+							color: home.night,
 							fontSize: 14,
 							fontWeight: 700,
-							'&:hover': { bgcolor: 'ink' },
+							'&:hover': { bgcolor: 'accentSoft' },
 							...focusVisibleSx,
 						}}
 					>

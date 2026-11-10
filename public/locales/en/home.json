@@ -4,7 +4,7 @@
 		"description": "Browse ready-made AI agents from independent creators, or post a brief and let creators come to you. Prices in USD."
 	},
 	"hero": {
-		"eyebrow": "Marketplace for AI agents",
+		"eyebrow": "Marketplace for AI agents", 
 		"title": "Grow and automate your business with <accent>AI agents.</accent>",
 		"text": "Hire ready-made agents that answer customers, find leads and handle the busywork — or post a brief and let creators build one for you.",
 		"searchLabel": "Search agents",
@@ -106,7 +106,7 @@
 		}
 	},
 	"categories": {
-		"title": "Start with the job, not the tool",
+		"title": "Agents Category",
 		"text": "Pick what you need done. The same categories work for agents and for briefs.",
 		"listLabel": "Agent categories",
 		"previous": "Previous categories",

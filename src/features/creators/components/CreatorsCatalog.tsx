@@ -7,6 +7,7 @@ import { useTranslation } from 'next-i18next';
 import { useAuth } from '@/auth';
 import { canPostBrief, newBriefHref } from '@/features/briefs';
 import { useFormat } from '@/shared/lib/format';
+import { useRefetchForMember } from '@/shared/lib/useRefetchForMember';
 import { useRouteLoading } from '@/shared/lib/useRouteLoading';
 import { AppliedChips, LoadMore, focusVisibleSx, outlineButtonSx, type AppliedChip } from '@/shared/ui/catalog';
 import { ErrorState } from '@/shared/ui/ErrorState';
@@ -87,16 +88,12 @@ export const CreatorsCatalog = () => {
 	const variables = useMemo(() => creatorsListVariables(filters), [filters]);
 	const facetVariables = useMemo(() => creatorFacetsVariables(filters), [filters]);
 
-	// The server render has no token: meFollowed and the "Following" count are asked again with it.
+	const { data, loading, error, refetch } = useQuery(CreatorsCatalogQuery, { variables });
+	const facets = useQuery(CreatorFacetsQuery, { variables: facetVariables });
+	// The server render has no token: meFollowed and the "Following" count are asked once more with it.
 	const member = status === 'member';
-	const { data, loading, error, refetch } = useQuery(CreatorsCatalogQuery, {
-		variables,
-		fetchPolicy: member ? 'cache-and-network' : 'cache-first',
-	});
-	const facets = useQuery(CreatorFacetsQuery, {
-		variables: facetVariables,
-		fetchPolicy: member ? 'cache-and-network' : 'cache-first',
-	});
+	useRefetchForMember(member, refetch);
+	useRefetchForMember(member, facets.refetch);
 	const stats = useQuery(CreatorsHeroStatsQuery);
 
 	// "Show more" opens the rest of this page; any new result set starts collapsed again.

@@ -1,7 +1,5 @@
 {
 	"list": {
-		"title": "AI agents",
-		"subtitle": "Ready-made agents from independent creators.",
 		"searchLabel": "Search agents by title",
 		"searchPlaceholder": "Search agents",
 		"sortLabel": "Sort",
@@ -14,17 +12,11 @@
 			"price-desc": "Price: high to low"
 		},
 		"resultsLabel": "Agents",
-		"count_one": "<strong>{{formatted}} agent</strong>",
-		"count_other": "<strong>{{formatted}} agents</strong>",
-		"countFiltered_one": "<strong>{{formatted}} agent</strong> matches your filters",
-		"countFiltered_other": "<strong>{{formatted}} agents</strong> match your filters",
 		"loading": "Loading agents…",
 		"errorTitle": "We couldn't load the agents"
 	},
 	"filters": {
 		"label": "Filters",
-		"open": "Filters",
-		"openWithCount": "Filters ({{count}})",
 		"close": "Close filters",
 		"showResults": "Show results",
 		"category": "Category",
@@ -39,7 +31,6 @@
 		"tagPlaceholder": "Add a tag and press Enter",
 		"tagHint": "Agents must have every tag you add.",
 		"tagLimit": "You can add up to {{max}} tags.",
-		"active": "Active filters:",
 		"remove": "Remove filter: {{label}}",
 		"clearAll": "Clear all",
 		"tagChip": "#{{tag}}",
@@ -55,13 +46,7 @@
 		"views_other": "{{formatted}} views"
 	},
 	"empty": {
-		"noResultsTitle": "No agents match your filters",
-		"noResultsText": "Try fewer filters or a different search.",
-		"clearFilters": "Clear filters",
-		"noAgentsTitle": "No agents yet",
-		"noAgentsText": "Creators haven't listed any agents. Check back soon.",
 		"pageTitle": "This page is empty",
-		"pageText": "There are fewer results than this page number.",
 		"firstPage": "Go to the first page",
 		"title": "No agent does this yet",
 		"text": "Remove a filter to widen the search, or post a brief so creators can build it for you.",
@@ -113,7 +98,6 @@
 			"profile": "View profile of @{{nick}}"
 		},
 		"contacts": {
-			"title": "Contacts",
 			"guestTitle": "Contacts are for members",
 			"guestText": "Log in to see this creator’s email and WhatsApp. It keeps creators safe from spam.",
 			"login": "Log in to contact",
@@ -123,10 +107,6 @@
 			"visible": "Visible because you are signed in.",
 			"none": "This creator hasn’t added contact details yet.",
 			"error": "We couldn’t load the contacts"
-		},
-		"questions": {
-			"title": "Questions",
-			"soon": "Questions and answers for this agent are coming soon."
 		},
 		"moreFrom": "More from @{{nick}}",
 		"errorTitle": "We couldn’t load this agent",

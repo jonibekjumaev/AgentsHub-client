@@ -7,6 +7,7 @@ import { useTranslation } from 'next-i18next';
 import { useAuth } from '@/auth';
 import { newBriefHref } from '@/features/briefs';
 import { useFormat } from '@/shared/lib/format';
+import { useRefetchForMember } from '@/shared/lib/useRefetchForMember';
 import { useRouteLoading } from '@/shared/lib/useRouteLoading';
 import { ErrorState } from '@/shared/ui/ErrorState';
 import { LoadMore, outlineButtonSx } from '@/shared/ui/catalog';
@@ -83,12 +84,10 @@ export const AgentsCatalog = () => {
 	const variables = useMemo(() => agentsListVariables(filters), [filters]);
 	const facetVariables = useMemo(() => agentFacetsVariables(filters), [filters]);
 
-	// The server render has no token, so its meLiked is empty: a member asks again with the token.
+	const { data, loading, error, refetch } = useQuery(AgentsCatalogQuery, { variables });
+	// The server render has no token, so its meLiked is empty: a member asks once more with the token.
 	const member = status === 'member';
-	const { data, loading, error, refetch } = useQuery(AgentsCatalogQuery, {
-		variables,
-		fetchPolicy: member ? 'cache-and-network' : 'cache-first',
-	});
+	useRefetchForMember(member, refetch);
 	const facets = useQuery(ProductFacetsQuery, { variables: facetVariables });
 	const everything = useQuery(ProductFacetsQuery, { variables: { input: {} } });
 
