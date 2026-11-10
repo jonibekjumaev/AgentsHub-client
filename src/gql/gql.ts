@@ -51,10 +51,10 @@ type Documents = {
     "\n\tquery VisitedAgents($input: OrdinaryInquiry!) {\n\t\tgetVisited(input: $input) {\n\t\t\tlist {\n\t\t\t\t...AgentCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": typeof types.VisitedAgentsDocument,
     "\n\tmutation Login($input: LoginInput!) {\n\t\tlogin(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n": typeof types.LoginDocument,
     "\n\tmutation Signup($input: MemberInput!) {\n\t\tsignup(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n": typeof types.SignupDocument,
-    "\n\tfragment BriefCard on Brief {\n\t\t_id\n\t\tbriefTitle\n\t\tbriefContent\n\t\tbriefCategory\n\t\tbriefStatus\n\t\tbriefBudget\n\t\tbriefDeadline\n\t\tbriefViews\n\t\tbriefComments\n\t\tcreatedAt\n\t\tclosedAt\n\t\tmemberData {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t}\n\t}\n": typeof types.BriefCardFragmentDoc,
+    "\n\tfragment BriefCard on Brief {\n\t\t_id\n\t\tbriefTitle\n\t\tbriefContent\n\t\tbriefCategory\n\t\tbriefStatus\n\t\tbriefBudget\n\t\tbriefDeadline\n\t\tbriefViews\n\t\tbriefComments\n\t\tcreatedAt\n\t\tclosedAt\n\t\tmeSaved\n\t\tmemberData {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t}\n\t}\n": typeof types.BriefCardFragmentDoc,
     "\n\tquery BriefsList($input: BriefsInquiry!) {\n\t\tgetBriefs(input: $input) {\n\t\t\tlist {\n\t\t\t\t...BriefCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": typeof types.BriefsListDocument,
     "\n\tquery BriefDetail($briefId: String!) {\n\t\tgetBrief(briefId: $briefId) {\n\t\t\t_id\n\t\t\tbriefTitle\n\t\t\tbriefContent\n\t\t\tbriefCategory\n\t\t\tbriefStatus\n\t\t\tbriefBudget\n\t\t\tbriefDeadline\n\t\t\tbriefViews\n\t\t\tbriefComments\n\t\t\tcreatedAt\n\t\t\tupdatedAt\n\t\t\tclosedAt\n\t\t\tmemberData {\n\t\t\t\t_id\n\t\t\t\tmemberNick\n\t\t\t\tmemberFullName\n\t\t\t\tmemberImage\n\t\t\t\tmemberBriefs\n\t\t\t}\n\t\t}\n\t}\n": typeof types.BriefDetailDocument,
-    "\n\tquery BriefViewer($briefId: String!) {\n\t\tgetBrief(briefId: $briefId) {\n\t\t\t_id\n\t\t\tbriefViews\n\t\t\tmemberData {\n\t\t\t\t_id\n\t\t\t\tmemberEmail\n\t\t\t\tmemberWhatsapp\n\t\t\t}\n\t\t}\n\t}\n": typeof types.BriefViewerDocument,
+    "\n\tquery BriefViewer($briefId: String!) {\n\t\tgetBrief(briefId: $briefId) {\n\t\t\t_id\n\t\t\tbriefViews\n\t\t\tmeSaved\n\t\t\tmemberData {\n\t\t\t\t_id\n\t\t\t\tmemberEmail\n\t\t\t\tmemberWhatsapp\n\t\t\t}\n\t\t}\n\t}\n": typeof types.BriefViewerDocument,
     "\n\tquery BriefFacets($input: BISearch!) {\n\t\tgetBriefFacets(input: $input) {\n\t\t\tcategories {\n\t\t\t\tvalue\n\t\t\t\tcount\n\t\t\t}\n\t\t\tbudgetTypes {\n\t\t\t\tvalue\n\t\t\t\tcount\n\t\t\t}\n\t\t\tstatuses {\n\t\t\t\tvalue\n\t\t\t\tcount\n\t\t\t}\n\t\t}\n\t}\n": typeof types.BriefFacetsDocument,
     "\n\tquery OpenBriefStats {\n\t\tgetOpenBriefStats {\n\t\t\topenNow\n\t\t\tbudgetTotal\n\t\t}\n\t}\n": typeof types.OpenBriefStatsDocument,
     "\n\tfragment MyBriefRow on Brief {\n\t\t_id\n\t\tbriefTitle\n\t\tbriefCategory\n\t\tbriefStatus\n\t\tbriefBudget\n\t\tbriefDeadline\n\t\tbriefViews\n\t\tbriefComments\n\t\tcreatedAt\n\t\tupdatedAt\n\t\tclosedAt\n\t}\n": typeof types.MyBriefRowFragmentDoc,
@@ -63,6 +63,9 @@ type Documents = {
     "\n\tquery OwnerBrief($briefId: String!) {\n\t\tgetBrief(briefId: $briefId) {\n\t\t\t_id\n\t\t\tmemberId\n\t\t\tbriefStatus\n\t\t\tbriefTitle\n\t\t\tbriefCategory\n\t\t\tbriefContent\n\t\t\tbriefBudget\n\t\t\tbriefDeadline\n\t\t\tupdatedAt\n\t\t}\n\t}\n": typeof types.OwnerBriefDocument,
     "\n\tmutation CreateBrief($input: BriefInput!) {\n\t\tcreateBrief(input: $input) {\n\t\t\t_id\n\t\t\tbriefTitle\n\t\t\tbriefStatus\n\t\t}\n\t}\n": typeof types.CreateBriefDocument,
     "\n\tmutation UpdateBrief($input: BriefUpdate!) {\n\t\tupdateBrief(input: $input) {\n\t\t\t_id\n\t\t\tbriefStatus\n\t\t\tbriefTitle\n\t\t\tbriefCategory\n\t\t\tbriefContent\n\t\t\tbriefBudget\n\t\t\tbriefDeadline\n\t\t\tupdatedAt\n\t\t}\n\t}\n": typeof types.UpdateBriefDocument,
+    "\n\tmutation SaveBrief($briefId: String!) {\n\t\tsaveBrief(briefId: $briefId) {\n\t\t\t_id\n\t\t\tmeSaved\n\t\t}\n\t}\n": typeof types.SaveBriefDocument,
+    "\n\tmutation UnsaveBrief($briefId: String!) {\n\t\tunsaveBrief(briefId: $briefId) {\n\t\t\t_id\n\t\t\tmeSaved\n\t\t}\n\t}\n": typeof types.UnsaveBriefDocument,
+    "\n\tquery SavedBriefs($input: OrdinaryInquiry!) {\n\t\tgetSavedBriefs(input: $input) {\n\t\t\tlist {\n\t\t\t\t...BriefCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": typeof types.SavedBriefsDocument,
     "\n\tfragment CommentItem on Comment {\n\t\t_id\n\t\tcommentContent\n\t\tcommentGroup\n\t\tcommentRefId\n\t\tmemberId\n\t\tcreatedAt\n\t\tmemberData {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t}\n\t}\n": typeof types.CommentItemFragmentDoc,
     "\n\tquery Comments($input: CommentsInquiry!) {\n\t\tgetComments(input: $input) {\n\t\t\tlist {\n\t\t\t\t...CommentItem\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": typeof types.CommentsDocument,
     "\n\tmutation CreateComment($input: CommentInput!) {\n\t\tcreateComment(input: $input) {\n\t\t\t...CommentItem\n\t\t}\n\t}\n": typeof types.CreateCommentDocument,
@@ -138,10 +141,10 @@ const documents: Documents = {
     "\n\tquery VisitedAgents($input: OrdinaryInquiry!) {\n\t\tgetVisited(input: $input) {\n\t\t\tlist {\n\t\t\t\t...AgentCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": types.VisitedAgentsDocument,
     "\n\tmutation Login($input: LoginInput!) {\n\t\tlogin(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n": types.LoginDocument,
     "\n\tmutation Signup($input: MemberInput!) {\n\t\tsignup(input: $input) {\n\t\t\t_id\n\t\t\tmemberType\n\t\t\taccessToken\n\t\t}\n\t}\n": types.SignupDocument,
-    "\n\tfragment BriefCard on Brief {\n\t\t_id\n\t\tbriefTitle\n\t\tbriefContent\n\t\tbriefCategory\n\t\tbriefStatus\n\t\tbriefBudget\n\t\tbriefDeadline\n\t\tbriefViews\n\t\tbriefComments\n\t\tcreatedAt\n\t\tclosedAt\n\t\tmemberData {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t}\n\t}\n": types.BriefCardFragmentDoc,
+    "\n\tfragment BriefCard on Brief {\n\t\t_id\n\t\tbriefTitle\n\t\tbriefContent\n\t\tbriefCategory\n\t\tbriefStatus\n\t\tbriefBudget\n\t\tbriefDeadline\n\t\tbriefViews\n\t\tbriefComments\n\t\tcreatedAt\n\t\tclosedAt\n\t\tmeSaved\n\t\tmemberData {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t}\n\t}\n": types.BriefCardFragmentDoc,
     "\n\tquery BriefsList($input: BriefsInquiry!) {\n\t\tgetBriefs(input: $input) {\n\t\t\tlist {\n\t\t\t\t...BriefCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": types.BriefsListDocument,
     "\n\tquery BriefDetail($briefId: String!) {\n\t\tgetBrief(briefId: $briefId) {\n\t\t\t_id\n\t\t\tbriefTitle\n\t\t\tbriefContent\n\t\t\tbriefCategory\n\t\t\tbriefStatus\n\t\t\tbriefBudget\n\t\t\tbriefDeadline\n\t\t\tbriefViews\n\t\t\tbriefComments\n\t\t\tcreatedAt\n\t\t\tupdatedAt\n\t\t\tclosedAt\n\t\t\tmemberData {\n\t\t\t\t_id\n\t\t\t\tmemberNick\n\t\t\t\tmemberFullName\n\t\t\t\tmemberImage\n\t\t\t\tmemberBriefs\n\t\t\t}\n\t\t}\n\t}\n": types.BriefDetailDocument,
-    "\n\tquery BriefViewer($briefId: String!) {\n\t\tgetBrief(briefId: $briefId) {\n\t\t\t_id\n\t\t\tbriefViews\n\t\t\tmemberData {\n\t\t\t\t_id\n\t\t\t\tmemberEmail\n\t\t\t\tmemberWhatsapp\n\t\t\t}\n\t\t}\n\t}\n": types.BriefViewerDocument,
+    "\n\tquery BriefViewer($briefId: String!) {\n\t\tgetBrief(briefId: $briefId) {\n\t\t\t_id\n\t\t\tbriefViews\n\t\t\tmeSaved\n\t\t\tmemberData {\n\t\t\t\t_id\n\t\t\t\tmemberEmail\n\t\t\t\tmemberWhatsapp\n\t\t\t}\n\t\t}\n\t}\n": types.BriefViewerDocument,
     "\n\tquery BriefFacets($input: BISearch!) {\n\t\tgetBriefFacets(input: $input) {\n\t\t\tcategories {\n\t\t\t\tvalue\n\t\t\t\tcount\n\t\t\t}\n\t\t\tbudgetTypes {\n\t\t\t\tvalue\n\t\t\t\tcount\n\t\t\t}\n\t\t\tstatuses {\n\t\t\t\tvalue\n\t\t\t\tcount\n\t\t\t}\n\t\t}\n\t}\n": types.BriefFacetsDocument,
     "\n\tquery OpenBriefStats {\n\t\tgetOpenBriefStats {\n\t\t\topenNow\n\t\t\tbudgetTotal\n\t\t}\n\t}\n": types.OpenBriefStatsDocument,
     "\n\tfragment MyBriefRow on Brief {\n\t\t_id\n\t\tbriefTitle\n\t\tbriefCategory\n\t\tbriefStatus\n\t\tbriefBudget\n\t\tbriefDeadline\n\t\tbriefViews\n\t\tbriefComments\n\t\tcreatedAt\n\t\tupdatedAt\n\t\tclosedAt\n\t}\n": types.MyBriefRowFragmentDoc,
@@ -150,6 +153,9 @@ const documents: Documents = {
     "\n\tquery OwnerBrief($briefId: String!) {\n\t\tgetBrief(briefId: $briefId) {\n\t\t\t_id\n\t\t\tmemberId\n\t\t\tbriefStatus\n\t\t\tbriefTitle\n\t\t\tbriefCategory\n\t\t\tbriefContent\n\t\t\tbriefBudget\n\t\t\tbriefDeadline\n\t\t\tupdatedAt\n\t\t}\n\t}\n": types.OwnerBriefDocument,
     "\n\tmutation CreateBrief($input: BriefInput!) {\n\t\tcreateBrief(input: $input) {\n\t\t\t_id\n\t\t\tbriefTitle\n\t\t\tbriefStatus\n\t\t}\n\t}\n": types.CreateBriefDocument,
     "\n\tmutation UpdateBrief($input: BriefUpdate!) {\n\t\tupdateBrief(input: $input) {\n\t\t\t_id\n\t\t\tbriefStatus\n\t\t\tbriefTitle\n\t\t\tbriefCategory\n\t\t\tbriefContent\n\t\t\tbriefBudget\n\t\t\tbriefDeadline\n\t\t\tupdatedAt\n\t\t}\n\t}\n": types.UpdateBriefDocument,
+    "\n\tmutation SaveBrief($briefId: String!) {\n\t\tsaveBrief(briefId: $briefId) {\n\t\t\t_id\n\t\t\tmeSaved\n\t\t}\n\t}\n": types.SaveBriefDocument,
+    "\n\tmutation UnsaveBrief($briefId: String!) {\n\t\tunsaveBrief(briefId: $briefId) {\n\t\t\t_id\n\t\t\tmeSaved\n\t\t}\n\t}\n": types.UnsaveBriefDocument,
+    "\n\tquery SavedBriefs($input: OrdinaryInquiry!) {\n\t\tgetSavedBriefs(input: $input) {\n\t\t\tlist {\n\t\t\t\t...BriefCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": types.SavedBriefsDocument,
     "\n\tfragment CommentItem on Comment {\n\t\t_id\n\t\tcommentContent\n\t\tcommentGroup\n\t\tcommentRefId\n\t\tmemberId\n\t\tcreatedAt\n\t\tmemberData {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t\tmemberFullName\n\t\t\tmemberImage\n\t\t}\n\t}\n": types.CommentItemFragmentDoc,
     "\n\tquery Comments($input: CommentsInquiry!) {\n\t\tgetComments(input: $input) {\n\t\t\tlist {\n\t\t\t\t...CommentItem\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n": types.CommentsDocument,
     "\n\tmutation CreateComment($input: CommentInput!) {\n\t\tcreateComment(input: $input) {\n\t\t\t...CommentItem\n\t\t}\n\t}\n": types.CreateCommentDocument,
@@ -353,7 +359,7 @@ export function graphql(source: "\n\tmutation Signup($input: MemberInput!) {\n\t
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n\tfragment BriefCard on Brief {\n\t\t_id\n\t\tbriefTitle\n\t\tbriefContent\n\t\tbriefCategory\n\t\tbriefStatus\n\t\tbriefBudget\n\t\tbriefDeadline\n\t\tbriefViews\n\t\tbriefComments\n\t\tcreatedAt\n\t\tclosedAt\n\t\tmemberData {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t}\n\t}\n"): (typeof documents)["\n\tfragment BriefCard on Brief {\n\t\t_id\n\t\tbriefTitle\n\t\tbriefContent\n\t\tbriefCategory\n\t\tbriefStatus\n\t\tbriefBudget\n\t\tbriefDeadline\n\t\tbriefViews\n\t\tbriefComments\n\t\tcreatedAt\n\t\tclosedAt\n\t\tmemberData {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t}\n\t}\n"];
+export function graphql(source: "\n\tfragment BriefCard on Brief {\n\t\t_id\n\t\tbriefTitle\n\t\tbriefContent\n\t\tbriefCategory\n\t\tbriefStatus\n\t\tbriefBudget\n\t\tbriefDeadline\n\t\tbriefViews\n\t\tbriefComments\n\t\tcreatedAt\n\t\tclosedAt\n\t\tmeSaved\n\t\tmemberData {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t}\n\t}\n"): (typeof documents)["\n\tfragment BriefCard on Brief {\n\t\t_id\n\t\tbriefTitle\n\t\tbriefContent\n\t\tbriefCategory\n\t\tbriefStatus\n\t\tbriefBudget\n\t\tbriefDeadline\n\t\tbriefViews\n\t\tbriefComments\n\t\tcreatedAt\n\t\tclosedAt\n\t\tmeSaved\n\t\tmemberData {\n\t\t\t_id\n\t\t\tmemberNick\n\t\t}\n\t}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -365,7 +371,7 @@ export function graphql(source: "\n\tquery BriefDetail($briefId: String!) {\n\t\
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n\tquery BriefViewer($briefId: String!) {\n\t\tgetBrief(briefId: $briefId) {\n\t\t\t_id\n\t\t\tbriefViews\n\t\t\tmemberData {\n\t\t\t\t_id\n\t\t\t\tmemberEmail\n\t\t\t\tmemberWhatsapp\n\t\t\t}\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery BriefViewer($briefId: String!) {\n\t\tgetBrief(briefId: $briefId) {\n\t\t\t_id\n\t\t\tbriefViews\n\t\t\tmemberData {\n\t\t\t\t_id\n\t\t\t\tmemberEmail\n\t\t\t\tmemberWhatsapp\n\t\t\t}\n\t\t}\n\t}\n"];
+export function graphql(source: "\n\tquery BriefViewer($briefId: String!) {\n\t\tgetBrief(briefId: $briefId) {\n\t\t\t_id\n\t\t\tbriefViews\n\t\t\tmeSaved\n\t\t\tmemberData {\n\t\t\t\t_id\n\t\t\t\tmemberEmail\n\t\t\t\tmemberWhatsapp\n\t\t\t}\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery BriefViewer($briefId: String!) {\n\t\tgetBrief(briefId: $briefId) {\n\t\t\t_id\n\t\t\tbriefViews\n\t\t\tmeSaved\n\t\t\tmemberData {\n\t\t\t\t_id\n\t\t\t\tmemberEmail\n\t\t\t\tmemberWhatsapp\n\t\t\t}\n\t\t}\n\t}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -398,6 +404,18 @@ export function graphql(source: "\n\tmutation CreateBrief($input: BriefInput!) {
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n\tmutation UpdateBrief($input: BriefUpdate!) {\n\t\tupdateBrief(input: $input) {\n\t\t\t_id\n\t\t\tbriefStatus\n\t\t\tbriefTitle\n\t\t\tbriefCategory\n\t\t\tbriefContent\n\t\t\tbriefBudget\n\t\t\tbriefDeadline\n\t\t\tupdatedAt\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation UpdateBrief($input: BriefUpdate!) {\n\t\tupdateBrief(input: $input) {\n\t\t\t_id\n\t\t\tbriefStatus\n\t\t\tbriefTitle\n\t\t\tbriefCategory\n\t\t\tbriefContent\n\t\t\tbriefBudget\n\t\t\tbriefDeadline\n\t\t\tupdatedAt\n\t\t}\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tmutation SaveBrief($briefId: String!) {\n\t\tsaveBrief(briefId: $briefId) {\n\t\t\t_id\n\t\t\tmeSaved\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation SaveBrief($briefId: String!) {\n\t\tsaveBrief(briefId: $briefId) {\n\t\t\t_id\n\t\t\tmeSaved\n\t\t}\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tmutation UnsaveBrief($briefId: String!) {\n\t\tunsaveBrief(briefId: $briefId) {\n\t\t\t_id\n\t\t\tmeSaved\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation UnsaveBrief($briefId: String!) {\n\t\tunsaveBrief(briefId: $briefId) {\n\t\t\t_id\n\t\t\tmeSaved\n\t\t}\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tquery SavedBriefs($input: OrdinaryInquiry!) {\n\t\tgetSavedBriefs(input: $input) {\n\t\t\tlist {\n\t\t\t\t...BriefCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery SavedBriefs($input: OrdinaryInquiry!) {\n\t\tgetSavedBriefs(input: $input) {\n\t\t\tlist {\n\t\t\t\t...BriefCard\n\t\t\t}\n\t\t\tmetaCounter {\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

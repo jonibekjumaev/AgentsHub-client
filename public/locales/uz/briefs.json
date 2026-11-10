@@ -188,5 +188,11 @@
 			"saveFailed": "Brief saqlanmadi",
 			"loadFailed": "Briefni yuklab boʻlmadi"
 		}
+	},
+	"save": {
+		"save": "Briefni saqlash: {{title}}",
+		"unsave": "Saqlanganlardan olib tashlash: {{title}}",
+		"label": "Saqlash",
+		"savedLabel": "Saqlangan"
 	}
 }

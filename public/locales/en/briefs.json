@@ -287,5 +287,11 @@
 			"briefFor": "Post a brief for “{{text}}”",
 			"clearAll": "Clear all filters"
 		}
+	},
+	"save": {
+		"save": "Save brief: {{title}}",
+		"unsave": "Remove from saved: {{title}}",
+		"label": "Save",
+		"savedLabel": "Saved"
 	}
 }

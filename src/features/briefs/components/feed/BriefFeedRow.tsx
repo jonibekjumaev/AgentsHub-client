@@ -19,6 +19,7 @@ import { visuallyHidden } from '@/shared/ui/visuallyHidden';
 import { briefFeed, colors, fonts, home, radiusPx } from '@/theme/tokens';
 import { deadlineState, type DeadlineState } from '../../lib/deadline';
 import { briefHref } from '../../lib/detail';
+import { SaveBriefButton } from '../SaveBriefButton';
 
 /** A small pill with a colored dot: "● Open", "● Past deadline", "● Closed". */
 const StatusPill = ({ label, colors: pill }: { label: string; colors: { bg: string; text: string; dot: string } }) => (
@@ -96,7 +97,8 @@ type BriefFeedRowProps = {
 /**
  * One brief of the /briefs feed (Upwork-style, agentshub-briefs design): status and category pills, the title
  * (the link), the full description, the facts (budget type, deadline, questions, views) and the author on the
- * left; the budget and "View brief" on the right. Wraps into one column on narrow screens.
+ * left; the budget, Save (D-47) and "View brief" on the right. Wraps into one column on narrow screens.
+ * Also the row of the saved-briefs list.
  */
 export const BriefFeedRow = ({ brief, index, guest, now }: BriefFeedRowProps) => {
 	const { t } = useTranslation('briefs');
@@ -228,25 +230,28 @@ export const BriefFeedRow = ({ brief, index, guest, now }: BriefFeedRowProps) =>
 						{fixed ? format.price(brief.briefBudget as number) : t('briefs:budget.open')}
 					</Typography>
 				</Box>
-				{/* The title is the link for keyboard and screen readers; this one is a bigger target for the mouse. */}
-				<ButtonBase
-					component={NextLink}
-					href={href}
-					tabIndex={-1}
-					aria-hidden="true"
-					sx={{
-						minHeight: 44,
-						px: 4.5,
-						borderRadius: home.radius.button,
-						bgcolor: home.footer,
-						color: colors.white,
-						fontSize: 15,
-						fontWeight: 700,
-						'&:hover': { bgcolor: 'ink' },
-					}}
-				>
-					{t('briefs:feed.view')}
-				</ButtonBase>
+				<Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+					<SaveBriefButton brief={brief} />
+					{/* The title is the link for keyboard and screen readers; this one is a bigger target for the mouse. */}
+					<ButtonBase
+						component={NextLink}
+						href={href}
+						tabIndex={-1}
+						aria-hidden="true"
+						sx={{
+							minHeight: 44,
+							px: 4.5,
+							borderRadius: home.radius.button,
+							bgcolor: home.footer,
+							color: colors.white,
+							fontSize: 15,
+							fontWeight: 700,
+							'&:hover': { bgcolor: 'ink' },
+						}}
+					>
+						{t('briefs:feed.view')}
+					</ButtonBase>
+				</Box>
 			</Box>
 		</Box>
 	);

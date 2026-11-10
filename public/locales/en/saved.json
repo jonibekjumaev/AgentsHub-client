@@ -13,5 +13,12 @@
 		"subtitle": "Agents you opened lately.",
 		"emptyTitle": "Nothing here yet",
 		"emptyText": "Agents you open show up here."
+	},
+	"briefs": {
+		"title": "Saved briefs",
+		"subtitle": "Briefs you saved to come back to. Deleted briefs drop off this list.",
+		"emptyTitle": "No saved briefs yet",
+		"emptyText": "Save a brief from the feed to keep it here.",
+		"browse": "Browse briefs"
 	}
 }

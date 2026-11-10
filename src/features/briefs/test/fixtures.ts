@@ -17,6 +17,7 @@ export const makeBrief = (patch: Partial<BriefCardFragment> = {}, index = 0) => 
 	briefComments: 3,
 	createdAt: '2026-10-19T10:00:00.000Z',
 	closedAt: null as string | null,
+	meSaved: null as boolean | null,
 	memberData: { __typename: 'Member' as const, _id: AUTHOR_ID, memberNick: 'dilnoza_bakes' },
 	...patch,
 });

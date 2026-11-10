@@ -1,12 +1,14 @@
 import type { ReactNode } from 'react';
 import type { MockedResponse } from '@apollo/client/testing';
-import { screen, within } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import mockRouter from 'next-router-mock';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type { Me } from '@/auth';
 import { CommentsQuery, briefCommentTarget, commentsVariables } from '@/features/comments';
 import { renderWithProviders } from '@/test/renderWithProviders';
 import { BriefDetailQuery, BriefViewerQuery } from '../graphql/briefs';
+import { SaveBriefMutation } from '../graphql/saved';
 import { AUTHOR_ID, BRIEF_ID, makeBriefDetail } from '../test/fixtures';
 import { BriefDetail } from './BriefDetail';
 
@@ -22,7 +24,7 @@ const commentsMock = (): MockedResponse => ({
 	result: { data: { getComments: { __typename: 'Comments', list: [], metaCounter: [{ __typename: 'TotalCounter', total: 0 }] } } },
 });
 
-const viewerMock = (): MockedResponse => ({
+const viewerMock = (meSaved: boolean | null = false): MockedResponse => ({
 	request: { query: BriefViewerQuery, variables: { briefId: BRIEF_ID } },
 	result: {
 		data: {
@@ -30,6 +32,7 @@ const viewerMock = (): MockedResponse => ({
 				__typename: 'Brief',
 				_id: BRIEF_ID,
 				briefViews: 42,
+				meSaved,
 				memberData: { __typename: 'Member', _id: AUTHOR_ID, memberEmail: 'orders@bakery.test', memberWhatsapp: '+998901234567' },
 			},
 		},
@@ -61,6 +64,52 @@ describe('BriefDetail (S4)', () => {
 		expect(await screen.findByText('No questions yet. Be the first to ask.')).toBeInTheDocument();
 		expect(screen.getByRole('link', { name: 'Log in to comment' })).toBeInTheDocument();
 		expect(screen.queryByRole('textbox', { name: /Ask a question/ })).not.toBeInTheDocument();
+	});
+
+	describe('Save (D-47)', () => {
+		const saveButton = () => screen.findByRole('button', { name: /AI agent to take WhatsApp orders for a bakery$/ });
+
+		it('a creator saves the brief; the button turns into "Saved"', async () => {
+			const user = userEvent.setup();
+			const saveMock: MockedResponse = {
+				request: { query: SaveBriefMutation, variables: { briefId: BRIEF_ID } },
+				delay: 50,
+				result: { data: { saveBrief: { __typename: 'Brief', _id: BRIEF_ID, meSaved: true } } },
+			};
+			renderWithProviders(<BriefDetail briefId={BRIEF_ID} />, {
+				mocks: [detailMock(), commentsMock(), viewerMock(false), saveMock],
+				auth: { status: 'member', me: creator },
+			});
+
+			const save = await saveButton();
+			await waitFor(() => expect(save).not.toHaveAttribute('aria-disabled'));
+			expect(save).toHaveAccessibleName('Save brief: AI agent to take WhatsApp orders for a bakery');
+			expect(save).toHaveTextContent('Save');
+
+			await user.click(save);
+			const saved = screen.getByRole('button', { name: 'Remove from saved: AI agent to take WhatsApp orders for a bakery' });
+			expect(saved).toHaveAttribute('aria-pressed', 'true');
+			expect(saved).toHaveTextContent('Saved');
+		});
+
+		it('a guest sees the button; it sends them to login and back', async () => {
+			const user = userEvent.setup();
+			renderWithProviders(<BriefDetail briefId={BRIEF_ID} />, { mocks: [detailMock(), commentsMock()], auth: { status: 'guest' } });
+
+			await user.click(await saveButton());
+			expect(mockRouter.asPath).toBe(`/login?next=${encodeURIComponent(`/briefs/${BRIEF_ID}`)}`);
+		});
+
+		it('the author of the brief gets no Save button', async () => {
+			const author = { ...creator, _id: AUTHOR_ID, memberType: 'USER' } as Me;
+			renderWithProviders(<BriefDetail briefId={BRIEF_ID} />, {
+				mocks: [detailMock(), commentsMock(), viewerMock(false)],
+				auth: { status: 'member', me: author },
+			});
+
+			expect(await screen.findByRole('heading', { level: 1 })).toBeInTheDocument();
+			expect(screen.queryByRole('button', { name: /Save brief/ })).not.toBeInTheDocument();
+		});
 	});
 
 	it('keeps a closed brief readable, with its comments but no comment box (D-30)', async () => {

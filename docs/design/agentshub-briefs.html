@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgentsHub — Briefs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:#101828;background:#F6F7F9}
+a{color:#3730A3;text-decoration:none}a:hover{color:#312E81}
+.ah-display{font-family:'Bricolage Grotesque',Inter,system-ui,sans-serif}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #818CF8;outline-offset:3px}
+.ah-search-input::placeholder{color:#98A2B3}
+.ah-search-input:focus{outline:none}
+.ah-search-box:focus-within{box-shadow:0 0 0 4px rgba(129,140,248,0.45),0 24px 60px rgba(8,6,40,0.35)}
+.ah-rail{scrollbar-width:none}.ah-rail::-webkit-scrollbar{display:none}
+.ah-clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.ah-brief{transition:background 0.2s}.ah-brief:hover{background:#FAFAFF}.ah-brief-link:hover{text-decoration:underline;text-underline-offset:3px}
+.ah-grid3>*{min-width:0}
+@media (max-width: 1024px){.ah-grid3{grid-template-columns:repeat(2,minmax(0,1fr)) !important}}
+@media (max-width: 640px){.ah-grid3{grid-template-columns:1fr !important}.ah-hide-sm{display:none !important}}
+@keyframes ahPopA{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes ahPopB{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+.ah-pop-a{animation:ahPopA .5s cubic-bezier(.2,.7,.2,1) both}
+.ah-pop-b{animation:ahPopB .5s cubic-bezier(.2,.7,.2,1) both}
+@keyframes ahBlink{0%,100%{opacity:1}50%{opacity:.35}}
+.ah-live{animation:ahBlink 1.6s ease-in-out infinite}
+@media (prefers-reduced-motion: reduce){.ah-pop-a,.ah-pop-b,.ah-live{animation:none}}
+</style>
+</head>
+<body>
+<!-- AgentsHub /briefs page design reference (Upwork-style feed with the Save button, D-47). The small script at
+     the bottom only renders this mockup; in the real Next.js app, rebuild each section as React components. -->
+<div id="app"></div>
+<script type="text/x-template" id="dc-template">
+<div style="min-height: 100vh; background: #F6F7F9; font-family: Inter, system-ui, sans-serif; color: #101828">
+
+  <header style="background: #FFFFFF; border-bottom: 1px solid #E6E8EC">
+    <nav aria-label="Main" style="max-width: 1240px; margin: 0 auto; padding: 16px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 36px">
+        <a href="#" class="ah-display" style="font-size: 24px; font-weight: 800; letter-spacing: -0.03em; color: #101828">AgentsHub</a>
+        <div style="display: flex; flex-wrap: wrap; gap: 26px; font-size: 16px; font-weight: 500">
+          <a href="#" style="color: #344054">Agents</a>
+          <a href="#" aria-current="page" style="color: #4338CA; font-weight: 700">Briefs</a>
+          <a href="#" style="color: #344054">Creators</a>
+          <a href="#" style="color: #344054">Community</a>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px">
+        <a href="#" style="min-height: 44px; display: flex; align-items: center; padding: 0 20px; border: 1px solid #E4E7EC; border-radius: 10px; background: #FFFFFF; font-size: 16px; font-weight: 600; color: #101828">Log in</a>
+        <a href="#" style="min-height: 44px; display: flex; align-items: center; padding: 0 20px; border-radius: 10px; background: #4338CA; font-size: 16px; font-weight: 700; color: #FFFFFF">Sign up</a>
+      </div>
+    </nav>
+  </header>
+
+  <section aria-labelledby="briefs-title" style="position: relative; overflow: hidden; background: #1E1B4B; color: #FFFFFF">
+    <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(rgba(199,210,254,0.16) 1px, transparent 1.4px); background-size: 24px 24px; -webkit-mask-image: radial-gradient(ellipse 70% 90% at 50% 0%, #000 20%, transparent 80%); mask-image: radial-gradient(ellipse 70% 90% at 50% 0%, #000 20%, transparent 80%)"></div>
+    <div aria-hidden="true" style="position: absolute; left: 50%; bottom: -260px; width: 900px; height: 420px; margin-left: -450px; border-radius: 50%; background: rgba(99,102,241,0.35); filter: blur(100px)"></div>
+    <div style="position: relative; max-width: 960px; margin: 0 auto; padding: 56px 24px 52px; display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center">
+      <span style="display: flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: rgba(18,183,106,0.16); border: 1px solid rgba(110,231,183,0.35); font-size: 14px; font-weight: 600; color: #D1FADF">
+        <span class="ah-live" style="width: 8px; height: 8px; border-radius: 50%; background: #32D583"></span>
+        {{liveCount}} briefs open now, {{budgetTotal}} in posted budgets
+      </span>
+      <h1 id="briefs-title" class="ah-display" style="margin: 0; font-size: clamp(38px, 5vw, 64px); line-height: 1; font-weight: 700; letter-spacing: -0.04em; color: #FFFFFF">Agents businesses want built</h1>
+      <p style="margin: 0; max-width: 560px; font-size: 18px; line-height: 1.5; color: #C7D2FE">Read what businesses need, ask questions in the comments, then reach out with an offer.</p>
+      <form role="search" onSubmit="{{noSubmit}}" class="ah-search-box" style="width: 100%; max-width: 760px; display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 20px; box-sizing: border-box; border-radius: 18px; background: #FFFFFF; box-shadow: 0 24px 60px rgba(8,6,40,0.35); transition: box-shadow 0.2s">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4338CA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+        <label for="brief-search" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap">Search briefs</label>
+        <input id="brief-search" class="ah-search-input" type="search" autocomplete="off" value="{{q}}" onInput="{{onQ}}" placeholder="{{placeholder}}" style="flex: 1 1 auto; min-width: 0; height: 52px; border: 0; background: transparent; font: 500 18px Inter, sans-serif; color: #101828">
+        <sc-if value="{{hasQ}}" hint-placeholder-val="{{ false }}">
+          <button type="button" aria-label="Clear search" onClick="{{clearQ}}" style="flex: 0 0 auto; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: #F2F4F7; color: #344054; cursor: pointer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+          </button>
+        </sc-if>
+        <button type="submit" class="ah-hide-sm" style="flex: 0 0 auto; height: 52px; padding: 0 24px; border: 0; border-radius: 12px; background: #4338CA; font: 700 16px Inter, sans-serif; color: #FFFFFF; cursor: pointer">Search</button>
+      </form>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px">
+        <span style="font-size: 14px; color: #C7D2FE">Try:</span>
+        <sc-for list="{{suggestions}}" as="s" hint-placeholder-count="4">
+          <button type="button" onClick="{{s.pick}}" style="min-height: 36px; padding: 0 14px; border: 1px solid rgba(199,210,254,0.35); border-radius: 999px; background: rgba(255,255,255,0.08); font: 500 14px Inter, sans-serif; color: #FFFFFF; cursor: pointer">{{s.label}}</button>
+        </sc-for>
+        <span aria-hidden="true" style="width: 1px; height: 22px; margin: 0 6px; background: rgba(199,210,254,0.35)"></span>
+        <a href="#" style="min-height: 36px; display: flex; align-items: center; gap: 6px; padding: 0 16px; border-radius: 999px; background: #FFFFFF; font-size: 14px; font-weight: 700; color: #1E1B4B">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+          Post a brief
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div style="position: sticky; top: 0; z-index: 5; background: rgba(246,247,249,0.92); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid #E4E7EC">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 14px 24px; display: flex; flex-direction: column; gap: 12px">
+      <div class="ah-rail" role="group" aria-label="Category" style="display: flex; gap: 8px; overflow-x: auto; padding: 2px">
+        <sc-for list="{{catPills}}" as="c" hint-placeholder-count="9">
+          <button type="button" aria-pressed="{{c.pressed}}" disabled="{{c.disabled}}" onClick="{{c.toggle}}" style="flex: 0 0 auto; min-height: 42px; display: flex; align-items: center; gap: 8px; padding: 0 14px 0 8px; border-radius: 999px; border: 1px solid {{c.border}}; background: {{c.bg}}; font: 600 14px Inter, sans-serif; color: {{c.fg}}; opacity: {{c.opacity}}; cursor: pointer; transition: background 0.2s, border-color 0.2s, color 0.2s">
+            <span style="width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: {{c.iconBg}}; color: {{c.ink}}">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{c.d1}}"></path><path d="{{c.d2}}"></path></svg>
+            </span>
+            {{c.label}}
+            <span style="min-width: 22px; padding: 2px 7px; box-sizing: border-box; border-radius: 999px; background: {{c.countBg}}; font-size: 12px; font-weight: 700; color: {{c.countFg}}">{{c.count}}</span>
+          </button>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+          <div role="tablist" aria-label="Brief status" style="display: flex; padding: 3px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E4E7EC">
+            <sc-for list="{{statusTabs}}" as="t" hint-placeholder-count="2">
+              <button type="button" role="tab" aria-selected="{{t.selected}}" onClick="{{t.pick}}" style="min-height: 32px; padding: 0 12px; border: 0; border-radius: 7px; background: {{t.bg}}; font: 700 14px Inter, sans-serif; color: {{t.fg}}; cursor: pointer; transition: background 0.2s, color 0.2s">{{t.label}} <span style="font-weight: 500; opacity: 0.75">{{t.count}}</span></button>
+            </sc-for>
+          </div>
+          <span aria-hidden="true" class="ah-hide-sm" style="width: 1px; height: 26px; background: #D0D5DD; margin: 0 4px"></span>
+          <div role="group" aria-label="Budget" style="display: flex; flex-wrap: wrap; gap: 6px">
+            <sc-for list="{{budgetChips}}" as="p" hint-placeholder-count="2">
+              <button type="button" aria-pressed="{{p.pressed}}" disabled="{{p.disabled}}" onClick="{{p.toggle}}" style="min-height: 38px; padding: 0 12px; border-radius: 10px; border: 1px solid {{p.border}}; background: {{p.bg}}; font: 600 14px Inter, sans-serif; color: {{p.fg}}; opacity: {{p.opacity}}; cursor: pointer; transition: background 0.2s, color 0.2s">{{p.label}} <span style="font-weight: 500; opacity: 0.75">{{p.count}}</span></button>
+            </sc-for>
+          </div>
+          <button type="button" role="switch" aria-checked="{{hidePastStr}}" onClick="{{toggleHidePast}}" style="min-height: 38px; display: flex; align-items: center; gap: 10px; padding: 0 12px; border: 1px solid #E4E7EC; border-radius: 10px; background: #FFFFFF; font: 600 14px Inter, sans-serif; color: #344054; cursor: pointer">
+            <span aria-hidden="true" style="position: relative; width: 34px; height: 20px; border-radius: 999px; background: {{switchBg}}; transition: background 0.2s">
+              <span style="position: absolute; top: 2px; left: {{knobLeft}}; width: 16px; height: 16px; border-radius: 50%; background: #FFFFFF; transition: left 0.2s"></span>
+            </span>
+            Hide past deadline
+          </button>
+        </div>
+        <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #475467">Sort
+          <select value="{{sort}}" onChange="{{onSort}}" style="min-height: 38px; padding: 0 12px; border: 1px solid #E4E7EC; border-radius: 10px; background: #FFFFFF; font: 600 14px Inter, sans-serif; color: #101828; cursor: pointer">
+            <option value="newest">Newest</option>
+            <option value="budget">Highest budget</option>
+            <option value="deadline">Deadline soonest</option>
+            <option value="discussed">Most discussed</option>
+          </select>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <main style="max-width: 1240px; margin: 0 auto; padding: 28px 24px 96px; display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px">
+      <p aria-live="polite" style="margin: 0; font-size: 16px; color: #475467"><b class="ah-display" style="font-size: 22px; letter-spacing: -0.02em; color: #101828">{{resultCount}}</b> {{resultWord}}{{queryNote}}</p>
+      <sc-if value="{{hasApplied}}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+          <sc-for list="{{applied}}" as="f" hint-placeholder-count="2">
+            <button type="button" onClick="{{f.remove}}" aria-label="Remove filter {{f.label}}" style="min-height: 34px; display: flex; align-items: center; gap: 6px; padding: 0 8px 0 12px; border: 0; border-radius: 999px; background: #EEF0FF; font: 600 13px Inter, sans-serif; color: #3730A3; cursor: pointer">
+              {{f.label}}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+            </button>
+          </sc-for>
+          <button type="button" onClick="{{clearAll}}" style="min-height: 34px; padding: 0 10px; border: 0; background: transparent; font: 700 13px Inter, sans-serif; color: #475467; text-decoration: underline; cursor: pointer">Clear all</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{hasHidden}}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{toggleHidePast}}" style="min-height: 34px; padding: 0 4px; border: 0; background: transparent; font: 600 13px Inter, sans-serif; color: #667085; text-decoration: underline; cursor: pointer">{{hiddenNote}}</button>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{hasResults}}" hint-placeholder-val="{{ true }}">
+      <ol style="margin: 0; padding: 0; list-style: none; border-radius: 22px; background: #FFFFFF; border: 1px solid #E4E7EC; overflow: hidden">
+        <sc-for list="{{visible}}" as="b" hint-placeholder-count="5">
+          <li class="{{b.cls}} ah-brief" style="animation-delay: {{b.delay}}; border-top: {{b.divider}}; opacity: {{b.dim}}">
+            <article style="display: flex; flex-wrap: wrap; gap: 20px 40px; padding: 26px 28px">
+              <div style="flex: 999 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+                <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px">
+                  <span style="display: flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; background: {{b.statusBg}}; font-size: 12px; font-weight: 700; color: {{b.statusFg}}"><span style="width: 6px; height: 6px; border-radius: 50%; background: {{b.statusDot}}"></span>{{b.statusLabel}}</span>
+                  <span style="display: flex; align-items: center; gap: 6px; padding: 3px 10px 3px 4px; border-radius: 999px; background: {{b.tint}}; font-size: 12px; font-weight: 700; color: {{b.inkText}}">
+                    <span style="width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #FFFFFF; color: {{b.ink}}">
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{b.d1}}"></path><path d="{{b.d2}}"></path></svg>
+                    </span>
+                    {{b.cat}}
+                  </span>
+                  <span style="font-size: 13px; color: #667085">Posted {{b.when}}</span>
+                </div>
+                <h2 class="ah-display" style="margin: 0; font-size: 23px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em"><a href="#" class="ah-brief-link" style="color: #101828">{{b.title}}</a></h2>
+                <p style="margin: 0; max-width: 760px; font-size: 16px; line-height: 1.55; color: #344054">{{b.body}}</p>
+                <dl style="margin: 4px 0 0; display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 14px">
+                  <div style="display: flex; align-items: center; gap: 6px">
+                    <dt style="display: flex; color: #667085"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="13" rx="2"></rect><path d="M12 10v5M9.5 12.5h5"></path></svg><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Budget type</span></dt>
+                    <dd style="margin: 0; font-weight: 600; color: #344054">{{b.budgetKind}}</dd>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 6px">
+                    <dt style="display: flex; color: {{b.dueFg}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Deadline</span></dt>
+                    <dd style="margin: 0; font-weight: 600; color: {{b.dueFg}}">{{b.dueLong}}</dd>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 6px">
+                    <dt style="display: flex; color: #667085"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"></path></svg><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Questions</span></dt>
+                    <dd style="margin: 0; font-weight: 600; color: #344054">{{b.commentsLabel}}</dd>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 6px">
+                    <dt style="display: flex; color: #667085"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Views</span></dt>
+                    <dd style="margin: 0; font-weight: 600; color: #344054">{{b.viewsLabel}}</dd>
+                  </div>
+                </dl>
+                <div style="display: flex; align-items: center; gap: 10px; margin-top: 6px">
+                  <span style="flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #EEF0FF; font-size: 11px; font-weight: 800; color: #3730A3">{{b.initials}}</span>
+                  <span style="font-size: 14px; font-weight: 600; color: #101828">{{b.who}}</span>
+                  <span style="display: flex; align-items: center; gap: 5px; font-size: 13px; color: #667085">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11h14v10H5z"></path><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
+                    Contact after sign-in
+                  </span>
+                </div>
+              </div>
+              <div style="flex: 1 0 200px; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; gap: 18px; text-align: right">
+                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px">
+                  <span style="font-size: 13px; color: #667085">Budget</span>
+                  <span class="ah-display" style="font-size: 30px; line-height: 1; font-weight: 800; letter-spacing: -0.03em; color: {{b.budgetFg}}">{{b.budgetLabel}}</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <button type="button" aria-label="{{b.saveLabel}}" aria-pressed="{{b.savedStr}}" onClick="{{b.toggleSave}}" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 1px solid {{b.saveBorder}}; border-radius: 12px; background: {{b.saveBg}}; color: {{b.saveFg}}; cursor: pointer; transition: background 0.2s, color 0.2s">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="{{b.saveFill}}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4Z"></path></svg>
+                  </button>
+                  <a href="#" style="min-height: 44px; display: flex; align-items: center; padding: 0 18px; border-radius: 12px; background: #101828; font-size: 15px; font-weight: 700; color: #FFFFFF">View brief</a>
+                </div>
+              </div>
+            </article>
+          </li>
+        </sc-for>
+        <li style="border-top: 1px solid #EEF0F4; background: #FAFAFF">
+          <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; padding: 22px 28px">
+            <span style="display: flex; flex-direction: column; gap: 4px">
+              <span class="ah-display" style="font-size: 20px; font-weight: 700; letter-spacing: -0.015em">Need an agent built?</span>
+              <span style="font-size: 15px; color: #475467">Describe the job in a brief. Creators who build custom agents will see it today.</span>
+            </span>
+            <a href="#" style="min-height: 44px; display: flex; align-items: center; padding: 0 20px; border-radius: 12px; background: #4338CA; font-size: 15px; font-weight: 700; color: #FFFFFF">Post a brief</a>
+          </div>
+        </li>
+      </ol>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 14px; padding-top: 12px">
+        <span style="font-size: 14px; color: #475467">Showing {{shownCount}} of {{resultCount}}</span>
+        <div aria-hidden="true" style="width: 220px; height: 4px; border-radius: 999px; background: #E4E7EC; overflow: hidden">
+          <div style="width: {{progress}}; height: 100%; border-radius: 999px; background: #4338CA; transition: width 0.4s ease"></div>
+        </div>
+        <sc-if value="{{hasMore}}" hint-placeholder-val="{{ false }}">
+          <button type="button" onClick="{{loadMore}}" style="min-height: 48px; padding: 0 26px; border: 1px solid #D0D5DD; border-radius: 12px; background: #FFFFFF; font: 700 15px Inter, sans-serif; color: #101828; cursor: pointer">Show {{moreCount}} more</button>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{noResults}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 72px 24px; text-align: center; border-radius: 26px; background: #FFFFFF; border: 1.5px dashed #A5ACF0">
+        <span style="width: 60px; height: 60px; border-radius: 18px; display: flex; align-items: center; justify-content: center; background: #EEF0FF; color: #4338CA">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6M9 15h6"></path></svg>
+        </span>
+        <h2 class="ah-display" style="margin: 0; font-size: 30px; line-height: 1.1; font-weight: 700; letter-spacing: -0.025em">{{emptyTitle}}</h2>
+        <p style="margin: 0; max-width: 460px; font-size: 16px; line-height: 1.55; color: #475467">{{emptyBody}}</p>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 6px">
+          <a href="#" style="min-height: 48px; display: flex; align-items: center; padding: 0 22px; border-radius: 12px; background: #4338CA; font-size: 15px; font-weight: 700; color: #FFFFFF">Post a brief{{briefSuffix}}</a>
+          <button type="button" onClick="{{clearAll}}" style="min-height: 48px; padding: 0 22px; border: 1px solid #D0D5DD; border-radius: 12px; background: #FFFFFF; font: 700 15px Inter, sans-serif; color: #101828; cursor: pointer">Clear all filters</button>
+        </div>
+      </div>
+    </sc-if>
+  </main>
+
+  <footer style="background: #101828; color: #CBD5E1">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 32px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; font-size: 14px">
+      <span class="ah-display" style="font-size: 22px; font-weight: 800; letter-spacing: -0.03em; color: #FFFFFF">AgentsHub</span>
+      <span style="display: flex; flex-wrap: wrap; gap: 20px">
+        <a href="#" style="color: #CBD5E1">Agents</a><a href="#" style="color: #CBD5E1">Briefs</a><a href="#" style="color: #CBD5E1">Creators</a><a href="#" style="color: #CBD5E1">FAQ</a>
+      </span>
+      <span style="color: #98A2B3">© 2026 AgentsHub. All prices in USD.</span>
+    </div>
+  </footer>
+</div>
+</script>
+
+<script>
+(function () {
+  var pending = false, comp, tplRoot, app;
+  function DCLogic(props) {}
+  window.DCLogic = class {
+    constructor(props) { this.props = props || {}; this.state = {}; }
+    setState(p) {
+      var patch = typeof p === 'function' ? p(this.state, this.props) : p;
+      this.state = Object.assign({}, this.state, patch);
+      schedule();
+    }
+    forceUpdate() { schedule(); }
+  };
+  function schedule() {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(function () { pending = false; render(); });
+  }
+  function lookup(path, scope) {
+    path = path.trim();
+    if (path === 'true') return true;
+    if (path === 'false') return false;
+    if (/^-?\d+(\.\d+)?$/.test(path)) return Number(path);
+    var parts = path.split('.'), v = scope;
+    for (var i = 0; i < parts.length; i++) { if (v == null) return undefined; v = v[parts[i]]; }
+    return v;
+  }
+  function interp(str, scope) {
+    return str.replace(/\{\{([^}]*)\}\}/g, function (_, p) { var v = lookup(p, scope); return v == null ? '' : String(v); });
+  }
+  var WHOLE = /^\s*\{\{([^}]*)\}\}\s*$/;
+  function renderChildren(tpl, scope, out) {
+    tpl.childNodes.forEach(function (n) { renderNode(n, scope, out); });
+  }
+  function renderNode(n, scope, out) {
+    if (n.nodeType === 3) { out.push(document.createTextNode(interp(n.nodeValue, scope))); return; }
+    if (n.nodeType !== 1) return;
+    var tag = n.localName;
+    if (tag === 'sc-for') {
+      var list = lookup((n.getAttribute('list') || '').replace(/[{}]/g, ''), scope) || [];
+      var as = n.getAttribute('as') || 'item';
+      list.forEach(function (item, i) {
+        var s = Object.create(scope); s[as] = item; s.$index = i;
+        renderChildren(n, s, out);
+      });
+      return;
+    }
+    if (tag === 'sc-if') {
+      if (lookup((n.getAttribute('value') || '').replace(/[{}]/g, ''), scope)) renderChildren(n, scope, out);
+      return;
+    }
+    var el = document.createElementNS(n.namespaceURI, n.localName);
+    el.__on = {};
+    Array.prototype.forEach.call(n.attributes, function (a) {
+      if (a.name.indexOf('hint-') === 0) return;
+      var m = a.value.match(WHOLE);
+      if (a.name === 'ref' && m) { el.__ref = lookup(m[1], scope); return; }
+      if (a.name.indexOf('on') === 0 && m) { el.__on[a.name.slice(2)] = lookup(m[1], scope); return; }
+      if (m) { var v = lookup(m[1], scope); if (v === undefined || v === null || v === false) return; }
+      el.setAttribute(a.name, interp(a.value, scope));
+    });
+    var kids = [];
+    renderChildren(n, scope, kids);
+    kids.forEach(function (k) { el.appendChild(k); });
+    out.push(el);
+  }
+  function bind(real, fresh) {
+    var prev = real.__onKeys || [];
+    prev.forEach(function (k) { if (!fresh.__on || !(k in fresh.__on)) real['on' + k] = null; });
+    var keys = Object.keys(fresh.__on || {});
+    keys.forEach(function (k) { real['on' + k] = fresh.__on[k]; });
+    real.__onKeys = keys;
+    if (fresh.__ref) fresh.__ref.current = real;
+  }
+  function bindTree(el) {
+    if (el.nodeType !== 1) return;
+    bind(el, el);
+    el.childNodes.forEach(bindTree);
+  }
+  function morphNode(r, n) {
+    if (r.nodeType !== n.nodeType || r.nodeName !== n.nodeName) { r.parentNode.replaceChild(n, r); bindTree(n); return; }
+    if (r.nodeType === 3) { if (r.nodeValue !== n.nodeValue) r.nodeValue = n.nodeValue; return; }
+    var live = r.getAttribute && r.getAttribute('data-live');
+    Array.prototype.slice.call(r.attributes).forEach(function (a) { if (!n.hasAttribute(a.name)) r.removeAttribute(a.name); });
+    Array.prototype.forEach.call(n.attributes, function (a) {
+      if (live && a.name === 'style') return;
+      if (r.getAttribute(a.name) !== a.value) r.setAttribute(a.name, a.value);
+    });
+    if ((r.tagName === 'INPUT' || r.tagName === 'TEXTAREA' || r.tagName === 'SELECT') && n.hasAttribute('value') && r.value !== n.getAttribute('value') && (document.activeElement !== r || r.type === 'range')) r.value = n.getAttribute('value');
+    bind(r, n);
+    morphChildren(r, n);
+  }
+  function morphChildren(rp, np) {
+    var r = Array.prototype.slice.call(rp.childNodes), n = Array.prototype.slice.call(np.childNodes);
+    for (var i = 0; i < n.length; i++) {
+      if (i < r.length) morphNode(r[i], n[i]);
+      else { rp.appendChild(n[i]); bindTree(n[i]); }
+    }
+    for (var j = n.length; j < r.length; j++) rp.removeChild(r[j]);
+  }
+  function render() {
+    var vals = comp.renderVals();
+    var out = [];
+    renderChildren(tplRoot, vals, out);
+    var holder = document.createElement('div');
+    out.forEach(function (x) { holder.appendChild(x); });
+    morphChildren(app, holder);
+  }
+  window.__mountDC = function (Component) {
+    var t = document.createElement('template');
+    t.innerHTML = document.getElementById('dc-template').textContent;
+    tplRoot = t.content;
+    app = document.getElementById('app');
+    comp = new Component({ animate: false });
+    render();
+    if (comp.componentDidMount) comp.componentDidMount();
+    if (app.querySelector('article[data-live]')) startCarousel();
+  };
+  function startCarousel() {
+    var reduced = false;
+    try { reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    var R = 2000, step = 8.6, n = 10, span = step * n, offset = 0, last = performance.now();
+    function tick(now) {
+      var dt = Math.min((now - last) / 1000, 0.1); last = now;
+      if (!reduced && !comp.state.paused) {
+        offset += 3 * dt;
+        var cards = app.querySelectorAll('article[data-live]');
+        cards.forEach(function (el, i) {
+          var t = (((offset + (i - (n - 1) / 2) * step + span / 2) % span) + span) % span - span / 2;
+          var r = t * Math.PI / 180;
+          el.style.transform = 'translate(' + (R * Math.sin(r)).toFixed(1) + 'px, ' + (R * (1 - Math.cos(r))).toFixed(1) + 'px) rotate(' + t.toFixed(2) + 'deg)';
+        });
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+})();
+</script>
+
+<script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { q: '', cats: {}, budget: {}, status: 'open', hidePast: true, sort: 'newest', saved: {}, limit: 9, ph: 0, flip: false };
+  }
+  componentDidMount() {
+    var self = this;
+    this.phTimer = setInterval(function () {
+      if (!self.state.q) self.setState({ ph: self.state.ph + 1 });
+    }, 3200);
+  }
+  componentWillUnmount() {
+    clearInterval(this.phTimer);
+  }
+  change(patch) {
+    this.setState(Object.assign({ flip: !this.state.flip, limit: 9 }, patch));
+  }
+  renderVals() {
+    var self = this;
+    var st = this.state;
+    var TODAY = Date.UTC(2026, 10, 8);
+    var DAY = 86400000;
+    var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    function fmt(t) { var d = new Date(t); return MONTHS[d.getUTCMonth()] + ' ' + d.getUTCDate() + ', ' + d.getUTCFullYear(); }
+    var CAT = {
+      'Customer support': { tint: '#EEF0FF', ink: '#4338CA', inkText: '#3730A3', d1: 'M7.9 20A9 9 0 1 0 4 16.1L2 22Z', d2: 'M8 10h8M8 14h5' },
+      'Sales': { tint: '#FDECEF', ink: '#C01048', inkText: '#A11043', d1: 'M12 2a10 10 0 1 0 0 20a10 10 0 1 0 0-20', d2: 'M12 7a5 5 0 1 0 0 10a5 5 0 1 0 0-10' },
+      'Marketing': { tint: '#FFF1E6', ink: '#B54708', inkText: '#93370D', d1: 'm3 11 18-5v12L3 14v-3z', d2: 'M11.6 16.8a3 3 0 1 1-5.8-1.6' },
+      'Content': { tint: '#F4EEFF', ink: '#6927DA', inkText: '#5925DC', d1: 'M12 20h9', d2: 'M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z' },
+      'Data analysis': { tint: '#E6F4FF', ink: '#175CD3', inkText: '#1849A9', d1: 'M3 3v18h18', d2: 'M8 17v-5M13 17V8M18 17V11' },
+      'Automation': { tint: '#E6F6F4', ink: '#0E7066', inkText: '#0B5A52', d1: 'M13 2 4 14h7l-1 8 9-12h-7Z', d2: '' },
+      'Education': { tint: '#FEF7E6', ink: '#93370D', inkText: '#7A2E0E', d1: 'M2 9l10-5 10 5-10 5Z', d2: 'M6 11v5c3 2.5 9 2.5 12 0v-5' },
+      'Other': { tint: '#F0F2F5', ink: '#344054', inkText: '#344054', d1: 'M4 4h6v6H4zM14 4h6v6h-6z', d2: 'M4 14h6v6H4zM14 14h6v6h-6z' }
+    };
+    var CAT_ORDER = ['Customer support', 'Sales', 'Marketing', 'Content', 'Data analysis', 'Automation', 'Education', 'Other'];
+    var BUDGETS = { fixed: 'Fixed budget', offers: 'Open to offers' };
+
+    var all = [
+      { id: 'telegram', title: 'Telegram support bot', cat: 'Automation', body: 'I need a Telegram bot that answers customer questions about my online store.', who: '@User', when: 'last month', comments: 0, views: 0, budget: 500, deadline: Date.UTC(2027, 0, 31), order: 6, status: 'open' },
+      { id: 'shopify', title: 'Support agent for a Shopify store', cat: 'Customer support', body: 'We get about 200 order and shipping questions a day. Looking for an agent that answers them from our FAQ.', who: '@seed_ana', when: 'last month', comments: 2, views: 2, budget: 500, deadline: Date.UTC(2026, 10, 7), order: 5, status: 'open' },
+      { id: 'cart', title: 'Abandoned cart follow-ups', cat: 'Sales', body: 'An agent that writes a personal follow-up email for each abandoned cart. Open to offers on price.', who: '@seed_ana', when: 'last month', comments: 0, views: 1, budget: null, deadline: null, order: 4, status: 'open' },
+      { id: 'slack', title: 'Shipment status updates in Slack', cat: 'Automation', body: 'Pull shipment events from our carrier APIs and post short status updates to the right Slack channel.', who: '@seed_ben', when: 'last month', comments: 1, views: 1, budget: 1200, deadline: null, order: 3, status: 'open' },
+      { id: 'delay', title: 'Delivery delay analysis', cat: 'Data analysis', body: 'A weekly report on late deliveries by route and carrier, with a short explanation of the main causes.', who: '@seed_ben', when: 'last month', comments: 0, views: 1, budget: null, deadline: Date.UTC(2026, 9, 22), order: 2, status: 'open' },
+      { id: 'product', title: 'Product description writer', cat: 'Content', body: 'Write on-brand descriptions for about 400 products from a spreadsheet of specs and photos.', who: '@seed_cara', when: 'last month', comments: 1, views: 3, budget: 250.5, deadline: Date.UTC(2026, 9, 29), order: 1, status: 'open' }
+    ].map(function (b) {
+      var days = b.deadline === null ? null : Math.ceil((b.deadline - TODAY) / DAY);
+      return Object.assign({}, b, { days: days, past: days !== null && days < 0, kind: b.budget === null ? 'offers' : 'fixed' });
+    });
+
+    var q = st.q.trim().toLowerCase();
+    var anyCat = Object.keys(st.cats).some(function (k) { return st.cats[k]; });
+    var anyBudget = Object.keys(st.budget).some(function (k) { return st.budget[k]; });
+    function passStatus(b) { return b.status === st.status; }
+    function passQ(b) { return !q || (b.title + ' ' + b.body + ' ' + b.cat + ' ' + b.who).toLowerCase().indexOf(q) >= 0; }
+    function passCat(b) { return !anyCat || !!st.cats[b.cat]; }
+    function passBudget(b) { return !anyBudget || !!st.budget[b.kind]; }
+    function passPast(b) { return !st.hidePast || !b.past; }
+
+    var base = all.filter(function (b) { return passStatus(b) && passQ(b) && passCat(b) && passBudget(b); });
+    var hiddenCount = base.filter(function (b) { return !passPast(b); }).length;
+    var results = base.filter(passPast);
+    var sorters = {
+      newest: function (a, b) { return b.order - a.order; },
+      budget: function (a, b) { return (b.budget === null ? -1 : b.budget) - (a.budget === null ? -1 : a.budget); },
+      deadline: function (a, b) { function k(x) { return x.days === null ? 1e9 : x.days < 0 ? 1e8 - x.days : x.days; } return k(a) - k(b); },
+      discussed: function (a, b) { return (b.comments - a.comments) || (b.views - a.views); }
+    };
+    results.sort(sorters[st.sort]);
+
+    var pop = st.flip ? 'ah-pop-b' : 'ah-pop-a';
+    var visible = results.slice(0, st.limit).map(function (b, i) {
+      var c = CAT[b.cat];
+      var due;
+      if (b.days === null) due = { short: 'No deadline', long: 'No deadline', fg: '#344054', dot: '#98A2B3' };
+      else if (b.past) due = { short: 'Past deadline', long: 'Deadline passed ' + fmt(b.deadline), fg: '#B42318', dot: '#F04438' };
+      else if (b.days <= 7) due = { short: b.days + (b.days === 1 ? ' day left' : ' days left'), long: 'Due ' + fmt(b.deadline) + ', ' + b.days + (b.days === 1 ? ' day left' : ' days left'), fg: '#B54708', dot: '#F79009' };
+      else due = { short: 'Due ' + fmt(b.deadline), long: 'Due ' + fmt(b.deadline) + ', ' + b.days + ' days left', fg: '#067647', dot: '#12B76A' };
+      var saved = !!st.saved[b.id];
+      return Object.assign({}, b, c, {
+        cls: pop,
+        delay: Math.min(i, 8) * 0.05 + 's',
+        dim: b.past ? '0.8' : '1',
+        budgetLabel: b.budget === null ? 'Open to offers' : '$' + (b.budget % 1 ? b.budget.toFixed(2) : b.budget.toLocaleString('en-US')),
+        budgetKind: b.budget === null ? 'Open to offers' : 'Fixed budget',
+        dueShort: due.short, dueLong: due.long, dueFg: due.fg, dueDot: due.dot,
+        divider: i ? '1px solid #EEF0F4' : '0',
+        statusLabel: b.past ? 'Past deadline' : 'Open',
+        statusBg: b.past ? '#FEF3F2' : '#E8F7EF', statusFg: b.past ? '#B42318' : '#067647', statusDot: b.past ? '#F04438' : '#12B76A',
+        budgetFg: b.budget === null ? '#4338CA' : '#101828',
+        viewsLabel: b.views === 1 ? '1 view' : b.views + ' views',
+        saveBorder: saved ? '#4338CA' : '#E4E7EC', saveBg: saved ? '#4338CA' : '#FFFFFF',
+        initials: b.who.replace('@', '').replace('seed_', '').slice(0, 2).toUpperCase(),
+        commentsLabel: b.comments === 0 ? 'No questions yet' : b.comments === 1 ? '1 question' : b.comments + ' questions',
+        savedStr: saved ? 'true' : 'false',
+        saveLabel: (saved ? 'Remove from saved: ' : 'Save brief: ') + b.title,
+        saveFill: saved ? 'currentColor' : 'none',
+        saveFg: saved ? '#FFFFFF' : '#344054',
+        toggleSave: function () { var s = Object.assign({}, self.state.saved); s[b.id] = !s[b.id]; self.setState({ saved: s }); }
+      });
+    });
+
+    var catPills = [{ key: null, label: 'All' }].concat(CAT_ORDER.map(function (k) { return { key: k, label: k }; })).map(function (p) {
+      var count = all.filter(function (b) { return passStatus(b) && passQ(b) && passBudget(b) && passPast(b) && (!p.key || b.cat === p.key); }).length;
+      var on = p.key ? !!st.cats[p.key] : !anyCat;
+      var c = p.key ? CAT[p.key] : { tint: '#EEF0FF', ink: '#4338CA', d1: 'M4 4h6v6H4zM14 4h6v6h-6z', d2: 'M4 14h6v6H4zM14 14h6v6h-6z' };
+      var dead = count === 0 && !on;
+      var pill = {
+        label: p.label, count: count, pressed: on ? 'true' : 'false',
+        bg: on ? '#101828' : '#FFFFFF', fg: on ? '#FFFFFF' : '#101828', border: on ? '#101828' : '#E4E7EC',
+        iconBg: on ? '#FFFFFF' : c.tint, ink: c.ink, d1: c.d1, d2: c.d2,
+        countBg: on ? 'rgba(255,255,255,0.18)' : '#F2F4F7', countFg: on ? '#FFFFFF' : '#475467',
+        opacity: dead ? '0.45' : '1',
+        toggle: function () {
+          if (!p.key) { self.change({ cats: {} }); return; }
+          var cs = Object.assign({}, self.state.cats); cs[p.key] = !cs[p.key]; self.change({ cats: cs });
+        }
+      };
+      if (dead) pill.disabled = 'true';
+      return pill;
+    });
+
+    var budgetChips = Object.keys(BUDGETS).map(function (k) {
+      var on = !!st.budget[k];
+      var count = all.filter(function (b) { return b.kind === k && passStatus(b) && passQ(b) && passCat(b) && passPast(b); }).length;
+      var dead = count === 0 && !on;
+      var chip = {
+        label: BUDGETS[k], count: count, pressed: on ? 'true' : 'false', opacity: dead ? '0.45' : '1',
+        bg: on ? '#4338CA' : '#FFFFFF', fg: on ? '#FFFFFF' : '#344054', border: on ? '#4338CA' : '#E4E7EC',
+        toggle: function () { var bs = Object.assign({}, self.state.budget); bs[k] = !bs[k]; self.change({ budget: bs }); }
+      };
+      if (dead) chip.disabled = 'true';
+      return chip;
+    });
+
+    var statusTabs = [{ id: 'open', label: 'Open' }, { id: 'closed', label: 'Closed' }].map(function (t) {
+      var on = t.id === st.status;
+      return { label: t.label, count: all.filter(function (b) { return b.status === t.id; }).length, selected: on ? 'true' : 'false', bg: on ? '#101828' : 'transparent', fg: on ? '#FFFFFF' : '#344054', pick: function () { self.change({ status: t.id }); } };
+    });
+
+    var applied = [];
+    if (st.q.trim()) applied.push({ label: '“' + st.q.trim() + '”', remove: function () { self.change({ q: '' }); } });
+    CAT_ORDER.forEach(function (k) { if (st.cats[k]) applied.push({ label: k, remove: function () { var cs = Object.assign({}, self.state.cats); delete cs[k]; self.change({ cats: cs }); } }); });
+    Object.keys(BUDGETS).forEach(function (k) { if (st.budget[k]) applied.push({ label: BUDGETS[k], remove: function () { var bs = Object.assign({}, self.state.budget); delete bs[k]; self.change({ budget: bs }); } }); });
+
+    var placeholders = ['Telegram bot for my online store', 'Weekly report from a spreadsheet', 'Answer shipping questions', 'Product descriptions for 400 items', 'Slack updates from an API'];
+    var suggestions = ['Telegram', 'Shopify', 'Slack', 'Open to offers'].map(function (s) {
+      return { label: s, pick: function () {
+        if (s === 'Open to offers') self.change({ budget: { offers: true } });
+        else self.change({ q: s });
+      } };
+    });
+
+    var openAll = all.filter(function (b) { return b.status === 'open'; });
+    var budgetTotal = openAll.reduce(function (s, b) { return s + (b.budget || 0); }, 0);
+    var total = results.length;
+    var shownCount = visible.length;
+    var closedEmpty = st.status === 'closed';
+    return {
+      liveCount: openAll.filter(function (b) { return !b.past; }).length,
+      budgetTotal: '$' + budgetTotal.toLocaleString('en-US', { minimumFractionDigits: budgetTotal % 1 ? 2 : 0, maximumFractionDigits: 2 }),
+      q: st.q,
+      hasQ: st.q.length > 0,
+      placeholder: placeholders[st.ph % placeholders.length],
+      onQ: function (e) { self.change({ q: e.target.value }); },
+      clearQ: function () { self.change({ q: '' }); },
+      noSubmit: function (e) { if (e && e.preventDefault) e.preventDefault(); },
+      suggestions: suggestions,
+      catPills: catPills,
+      budgetChips: budgetChips,
+      statusTabs: statusTabs,
+      hidePastStr: st.hidePast ? 'true' : 'false',
+      switchBg: st.hidePast ? '#4338CA' : '#D0D5DD',
+      knobLeft: st.hidePast ? '16px' : '2px',
+      toggleHidePast: function () { self.change({ hidePast: !self.state.hidePast }); },
+      sort: st.sort,
+      onSort: function (e) { self.change({ sort: e.target.value }); },
+      resultCount: total,
+      resultWord: (total === 1 ? 'brief' : 'briefs') + (st.status === 'open' ? ' open' : ' closed'),
+      queryNote: st.q.trim() ? ' for “' + st.q.trim() + '”' : '',
+      applied: applied,
+      hasApplied: applied.length > 0,
+      clearAll: function () { self.change({ q: '', cats: {}, budget: {}, status: 'open' }); },
+      hasHidden: hiddenCount > 0,
+      hiddenNote: hiddenCount + (hiddenCount === 1 ? ' brief is' : ' briefs are') + ' past deadline. Show them',
+      hasResults: total > 0,
+      noResults: total === 0,
+      emptyTitle: closedEmpty ? 'No closed briefs yet' : 'No brief matches this',
+      emptyBody: closedEmpty ? 'When a business picks a creator and closes its brief, it appears here.' : 'Remove a filter to widen the search, or post the brief yourself.',
+      briefSuffix: st.q.trim() && !closedEmpty ? ' for “' + st.q.trim() + '”' : '',
+      visible: visible,
+      shownCount: shownCount,
+      progress: total ? Math.round(shownCount / total * 100) + '%' : '0%',
+      hasMore: shownCount < total,
+      moreCount: Math.min(6, total - shownCount),
+      loadMore: function () { self.setState({ limit: self.state.limit + 6 }); }
+    };
+  }
+}
+window.__mountDC(Component);
+</script>
+</body>
+</html>

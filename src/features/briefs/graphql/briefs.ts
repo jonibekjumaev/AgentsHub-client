@@ -1,6 +1,9 @@
 import { graphql } from '@/gql';
 
-/** One row of the /briefs list (Briefs.html). Public fields only: no contacts. */
+/**
+ * One row of the /briefs list (Briefs.html). Public fields only: no contacts. meSaved (D-47) is null in the server
+ * render (no token); BriefsCatalog asks once more with the token for a signed-in member.
+ */
 export const BriefCardFragment = graphql(`
 	fragment BriefCard on Brief {
 		_id
@@ -14,6 +17,7 @@ export const BriefCardFragment = graphql(`
 		briefComments
 		createdAt
 		closedAt
+		meSaved
 		memberData {
 			_id
 			memberNick
@@ -67,13 +71,15 @@ export const BriefDetailQuery = graphql(`
 
 /**
  * Signed-in ACTIVE members only, in the browser after auth. The token makes the API return the
- * author's contacts (D-07/D-23) and record this member's view once (OPEN briefs, never the owner's, §3.6).
+ * author's contacts (D-07/D-23), this member's meSaved (D-47) and record their view once (OPEN briefs,
+ * never the owner's, §3.6).
  */
 export const BriefViewerQuery = graphql(`
 	query BriefViewer($briefId: String!) {
 		getBrief(briefId: $briefId) {
 			_id
 			briefViews
+			meSaved
 			memberData {
 				_id
 				memberEmail

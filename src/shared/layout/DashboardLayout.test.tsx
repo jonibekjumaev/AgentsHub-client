@@ -61,6 +61,7 @@ describe('DashboardLayout', () => {
 				'Following',
 				'Profile visitors',
 				'Favorites',
+				'Saved briefs',
 				'Recently visited',
 				'Profile settings',
 				'View public profile',
@@ -75,6 +76,7 @@ describe('DashboardLayout', () => {
 				'Followers',
 				'Profile visitors',
 				'Favorites',
+				'Saved briefs',
 				'Recently visited',
 				'Profile settings',
 				'View public profile',
@@ -93,6 +95,7 @@ describe('DashboardLayout', () => {
 		expect(within(workspace).getByRole('link', { name: 'Profile visitors' })).toHaveAttribute('href', '/dashboard/visitors');
 		const library = within(sidebar).getByRole('list', { name: 'Library' });
 		expect(within(library).getByRole('link', { name: 'Recently visited' })).toHaveAttribute('href', '/dashboard/visited');
+		expect(within(library).getByRole('link', { name: 'Saved briefs' })).toHaveAttribute('href', '/dashboard/saved-briefs');
 		expect(within(sidebar).getByRole('list', { name: 'Account' })).toBeInTheDocument();
 		expect(within(sidebar).getByRole('link', { name: 'View public profile' })).toHaveAttribute('href', '/members/6ac7992dd87bde19b9216c8b');
 	});

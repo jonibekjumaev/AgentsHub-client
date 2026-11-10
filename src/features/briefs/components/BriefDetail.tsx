@@ -15,10 +15,12 @@ import { ErrorState } from '@/shared/ui/ErrorState';
 import { StatusChip } from '@/shared/ui/StatusChip';
 import { fonts, radiusPx } from '@/theme/tokens';
 import { BriefDetailQuery } from '../graphql/briefs';
+import { useBriefViewer } from '../hooks/useBriefViewer';
 import { isDeadlinePassed } from '../lib/detail';
 import { DEFAULT_BRIEF_FILTERS, briefsHref } from '../lib/listQuery';
 import { BriefBudget } from './BriefRow';
 import { BriefContacts } from './BriefContacts';
+import { SaveBriefButton } from './SaveBriefButton';
 
 type Brief = BriefDetailData['getBrief'];
 type Author = NonNullable<Brief['memberData']>;
@@ -194,6 +196,20 @@ const CreatorHint = () => {
 	);
 };
 
+/**
+ * Save / Saved (D-47). meSaved comes from the signed-in viewer query (the server render has no token), the same
+ * request that brings the contacts; until it arrives the button is inactive.
+ */
+const DetailSaveButton = ({ brief }: { brief: Brief }) => {
+	const { data } = useBriefViewer(brief._id);
+	return (
+		<SaveBriefButton
+			variant="labeled"
+			brief={{ _id: brief._id, briefTitle: brief.briefTitle, memberData: brief.memberData, meSaved: data?.getBrief.meSaved }}
+		/>
+	);
+};
+
 const DetailSkeleton = () => {
 	const { t } = useTranslation('common');
 	return (
@@ -262,9 +278,12 @@ export const BriefDetail = ({ briefId }: { briefId: string }) => {
 								)}
 							</Typography>
 						</Stack>
-						<Typography id="brief-title" variant="h1" sx={{ fontSize: { xs: 28, md: 34 }, overflowWrap: 'anywhere' }}>
-							{brief.briefTitle}
-						</Typography>
+						<Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'space-between', gap: 4 }}>
+							<Typography id="brief-title" variant="h1" sx={{ flex: '1 1 320px', minWidth: 0, fontSize: { xs: 28, md: 34 }, overflowWrap: 'anywhere' }}>
+								{brief.briefTitle}
+							</Typography>
+							<DetailSaveButton brief={brief} />
+						</Box>
 						<Facts brief={brief} />
 						{/* Plain text from the author (CLAUDE.md rule 7). */}
 						<Typography sx={{ whiteSpace: 'pre-line', overflowWrap: 'anywhere', color: 'body', lineHeight: 1.7 }}>

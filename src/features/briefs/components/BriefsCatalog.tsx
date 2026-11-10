@@ -1,11 +1,12 @@
 import { useMemo, useState } from 'react';
 import NextLink from 'next/link';
 import { useQuery } from '@apollo/client';
-import { Box, Button, ButtonBase, Link, Skeleton, Typography } from '@mui/material';
+import { Box, Button, ButtonBase, Link, Typography } from '@mui/material';
 import { DescriptionOutlined as DescriptionOutlinedIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
 import { useAuth } from '@/auth';
 import { useFormat } from '@/shared/lib/format';
+import { useRefetchForMember } from '@/shared/lib/useRefetchForMember';
 import { useRouteLoading } from '@/shared/lib/useRouteLoading';
 import { AppliedChips, LoadMore, focusVisibleSx, outlineButtonSx, type AppliedChip } from '@/shared/ui/catalog';
 import { ErrorState } from '@/shared/ui/ErrorState';
@@ -23,36 +24,8 @@ import {
 import { NEW_BRIEF_PATH, canPostBrief, newBriefHref } from '../lib/myBriefs';
 import { BriefFeedRow } from './feed/BriefFeedRow';
 import { BriefFilterBar, type BriefFacetCounts } from './feed/BriefFilterBar';
+import { FeedSkeleton, feedSx } from './feed/FeedList';
 import { BriefsHero } from './feed/BriefsHero';
-
-/** The one white container of the feed: rows are separated by thin dividers, not separate cards. */
-const feedSx = {
-	m: 0,
-	p: 0,
-	listStyle: 'none',
-	borderRadius: home.radius.card,
-	bgcolor: 'surface',
-	border: 1,
-	borderColor: 'border',
-	overflow: 'hidden',
-	'& > li + li': { borderTop: `1px solid ${briefFeed.rowDivider}` },
-} as const;
-
-const FeedSkeleton = () => {
-	const { t } = useTranslation('briefs');
-	return (
-		<Box role="status" aria-busy="true" aria-label={t('briefs:list.loading')} sx={{ ...feedSx, display: 'block' }}>
-			{Array.from({ length: 4 }, (_, index) => (
-				<Box key={index} sx={{ px: 7, py: 6.5, display: 'flex', flexDirection: 'column', gap: 2.5, borderTop: index ? `1px solid ${briefFeed.rowDivider}` : 0 }}>
-					<Skeleton variant="rounded" width={220} height={24} />
-					<Skeleton variant="rounded" width="55%" height={28} />
-					<Skeleton variant="rounded" width="85%" height={48} />
-					<Skeleton variant="rounded" width={360} height={20} />
-				</Box>
-			))}
-		</Box>
-	);
-};
 
 /** The last row of the feed: briefs are how a business gets an agent built. */
 const PostBriefRow = () => {
@@ -90,6 +63,8 @@ export const BriefsCatalog = () => {
 	const [now] = useState(() => new Date());
 
 	const { data, loading, error, refetch } = useQuery(BriefsListQuery, { variables });
+	// The server render has no token, so its meSaved is null (D-47): a member asks once more with the token.
+	useRefetchForMember(status === 'member', refetch);
 	const facets = useQuery(BriefFacetsQuery, { variables: facetVariables });
 	const withPast = useQuery(BriefFacetsQuery, { variables: withPastVariables ?? facetVariables, skip: !withPastVariables });
 	const stats = useQuery(OpenBriefStatsQuery);

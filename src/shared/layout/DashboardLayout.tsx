@@ -6,6 +6,7 @@ import { Box, Link, Typography } from '@mui/material';
 import {
 	ArticleOutlined as ArticleOutlinedIcon,
 	AssignmentOutlined as AssignmentOutlinedIcon,
+	BookmarkBorder as BookmarkBorderIcon,
 	FavoriteBorder as FavoriteBorderIcon,
 	GroupsOutlined as GroupsOutlinedIcon,
 	History as HistoryIcon,
@@ -46,6 +47,7 @@ const NAV_ICONS: Record<NavIcon, ReactNode> = {
 	following: <HowToRegOutlinedIcon aria-hidden="true" sx={iconSx} />,
 	visitors: <VisibilityOutlinedIcon aria-hidden="true" sx={iconSx} />,
 	favorites: <FavoriteBorderIcon aria-hidden="true" sx={iconSx} />,
+	savedBriefs: <BookmarkBorderIcon aria-hidden="true" sx={iconSx} />,
 	visited: <HistoryIcon aria-hidden="true" sx={iconSx} />,
 	settings: <SettingsOutlinedIcon aria-hidden="true" sx={iconSx} />,
 	members: <GroupsOutlinedIcon aria-hidden="true" sx={iconSx} />,

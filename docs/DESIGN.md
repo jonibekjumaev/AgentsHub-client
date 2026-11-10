@@ -174,6 +174,7 @@ Uploaded image replaces initials.
 | `/dashboard/agents`, `/new`, `/[id]/edit` | Dashboard.html, AgentForm.html | CREATOR |
 | `/dashboard/briefs`, `/new`, `/[id]/edit` | MyBriefs.html, BriefForm.html | USER |
 | `/dashboard/articles`, `/favorites`, `/visited`, `/follows`, `/settings` | pending | CREATOR, USER |
+| `/dashboard/saved-briefs` | agentshub-briefs.html (feed rows with Save, D-47) | CREATOR, USER |
 | `/admin/*` | pending | ADMIN |
 | `/404`, `/500`, `/faq`, `/about` | pending | public |
 

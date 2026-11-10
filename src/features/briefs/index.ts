@@ -3,6 +3,8 @@ export { BriefDetailSeo } from './components/BriefDetailSeo';
 export { BriefBudget, BriefDeadline, BriefRow } from './components/BriefRow';
 export { BriefsCatalog } from './components/BriefsCatalog';
 export { BriefsSeo } from './components/BriefsSeo';
+export { SaveBriefButton } from './components/SaveBriefButton';
+export { SavedBriefs } from './components/saved/SavedBriefs';
 export { BriefFacetsQuery, BriefsListQuery, OpenBriefStatsQuery } from './graphql/briefs';
 export { useBriefFilters } from './hooks/useBriefFilters';
 export { briefHref } from './lib/detail';

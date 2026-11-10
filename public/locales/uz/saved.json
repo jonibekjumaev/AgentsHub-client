@@ -13,5 +13,12 @@
 		"subtitle": "Yaqinda ochgan agentlaringiz.",
 		"emptyTitle": "Hali hech narsa yoʻq",
 		"emptyText": "Ochgan agentlaringiz shu yerda chiqadi."
+	},
+	"briefs": {
+		"title": "Saqlangan brieflar",
+		"subtitle": "Keyinroq qaytish uchun saqlagan brieflaringiz. Oʻchirilgan brieflar roʻyxatdan tushib qoladi.",
+		"emptyTitle": "Hali saqlangan brieflar yoʻq",
+		"emptyText": "Lentadagi briefni saqlang, u shu yerda turadi.",
+		"browse": "Brieflarni koʻrish"
 	}
 }

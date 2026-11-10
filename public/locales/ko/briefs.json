@@ -188,5 +188,11 @@
 			"saveFailed": "브리프를 저장하지 못했습니다",
 			"loadFailed": "브리프를 불러오지 못했습니다"
 		}
+	},
+	"save": {
+		"save": "브리프 저장: {{title}}",
+		"unsave": "저장 취소: {{title}}",
+		"label": "저장",
+		"savedLabel": "저장됨"
 	}
 }

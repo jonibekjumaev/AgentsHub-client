@@ -29,6 +29,7 @@ export type NavIcon =
 	| 'following'
 	| 'visitors'
 	| 'favorites'
+	| 'savedBriefs'
 	| 'visited'
 	| 'settings'
 	| 'members';
@@ -44,6 +45,7 @@ export type DashboardGroup = { key: string; titleKey: string; items: DashboardIt
 
 const FOLLOWS_PATH = '/dashboard/follows';
 export const VISITORS_PATH = '/dashboard/visitors';
+export const SAVED_BRIEFS_PATH = '/dashboard/saved-briefs';
 
 const followers: DashboardItem = {
 	href: `${FOLLOWS_PATH}?tab=followers`,
@@ -71,6 +73,8 @@ const library: DashboardGroup = {
 	titleKey: 'common:dashboardNav.groups.library',
 	items: [
 		{ href: '/dashboard/favorites', labelKey: 'common:dashboardNav.favorites', icon: 'favorites' },
+		// D-47: USER and CREATOR both save briefs (a creator keeps the leads worth answering)
+		{ href: SAVED_BRIEFS_PATH, labelKey: 'common:dashboardNav.savedBriefs', icon: 'savedBriefs' },
 		{ href: '/dashboard/visited', labelKey: 'common:dashboardNav.visited', icon: 'visited' },
 	],
 };
