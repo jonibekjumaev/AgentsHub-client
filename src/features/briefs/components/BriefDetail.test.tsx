@@ -139,6 +139,20 @@ describe('BriefDetail (S4)', () => {
 		expect(screen.getByRole('link', { name: 'Go to my agents' })).toHaveAttribute('href', '/dashboard/agents');
 	});
 
+	it('uses the feed language: status and category pills, "Open to offers" without a budget (D-04)', async () => {
+		renderWithProviders(<BriefDetail briefId={BRIEF_ID} />, {
+			mocks: [detailMock(makeBriefDetail({ briefBudget: null, briefDeadline: null })), commentsMock()],
+			auth: { status: 'guest' },
+		});
+
+		const title = await screen.findByRole('heading', { level: 1, name: 'AI agent to take WhatsApp orders for a bakery' });
+		const band = title.closest('header') as HTMLElement;
+		expect(within(band).getByText('Open')).toBeInTheDocument();
+		expect(within(band).getByText('Sales')).toBeInTheDocument();
+		expect(screen.getAllByText('Open to offers').length).toBeGreaterThan(0);
+		expect(screen.getByText('No deadline')).toBeInTheDocument();
+	});
+
 	it('marks a passed deadline on an open brief (D-05: never closed automatically)', async () => {
 		renderWithProviders(<BriefDetail briefId={BRIEF_ID} />, {
 			mocks: [detailMock(makeBriefDetail({ briefDeadline: '2020-01-10T00:00:00.000Z' })), commentsMock()],
@@ -146,5 +160,7 @@ describe('BriefDetail (S4)', () => {
 		});
 
 		expect(await screen.findByText('The deadline has passed.')).toBeInTheDocument();
+		// still OPEN (nothing closes it), shown as past its deadline
+		expect(screen.getByText('Past deadline')).toBeInTheDocument();
 	});
 });

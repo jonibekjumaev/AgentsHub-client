@@ -8,13 +8,15 @@ type SaveBriefButtonProps = {
 	brief: SaveTarget;
 	/** icon: the 44 × 44 square of the feed row (agentshub-briefs design). labeled: "Save" / "Saved" on the detail page. */
 	variant?: 'icon' | 'labeled';
+	/** labeled only: take the whole width of its box (the detail page's budget card). */
+	fullWidth?: boolean;
 };
 
 /**
  * Save / unsave a brief (D-47): a toggle button with aria-pressed. Nothing for admins or on your own brief.
  * Inactive = aria-disabled (not `disabled`), so it keeps its place in the tab order while meSaved loads.
  */
-export const SaveBriefButton = ({ brief, variant = 'icon' }: SaveBriefButtonProps) => {
+export const SaveBriefButton = ({ brief, variant = 'icon', fullWidth = false }: SaveBriefButtonProps) => {
 	const { t } = useTranslation('briefs');
 	const { hidden, saved, inactive, pending, toggle } = useSaveBrief(brief);
 	if (hidden) return null;
@@ -35,6 +37,7 @@ export const SaveBriefButton = ({ brief, variant = 'icon' }: SaveBriefButtonProp
 		return (
 			<Button
 				variant="outlined"
+				fullWidth={fullWidth}
 				startIcon={icon}
 				{...common}
 				aria-label={t(saved ? 'briefs:save.unsave' : 'briefs:save.save', { title: brief.briefTitle })}

@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react';
 import NextLink from 'next/link';
 import { Box, ButtonBase, Typography } from '@mui/material';
 import {
@@ -13,78 +12,12 @@ import { BriefStatus } from '@/gql/enums';
 import type { BriefCardFragment } from '@/gql/graphql';
 import { useFormat } from '@/shared/lib/format';
 import { initialsOf } from '@/shared/ui/Avatar';
-import { CategoryIcon, categoryTint } from '@/shared/ui/CategoryIcon';
 import { enterSx, focusVisibleSx } from '@/shared/ui/catalog';
-import { visuallyHidden } from '@/shared/ui/visuallyHidden';
-import { briefFeed, colors, fonts, home, radiusPx } from '@/theme/tokens';
-import { deadlineState, type DeadlineState } from '../../lib/deadline';
+import { briefFeed, colors, fonts, home } from '@/theme/tokens';
+import { deadlineState } from '../../lib/deadline';
 import { briefHref } from '../../lib/detail';
 import { SaveBriefButton } from '../SaveBriefButton';
-
-/** A small pill with a colored dot: "● Open", "● Past deadline", "● Closed". */
-const StatusPill = ({ label, colors: pill }: { label: string; colors: { bg: string; text: string; dot: string } }) => (
-	<Box
-		component="span"
-		sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.5, px: 2.5, py: 0.75, borderRadius: radiusPx.pill, bgcolor: pill.bg, fontSize: 12, fontWeight: 700, color: pill.text }}
-	>
-		<Box component="span" aria-hidden="true" sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: pill.dot }} />
-		{label}
-	</Box>
-);
-
-const closedPill = { bg: 'neutralSoft', text: 'body', dot: briefFeed.deadline.none.dot } as const;
-
-/** Category tint, a small white circle with the category icon, then the name. */
-const CategoryPill = ({ category }: { category: BriefCardFragment['briefCategory'] }) => {
-	const { t } = useTranslation('common');
-	const [tint, ink] = categoryTint(category);
-	return (
-		<Box
-			component="span"
-			sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.5, py: 0.75, pl: 1, pr: 2.5, borderRadius: radiusPx.pill, bgcolor: tint, fontSize: 12, fontWeight: 700, color: 'ink' }}
-		>
-			<Box component="span" aria-hidden="true" sx={{ width: 20, height: 20, display: 'grid', placeItems: 'center', borderRadius: '50%', bgcolor: colors.white, color: ink }}>
-				<CategoryIcon category={category} size={11} />
-			</Box>
-			{t(`common:enums.AgentCategory.${category}`)}
-		</Box>
-	);
-};
-
-/** One fact of the row: a small icon, a visually hidden <dt> for screen readers, the value as <dd>. */
-const Fact = ({ icon, term, color = 'body', children }: { icon: ReactNode; term: string; color?: string; children: ReactNode }) => (
-	<Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-		<Box component="dt" sx={{ display: 'flex', color: color === 'body' ? 'muted' : color }}>
-			{icon}
-			<Box component="span" sx={visuallyHidden}>
-				{term}
-			</Box>
-		</Box>
-		<Box component="dd" sx={{ m: 0, fontWeight: 600, color }}>
-			{children}
-		</Box>
-	</Box>
-);
-
-const factIconSx = { fontSize: 16 } as const;
-
-/**
- * "Due Jan 31, 2027, 84 days left" / "Deadline passed Oct 29, 2026" / "No deadline". One text node, so the
- * server and browser clocks may differ by a day count without a hydration error.
- */
-const DeadlineText = ({ state }: { state: DeadlineState }) => {
-	const { t } = useTranslation('briefs');
-	const format = useFormat();
-	if (state.kind === 'none') return <>{t('briefs:deadline.none')}</>;
-	const date = format.date(state.date);
-	return (
-		<time dateTime={state.date.toISOString()} suppressHydrationWarning>
-			{state.kind === 'passed'
-				? t('briefs:feed.deadline.passed', { date })
-				: t('briefs:feed.deadline.due', { date, count: state.daysLeft })}
-		</time>
-	);
-};
+import { BriefStatusPill, CategoryPill, DeadlineText, Fact, factIconSx } from './briefParts';
 
 type BriefFeedRowProps = {
 	brief: BriefCardFragment;
@@ -129,13 +62,7 @@ export const BriefFeedRow = ({ brief, index, guest, now }: BriefFeedRowProps) =>
 		>
 			<Box sx={{ flex: '999 1 480px', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 2.5 }}>
 				<Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', columnGap: 2.5, rowGap: 2 }}>
-					{closed ? (
-						<StatusPill label={t('briefs:list.tabs.closed')} colors={closedPill} />
-					) : past ? (
-						<StatusPill label={t('briefs:feed.status.past')} colors={briefFeed.pastPill} />
-					) : (
-						<StatusPill label={t('briefs:list.tabs.open')} colors={briefFeed.openPill} />
-					)}
+					<BriefStatusPill closed={closed} past={past} />
 					<CategoryPill category={brief.briefCategory} />
 					<Typography component="span" sx={{ fontSize: 13, color: 'muted' }}>
 						<time dateTime={brief.createdAt} suppressHydrationWarning>
