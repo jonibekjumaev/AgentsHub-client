@@ -189,6 +189,105 @@
 			"loadFailed": "브리프를 불러오지 못했습니다"
 		}
 	},
+	"feed": {
+		"hero": {
+			"title": "비즈니스가 만들고 싶어 하는 에이전트",
+			"text": "비즈니스에 필요한 것을 읽고, 댓글로 질문한 뒤 제안을 보내세요.",
+			"examples": {
+				"0": "온라인 쇼핑몰용 텔레그램 봇",
+				"1": "스프레드시트로 만드는 주간 보고서",
+				"2": "배송 문의 답변",
+				"3": "상품 400개의 상세 설명",
+				"4": "API로 보내는 Slack 알림"
+			},
+			"clear": "검색 지우기",
+			"submit": "검색",
+			"try": "추천 검색:",
+			"suggestions": {
+				"telegram": "Telegram",
+				"shopify": "Shopify",
+				"slack": "Slack",
+				"offers": "제안 받음"
+			}
+		},
+		"live": {
+			"openOnly_one": "지금 진행 중인 브리프 {{formatted}}개",
+			"openOnly_other": "지금 진행 중인 브리프 {{formatted}}개",
+			"withBudget_one": "지금 진행 중인 브리프 {{formatted}}개, 게시된 예산 합계 {{budget}}",
+			"withBudget_other": "지금 진행 중인 브리프 {{formatted}}개, 게시된 예산 합계 {{budget}}"
+		},
+		"filters": {
+			"all": "전체",
+			"budget": "예산",
+			"hidePast": "마감일 지난 브리프 숨기기",
+			"remove": "필터 삭제: {{label}}",
+			"clearAll": "모두 지우기"
+		},
+		"budgetType": {
+			"FIXED": "고정 예산",
+			"OPEN_TO_OFFERS": "제안 받음"
+		},
+		"sort": {
+			"newest": "최신순",
+			"budget": "예산 높은순",
+			"deadline": "마감 임박순",
+			"discussed": "댓글 많은순"
+		},
+		"results": {
+			"open_one": "개 진행 중",
+			"open_other": "개 진행 중",
+			"closed_one": "개 마감",
+			"closed_other": "개 마감",
+			"for": "“{{text}}” 검색 결과"
+		},
+		"hiddenPast_one": "마감일이 지난 브리프 {{count}}개. 보기",
+		"hiddenPast_other": "마감일이 지난 브리프 {{count}}개. 보기",
+		"status": {
+			"past": "마감일 지남"
+		},
+		"posted": "{{when}} 게시",
+		"facts": {
+			"budgetType": "예산 유형",
+			"deadline": "마감일",
+			"questions": "질문",
+			"views": "조회수"
+		},
+		"deadline": {
+			"due_one": "{{date}} 마감, {{count}}일 남음",
+			"due_other": "{{date}} 마감, {{count}}일 남음",
+			"passed": "{{date}} 마감됨"
+		},
+		"questions": {
+			"none": "아직 질문이 없습니다",
+			"count_one": "질문 {{formatted}}개",
+			"count_other": "질문 {{formatted}}개"
+		},
+		"contactAfterSignIn": "로그인 후 연락 가능",
+		"view": "브리프 보기",
+		"cta": {
+			"title": "에이전트가 필요하신가요?",
+			"text": "필요한 작업을 브리프로 작성하세요. 맞춤 에이전트를 만드는 크리에이터가 오늘 바로 확인합니다."
+		},
+		"showing": "{{total}}개 중 {{shown}}개 표시",
+		"showMore_one": "{{count}}개 더 보기",
+		"showMore_other": "{{count}}개 더 보기",
+		"empty": {
+			"noMatch": {
+				"title": "일치하는 브리프가 없습니다",
+				"text": "필터를 지워 검색 범위를 넓히거나 직접 브리프를 올려 보세요."
+			},
+			"open": {
+				"title": "아직 진행 중인 브리프가 없습니다",
+				"text": "비즈니스가 필요한 것을 올리면 여기에 표시됩니다."
+			},
+			"closed": {
+				"title": "아직 마감된 브리프가 없습니다",
+				"text": "비즈니스가 크리에이터를 정하고 브리프를 마감하면 여기에 표시됩니다."
+			},
+			"briefFor": "“{{text}}” 브리프 올리기",
+			"clearAll": "모든 필터 지우기"
+		}
+	},
 	"save": {
 		"save": "브리프 저장: {{title}}",
 		"unsave": "저장 취소: {{title}}",

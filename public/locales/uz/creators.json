@@ -13,6 +13,9 @@
 		"sortLabel": "Saralash",
 		"sort": {
 			"rank": "Reyting boʻyicha",
+			"followers": "Eng koʻp kuzatuvchi",
+			"agents": "Eng koʻp agent",
+			"name": "Nomi boʻyicha (A–Z)",
 			"products": "Eng koʻp agent",
 			"likes": "Eng koʻp layk",
 			"views": "Eng koʻp koʻrilgan",
@@ -20,7 +23,15 @@
 		},
 		"loading": "Kreatorlar yuklanmoqda…",
 		"errorTitle": "Kreatorlarni yuklab boʻlmadi",
-		"resultsLabel": "Kreatorlar"
+		"resultsLabel": "Kreatorlar",
+		"results_one": "ta kreator",
+		"results_other": "ta kreator",
+		"resultsFor": "“{{text}}” boʻyicha",
+		"hiddenEmpty_one": "{{count}} ta kreatorda hali agent yoʻq. Koʻrsatish",
+		"hiddenEmpty_other": "{{count}} ta kreatorda hali agent yoʻq. Koʻrsatish",
+		"showing": "{{total}} tadan {{shown}} tasi koʻrsatilmoqda",
+		"showMore_one": "Yana {{count}} tasini koʻrsatish",
+		"showMore_other": "Yana {{count}} tasini koʻrsatish"
 	},
 	"empty": {
 		"noneTitle": "Hali kreatorlar yoʻq",
@@ -29,7 +40,17 @@
 		"noResultsText": "Qisqaroq yoki boshqacha yozib qidiring.",
 		"clear": "Qidiruvni tozalash",
 		"pageTitle": "Bu sahifa boʻsh",
-		"firstPage": "1-sahifaga oʻtish"
+		"firstPage": "1-sahifaga oʻtish",
+		"noMatch": {
+			"title": "Mos kreator topilmadi",
+			"text": "Boshqa ism yoki kategoriyani sinab koʻring yoki brief joylang, kreatorlar oʻzlari bogʻlanadi."
+		},
+		"noFollows": {
+			"title": "Siz hali hech kimni kuzatmayapsiz",
+			"text": "Yangi agentlarini birinchi boʻlib koʻrish uchun kreatorlarni kuzating. Ularning profillari shu yerda toʻplanadi."
+		},
+		"postBrief": "Buning oʻrniga brief joylash",
+		"clearAll": "Barcha filtrlarni tozalash"
 	},
 	"seo": {
 		"title": "AI agent kreatorlari",
@@ -106,5 +127,43 @@
 			"colLikes": "Layklar",
 			"colViews": "Koʻrishlar"
 		}
+	},
+	"hero": {
+		"title": "Agent yaratayotgan odamlar bilan tanishing",
+		"text": "Kreatorni nima yaratishiga qarab toping, yangi agentlari uchun kuzating yoki maxsus agent uchun bogʻlaning.",
+		"stats": "{{creators}}, {{agents}} joylangan",
+		"creators_one": "{{formatted}} ta kreator",
+		"creators_other": "{{formatted}} ta kreator",
+		"agents_one": "{{formatted}} ta agent",
+		"agents_other": "{{formatted}} ta agent",
+		"examples": {
+			"0": "Ism yoki taxallus boʻyicha qidiring, masalan Nova Labs",
+			"1": "Nima yaratishi boʻyicha qidiring, masalan invoices",
+			"2": "Agent nomi boʻyicha qidiring, masalan Blog Drafter"
+		},
+		"clear": "Qidiruvni tozalash",
+		"submit": "Qidirish",
+		"try": "Sinab koʻring:"
+	},
+	"become": {
+		"title": "AI agent yaratasizmi?",
+		"text": "Kreator profilini yarating, agentlaringizni joylang va layk hamda koʻrishlar bilan reytingda koʻtariling.",
+		"action": "Kreator boʻlish"
+	},
+	"filters": {
+		"buildsFor": "Kim uchun agent yaratadi",
+		"all": "Hammasi",
+		"withAgents": "Faqat agenti bor kreatorlar",
+		"following": "Kuzatilayotganlar",
+		"remove": "Filtrni olib tashlash: {{label}}",
+		"clearAll": "Hammasini tozalash"
+	},
+	"card": {
+		"noBio": "Bu kreator hali oʻzi haqida yozmagan.",
+		"agentsBy": "{{name}} agentlari",
+		"seeAll_one": "{{count}} ta agentni koʻrish",
+		"seeAll_other": "Barcha {{count}} ta agentni koʻrish",
+		"noAgents": "Hali agent joylanmagan.",
+		"buildsFor": "Kim uchun agent yaratadi"
 	}
 }

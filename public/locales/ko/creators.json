@@ -13,6 +13,9 @@
 		"sortLabel": "정렬",
 		"sort": {
 			"rank": "순위순",
+			"followers": "팔로워 많은순",
+			"agents": "에이전트 많은순",
+			"name": "이름순 (A–Z)",
 			"products": "에이전트 많은순",
 			"likes": "좋아요순",
 			"views": "조회수순",
@@ -20,7 +23,15 @@
 		},
 		"loading": "크리에이터를 불러오는 중…",
 		"errorTitle": "크리에이터를 불러오지 못했습니다",
-		"resultsLabel": "크리에이터"
+		"resultsLabel": "크리에이터",
+		"results_one": "명의 크리에이터",
+		"results_other": "명의 크리에이터",
+		"resultsFor": "“{{text}}” 검색 결과",
+		"hiddenEmpty_one": "아직 에이전트가 없는 크리에이터 {{count}}명. 보기",
+		"hiddenEmpty_other": "아직 에이전트가 없는 크리에이터 {{count}}명. 보기",
+		"showing": "{{total}}명 중 {{shown}}명 표시",
+		"showMore_one": "{{count}}명 더 보기",
+		"showMore_other": "{{count}}명 더 보기"
 	},
 	"empty": {
 		"noneTitle": "아직 크리에이터가 없습니다",
@@ -29,7 +40,17 @@
 		"noResultsText": "검색어를 줄이거나 다른 철자로 시도해 보세요.",
 		"clear": "검색 지우기",
 		"pageTitle": "이 페이지는 비어 있습니다",
-		"firstPage": "1페이지로 이동"
+		"firstPage": "1페이지로 이동",
+		"noMatch": {
+			"title": "일치하는 크리에이터가 없습니다",
+			"text": "다른 이름이나 카테고리로 찾아보거나, 브리프를 올려 크리에이터의 연락을 받아 보세요."
+		},
+		"noFollows": {
+			"title": "아직 팔로우한 크리에이터가 없습니다",
+			"text": "크리에이터를 팔로우하면 새 에이전트를 가장 먼저 볼 수 있습니다. 팔로우한 프로필이 여기에 모입니다."
+		},
+		"postBrief": "대신 브리프 올리기",
+		"clearAll": "모든 필터 지우기"
 	},
 	"seo": {
 		"title": "AI 에이전트 크리에이터",
@@ -106,5 +127,43 @@
 			"colLikes": "좋아요",
 			"colViews": "조회수"
 		}
+	},
+	"hero": {
+		"title": "에이전트를 만드는 사람들을 만나 보세요",
+		"text": "만드는 분야로 크리에이터를 찾고, 팔로우해 새 에이전트를 받아 보거나, 맞춤 에이전트를 문의하세요.",
+		"stats": "{{creators}}, {{agents}} 등록",
+		"creators_one": "크리에이터 {{formatted}}명",
+		"creators_other": "크리에이터 {{formatted}}명",
+		"agents_one": "에이전트 {{formatted}}개",
+		"agents_other": "에이전트 {{formatted}}개",
+		"examples": {
+			"0": "이름이나 아이디로 검색, 예: Nova Labs",
+			"1": "만드는 분야로 검색, 예: invoices",
+			"2": "에이전트 이름으로 검색, 예: Blog Drafter"
+		},
+		"clear": "검색 지우기",
+		"submit": "검색",
+		"try": "추천 검색:"
+	},
+	"become": {
+		"title": "AI 에이전트를 만드시나요?",
+		"text": "크리에이터 프로필을 만들고 에이전트를 등록한 뒤 좋아요와 조회수로 순위를 올려 보세요.",
+		"action": "크리에이터 되기"
+	},
+	"filters": {
+		"buildsFor": "에이전트 분야",
+		"all": "전체",
+		"withAgents": "에이전트가 있는 크리에이터만",
+		"following": "팔로잉",
+		"remove": "필터 삭제: {{label}}",
+		"clearAll": "모두 지우기"
+	},
+	"card": {
+		"noBio": "이 크리에이터는 아직 소개를 작성하지 않았습니다.",
+		"agentsBy": "{{name}}의 에이전트",
+		"seeAll_one": "에이전트 {{count}}개 보기",
+		"seeAll_other": "에이전트 {{count}}개 모두 보기",
+		"noAgents": "아직 등록된 에이전트가 없습니다.",
+		"buildsFor": "에이전트 분야"
 	}
 }

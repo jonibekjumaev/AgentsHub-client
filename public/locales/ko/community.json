@@ -58,7 +58,8 @@
 			"length": "1~{{max}}자로 입력하세요.",
 			"rate": "천천히: 1초에 한 번만 보낼 수 있습니다.",
 			"unknown": "메시지를 보내지 못했습니다."
-		}
+		},
+		"connected": "연결됨"
 	},
 	"mine": {
 		"title": "내 글",
@@ -111,5 +112,60 @@
 			"saveFailed": "글을 저장하지 못했습니다",
 			"loadFailed": "글을 불러오지 못했습니다"
 		}
+	},
+	"hero": {
+		"title": "AgentsHub 커뮤니티",
+		"text": "AI 에이전트를 만드는 사람들과 이를 사용하는 비즈니스가 전하는 팁, 소식, 솔직한 후기.",
+		"textWithStats_one": "AI 에이전트를 만드는 사람과 사용하는 사람이 전하는 팁, 소식, 솔직한 후기: {{writers}}의 글 {{articles}}개.",
+		"textWithStats_other": "AI 에이전트를 만드는 사람과 사용하는 사람이 전하는 팁, 소식, 솔직한 후기: {{writers}}의 글 {{articles}}개.",
+		"writers_one": "작성자 {{formatted}}명",
+		"writers_other": "작성자 {{formatted}}명",
+		"online_one": "실시간 채팅 {{formatted}}명 접속 중",
+		"online_other": "실시간 채팅 {{formatted}}명 접속 중"
+	},
+	"feed": {
+		"sortLabel": "정렬",
+		"sort": {
+			"newest": "최신순",
+			"liked": "좋아요순",
+			"discussed": "댓글 많은순",
+			"viewed": "조회수순"
+		},
+		"results_one": "개의 글",
+		"results_other": "개의 글",
+		"resultsFor": "“{{text}}” 검색 결과",
+		"remove": "필터 삭제: {{label}}",
+		"clearAll": "모두 지우기",
+		"readTime_one": "{{count}}분 분량",
+		"readTime_other": "{{count}}분 분량",
+		"like_one": "“{{title}}” 좋아요, 좋아요 {{count}}개",
+		"like_other": "“{{title}}” 좋아요, 좋아요 {{count}}개",
+		"commentsLink_one": "“{{title}}” 댓글 {{count}}개",
+		"commentsLink_other": "“{{title}}” 댓글 {{count}}개",
+		"showing": "{{total}}개 중 {{shown}}개 표시",
+		"showMore_one": "{{count}}개 더 보기",
+		"showMore_other": "{{count}}개 더 보기",
+		"sidebarLabel": "채팅과 작성자",
+		"cta": {
+			"title": "공유하고 싶은 이야기가 있나요?",
+			"text": "팁, 출시 소식, 질문 무엇이든 커뮤니티에 글로 남겨 보세요."
+		},
+		"empty": {
+			"none": {
+				"title": "아직 글이 없습니다",
+				"text": "첫 글로 대화를 시작해 보세요."
+			},
+			"noMatch": {
+				"title": "일치하는 글이 없습니다",
+				"text": "다른 주제나 더 짧은 검색어로 시도해 보세요.",
+				"textFor": "“{{text}}”와 일치하는 글이 없습니다. 다른 주제나 더 짧은 검색어로 시도해 보세요."
+			}
+		}
+	},
+	"writers": {
+		"title": "활발한 작성자",
+		"loading": "작성자를 불러오는 중…",
+		"articles_one": "글 {{formatted}}개",
+		"articles_other": "글 {{formatted}}개"
 	}
 }

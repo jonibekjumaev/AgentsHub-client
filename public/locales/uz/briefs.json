@@ -189,6 +189,105 @@
 			"loadFailed": "Briefni yuklab boʻlmadi"
 		}
 	},
+	"feed": {
+		"hero": {
+			"title": "Bizneslar yaratishni xohlagan agentlar",
+			"text": "Bizneslarga nima kerakligini oʻqing, izohlarda savol bering, soʻng taklif bilan bogʻlaning.",
+			"examples": {
+				"0": "Onlayn doʻkonim uchun Telegram bot",
+				"1": "Jadvaldan haftalik hisobot",
+				"2": "Yetkazib berish haqidagi savollarga javob",
+				"3": "400 ta mahsulot uchun tavsiflar",
+				"4": "APIʼdan Slack xabarlari"
+			},
+			"clear": "Qidiruvni tozalash",
+			"submit": "Qidirish",
+			"try": "Sinab koʻring:",
+			"suggestions": {
+				"telegram": "Telegram",
+				"shopify": "Shopify",
+				"slack": "Slack",
+				"offers": "Takliflar uchun ochiq"
+			}
+		},
+		"live": {
+			"openOnly_one": "Hozir {{formatted}} ta brief ochiq",
+			"openOnly_other": "Hozir {{formatted}} ta brief ochiq",
+			"withBudget_one": "Hozir {{formatted}} ta brief ochiq, eʼlon qilingan budjetlar jami {{budget}}",
+			"withBudget_other": "Hozir {{formatted}} ta brief ochiq, eʼlon qilingan budjetlar jami {{budget}}"
+		},
+		"filters": {
+			"all": "Hammasi",
+			"budget": "Budjet",
+			"hidePast": "Muddati oʻtganlarni yashirish",
+			"remove": "Filtrni olib tashlash: {{label}}",
+			"clearAll": "Hammasini tozalash"
+		},
+		"budgetType": {
+			"FIXED": "Belgilangan budjet",
+			"OPEN_TO_OFFERS": "Takliflar uchun ochiq"
+		},
+		"sort": {
+			"newest": "Eng yangi",
+			"budget": "Eng katta budjet",
+			"deadline": "Muddati eng yaqin",
+			"discussed": "Eng koʻp muhokama qilingan"
+		},
+		"results": {
+			"open_one": "ta ochiq brief",
+			"open_other": "ta ochiq brief",
+			"closed_one": "ta yopilgan brief",
+			"closed_other": "ta yopilgan brief",
+			"for": "“{{text}}” boʻyicha"
+		},
+		"hiddenPast_one": "{{count}} ta briefning muddati oʻtgan. Koʻrsatish",
+		"hiddenPast_other": "{{count}} ta briefning muddati oʻtgan. Koʻrsatish",
+		"status": {
+			"past": "Muddati oʻtgan"
+		},
+		"posted": "{{when}} joylangan",
+		"facts": {
+			"budgetType": "Budjet turi",
+			"deadline": "Muddat",
+			"questions": "Savollar",
+			"views": "Koʻrishlar"
+		},
+		"deadline": {
+			"due_one": "Muddat {{date}}, {{count}} kun qoldi",
+			"due_other": "Muddat {{date}}, {{count}} kun qoldi",
+			"passed": "Muddat {{date}} kuni oʻtgan"
+		},
+		"questions": {
+			"none": "Hali savollar yoʻq",
+			"count_one": "{{formatted}} ta savol",
+			"count_other": "{{formatted}} ta savol"
+		},
+		"contactAfterSignIn": "Kirgandan soʻng bogʻlanish",
+		"view": "Briefni koʻrish",
+		"cta": {
+			"title": "Agent yaratish kerakmi?",
+			"text": "Vazifani briefda tasvirlang. Maxsus agent yaratadigan kreatorlar uni bugunoq koʻradi."
+		},
+		"showing": "{{total}} tadan {{shown}} tasi koʻrsatilmoqda",
+		"showMore_one": "Yana {{count}} tasini koʻrsatish",
+		"showMore_other": "Yana {{count}} tasini koʻrsatish",
+		"empty": {
+			"noMatch": {
+				"title": "Mos brief topilmadi",
+				"text": "Qidiruvni kengaytirish uchun filtrni olib tashlang yoki briefni oʻzingiz joylang."
+			},
+			"open": {
+				"title": "Hali ochiq brieflar yoʻq",
+				"text": "Biznes oʻziga nima kerakligini joylasa, u shu yerda chiqadi."
+			},
+			"closed": {
+				"title": "Hali yopilgan brieflar yoʻq",
+				"text": "Biznes kreator tanlab, briefini yopsa, u shu yerda chiqadi."
+			},
+			"briefFor": "“{{text}}” uchun brief joylash",
+			"clearAll": "Barcha filtrlarni tozalash"
+		}
+	},
 	"save": {
 		"save": "Briefni saqlash: {{title}}",
 		"unsave": "Saqlanganlardan olib tashlash: {{title}}",

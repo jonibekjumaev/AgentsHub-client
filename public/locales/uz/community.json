@@ -58,7 +58,8 @@
 			"length": "1 dan {{max}} gacha belgi yozing.",
 			"rate": "Sekinroq: soniyasiga bitta xabar.",
 			"unknown": "Xabar yuborilmadi."
-		}
+		},
+		"connected": "Ulangan"
 	},
 	"mine": {
 		"title": "Mening maqolalarim",
@@ -111,5 +112,60 @@
 			"saveFailed": "Maqola saqlanmadi",
 			"loadFailed": "Maqolani yuklab boʻlmadi"
 		}
+	},
+	"hero": {
+		"title": "AgentsHub hamjamiyati",
+		"text": "AI agent yaratuvchilar va ulardan foydalanadigan bizneslardan maslahatlar, yangiliklar va xolis sharhlar.",
+		"textWithStats_one": "AI agent yaratuvchilar va xaridorlardan maslahatlar, yangiliklar va xolis sharhlar: {{writers}} tomonidan {{articles}} ta maqola.",
+		"textWithStats_other": "AI agent yaratuvchilar va xaridorlardan maslahatlar, yangiliklar va xolis sharhlar: {{writers}} tomonidan {{articles}} ta maqola.",
+		"writers_one": "{{formatted}} ta muallif",
+		"writers_other": "{{formatted}} ta muallif",
+		"online_one": "Jonli chatda {{formatted}} kishi onlayn",
+		"online_other": "Jonli chatda {{formatted}} kishi onlayn"
+	},
+	"feed": {
+		"sortLabel": "Saralash",
+		"sort": {
+			"newest": "Eng yangi",
+			"liked": "Eng koʻp layk",
+			"discussed": "Eng koʻp muhokama qilingan",
+			"viewed": "Eng koʻp koʻrilgan"
+		},
+		"results_one": "ta maqola",
+		"results_other": "ta maqola",
+		"resultsFor": "“{{text}}” boʻyicha",
+		"remove": "Filtrni olib tashlash: {{label}}",
+		"clearAll": "Hammasini tozalash",
+		"readTime_one": "{{count}} daqiqada oʻqiladi",
+		"readTime_other": "{{count}} daqiqada oʻqiladi",
+		"like_one": "“{{title}}”ga layk bosish, {{count}} layk",
+		"like_other": "“{{title}}”ga layk bosish, {{count}} layk",
+		"commentsLink_one": "“{{title}}”ga {{count}} ta izoh",
+		"commentsLink_other": "“{{title}}”ga {{count}} ta izoh",
+		"showing": "{{total}} tadan {{shown}} tasi koʻrsatilmoqda",
+		"showMore_one": "Yana {{count}} tasini koʻrsatish",
+		"showMore_other": "Yana {{count}} tasini koʻrsatish",
+		"sidebarLabel": "Chat va mualliflar",
+		"cta": {
+			"title": "Ulashadigan narsangiz bormi?",
+			"text": "Maslahat, yangi mahsulot yoki savol: hamjamiyat uchun yozib qoldiring."
+		},
+		"empty": {
+			"none": {
+				"title": "Hali maqolalar yoʻq",
+				"text": "Birinchi post bilan suhbatni boshlang."
+			},
+			"noMatch": {
+				"title": "Mos maqola topilmadi",
+				"text": "Boshqa mavzuni yoki kamroq soʻzni sinab koʻring.",
+				"textFor": "“{{text}}” boʻyicha hech narsa topilmadi. Boshqa mavzuni yoki kamroq soʻzni sinab koʻring."
+			}
+		}
+	},
+	"writers": {
+		"title": "Faol mualliflar",
+		"loading": "Mualliflar yuklanmoqda…",
+		"articles_one": "{{formatted}} ta maqola",
+		"articles_other": "{{formatted}} ta maqola"
 	}
 }

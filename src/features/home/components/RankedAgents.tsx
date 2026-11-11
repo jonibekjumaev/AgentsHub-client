@@ -18,7 +18,10 @@ import { CategoryIcon, SectionTitle, categoryTint, displaySx, focusRingSx, frame
 
 type CardProps = { agent: AgentCardFragment; position: number; inView: boolean };
 
-/** One agent: a tinted cover (its image when it has one), price, name, creator, likes, views. */
+/**
+ * One agent: its cover image, price, name, creator, likes, views. Without an image the cover is plain white, like
+ * the rest of the card: no category tint, icon or color (only the neutral position chip).
+ */
 const RankedAgentCard = ({ agent, position, inView }: CardProps) => {
 	const { t } = useTranslation(['home', 'common']);
 	const format = useFormat();
@@ -41,32 +44,37 @@ const RankedAgentCard = ({ agent, position, inView }: CardProps) => {
 				...revealSx(inView, position - 1),
 			}}
 		>
-			<Box sx={{ position: 'relative', height: 196, bgcolor: tint, display: 'grid', placeItems: 'center', color: ink }}>
-				{src ? (
-					<Image src={src} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" style={{ objectFit: 'cover' }} />
-				) : (
-					<Box aria-hidden="true" sx={{ opacity: 0.35, display: 'flex' }}>
-						<CategoryIcon category={agent.productCategory} size={72} />
-					</Box>
+			<Box
+				sx={{
+					position: 'relative',
+					height: 196,
+					bgcolor: src ? tint : 'surface',
+					...(!src && { borderBottom: 1, borderColor: 'border' }),
+				}}
+			>
+				{src && (
+					<>
+						<Image src={src} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" style={{ objectFit: 'cover' }} />
+						<Box
+							aria-hidden="true"
+							sx={{
+								position: 'absolute',
+								top: 18,
+								left: 18,
+								width: 44,
+								height: 44,
+								display: 'grid',
+								placeItems: 'center',
+								borderRadius: '13px',
+								bgcolor: 'surface',
+								color: ink,
+								boxShadow: home.cardShadow,
+							}}
+						>
+							<CategoryIcon category={agent.productCategory} size={22} />
+						</Box>
+					</>
 				)}
-				<Box
-					aria-hidden="true"
-					sx={{
-						position: 'absolute',
-						top: 18,
-						left: 18,
-						width: 44,
-						height: 44,
-						display: 'grid',
-						placeItems: 'center',
-						borderRadius: '13px',
-						bgcolor: 'surface',
-						color: ink,
-						boxShadow: home.cardShadow,
-					}}
-				>
-					<CategoryIcon category={agent.productCategory} size={22} />
-				</Box>
 				{/* The position in this list, not the nightly score. */}
 				<Box
 					component="span"
@@ -78,14 +86,13 @@ const RankedAgentCard = ({ agent, position, inView }: CardProps) => {
 						px: 2.5,
 						py: 0.5,
 						borderRadius: '999px',
-						bgcolor: src ? home.rankChip : 'transparent',
+						bgcolor: src ? home.rankChip : 'neutralSoft',
 						...displaySx,
 						fontWeight: 800,
-						fontSize: src ? 20 : 56,
+						fontSize: 20,
 						lineHeight: 1.1,
 						letterSpacing: '-0.05em',
-						color: ink,
-						opacity: src ? 1 : 0.22,
+						color: src ? ink : 'body',
 					}}
 				>
 					#{position}
