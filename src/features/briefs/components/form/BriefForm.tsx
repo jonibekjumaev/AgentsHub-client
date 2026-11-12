@@ -12,7 +12,7 @@ import { ErrorState } from '@/shared/ui/ErrorState';
 import { RHFTextField } from '@/shared/ui/RHFTextField';
 import { SubmitButton } from '@/shared/ui/SubmitButton';
 import { useToast } from '@/shared/ui/toast';
-import { radiusPx } from '@/theme/tokens';
+import { home } from '@/theme/tokens';
 import { CreateBriefMutation, UpdateBriefMutation } from '../../graphql/myBriefs';
 import {
 	BRIEF_CONTENT_MAX,
@@ -50,7 +50,7 @@ const Tips = () => {
 	const { t } = useTranslation('briefs');
 	return (
 		<Box component="aside" aria-labelledby="brief-tips" sx={{ flex: '1 1 260px', minWidth: 0, maxWidth: { md: 320 }, display: 'flex', flexDirection: 'column', gap: 4 }}>
-			<Box sx={{ p: 5, bgcolor: 'surface', border: 1, borderColor: 'border', borderRadius: radiusPx.lg }}>
+			<Box sx={{ p: 5, bgcolor: 'surface', border: 1, borderColor: 'border', borderRadius: home.radius.card }}>
 				<Typography id="brief-tips" variant="overline" component="h2">
 					{t('briefs:form.tips.title')}
 				</Typography>
@@ -147,7 +147,7 @@ export const BriefForm = ({ mode, briefId, initialValues }: BriefFormProps) => {
 					bgcolor: 'surface',
 					border: 1,
 					borderColor: 'border',
-					borderRadius: radiusPx.lg,
+					borderRadius: home.radius.card,
 				}}
 			>
 				<RHFTextField

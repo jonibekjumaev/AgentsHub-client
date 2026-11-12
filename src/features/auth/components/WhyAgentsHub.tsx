@@ -5,7 +5,8 @@ import {
 	LockOutlined as LockOutlinedIcon,
 } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
-import { radiusPx } from '@/theme/tokens';
+import { pageCardSx } from '@/shared/ui/page';
+import { fonts, home, radiusPx, shadows } from '@/theme/tokens';
 
 const POINTS = [
 	{ key: 'contacts', Icon: LockOutlinedIcon },
@@ -21,9 +22,9 @@ export const WhyAgentsHub = () => {
 		<Box
 			component="aside"
 			aria-labelledby="why-agentshub"
-			sx={{ flex: '1 1 340px', minWidth: 0, display: { xs: 'none', md: 'flex' }, flexDirection: 'column', gap: 5, py: 2, px: 1 }}
+			sx={{ ...pageCardSx, flex: '1 1 340px', minWidth: 0, display: { xs: 'none', md: 'flex' }, gap: 5, boxShadow: shadows.raised, borderRadius: home.radius.card }}
 		>
-			<Typography id="why-agentshub" variant="h2">
+			<Typography id="why-agentshub" variant="h2" sx={{ fontFamily: fonts.display, fontSize: 22, fontWeight: 700, letterSpacing: '-0.02em' }}>
 				{t('auth:signup.why.title')}
 			</Typography>
 			{POINTS.map(({ key, Icon }) => (

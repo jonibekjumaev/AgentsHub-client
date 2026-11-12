@@ -15,9 +15,9 @@ import { BriefStatus } from '@/gql/enums';
 import type { BriefDetailQuery as BriefDetailData } from '@/gql/graphql';
 import { useFormat } from '@/shared/lib/format';
 import { Avatar } from '@/shared/ui/Avatar';
-import { focusVisibleSx } from '@/shared/ui/catalog';
 import { ErrorState } from '@/shared/ui/ErrorState';
-import { briefFeed, catalog, colors, fonts, home, radiusPx } from '@/theme/tokens';
+import { NightBand, NightBreadcrumbs, pageCardSx } from '@/shared/ui/page';
+import { briefFeed, fonts, radiusPx } from '@/theme/tokens';
 import { BriefDetailQuery } from '../graphql/briefs';
 import { useBriefViewer } from '../hooks/useBriefViewer';
 import { deadlineState } from '../lib/deadline';
@@ -30,104 +30,43 @@ import { SaveBriefButton } from './SaveBriefButton';
 type Brief = BriefDetailData['getBrief'];
 type Author = NonNullable<Brief['memberData']>;
 
-/** A white card of the briefs design (the feed's container: 22px corners, thin border). */
-const cardSx = {
-	display: 'flex',
-	flexDirection: 'column',
-	gap: 4,
-	p: { xs: 5, sm: 6 },
-	bgcolor: 'surface',
-	border: 1,
-	borderColor: 'border',
-	borderRadius: home.radius.card,
-} as const;
+const cardSx = pageCardSx;
 
 const memberHref = (memberId: string) => `/members/${memberId}`;
-
-const Breadcrumbs = ({ brief }: { brief: Brief }) => {
-	const { t } = useTranslation(['briefs', 'common']);
-	return (
-		<Box component="nav" aria-label={t('briefs:detail.breadcrumb')}>
-			<Box
-				component="ol"
-				sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, m: 0, p: 0, listStyle: 'none', fontSize: 13, color: home.nightText }}
-			>
-				<li>
-					<Link
-						component={NextLink}
-						href={briefsHref({ ...DEFAULT_BRIEF_FILTERS, tab: brief.briefStatus === BriefStatus.Closed ? 'closed' : 'open' })}
-						sx={{ color: home.nightText, fontWeight: 500, '&:hover': { color: colors.white }, ...focusVisibleSx }}
-					>
-						{t('common:nav.briefs')}
-					</Link>
-				</li>
-				<li aria-hidden="true">/</li>
-				<Box component="li" aria-current="page" sx={{ color: colors.white, fontWeight: 600, overflowWrap: 'anywhere' }}>
-					{brief.briefTitle}
-				</Box>
-			</Box>
-		</Box>
-	);
-};
 
 /**
  * The top of the page, on the night ground of the /briefs band (agentshub-briefs design): breadcrumb, the status
  * and category pills, the title, and when it was posted, how often viewed, when closed.
  */
 const DetailBand = ({ brief, past }: { brief: Brief; past: boolean }) => {
-	const { t } = useTranslation('briefs');
+	const { t } = useTranslation(['briefs', 'common']);
 	const format = useFormat();
 	const closed = brief.briefStatus === BriefStatus.Closed;
 
 	return (
-		<Box component="header" sx={{ position: 'relative', overflow: 'hidden', bgcolor: home.night, color: colors.white }}>
-			<Box
-				aria-hidden="true"
-				sx={{
-					position: 'absolute',
-					inset: 0,
-					pointerEvents: 'none',
-					backgroundImage: catalog.heroDots,
-					backgroundSize: '24px 24px',
-					WebkitMaskImage: catalog.heroDotsMask,
-					maskImage: catalog.heroDotsMask,
-				}}
-			/>
-			<Box
-				sx={{
-					position: 'relative',
-					maxWidth: 1200,
-					mx: 'auto',
-					px: { xs: 4, sm: 6 },
-					pt: { xs: 8, md: 10 },
-					pb: { xs: 9, md: 11 },
-					display: 'flex',
-					flexDirection: 'column',
-					gap: 4.5,
-				}}
-			>
-				<Breadcrumbs brief={brief} />
-				<Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', columnGap: 2.5, rowGap: 2 }}>
+		<NightBand
+			titleId="brief-title"
+			title={brief.briefTitle}
+			top={
+				<NightBreadcrumbs
+					label={t('briefs:detail.breadcrumb')}
+					items={[
+						{
+							label: t('common:nav.briefs'),
+							href: briefsHref({ ...DEFAULT_BRIEF_FILTERS, tab: closed ? 'closed' : 'open' }),
+						},
+						{ label: brief.briefTitle },
+					]}
+				/>
+			}
+			pills={
+				<>
 					<BriefStatusPill closed={closed} past={past} />
 					<CategoryPill category={brief.briefCategory} />
-				</Box>
-				<Typography
-					id="brief-title"
-					variant="h1"
-					sx={{
-						maxWidth: 900,
-						fontFamily: fonts.display,
-						fontSize: 'clamp(28px, 4vw, 44px)',
-						lineHeight: 1.08,
-						fontWeight: 700,
-						letterSpacing: '-0.03em',
-						color: colors.white,
-						overflowWrap: 'anywhere',
-					}}
-				>
-					{brief.briefTitle}
-				</Typography>
-				<Typography sx={{ fontSize: 14, color: home.nightText }}>
+				</>
+			}
+			meta={
+				<>
 					{/* Server and browser may sit in different time zones: the browser's date wins. */}
 					<time dateTime={brief.createdAt} suppressHydrationWarning>
 						{t('briefs:detail.posted', { date: format.date(brief.createdAt) })}
@@ -142,9 +81,9 @@ const DetailBand = ({ brief, past }: { brief: Brief; past: boolean }) => {
 							</time>
 						</>
 					)}
-				</Typography>
-			</Box>
-		</Box>
+				</>
+			}
+		/>
 	);
 };
 

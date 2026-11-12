@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { Skeleton, Stack, Typography } from '@mui/material';
+import { Skeleton, Stack } from '@mui/material';
 import { SearchOff as SearchOffIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
 import { useAuth } from '@/auth';
@@ -10,6 +10,7 @@ import { StatusPage } from '@/shared/ui/StatusPage';
 import { OwnerArticleQuery } from '../../graphql/articles';
 import { EMPTY_ARTICLE_FORM, MY_ARTICLES_PATH, fromArticle, isObjectId } from '../../lib/articles';
 import { ArticleForm } from './ArticleForm';
+import { DashboardHeader } from '@/shared/ui/page';
 
 const ArticleNotFound = () => {
 	const { t } = useTranslation(['common', 'community']);
@@ -33,7 +34,10 @@ export const NewArticle = () => {
 	return (
 		<Stack spacing={6}>
 			<Seo title={t('community:form.newTitle')} noindex />
-			<Typography variant="h1">{t('community:form.newTitle')}</Typography>
+			<DashboardHeader
+				crumbs={{ label: t('community:detail.breadcrumb'), items: [{ label: t('community:mine.title'), href: MY_ARTICLES_PATH }, { label: t('community:form.newTitle') }] }}
+				title={t('community:form.newTitle')}
+			/>
 			<ArticleForm mode="create" initialValues={EMPTY_ARTICLE_FORM} />
 		</Stack>
 	);
@@ -59,7 +63,10 @@ export const EditArticle = ({ articleId }: { articleId: string }) => {
 	return (
 		<Stack spacing={6}>
 			<Seo title={t('community:form.editTitle')} noindex />
-			<Typography variant="h1">{t('community:form.editTitle')}</Typography>
+			<DashboardHeader
+				crumbs={{ label: t('community:detail.breadcrumb'), items: [{ label: t('community:mine.title'), href: MY_ARTICLES_PATH }, { label: article.articleTitle }] }}
+				title={t('community:form.editTitle')}
+			/>
 			<ArticleForm key={`${article._id}-${article.updatedAt}`} mode="edit" articleId={article._id} initialValues={fromArticle(article)} />
 		</Stack>
 	);

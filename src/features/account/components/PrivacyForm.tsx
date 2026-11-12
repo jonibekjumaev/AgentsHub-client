@@ -4,7 +4,7 @@ import { Box, FormControlLabel, Switch, Typography } from '@mui/material';
 import { useTranslation } from 'next-i18next';
 import { toErrorKey } from '@/shared/lib/errors';
 import { useToast } from '@/shared/ui/toast';
-import { radiusPx } from '@/theme/tokens';
+import { home } from '@/theme/tokens';
 import { UpdateBrowsePrivatelyMutation } from '../graphql/account';
 
 type PrivacyFormProps = { browsePrivately: boolean };
@@ -33,7 +33,7 @@ export const PrivacyForm = ({ browsePrivately }: PrivacyFormProps) => {
 		<Box
 			component="section"
 			aria-labelledby="privacy-settings"
-			sx={{ p: 6, bgcolor: 'surface', border: 1, borderColor: 'border', borderRadius: radiusPx.lg }}
+			sx={{ p: 6, bgcolor: 'surface', border: 1, borderColor: 'border', borderRadius: home.radius.card }}
 		>
 			<Typography id="privacy-settings" variant="h2" sx={{ fontSize: 20 }}>
 				{t('account:privacy.title')}

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { BookmarkBorder as BookmarkBorderIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
 import { EmptyState } from '@/shared/ui/EmptyState';
@@ -10,6 +10,7 @@ import { SavedBriefsQuery } from '../../graphql/saved';
 import { BRIEFS_PATH } from '../../lib/listQuery';
 import { BriefFeedRow } from '../feed/BriefFeedRow';
 import { FeedSkeleton, feedSx } from '../feed/FeedList';
+import { DashboardHeader } from '@/shared/ui/page';
 
 export const SAVED_BRIEFS_PAGE_SIZE = 10;
 
@@ -66,10 +67,7 @@ export const SavedBriefs = () => {
 
 	return (
 		<Stack spacing={6}>
-			<div>
-				<Typography variant="h1">{t('saved:briefs.title')}</Typography>
-				<Typography sx={{ mt: 1.5, color: 'muted' }}>{t('saved:briefs.subtitle')}</Typography>
-			</div>
+			<DashboardHeader title={t('saved:briefs.title')} subtitle={t('saved:briefs.subtitle')} />
 			{body()}
 		</Stack>
 	);

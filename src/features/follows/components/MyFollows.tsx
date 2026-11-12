@@ -1,10 +1,11 @@
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import { Box, ButtonBase, Stack, Typography } from '@mui/material';
+import { Box, ButtonBase, Stack } from '@mui/material';
 import { useTranslation } from 'next-i18next';
 import { useAuth } from '@/auth';
 import { FOLLOWS_TABS, followsHref, followsTab } from '@/shared/layout/navigation';
 import { FollowList } from './FollowList';
+import { DashboardHeader } from '@/shared/ui/page';
 
 /**
  * /dashboard/follows?tab=followers|following. The sidebar has an item for each list, so the open
@@ -19,10 +20,7 @@ export const MyFollows = () => {
 
 	return (
 		<Stack spacing={6}>
-			<div>
-				<Typography variant="h1">{t('follows:mine.title')}</Typography>
-				<Typography sx={{ mt: 1.5, color: 'muted' }}>{t('follows:mine.subtitle')}</Typography>
-			</div>
+			<DashboardHeader title={t('follows:mine.title')} subtitle={t('follows:mine.subtitle')} />
 			<Box role="tablist" aria-label={t('follows:mine.tabsLabel')} sx={{ display: 'flex', gap: 6, borderBottom: 1, borderColor: 'border' }}>
 				{FOLLOWS_TABS.map((item) => {
 					const selected = item === kind;

@@ -13,6 +13,7 @@ import { Pagination } from '@/shared/ui/Pagination';
 import { radiusPx } from '@/theme/tokens';
 import { ProfileVisitorsQuery } from '../graphql/visitors';
 import { SETTINGS_PATH, VISITORS_PAGE_SIZE, VISITORS_WINDOW_DAYS, profileVisitorsVariables } from '../lib/overview';
+import { DashboardHeader } from '@/shared/ui/page';
 
 type Visit = ProfileVisitorsData['getProfileVisitors']['list'][number];
 
@@ -28,7 +29,7 @@ const VisitRow = ({ visit }: { visit: Visit }) => {
 			direction="row"
 			spacing={3}
 			alignItems="center"
-			sx={{ p: 4, bgcolor: 'surface', border: 1, borderColor: 'border', borderRadius: radiusPx.lg, minWidth: 0 }}
+			sx={{ p: 4, bgcolor: 'surface', border: 1, borderColor: 'border', borderRadius: radiusPx.xl, minWidth: 0 }}
 		>
 			<Avatar memberId={visitor._id} name={name} image={visitor.memberImage} size={44} />
 			<Box sx={{ flex: 1, minWidth: 0 }}>
@@ -127,15 +128,17 @@ export const ProfileVisitors = () => {
 
 	return (
 		<Stack spacing={6}>
-			<div>
-				<Typography variant="h1">{t('dashboard:visitors.title')}</Typography>
-				<Typography sx={{ mt: 1.5, color: 'muted' }}>
-					{t('dashboard:visitors.subtitle', { days: VISITORS_WINDOW_DAYS })}{' '}
-					<Link component={NextLink} href={SETTINGS_PATH}>
-						{t('dashboard:visitors.privacyLink')}
-					</Link>
-				</Typography>
-			</div>
+			<DashboardHeader
+				title={t('dashboard:visitors.title')}
+				subtitle={
+					<>
+						{t('dashboard:visitors.subtitle', { days: VISITORS_WINDOW_DAYS })}{' '}
+						<Link component={NextLink} href={SETTINGS_PATH}>
+							{t('dashboard:visitors.privacyLink')}
+						</Link>
+					</>
+				}
+			/>
 			{body()}
 		</Stack>
 	);

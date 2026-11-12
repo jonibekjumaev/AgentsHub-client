@@ -1,88 +1,20 @@
 import type { ReactNode } from 'react';
 import { Box } from '@mui/material';
 import { useTranslation } from 'next-i18next';
-import type { AgentCategory } from '@/gql/graphql';
 import { useFormat } from '@/shared/lib/format';
-import { CategoryIcon, categoryTint } from '@/shared/ui/CategoryIcon';
 import { visuallyHidden } from '@/shared/ui/visuallyHidden';
-import { briefFeed, colors, radiusPx } from '@/theme/tokens';
+import { briefFeed } from '@/theme/tokens';
+import { StatusPill } from '@/shared/ui/page';
 import type { DeadlineState } from '../../lib/deadline';
+
+export { CategoryPill, StatusPill } from '@/shared/ui/page';
 
 /*
  * The small pieces of the briefs design (agentshub-briefs), shared by the feed row and the detail page, so a
  * brief looks the same wherever it is shown.
  */
 
-/** A small pill with a colored dot: "● Open", "● Past deadline", "● Closed". */
-export const StatusPill = ({
-	label,
-	colors: pill,
-}: {
-	label: string;
-	colors: { bg: string; text: string; dot: string };
-}) => (
-	<Box
-		component="span"
-		sx={{
-			display: 'inline-flex',
-			alignItems: 'center',
-			gap: 1.5,
-			px: 2.5,
-			py: 0.75,
-			borderRadius: radiusPx.pill,
-			bgcolor: pill.bg,
-			fontSize: 12,
-			fontWeight: 700,
-			color: pill.text,
-		}}
-	>
-		<Box component="span" aria-hidden="true" sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: pill.dot }} />
-		{label}
-	</Box>
-);
-
 const closedPill = { bg: 'neutralSoft', text: 'body', dot: briefFeed.deadline.none.dot } as const;
-
-/** Category tint, a small white circle with the category icon, then the name. */
-export const CategoryPill = ({ category }: { category: AgentCategory }) => {
-	const { t } = useTranslation('common');
-	const [tint, ink] = categoryTint(category);
-	return (
-		<Box
-			component="span"
-			sx={{
-				display: 'inline-flex',
-				alignItems: 'center',
-				gap: 1.5,
-				py: 0.75,
-				pl: 1,
-				pr: 2.5,
-				borderRadius: radiusPx.pill,
-				bgcolor: tint,
-				fontSize: 12,
-				fontWeight: 700,
-				color: 'ink',
-			}}
-		>
-			<Box
-				component="span"
-				aria-hidden="true"
-				sx={{
-					width: 20,
-					height: 20,
-					display: 'grid',
-					placeItems: 'center',
-					borderRadius: '50%',
-					bgcolor: colors.white,
-					color: ink,
-				}}
-			>
-				<CategoryIcon category={category} size={11} />
-			</Box>
-			{t(`common:enums.AgentCategory.${category}`)}
-		</Box>
-	);
-};
 
 /** One fact of the row: a small icon, a visually hidden <dt> for screen readers, the value as <dd>. */
 export const Fact = ({

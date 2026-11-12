@@ -13,7 +13,7 @@ import { ErrorState } from '@/shared/ui/ErrorState';
 import { RHFTextField } from '@/shared/ui/RHFTextField';
 import { SubmitButton } from '@/shared/ui/SubmitButton';
 import { useToast } from '@/shared/ui/toast';
-import { radiusPx } from '@/theme/tokens';
+import { home, radiusPx } from '@/theme/tokens';
 import { CreateAgentMutation, UpdateAgentMutation } from '../../graphql/agentForm';
 import { useImageUploads } from '../../hooks/useImageUploads';
 import {
@@ -110,7 +110,7 @@ const Section = ({ title, id, children }: { title: string; id: string; children:
 	<Box
 		component="section"
 		aria-labelledby={id}
-		sx={{ display: 'flex', flexDirection: 'column', gap: 5, p: 6, bgcolor: 'surface', border: 1, borderColor: 'border', borderRadius: radiusPx.lg }}
+		sx={{ display: 'flex', flexDirection: 'column', gap: 5, p: 6, bgcolor: 'surface', border: 1, borderColor: 'border', borderRadius: home.radius.card }}
 	>
 		<Typography id={id} variant="h2" sx={{ fontSize: 20 }}>
 			{title}

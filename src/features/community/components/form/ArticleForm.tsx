@@ -14,7 +14,7 @@ import { ErrorState } from '@/shared/ui/ErrorState';
 import { RHFTextField } from '@/shared/ui/RHFTextField';
 import { SubmitButton } from '@/shared/ui/SubmitButton';
 import { useToast } from '@/shared/ui/toast';
-import { radiusPx } from '@/theme/tokens';
+import { home, radiusPx } from '@/theme/tokens';
 import { CreateArticleMutation, UpdateArticleMutation, UploadArticleImageMutation } from '../../graphql/articles';
 import {
 	ARTICLE_CATEGORIES,
@@ -100,7 +100,7 @@ export const ArticleForm = ({ mode, articleId, initialValues }: ArticleFormProps
 			component="form"
 			noValidate
 			onSubmit={onSubmit}
-			sx={{ display: 'flex', flexDirection: 'column', gap: 5, p: 6, bgcolor: 'surface', border: 1, borderColor: 'border', borderRadius: radiusPx.lg, maxWidth: 760 }}
+			sx={{ display: 'flex', flexDirection: 'column', gap: 5, p: 6, bgcolor: 'surface', border: 1, borderColor: 'border', borderRadius: home.radius.card, maxWidth: 760 }}
 		>
 			<Controller
 				control={control}

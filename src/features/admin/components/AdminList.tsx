@@ -24,7 +24,8 @@ import { EmptyState } from '@/shared/ui/EmptyState';
 import { ErrorState } from '@/shared/ui/ErrorState';
 import { Pagination } from '@/shared/ui/Pagination';
 import { visuallyHidden } from '@/shared/ui/visuallyHidden';
-import { radiusPx } from '@/theme/tokens';
+import { DashboardHeader } from '@/shared/ui/page';
+import { home } from '@/theme/tokens';
 import { ADMIN_PAGE_SIZE, adminNeedsConfirm, type AdminAction, type AdminListState } from '../lib/admin';
 
 export type AdminRow = { id: string; title: string; cells: ReactNode[]; actions: AdminAction[] };
@@ -143,7 +144,16 @@ export const AdminList = ({
 		if (rows.length === 0) return <EmptyState title={t('admin:empty')} headingLevel="h2" />;
 		return (
 			<>
-				<TableContainer sx={{ bgcolor: 'surface', border: 1, borderColor: 'border', borderRadius: radiusPx.lg }}>
+				<TableContainer
+					sx={{
+						bgcolor: 'surface',
+						border: 1,
+						borderColor: 'border',
+						borderRadius: home.radius.card,
+						'& th': { fontSize: 12, fontWeight: 700, color: 'muted', textTransform: 'uppercase', letterSpacing: '0.04em', bgcolor: 'surfaceMuted' },
+						'& tbody tr:hover': { bgcolor: 'surfaceMuted' },
+					}}
+				>
 					<Table size="small">
 						<Box component="caption" sx={visuallyHidden}>
 							{title}
@@ -162,7 +172,9 @@ export const AdminList = ({
 							{rows.map((row) => (
 								<TableRow key={row.id}>
 									{row.cells.map((cell, index) => (
-										<TableCell key={index} sx={{ overflowWrap: 'anywhere' }}>
+										// Only the first column (nick, title) may break anywhere. Elsewhere words stay whole ("Creator", "Blocked"):
+										// Chrome lets even break-word shrink a table column to one letter, so those cells wrap at spaces only.
+										<TableCell key={index} sx={index === 0 ? { overflowWrap: 'anywhere' } : { overflowWrap: 'normal', wordBreak: 'keep-all' }}>
 											{cell}
 										</TableCell>
 									))}
@@ -195,10 +207,7 @@ export const AdminList = ({
 
 	return (
 		<Stack spacing={5}>
-			<div>
-				<Typography variant="h1">{title}</Typography>
-				<Typography sx={{ mt: 1.5, color: 'muted' }}>{subtitle}</Typography>
-			</div>
+			<DashboardHeader title={title} subtitle={subtitle} />
 			<Stack direction="row" spacing={3} useFlexGap flexWrap="wrap" alignItems="center">
 				<Stack direction="row" spacing={2} alignItems="center">
 					<Typography component="label" htmlFor={statusId} variant="body2" sx={{ color: 'muted' }}>

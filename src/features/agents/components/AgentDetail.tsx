@@ -1,7 +1,8 @@
+import type { ReactNode } from 'react';
 import NextLink from 'next/link';
 import Image from 'next/image';
 import { useQuery } from '@apollo/client';
-import { Box, Button, Chip, Link, Skeleton, Stack, Typography, type SxProps, type Theme } from '@mui/material';
+import { Box, Button, Chip, Link, Skeleton, Stack, Typography } from '@mui/material';
 import { OpenInNew as OpenInNewIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
 import { CommentsSection, productCommentTarget } from '@/features/comments';
@@ -10,11 +11,20 @@ import type { AgentDetailQuery as AgentDetailData } from '@/gql/graphql';
 import { useFormat } from '@/shared/lib/format';
 import { mediaUrl } from '@/shared/lib/media';
 import { Avatar } from '@/shared/ui/Avatar';
-import { CategoryChip } from '@/shared/ui/CategoryChip';
 import { ErrorState } from '@/shared/ui/ErrorState';
 import { PriceTag } from '@/shared/ui/PriceTag';
 import { visuallyHidden } from '@/shared/ui/visuallyHidden';
-import { radiusPx } from '@/theme/tokens';
+import {
+	CategoryPill,
+	NightBand,
+	NightBreadcrumbs,
+	cardLabelSx,
+	detailAsideSx,
+	detailGridSx,
+	pageCardSx,
+	pageFrameSx,
+} from '@/shared/ui/page';
+import { fonts, home, radiusPx } from '@/theme/tokens';
 import { AgentsListQuery } from '../graphql/agents';
 import { AgentDetailQuery } from '../graphql/agentDetail';
 import { MORE_FROM_SHOWN, isExternalHttpUrl, moreFromVariables } from '../lib/detail';
@@ -27,16 +37,7 @@ import { LikeButton } from './LikeButton';
 type Agent = AgentDetailData['getProduct'];
 type Creator = NonNullable<Agent['memberData']>;
 
-const cardSx = {
-	display: 'flex',
-	flexDirection: 'column',
-	gap: 4,
-	p: 6,
-	bgcolor: 'surface',
-	border: 1,
-	borderColor: 'border',
-	borderRadius: radiusPx.lg,
-} as const;
+const cardSx = pageCardSx;
 
 const statBoxSx = {
 	flex: 1,
@@ -57,31 +58,29 @@ export type AgentDetailVariant = 'public' | 'owner';
 
 const Breadcrumbs = ({ agent }: { agent: Agent }) => {
 	const { t } = useTranslation(['agents', 'common']);
-	const linkSx = { color: 'muted', fontWeight: 500, '&:hover': { color: 'primary.main' } };
-
 	return (
-		<Box component="nav" aria-label={t('agents:detail.breadcrumb')}>
-			<Box
-				component="ol"
-				sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, m: 0, p: 0, listStyle: 'none', fontSize: 13, color: 'muted' }}
-			>
-				<li>
-					<Link component={NextLink} href={agentsHref(DEFAULT_FILTERS)} sx={linkSx}>
-						{t('common:nav.agents')}
-					</Link>
-				</li>
-				<li aria-hidden="true">/</li>
-				<li>
-					<Link component={NextLink} href={agentsHref({ ...DEFAULT_FILTERS, categories: [agent.productCategory] })} sx={linkSx}>
-						{t(`common:enums.AgentCategory.${agent.productCategory}`)}
-					</Link>
-				</li>
-				<li aria-hidden="true">/</li>
-				<Box component="li" aria-current="page" sx={{ color: 'ink', fontWeight: 600, overflowWrap: 'anywhere' }}>
-					{agent.productTitle}
-				</Box>
-			</Box>
-		</Box>
+		<NightBreadcrumbs
+			label={t('agents:detail.breadcrumb')}
+			items={[
+				{ label: t('common:nav.agents'), href: agentsHref(DEFAULT_FILTERS) },
+				{
+					label: t(`common:enums.AgentCategory.${agent.productCategory}`),
+					href: agentsHref({ ...DEFAULT_FILTERS, categories: [agent.productCategory] }),
+				},
+				{ label: agent.productTitle },
+			]}
+		/>
+	);
+};
+
+/** The update date (server and browser may sit in different time zones: the browser's date wins). */
+const Updated = ({ agent }: { agent: Agent }) => {
+	const { t } = useTranslation('agents');
+	const format = useFormat();
+	return (
+		<time dateTime={agent.updatedAt} suppressHydrationWarning>
+			{t('agents:detail.updated', { date: format.date(agent.updatedAt) })}
+		</time>
 	);
 };
 
@@ -93,9 +92,9 @@ const PriceBox = ({ agent, owner }: { agent: Agent; owner: boolean }) => {
 
 	return (
 		<Box sx={cardSx}>
-			<Box>
+			<Box sx={{ '& > :first-of-type': { fontFamily: fonts.display, letterSpacing: '-0.03em' } }}>
 				<PriceTag pricing={agent.productPricing} price={agent.productPrice} size="large" />
-				<Typography variant="meta" sx={{ mt: 1 }}>
+				<Typography variant="meta" sx={{ mt: 1.5 }}>
 					{t(`agents:detail.price.${agent.productPricing}`)}
 				</Typography>
 			</Box>
@@ -139,7 +138,7 @@ const CreatorBox = ({ agentId, creator }: { agentId: string; creator: Creator })
 
 	return (
 		<Box sx={cardSx}>
-			<Typography variant="overline" component="h2">
+			<Typography component="h2" sx={cardLabelSx}>
 				{t('agents:detail.creator.title')}
 			</Typography>
 			<Stack direction="row" spacing={3} alignItems="center" sx={{ minWidth: 0 }}>
@@ -170,7 +169,7 @@ const DeletedAuthorBox = () => {
 	const { t } = useTranslation(['agents', 'common']);
 	return (
 		<Box sx={cardSx}>
-			<Typography variant="overline" component="h2">
+			<Typography component="h2" sx={cardLabelSx}>
 				{t('agents:detail.creator.title')}
 			</Typography>
 			<Stack direction="row" spacing={3} alignItems="center">
@@ -190,7 +189,7 @@ const MoreFromCreator = ({ agentId, creator }: { agentId: string; creator: Creat
 
 	return (
 		<Box component="section" aria-labelledby="more-from-creator" sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-			<Typography id="more-from-creator" variant="h2">
+			<Typography id="more-from-creator" variant="h2" sx={{ fontFamily: fonts.display, letterSpacing: '-0.02em' }}>
 				{t('agents:detail.moreFrom', { nick: creator.memberNick })}
 			</Typography>
 			<Box
@@ -213,9 +212,10 @@ const MoreFromCreator = ({ agentId, creator }: { agentId: string; creator: Creat
 									bgcolor: 'surface',
 									border: 1,
 									borderColor: 'border',
-									borderRadius: radiusPx.lg,
+									borderRadius: home.radius.card,
 									color: 'ink',
-									'&:hover': { borderColor: 'inputBorder' },
+									transition: 'border-color 200ms',
+									'&:hover': { borderColor: 'primary.main' },
 								}}
 							>
 								<Box
@@ -263,107 +263,113 @@ const DetailSkeleton = () => {
 };
 
 /**
- * /agents/[id] (AgentDetail.html). Public data comes from the SSR cache; contacts load after auth.
+ * /agents/[id], in the catalog language: the night band (breadcrumb, category pill, title, update date), the gallery
+ * and "About" cards, an aside with the price + like and the creator + contacts, then questions and "More from".
+ * Public data comes from the SSR cache; contacts load after auth.
  * variant 'owner' renders the same view inside the dashboard preview; that page loads the data itself.
  */
 export const AgentDetail = ({ agentId, variant = 'public' }: { agentId: string; variant?: AgentDetailVariant }) => {
 	const { t } = useTranslation(['agents', 'common']);
-	const format = useFormat();
 	const { data, loading, error, refetch } = useQuery(AgentDetailQuery, { variables: { productId: agentId } });
 	const agent = data?.getProduct;
 	const owner = variant === 'owner';
 
-	const body = () => {
-		if (loading && !agent) return <DetailSkeleton />;
-		if (!agent) return <ErrorState error={error} title={t('agents:detail.errorTitle')} onRetry={() => void refetch()} />;
-		const creator = agent.memberData;
-		const tags = agent.productTags ?? [];
+	const container = (children: ReactNode) =>
+		// Inside the dashboard the layout already sets the width and padding.
+		owner ? <Box sx={{ display: 'flex', flexDirection: 'column', gap: 6 }}>{children}</Box> : <Box sx={pageFrameSx}>{children}</Box>;
 
-		return (
-			<>
-				{!owner && <Breadcrumbs agent={agent} />}
-				{/*
-				  DOM order = the mobile order: header, gallery, price + creator, about, questions.
-				  From md the price + creator column moves to the right and spans every row (AgentDetail.html).
-				*/}
-				<Box
-					sx={{
-						display: 'grid',
-						gridTemplateColumns: { xs: 'minmax(0, 1fr)', md: 'minmax(0, 1fr) 340px' },
-						// The last row takes the spare height, so a tall right column never spreads the left one.
-						gridTemplateRows: { md: 'auto auto auto 1fr' },
-						columnGap: 8,
-						rowGap: 7,
-						alignItems: 'start',
-					}}
-				>
+	if (loading && !agent) return container(<DetailSkeleton />);
+	if (!agent) return container(<ErrorState error={error} title={t('agents:detail.errorTitle')} onRetry={() => void refetch()} />);
+	const creator = agent.memberData;
+	const tags = agent.productTags ?? [];
+
+	const content = (
+		<>
+			{/*
+			  DOM order = the mobile order: (owner: header), gallery, price + creator, about, questions.
+			  From md the price + creator column moves to the right and spans every row.
+			*/}
+			<Box sx={{ ...detailGridSx, gridTemplateRows: { md: owner ? 'auto auto auto 1fr' : 'auto auto 1fr' } }}>
+				{owner && (
+					// The dashboard preview has no night band: the title sits in the page, as before.
 					<Box component="header" sx={{ display: 'flex', flexDirection: 'column', gap: 2.5 }}>
 						<Stack direction="row" spacing={2} alignItems="center" useFlexGap flexWrap="wrap">
-							<CategoryChip category={agent.productCategory} size="medium" />
+							<CategoryPill category={agent.productCategory} />
 							<Typography variant="meta" component="span">
-								{/* Server and browser may sit in different time zones: the browser's date wins. */}
-								<time dateTime={agent.updatedAt} suppressHydrationWarning>
-									{t('agents:detail.updated', { date: format.date(agent.updatedAt) })}
-								</time>
+								<Updated agent={agent} />
 							</Typography>
 						</Stack>
-						<Typography variant="h1" sx={{ fontSize: { xs: 32, md: 40 }, overflowWrap: 'anywhere' }}>
+						<Typography
+							variant="h1"
+							sx={{ fontFamily: fonts.display, fontSize: { xs: 32, md: 40 }, letterSpacing: '-0.03em', overflowWrap: 'anywhere' }}
+						>
 							{agent.productTitle}
 						</Typography>
 					</Box>
+				)}
+				<Box sx={{ ...cardSx, p: { xs: 3, sm: 4 } }}>
 					<AgentGallery title={agent.productTitle} images={agent.productImages} />
-					<Box
-						component="aside"
-						sx={{ gridColumn: { md: 2 }, gridRow: { md: '1 / -1' }, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 4 }}
-					>
-						<PriceBox agent={agent} owner={owner} />
-						{!owner && (creator ? <CreatorBox agentId={agent._id} creator={creator} /> : <DeletedAuthorBox />)}
-					</Box>
-					<Box component="section" aria-labelledby="agent-about" sx={cardSx}>
-						<Typography id="agent-about" variant="h2" sx={{ fontSize: 20 }}>
-							{t('agents:detail.about')}
-						</Typography>
-						{/* Plain text from the creator (CLAUDE.md rule 7). */}
-						<Typography sx={{ whiteSpace: 'pre-line', overflowWrap: 'anywhere', color: 'body', lineHeight: 1.7 }}>
-							{agent.productDesc}
-						</Typography>
-						{tags.length > 0 && (
-							<Box
-								component="ul"
-								aria-label={t('agents:detail.tagsLabel')}
-								sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5, m: 0, p: 0, listStyle: 'none' }}
-							>
-								{tags.map((tag) => (
-									<li key={tag}>
-										<Chip
-											component={NextLink}
-											href={agentsHref({ ...DEFAULT_FILTERS, tags: [tag] })}
-											clickable
-											label={tag}
-											aria-label={t('agents:detail.tagLink', { tag })}
-											sx={{ borderRadius: radiusPx.sm, bgcolor: 'neutralSoft', color: 'body', fontWeight: 600, height: 26 }}
-										/>
-									</li>
-								))}
-							</Box>
-						)}
-					</Box>
-					{/* §3.8: everyone reads; members ask on ACTIVE agents; a PAUSED agent (owner preview) takes no new comments. */}
-					<CommentsSection
-						target={productCommentTarget(agent._id)}
-						authorId={creator?._id}
-						canPost={agent.productStatus === 'ACTIVE'}
-					/>
 				</Box>
-				{creator && !owner && <MoreFromCreator agentId={agent._id} creator={creator} />}
-			</>
-		);
-	};
+				<Box component="aside" sx={detailAsideSx}>
+					<PriceBox agent={agent} owner={owner} />
+					{!owner && (creator ? <CreatorBox agentId={agent._id} creator={creator} /> : <DeletedAuthorBox />)}
+				</Box>
+				<Box component="section" aria-labelledby="agent-about" sx={cardSx}>
+					<Typography id="agent-about" variant="h2" sx={{ fontSize: 20, fontFamily: fonts.display, letterSpacing: '-0.02em' }}>
+						{t('agents:detail.about')}
+					</Typography>
+					{/* Plain text from the creator (CLAUDE.md rule 7). */}
+					<Typography sx={{ whiteSpace: 'pre-line', overflowWrap: 'anywhere', color: 'body', lineHeight: 1.7 }}>
+						{agent.productDesc}
+					</Typography>
+					{tags.length > 0 && (
+						<Box
+							component="ul"
+							aria-label={t('agents:detail.tagsLabel')}
+							sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5, m: 0, p: 0, listStyle: 'none' }}
+						>
+							{tags.map((tag) => (
+								<li key={tag}>
+									<Chip
+										component={NextLink}
+										href={agentsHref({ ...DEFAULT_FILTERS, tags: [tag] })}
+										clickable
+										label={`#${tag}`}
+										aria-label={t('agents:detail.tagLink', { tag })}
+										sx={{ borderRadius: radiusPx.pill, bgcolor: 'neutralSoft', color: 'body', fontWeight: 600, height: 28 }}
+									/>
+								</li>
+							))}
+						</Box>
+					)}
+				</Box>
+				{/* §3.8: everyone reads; members ask on ACTIVE agents; a PAUSED agent (owner preview) takes no new comments. */}
+				<CommentsSection
+					target={productCommentTarget(agent._id)}
+					authorId={creator?._id}
+					canPost={agent.productStatus === 'ACTIVE'}
+				/>
+			</Box>
+			{creator && !owner && <MoreFromCreator agentId={agent._id} creator={creator} />}
+		</>
+	);
 
-	// Inside the dashboard the layout already sets the width and padding.
-	const frameSx: SxProps<Theme> = owner
-		? { display: 'flex', flexDirection: 'column', gap: 6 }
-		: { maxWidth: 1200, mx: 'auto', px: { xs: 4, sm: 6 }, pt: 6, pb: 16, display: 'flex', flexDirection: 'column', gap: 6 };
+	if (owner) return container(content);
 
-	return <Box sx={frameSx}>{body()}</Box>;
+	return (
+		<>
+			<NightBand
+				title={agent.productTitle}
+				top={<Breadcrumbs agent={agent} />}
+				pills={<CategoryPill category={agent.productCategory} />}
+				meta={
+					<>
+						<Updated agent={agent} />
+						{creator && ` · @${creator.memberNick}`}
+					</>
+				}
+			/>
+			{container(content)}
+		</>
+	);
 };

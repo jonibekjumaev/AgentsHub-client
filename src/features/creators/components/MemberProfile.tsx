@@ -5,14 +5,15 @@ import { useQuery } from '@apollo/client';
 import { Box, Button, Link, Skeleton, Stack, Typography } from '@mui/material';
 import { ArticleOutlined as ArticleOutlinedIcon, AssignmentOutlined as AssignmentOutlinedIcon, ChevronRight as ChevronRightIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
-import { BriefRow, BriefsListQuery } from '@/features/briefs';
+import { useAuth } from '@/auth';
+import { BriefFeedRow, BriefsListQuery, feedSx } from '@/features/briefs';
 import { ArticleCard, ArticlesListQuery } from '@/features/community';
 import { FollowList } from '@/features/follows';
 import type { MemberProfileQuery as MemberProfileData } from '@/gql/graphql';
 import { useFormat } from '@/shared/lib/format';
 import { EmptyState } from '@/shared/ui/EmptyState';
 import { ErrorState } from '@/shared/ui/ErrorState';
-import { radiusPx } from '@/theme/tokens';
+import { fonts, radiusPx } from '@/theme/tokens';
 import { MemberProfileQuery } from '../graphql/creators';
 import { CREATORS_PATH } from '../lib/creatorsQuery';
 import { PROFILE_WORK_PAGE_SIZE, isCreator, parseProfileTab, profileArticlesVariables, profileBriefsVariables, type ProfileTab } from '../lib/profile';
@@ -25,6 +26,8 @@ type Member = MemberProfileData['getMember'];
 /** A user's OPEN briefs, "Show more" in steps. */
 const ProfileBriefs = ({ member }: { member: Member }) => {
 	const { t } = useTranslation('creators');
+	const { status } = useAuth();
+	const [now] = useState(() => new Date());
 	const [limit, setLimit] = useState(PROFILE_WORK_PAGE_SIZE);
 	const { data, previousData, loading, error, refetch } = useQuery(BriefsListQuery, { variables: profileBriefsVariables(member._id, limit) });
 	const shown = data ?? previousData;
@@ -45,10 +48,10 @@ const ProfileBriefs = ({ member }: { member: Member }) => {
 	}
 	return (
 		<Stack spacing={4}>
-			<Box component="ul" aria-label={t('creators:profile.tabs.briefs')} sx={{ m: 0, p: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 3 }}>
-				{briefs.map((brief) => (
+			<Box component="ul" aria-label={t('creators:profile.tabs.briefs')} sx={feedSx}>
+				{briefs.map((brief, index) => (
 					<li key={brief._id}>
-						<BriefRow brief={brief} />
+						<BriefFeedRow brief={brief} index={index} guest={status === 'guest'} now={now} headingLevel="h3" />
 					</li>
 				))}
 			</Box>
@@ -114,7 +117,7 @@ const SectionHeader = ({ member, tab }: { member: Member; tab: ProfileTab }) => 
 				{t(`creators:profile.groups.${navGroupOf(tab)}`)}
 			</Typography>
 			<Stack direction="row" spacing={3} alignItems="center" sx={{ mt: 1 }}>
-				<Typography id="profile-section-title" variant="h2" sx={{ fontSize: { xs: 24, md: 28 } }}>
+				<Typography id="profile-section-title" variant="h2" sx={{ fontFamily: fonts.display, fontSize: { xs: 24, md: 30 }, fontWeight: 700, letterSpacing: '-0.02em' }}>
 					{label}
 				</Typography>
 				<Box

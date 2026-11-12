@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { FavoriteBorder as FavoriteBorderIcon, History as HistoryIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
 import { EmptyState } from '@/shared/ui/EmptyState';
@@ -10,6 +10,7 @@ import { CardSkeleton } from '@/shared/ui/Skeletons';
 import { FavoriteAgentsQuery, VisitedAgentsQuery } from '../../graphql/saved';
 import { DEFAULT_FILTERS, agentsHref } from '../../lib/listQuery';
 import { AgentCard } from '../AgentCard';
+import { DashboardHeader } from '@/shared/ui/page';
 
 export const SAVED_PAGE_SIZE = 9;
 const gridSx = { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 5 } as const;
@@ -67,10 +68,7 @@ export const SavedAgents = ({ kind }: { kind: 'favorites' | 'visited' }) => {
 
 	return (
 		<Stack spacing={6}>
-			<div>
-				<Typography variant="h1">{t(`saved:${kind}.title`)}</Typography>
-				<Typography sx={{ mt: 1.5, color: 'muted' }}>{t(`saved:${kind}.subtitle`)}</Typography>
-			</div>
+			<DashboardHeader title={t(`saved:${kind}.title`)} subtitle={t(`saved:${kind}.subtitle`)} />
 			{body()}
 		</Stack>
 	);

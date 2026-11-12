@@ -28,7 +28,7 @@ const MemberRow = ({ member }: { member: FollowMemberFragment }) => {
 			direction="row"
 			spacing={3}
 			alignItems="center"
-			sx={{ p: 4, bgcolor: 'surface', border: 1, borderColor: 'border', borderRadius: radiusPx.lg, minWidth: 0 }}
+			sx={{ p: 4, bgcolor: 'surface', border: 1, borderColor: 'border', borderRadius: radiusPx.xl, minWidth: 0 }}
 		>
 			<Avatar memberId={member._id} name={name} image={member.memberImage} size={44} />
 			<Box sx={{ flex: 1, minWidth: 0 }}>

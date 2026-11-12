@@ -25,6 +25,8 @@ type BriefFeedRowProps = {
 	/** A guest sees "Contact after sign-in" (D-07): contacts are for signed-in members only. */
 	guest: boolean;
 	now: Date;
+	/** h2 in the /briefs feed; h3 where the list sits under a section title (the member profile). */
+	headingLevel?: 'h2' | 'h3';
 };
 
 /**
@@ -33,7 +35,7 @@ type BriefFeedRowProps = {
  * left; the budget, Save (D-47) and "View brief" on the right. Wraps into one column on narrow screens.
  * Also the row of the saved-briefs list.
  */
-export const BriefFeedRow = ({ brief, index, guest, now }: BriefFeedRowProps) => {
+export const BriefFeedRow = ({ brief, index, guest, now, headingLevel = 'h2' }: BriefFeedRowProps) => {
 	const { t } = useTranslation('briefs');
 	const format = useFormat();
 	const href = briefHref(brief._id);
@@ -73,6 +75,7 @@ export const BriefFeedRow = ({ brief, index, guest, now }: BriefFeedRowProps) =>
 				<Typography
 					id={`brief-${brief._id}`}
 					variant="h2"
+					component={headingLevel}
 					sx={{ fontFamily: fonts.display, fontSize: 23, lineHeight: 1.15, fontWeight: 700, letterSpacing: '-0.02em', overflowWrap: 'anywhere' }}
 				>
 					<Box

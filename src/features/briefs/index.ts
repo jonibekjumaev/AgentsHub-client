@@ -2,6 +2,8 @@ export { BriefDetail } from './components/BriefDetail';
 export { BriefDetailSeo } from './components/BriefDetailSeo';
 export { BriefBudget, BriefDeadline, BriefRow } from './components/BriefRow';
 export { BriefsCatalog } from './components/BriefsCatalog';
+export { BriefFeedRow } from './components/feed/BriefFeedRow';
+export { feedSx } from './components/feed/FeedList';
 export { BriefsSeo } from './components/BriefsSeo';
 export { SaveBriefButton } from './components/SaveBriefButton';
 export { SavedBriefs } from './components/saved/SavedBriefs';

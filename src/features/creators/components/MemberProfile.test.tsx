@@ -5,11 +5,18 @@ import mockRouter from 'next-router-mock';
 import { beforeEach, describe, expect, it } from 'vitest';
 import type { Me } from '@/auth';
 import { AgentsListQuery } from '@/features/agents';
+import { BriefsListQuery } from '@/features/briefs';
 import { ArticlesListQuery } from '@/features/community';
 import { MyFollowingIdsQuery, SubscribeMutation } from '@/features/follows';
 import { renderWithProviders } from '@/test/renderWithProviders';
 import { MemberProfileQuery, MemberViewerQuery } from '../graphql/creators';
-import { DEFAULT_PROFILE_AGENT_FILTERS, profileAgentsVariables, profileArticlesVariables, type ProfileAgentFilters } from '../lib/profile';
+import {
+	DEFAULT_PROFILE_AGENT_FILTERS,
+	profileAgentsVariables,
+	profileArticlesVariables,
+	profileBriefsVariables,
+	type ProfileAgentFilters,
+} from '../lib/profile';
 import { CREATOR_ID, VIEWER_ID, makeProfile } from '../test/fixtures';
 import { MemberProfile } from './MemberProfile';
 
@@ -44,6 +51,34 @@ const articlesMock = (titles: string[], total = titles.length): MockedResponse =
 					memberData: { __typename: 'Member', _id: CREATOR_ID, memberNick: 'nova_labs', memberFullName: 'Nova Labs', memberImage: '' },
 				})),
 				metaCounter: [{ __typename: 'TotalCounter', total }],
+			},
+		},
+	},
+});
+
+const briefsMock = (titles: string[]): MockedResponse => ({
+	request: { query: BriefsListQuery, variables: profileBriefsVariables(CREATOR_ID) },
+	result: {
+		data: {
+			getBriefs: {
+				__typename: 'Briefs',
+				list: titles.map((briefTitle, index) => ({
+					__typename: 'Brief',
+					_id: `6ac7992dd87bde19b9216e${String(index).padStart(2, '0')}`,
+					briefTitle,
+					briefContent: 'A support bot for a bakery.',
+					briefCategory: 'CUSTOMER_SUPPORT',
+					briefStatus: 'OPEN',
+					briefBudget: 300,
+					briefDeadline: null,
+					briefViews: 12,
+					briefComments: 0,
+					createdAt: '2026-10-01T10:00:00.000Z',
+					closedAt: null,
+					meSaved: null,
+					memberData: { __typename: 'Member', _id: CREATOR_ID, memberNick: 'nova_labs' },
+				})),
+				metaCounter: [{ __typename: 'TotalCounter', total: titles.length }],
 			},
 		},
 	},
@@ -128,6 +163,17 @@ describe('MemberProfile (S6)', () => {
 
 		await user.click(await screen.findByRole('button', { name: 'Follow @nova_labs' }));
 		expect(await screen.findByText('You follow @nova_labs now.')).toBeInTheDocument();
+	});
+
+	it("lists a user's briefs in the /briefs feed rows, titles one level under the section title", async () => {
+		renderWithProviders(<MemberProfile memberId={CREATOR_ID} />, {
+			mocks: [profileMock(makeProfile({ memberType: 'USER' })), briefsMock(['Bakery support bot'])],
+			auth: { status: 'guest' },
+		});
+
+		const list = await screen.findByRole('list', { name: 'Open briefs' });
+		expect(within(list).getByRole('heading', { level: 3, name: 'Bakery support bot' })).toBeInTheDocument();
+		expect(screen.getByRole('heading', { level: 2, name: 'Open briefs' })).toBeInTheDocument();
 	});
 
 	it('lists the member\'s articles on ?tab=articles, with "Show more"', async () => {

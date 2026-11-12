@@ -1,7 +1,7 @@
 import type { FormEventHandler, ReactNode } from 'react';
 import { Box, Skeleton, Typography } from '@mui/material';
 import { useTranslation } from 'next-i18next';
-import { radiusPx } from '@/theme/tokens';
+import { fonts, home, shadows } from '@/theme/tokens';
 
 type AuthCardProps = {
 	title: string;
@@ -19,14 +19,15 @@ const cardSx = {
 	bgcolor: 'surface',
 	border: 1,
 	borderColor: 'border',
-	borderRadius: radiusPx.xl,
+	borderRadius: home.radius.card,
+	boxShadow: shadows.raised,
 } as const;
 
 /** The form shell of Login.html / Signup.html: h1 + subtitle, then the fields. */
 export const AuthCard = ({ title, subtitle, onSubmit, children }: AuthCardProps) => (
 	<Box component="form" noValidate onSubmit={onSubmit} sx={cardSx}>
 		<Box>
-			<Typography variant="h1" sx={{ fontSize: 28 }}>
+			<Typography variant="h1" sx={{ fontFamily: fonts.display, fontSize: 30, fontWeight: 700, letterSpacing: '-0.02em' }}>
 				{title}
 			</Typography>
 			<Typography sx={{ mt: 2, color: 'muted' }}>{subtitle}</Typography>

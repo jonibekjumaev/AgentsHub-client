@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react';
-import NextLink from 'next/link';
 import { useQuery } from '@apollo/client';
-import { Box, Link, Skeleton, Stack, Typography } from '@mui/material';
+import { Box, Skeleton, Stack, Typography } from '@mui/material';
 import { PauseCircleOutline as PauseIcon, SearchOff as SearchOffIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
 import { useAuth } from '@/auth';
@@ -15,26 +14,17 @@ import { EMPTY_AGENT_FORM, fromAgent } from '../../lib/agentForm';
 import { isObjectId } from '../../lib/detail';
 import { MY_AGENTS_PATH } from '../../lib/myAgents';
 import { AgentForm } from './AgentForm';
+import { DashboardHeader } from '@/shared/ui/page';
 
 const PageHeader = ({ current, title, subtitle }: { current: string; title: string; subtitle: string }) => {
 	const { t } = useTranslation('agents');
 	return (
 		<Box sx={{ mb: 6 }}>
-			<Box component="nav" aria-label={t('agents:detail.breadcrumb')} sx={{ fontSize: 13, color: 'muted', mb: 3 }}>
-				<Box component="ol" sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, m: 0, p: 0, listStyle: 'none' }}>
-					<li>
-						<Link component={NextLink} href={MY_AGENTS_PATH} sx={{ color: 'muted', fontWeight: 500 }}>
-							{t('agents:form.breadcrumb')}
-						</Link>
-					</li>
-					<li aria-hidden="true">/</li>
-					<Box component="li" aria-current="page" sx={{ color: 'ink', fontWeight: 600, overflowWrap: 'anywhere' }}>
-						{current}
-					</Box>
-				</Box>
-			</Box>
-			<Typography variant="h1">{title}</Typography>
-			<Typography sx={{ mt: 1.5, color: 'muted' }}>{subtitle}</Typography>
+			<DashboardHeader
+				crumbs={{ label: t('agents:detail.breadcrumb'), items: [{ label: t('agents:form.breadcrumb'), href: MY_AGENTS_PATH }, { label: current }] }}
+				title={title}
+				subtitle={subtitle}
+			/>
 		</Box>
 	);
 };

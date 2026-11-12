@@ -20,7 +20,7 @@ import { mediaUrl } from '@/shared/lib/media';
 import { ConfirmDialog } from '@/shared/ui/ConfirmDialog';
 import { ErrorState } from '@/shared/ui/ErrorState';
 import { StatusChip } from '@/shared/ui/StatusChip';
-import { radiusPx } from '@/theme/tokens';
+import { home, radiusPx } from '@/theme/tokens';
 import { CreatorAgentsQuery } from '../../graphql/creatorAgents';
 import { useAgentStatusAction } from '../../hooks/useAgentStatusAction';
 import { MY_AGENTS_PATH, agentEditHref, agentPreviewHref, myAgentsVariables, needsConfirm, type StatusAction } from '../../lib/myAgents';
@@ -211,7 +211,7 @@ export const RecentAgents = () => {
 		<Box
 			component="section"
 			aria-labelledby="recent-agents"
-			sx={{ bgcolor: 'surface', border: 1, borderColor: 'border', borderRadius: radiusPx.xl, overflow: 'hidden' }}
+			sx={{ bgcolor: 'surface', border: 1, borderColor: 'border', borderRadius: home.radius.card, overflow: 'hidden' }}
 		>
 			<Stack
 				direction="row"

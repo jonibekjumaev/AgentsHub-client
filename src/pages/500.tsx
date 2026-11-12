@@ -18,6 +18,7 @@ const ServerErrorPage: NextPageWithLayout = () => {
 		<>
 			<Seo title={t('common:errorPages.serverError.title')} noindex />
 			<StatusPage
+				variant="band"
 				code="500"
 				icon={<ErrorOutlineIcon />}
 				title={t('common:errorPages.serverError.title')}

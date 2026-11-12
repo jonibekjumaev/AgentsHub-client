@@ -10,7 +10,7 @@ import { mediaUrl } from '@/shared/lib/media';
 import { PriceTag } from '@/shared/ui/PriceTag';
 import { StatusChip } from '@/shared/ui/StatusChip';
 import { visuallyHidden } from '@/shared/ui/visuallyHidden';
-import { radiusPx } from '@/theme/tokens';
+import { home, radiusPx } from '@/theme/tokens';
 import { agentEditHref, agentPreviewHref, statusActions, type StatusAction } from '../../lib/myAgents';
 
 export const editAgentHref = agentEditHref;
@@ -66,7 +66,7 @@ export const MyAgentsTable = ({ agents, busyId, onAction }: MyAgentsTableProps) 
 				bgcolor: 'surface',
 				border: 1,
 				borderColor: 'border',
-				borderRadius: radiusPx.lg,
+				borderRadius: home.radius.card,
 				'&:focus-visible': { outline: 2, outlineStyle: 'solid', outlineColor: 'primary.main', outlineOffset: 2 },
 			}}
 		>

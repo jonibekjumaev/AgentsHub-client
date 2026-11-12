@@ -38,6 +38,7 @@ import {
 } from '../../lib/myBriefs';
 import { BriefBudget } from '../BriefRow';
 import { ReopenDialog } from './ReopenDialog';
+import { DashboardHeader } from '@/shared/ui/page';
 
 type Pending = { brief: MyBriefRowFragment; action: BriefAction };
 
@@ -88,7 +89,7 @@ const MyBriefRow = ({ brief, busy, onAction }: RowProps) => {
 				bgcolor: closed ? 'surfaceMuted' : 'surface',
 				border: 1,
 				borderColor: 'border',
-				borderRadius: radiusPx.lg,
+				borderRadius: radiusPx.xl,
 			}}
 		>
 			<Box sx={{ flex: '999 1 360px', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 2 }}>
@@ -257,17 +258,16 @@ export const MyBriefs = () => {
 
 	return (
 		<Stack spacing={6}>
-			<Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', justifyContent: 'space-between', gap: 4 }}>
-				<Box>
-					<Typography ref={headingRef} tabIndex={-1} variant="h1" sx={{ outline: 'none' }}>
-						{t('briefs:mine.title')}
-					</Typography>
-					<Typography sx={{ mt: 1.5, color: 'muted' }}>{t('briefs:mine.subtitle')}</Typography>
-				</Box>
-				<Button component={NextLink} href={NEW_BRIEF_PATH} startIcon={<AddIcon />} sx={{ height: 42 }}>
-					{t('briefs:list.post')}
-				</Button>
-			</Box>
+			<DashboardHeader
+				headingRef={headingRef}
+				title={t('briefs:mine.title')}
+				subtitle={t('briefs:mine.subtitle')}
+				action={
+					<Button component={NextLink} href={NEW_BRIEF_PATH} startIcon={<AddIcon />} sx={{ height: 42 }}>
+						{t('briefs:list.post')}
+					</Button>
+				}
+			/>
 
 			<Box
 				component="nav"

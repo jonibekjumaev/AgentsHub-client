@@ -1,8 +1,7 @@
 import type { ReactNode } from 'react';
-import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
-import { Box, Link, Skeleton, Stack, Typography } from '@mui/material';
+import { Box, Skeleton, Stack, Typography } from '@mui/material';
 import { LockOutlined as LockOutlinedIcon, SearchOff as SearchOffIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
 import { useAuth } from '@/auth';
@@ -17,26 +16,17 @@ import { EMPTY_BRIEF_FORM, fromBrief, prefillTitle } from '../../lib/briefForm';
 import { isObjectId } from '../../lib/detail';
 import { MY_BRIEFS_PATH } from '../../lib/myBriefs';
 import { BriefForm } from './BriefForm';
+import { DashboardHeader } from '@/shared/ui/page';
 
 const PageHeader = ({ current, title, subtitle }: { current: string; title: string; subtitle: string }) => {
 	const { t } = useTranslation('briefs');
 	return (
 		<Box sx={{ mb: 6 }}>
-			<Box component="nav" aria-label={t('briefs:detail.breadcrumb')} sx={{ fontSize: 13, color: 'muted', mb: 3 }}>
-				<Box component="ol" sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, m: 0, p: 0, listStyle: 'none' }}>
-					<li>
-						<Link component={NextLink} href={MY_BRIEFS_PATH} sx={{ color: 'muted', fontWeight: 500 }}>
-							{t('briefs:mine.title')}
-						</Link>
-					</li>
-					<li aria-hidden="true">/</li>
-					<Box component="li" aria-current="page" sx={{ color: 'ink', fontWeight: 600, overflowWrap: 'anywhere' }}>
-						{current}
-					</Box>
-				</Box>
-			</Box>
-			<Typography variant="h1">{title}</Typography>
-			<Typography sx={{ mt: 1.5, color: 'muted' }}>{subtitle}</Typography>
+			<DashboardHeader
+				crumbs={{ label: t('briefs:detail.breadcrumb'), items: [{ label: t('briefs:mine.title'), href: MY_BRIEFS_PATH }, { label: current }] }}
+				title={title}
+				subtitle={subtitle}
+			/>
 		</Box>
 	);
 };

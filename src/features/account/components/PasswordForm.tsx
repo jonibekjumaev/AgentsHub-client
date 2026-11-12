@@ -9,7 +9,7 @@ import { ErrorState } from '@/shared/ui/ErrorState';
 import { RHFPasswordField } from '@/shared/ui/RHFTextField';
 import { SubmitButton } from '@/shared/ui/SubmitButton';
 import { useToast } from '@/shared/ui/toast';
-import { radiusPx } from '@/theme/tokens';
+import { home } from '@/theme/tokens';
 import { ChangePasswordMutation } from '../graphql/account';
 import { AccountErrorMessage, EMPTY_PASSWORD_FORM, passwordFormSchema, type PasswordFormValues } from '../lib/accountForm';
 
@@ -47,7 +47,7 @@ export const PasswordForm = () => {
 			noValidate
 			onSubmit={onSubmit}
 			aria-labelledby="password-settings"
-			sx={{ display: 'flex', flexDirection: 'column', gap: 5, p: 6, bgcolor: 'surface', border: 1, borderColor: 'border', borderRadius: radiusPx.lg }}
+			sx={{ display: 'flex', flexDirection: 'column', gap: 5, p: 6, bgcolor: 'surface', border: 1, borderColor: 'border', borderRadius: home.radius.card }}
 		>
 			<Box>
 				<Typography id="password-settings" variant="h2" sx={{ fontSize: 20 }}>

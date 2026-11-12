@@ -26,6 +26,7 @@ import {
 	type StatusTab,
 } from '../../lib/myAgents';
 import { MyAgentsTable } from './MyAgentsTable';
+import { DashboardHeader } from '@/shared/ui/page';
 
 type Pending = { agent: CreatorAgentRowFragment; action: StatusAction };
 
@@ -127,17 +128,16 @@ export const MyAgents = () => {
 
 	return (
 		<Stack spacing={6}>
-			<Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', justifyContent: 'space-between', gap: 4 }}>
-				<Box>
-					<Typography ref={headingRef} tabIndex={-1} variant="h1" sx={{ outline: 'none' }}>
-						{t('dashboard:myAgents.title')}
-					</Typography>
-					<Typography sx={{ mt: 1.5, color: 'muted' }}>{t('dashboard:myAgents.subtitle')}</Typography>
-				</Box>
-				<Button component={NextLink} href={NEW_AGENT_PATH} startIcon={<AddIcon />} sx={{ height: 42 }}>
-					{t('dashboard:myAgents.new')}
-				</Button>
-			</Box>
+			<DashboardHeader
+				headingRef={headingRef}
+				title={t('dashboard:myAgents.title')}
+				subtitle={t('dashboard:myAgents.subtitle')}
+				action={
+					<Button component={NextLink} href={NEW_AGENT_PATH} startIcon={<AddIcon />} sx={{ height: 42 }}>
+						{t('dashboard:myAgents.new')}
+					</Button>
+				}
+			/>
 
 			<Box
 				component="nav"

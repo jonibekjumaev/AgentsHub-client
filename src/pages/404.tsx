@@ -18,6 +18,7 @@ const NotFoundPage: NextPageWithLayout = () => {
 		<>
 			<Seo title={t('common:errorPages.notFound.title')} noindex />
 			<StatusPage
+				variant="band"
 				code="404"
 				icon={<SearchOffIcon />}
 				title={t('common:errorPages.notFound.title')}

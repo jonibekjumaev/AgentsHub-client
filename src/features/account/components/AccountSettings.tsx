@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { Skeleton, Stack, Typography } from '@mui/material';
+import { Skeleton, Stack } from '@mui/material';
 import { useTranslation } from 'next-i18next';
 import { ErrorState } from '@/shared/ui/ErrorState';
 import { AccountQuery } from '../graphql/account';
@@ -7,6 +7,7 @@ import { fromAccount } from '../lib/accountForm';
 import { PasswordForm } from './PasswordForm';
 import { PrivacyForm } from './PrivacyForm';
 import { ProfileForm } from './ProfileForm';
+import { DashboardHeader } from '@/shared/ui/page';
 
 /** /dashboard/settings: profile, privacy (D-42) and password. Own data, loaded in the browser with the token (rule 11). */
 export const AccountSettings = () => {
@@ -17,10 +18,7 @@ export const AccountSettings = () => {
 
 	return (
 		<Stack spacing={6} sx={{ maxWidth: 860 }}>
-			<div>
-				<Typography variant="h1">{t('account:title')}</Typography>
-				<Typography sx={{ mt: 1.5, color: 'muted' }}>{t('account:subtitle')}</Typography>
-			</div>
+			<DashboardHeader title={t('account:title')} subtitle={t('account:subtitle')} />
 			{loading && !member && (
 				<Stack spacing={4} role="status" aria-busy="true" aria-label={t('account:loading')}>
 					<Skeleton variant="rounded" height={420} aria-hidden="true" />

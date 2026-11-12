@@ -11,7 +11,7 @@ import { ErrorState } from '@/shared/ui/ErrorState';
 import { RHFTextField } from '@/shared/ui/RHFTextField';
 import { SubmitButton } from '@/shared/ui/SubmitButton';
 import { useToast } from '@/shared/ui/toast';
-import { radiusPx } from '@/theme/tokens';
+import { home } from '@/theme/tokens';
 import { UpdateAccountMutation, UploadAvatarMutation } from '../graphql/account';
 import {
 	AccountErrorMessage,
@@ -104,7 +104,7 @@ export const ProfileForm = ({ memberId, initialValues }: ProfileFormProps) => {
 			noValidate
 			onSubmit={onSubmit}
 			aria-labelledby="profile-settings"
-			sx={{ display: 'flex', flexDirection: 'column', gap: 5, p: 6, bgcolor: 'surface', border: 1, borderColor: 'border', borderRadius: radiusPx.lg }}
+			sx={{ display: 'flex', flexDirection: 'column', gap: 5, p: 6, bgcolor: 'surface', border: 1, borderColor: 'border', borderRadius: home.radius.card }}
 		>
 			<Typography id="profile-settings" variant="h2" sx={{ fontSize: 20 }}>
 				{t('account:profile.title')}

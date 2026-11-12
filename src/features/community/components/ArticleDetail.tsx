@@ -14,10 +14,11 @@ import { mediaUrl } from '@/shared/lib/media';
 import { Avatar } from '@/shared/ui/Avatar';
 import { ErrorState } from '@/shared/ui/ErrorState';
 import { useToast } from '@/shared/ui/toast';
-import { radiusPx } from '@/theme/tokens';
+import { NightBand, NightBreadcrumbs, pageCardSx, pageFrameSx } from '@/shared/ui/page';
+import { colors, home, radiusPx } from '@/theme/tokens';
 import { ArticleDetailQuery, ArticleViewerQuery, LikeArticleMutation } from '../graphql/articles';
 import { COMMUNITY_PATH, articleEditHref } from '../lib/articles';
-import { ArticleCategoryChip } from './ArticleCard';
+import { TopicPill } from './feed/TopicPill';
 
 type Article = ArticleDetailData['getBoardArticle'];
 
@@ -77,58 +78,72 @@ const ArticleLikeButton = ({ article }: { article: Article }) => {
 	);
 };
 
-/** /community/[id]: one article, its like button and its comments (CommentGroup ARTICLE). */
+const READING_WIDTH = 820;
+
+/**
+ * /community/[id], in the catalog language: the night band (breadcrumb, topic pill, title, author, date, views),
+ * then the article card (cover, text, like / edit) and its comments (CommentGroup ARTICLE). The column stays a
+ * reading width.
+ */
 export const ArticleDetail = ({ articleId }: { articleId: string }) => {
 	const { t } = useTranslation(['community', 'common']);
 	const format = useFormat();
 	const { me } = useAuth();
 	const { data, loading, error, refetch } = useQuery(ArticleDetailQuery, { variables: { articleId } });
 	const article = data?.getBoardArticle;
+	const frameSx = { ...pageFrameSx, maxWidth: READING_WIDTH };
 
-	const body = () => {
-		if (loading && !article) return <Skeleton variant="rounded" height={360} aria-label={t('common:status.loading')} />;
-		if (!article) return <ErrorState error={error} title={t('community:detail.errorTitle')} onRetry={() => void refetch()} />;
-		const author = article.memberData;
-		const src = mediaUrl(article.articleImage);
-		const isOwner = Boolean(me && me._id === article.memberId);
-
+	if (loading && !article) {
 		return (
-			<>
-				<Box component="nav" aria-label={t('community:detail.breadcrumb')}>
-					<Box component="ol" sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, m: 0, p: 0, listStyle: 'none', fontSize: 13, color: 'muted' }}>
-						<li>
-							<Link component={NextLink} href={COMMUNITY_PATH} sx={{ color: 'muted', fontWeight: 500 }}>
-								{t('common:nav.community')}
-							</Link>
-						</li>
-						<li aria-hidden="true">/</li>
-						<Box component="li" aria-current="page" sx={{ color: 'ink', fontWeight: 600, overflowWrap: 'anywhere' }}>
-							{article.articleTitle}
-						</Box>
-					</Box>
-				</Box>
-				<Box component="article" aria-labelledby="article-title" sx={{ display: 'flex', flexDirection: 'column', gap: 4, p: 6, bgcolor: 'surface', border: 1, borderColor: 'border', borderRadius: radiusPx.lg }}>
-					<div>
-						<ArticleCategoryChip category={article.articleCategory} />
-					</div>
-					<Typography id="article-title" variant="h1" sx={{ fontSize: { xs: 26, md: 32 }, overflowWrap: 'anywhere' }}>
-						{article.articleTitle}
-					</Typography>
-					{/* author is null when the member was deleted (D-38): name without a link */}
-					<Stack direction="row" spacing={2.5} alignItems="center">
+			<Box sx={frameSx}>
+				<Skeleton variant="rounded" height={360} aria-label={t('common:status.loading')} />
+			</Box>
+		);
+	}
+	if (!article) {
+		return (
+			<Box sx={frameSx}>
+				<ErrorState error={error} title={t('community:detail.errorTitle')} onRetry={() => void refetch()} />
+			</Box>
+		);
+	}
+	const author = article.memberData;
+	const src = mediaUrl(article.articleImage);
+	const isOwner = Boolean(me && me._id === article.memberId);
+
+	return (
+		<>
+			<NightBand
+				maxWidth={READING_WIDTH}
+				titleId="article-title"
+				title={article.articleTitle}
+				top={
+					<NightBreadcrumbs
+						label={t('community:detail.breadcrumb')}
+						items={[{ label: t('common:nav.community'), href: COMMUNITY_PATH }, { label: article.articleTitle }]}
+					/>
+				}
+				pills={<TopicPill topic={article.articleCategory} />}
+				meta={
+					// author is null when the member was deleted (D-38): name without a link
+					<Box component="span" sx={{ display: 'inline-flex', flexWrap: 'wrap', alignItems: 'center', gap: 2 }}>
 						<Avatar
 							memberId={article.memberId}
 							name={author ? author.memberFullName || author.memberNick : t('common:deletedMember')}
 							image={author?.memberImage}
-							size={36}
+							size={28}
 						/>
-						<Typography variant="meta">
+						<span>
 							{author ? (
-								<Link component={NextLink} href={`/members/${author._id}`} sx={{ color: 'ink', fontWeight: 700 }}>
+								<Link
+									component={NextLink}
+									href={`/members/${author._id}`}
+									sx={{ color: colors.white, fontWeight: 700, '&:hover': { color: home.nightTextSoft } }}
+								>
 									@{author.memberNick}
 								</Link>
 							) : (
-								<Box component="span" sx={{ fontWeight: 700 }}>
+								<Box component="span" sx={{ fontWeight: 700, color: colors.white }}>
 									{t('common:deletedMember')}
 								</Box>
 							)}{' '}
@@ -137,16 +152,22 @@ export const ArticleDetail = ({ articleId }: { articleId: string }) => {
 								{format.date(article.createdAt)}
 							</time>{' '}
 							· {t('community:views', { count: article.articleViews, formatted: format.compact(article.articleViews) })}
-						</Typography>
-					</Stack>
+						</span>
+					</Box>
+				}
+			/>
+			<Box sx={frameSx}>
+				<Box component="article" aria-labelledby="article-title" sx={{ ...pageCardSx, gap: 5 }}>
 					{src && (
-						<Box sx={{ position: 'relative', width: '100%', aspectRatio: '16 / 9', borderRadius: radiusPx.md, overflow: 'hidden', bgcolor: 'ground' }}>
+						<Box sx={{ position: 'relative', width: '100%', aspectRatio: '16 / 9', borderRadius: radiusPx.lg, overflow: 'hidden', bgcolor: 'ground' }}>
 							<Image src={src} alt="" fill sizes="(max-width: 900px) 100vw, 760px" style={{ objectFit: 'cover' }} />
 						</Box>
 					)}
 					{/* Plain text (§3.10). */}
-					<Typography sx={{ whiteSpace: 'pre-line', overflowWrap: 'anywhere', color: 'body', lineHeight: 1.7 }}>{article.articleContent}</Typography>
-					<Stack direction="row" spacing={2}>
+					<Typography sx={{ whiteSpace: 'pre-line', overflowWrap: 'anywhere', color: 'body', fontSize: 17, lineHeight: 1.75 }}>
+						{article.articleContent}
+					</Typography>
+					<Stack direction="row" spacing={2} sx={{ pt: 4, borderTop: 1, borderColor: 'border' }}>
 						<ArticleLikeButton article={article} />
 						{isOwner && (
 							<Button component={NextLink} href={articleEditHref(article._id)} variant="outlined" startIcon={<EditOutlinedIcon />}>
@@ -162,9 +183,7 @@ export const ArticleDetail = ({ articleId }: { articleId: string }) => {
 					placeholder={t('community:detail.commentPlaceholder')}
 					labels={{ title: t('community:detail.commentsTitle'), field: t('community:detail.commentLabel'), submit: t('community:detail.commentSubmit') }}
 				/>
-			</>
-		);
-	};
-
-	return <Box sx={{ maxWidth: 820, mx: 'auto', px: { xs: 4, sm: 6 }, pt: 6, pb: 16, display: 'flex', flexDirection: 'column', gap: 6 }}>{body()}</Box>;
+			</Box>
+		</>
+	);
 };

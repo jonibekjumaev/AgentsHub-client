@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import NextLink from 'next/link';
 import { useMutation, useQuery } from '@apollo/client';
-import { Box, Button, Skeleton, Stack, Typography } from '@mui/material';
+import { Box, Button, Skeleton, Stack } from '@mui/material';
 import { Add as AddIcon, EditOutlined as EditOutlinedIcon } from '@mui/icons-material';
 import { useTranslation } from 'next-i18next';
 import { useAuth } from '@/auth';
@@ -15,6 +15,7 @@ import { useToast } from '@/shared/ui/toast';
 import { ArticlesListQuery, UpdateArticleMutation } from '../graphql/articles';
 import { ARTICLES_PAGE_SIZE, NEW_ARTICLE_PATH, articleEditHref, memberArticlesVariables } from '../lib/articles';
 import { ArticleCard } from './ArticleCard';
+import { DashboardHeader } from '@/shared/ui/page';
 
 /** /dashboard/articles: the member's own articles, with Edit and Delete (articleStatus DELETE). */
 export const MyArticles = () => {
@@ -92,15 +93,15 @@ export const MyArticles = () => {
 
 	return (
 		<Stack spacing={6}>
-			<Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: 4 }}>
-				<div>
-					<Typography variant="h1">{t('community:mine.title')}</Typography>
-					<Typography sx={{ mt: 1.5, color: 'muted' }}>{t('community:mine.subtitle')}</Typography>
-				</div>
-				<Button component={NextLink} href={NEW_ARTICLE_PATH} startIcon={<AddIcon />} sx={{ height: 42 }}>
-					{t('community:list.write')}
-				</Button>
-			</Box>
+			<DashboardHeader
+				title={t('community:mine.title')}
+				subtitle={t('community:mine.subtitle')}
+				action={
+					<Button component={NextLink} href={NEW_ARTICLE_PATH} startIcon={<AddIcon />} sx={{ height: 42 }}>
+						{t('community:list.write')}
+					</Button>
+				}
+			/>
 			{body()}
 			<ConfirmDialog
 				open={open}
